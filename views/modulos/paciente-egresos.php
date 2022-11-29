@@ -83,6 +83,7 @@
             <tr>
               <th scope="col">#</th>
               <th scope="col"></th>
+              <th scope="col"></th>
               <th scope="col">NOMBRE(S) Y APELLIDO(S)</th>
               <th scope="col">FECHA EGRESO</th>
               <th scope="col">HORA EGRESO</th>              
@@ -90,7 +91,6 @@
               <th scope="col">CONDICION EGRESO</th> 
               <th scope="col">DIAGNOSTICO CIE10</th>
               <th scope="col">DIAGNOSTICO(S) ESPECIFICO</th>
-              <th scope="col">ESTADO</th>
             </tr>
           </thead>
 

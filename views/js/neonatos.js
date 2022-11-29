@@ -238,8 +238,7 @@ $("#frmNuevoNeonato").on("click", ".btnGuardar", function() {
                 $("#nuevoTallaNeonato").val("");
                 $("#nuevoPCNeonato").val("");    
                 $("#nuevoPTNeonato").val("");
-                $("#nuevoAPGARIni").val("");
-                $("#nuevoAPGARFin").val("");
+                $("#nuevoAPGAR").val("");
                 $("#nuevoEdadGestacional").val("");
                 $("#nuevoTipoPartoNeonato").val("");
                 $("#nuevoDescripcionParto").val("");
@@ -421,8 +420,7 @@ $(document).on("click", ".btnEditarNeonato", function() {
       $("#editarTallaNeonato").val(respuesta['talla_neonato']);
       $("#editarPCNeonato").val(respuesta['pc_neonato']);
       $("#editarPTNeonato").val(respuesta['pt_neonato']);
-      $("#editarAPGARIni").val(respuesta['apgar_ini']);
-      $("#editarAPGARFin").val(respuesta['apgar_fin']);
+      $("#editarAPGAR").val(respuesta['apgar']);
       $("#editarEdadGestacional").val(respuesta['edad_gestacional_neonato']);
       $("#editarTipoPartoNeonato").val(respuesta['tipo_parto_neonato']);
       $("#editarDescripcionParto").val(respuesta['descripcion_parto']);
@@ -498,23 +496,22 @@ $("#frmEditarNeonato").on("click", ".btnGuardar", function() {
 
           }).then((result) => {
               
-              if (result.value) {
+            if (result.value) {
 
-                $('#modalEditarNeonato').modal('toggle');
+              $('#modalEditarNeonato').modal('toggle');
 
-                $("#editarPesoNeonato").val(""); 
-                $("#editarTallaNeonato").val("");
-                $("#editarPCNeonato").val("");
-                $("#editarPTNeonato").val("");                
-                $("#editarAPGARIni").val("");
-                $("#editarAPGARFin").val("");
-                $("#editarEdadGestacional").val("");
-                $("#editarTipoPartoNeonato").val("");    
-                $("#editarDescripcionParto").val("");
-                $("#idPacienteIngresoEN").val("");
+              $("#editarPesoNeonato").val(""); 
+              $("#editarTallaNeonato").val("");
+              $("#editarPCNeonato").val("");
+              $("#editarPTNeonato").val("");                
+              $("#editarAPGAR").val("");
+              $("#editarEdadGestacional").val("");
+              $("#editarTipoPartoNeonato").val("");    
+              $("#editarDescripcionParto").val("");
+              $("#idPacienteIngresoEN").val("");
 
-                // Funcion que recarga y actuaiiza la tabla
-                tablaPacienteIngresos.ajax.reload( null, false );
+              // Funcion que recarga y actuaiiza la tabla
+              tablaPacienteIngresos.ajax.reload( null, false );
 
             }
 

@@ -10,7 +10,7 @@ class ModelNeonatos {
 	static public function mdlContarNeonatos($tabla) {
 
 		// devuelve el numero de registros de la consulta
-		$sql = "SELECT n.id, pi2.fecha_ingreso, pi2.hora_ingreso, CONCAT(p.nombre_paciente,' ',p.paterno_paciente,' ',p.materno_paciente) nombre_completo, c.nombre_cama, p.sexo, n.peso_neonato, n.talla_neonato, n.pc_neonato, n.pt_neonato, n.apgar_ini, n.apgar_fin, n.edad_gestacional_neonato, p.cod_asegurado, p.nro_empleador, n.tipo_parto_neonato, pi2.diagnostico_especifico1, pi2.diagnostico_especifico2, pi2.diagnostico_especifico3, pe.diagnostico_egreso1, pe.diagnostico_egreso2, pe.diagnostico_egreso3, p.id_consultorio, c2.nombre_consultorio, pe.fecha_egreso, pe.hora_egreso, pe.causa_egreso, n.descripcion_parto 
+		$sql = "SELECT n.id, pi2.fecha_ingreso, pi2.hora_ingreso, CONCAT(p.nombre_paciente,' ',p.paterno_paciente,' ',p.materno_paciente) nombre_completo, c.nombre_cama, p.sexo, n.peso_neonato, n.talla_neonato, n.pc_neonato, n.pt_neonato, n.apgar, n.edad_gestacional_neonato, p.cod_asegurado, p.nro_empleador, n.tipo_parto_neonato, pi2.diagnostico_especifico1, pi2.diagnostico_especifico2, pi2.diagnostico_especifico3, pe.diagnostico_egreso1, pe.diagnostico_egreso2, pe.diagnostico_egreso3, p.id_consultorio, c2.nombre_consultorio, pe.fecha_egreso, pe.hora_egreso, pe.causa_egreso, n.descripcion_parto 
 			FROM paciente_ingresos pi2
 			INNER JOIN pacientes p
 			ON pi2.id_paciente = p.id
@@ -47,7 +47,7 @@ class ModelNeonatos {
 
 			// devuelve el numero de registros de la consulta
 
-			$sql2 = "SELECT n.id, pi2.fecha_ingreso, pi2.hora_ingreso, CONCAT(p.nombre_paciente,' ',p.paterno_paciente,' ',p.materno_paciente) nombre_completo, c.nombre_cama, p.sexo, n.peso_neonato, n.talla_neonato, n.pc_neonato, n.pt_neonato, n.apgar_ini, n.apgar_fin, n.edad_gestacional_neonato, p.cod_asegurado, p.nro_empleador, n.tipo_parto_neonato, pi2.diagnostico_especifico1, pi2.diagnostico_especifico2, pi2.diagnostico_especifico3, pe.diagnostico_egreso1, pe.diagnostico_egreso2, pe.diagnostico_egreso3, p.id_consultorio, c2.nombre_consultorio, pe.fecha_egreso, pe.hora_egreso, pe.causa_egreso, n.descripcion_parto 
+			$sql2 = "SELECT n.id, pi2.fecha_ingreso, pi2.hora_ingreso, CONCAT(p.nombre_paciente,' ',p.paterno_paciente,' ',p.materno_paciente) nombre_completo, c.nombre_cama, p.sexo, n.peso_neonato, n.talla_neonato, n.pc_neonato, n.pt_neonato, n.apgar, n.edad_gestacional_neonato, p.cod_asegurado, p.nro_empleador, n.tipo_parto_neonato, pi2.diagnostico_especifico1, pi2.diagnostico_especifico2, pi2.diagnostico_especifico3, pe.diagnostico_egreso1, pe.diagnostico_egreso2, pe.diagnostico_egreso3, p.id_consultorio, c2.nombre_consultorio, pe.fecha_egreso, pe.hora_egreso, pe.causa_egreso, n.descripcion_parto 
 			FROM paciente_ingresos pi2
 			INNER JOIN pacientes p
 			ON pi2.id_paciente = p.id
@@ -76,7 +76,7 @@ class ModelNeonatos {
 
 			// devuelve el numero de registros de la consulta
 
-			$sql2 = "SELECT n.id, pi2.fecha_ingreso, pi2.hora_ingreso, CONCAT(p.nombre_paciente,' ',p.paterno_paciente,' ',p.materno_paciente) nombre_completo, c.nombre_cama, p.sexo, n.peso_neonato, n.talla_neonato, n.pc_neonato, n.pt_neonato, n.apgar_ini, n.apgar_fin, n.edad_gestacional_neonato, p.cod_asegurado, p.nro_empleador, n.tipo_parto_neonato, pi2.diagnostico_especifico1, pi2.diagnostico_especifico2, pi2.diagnostico_especifico3, pe.diagnostico_egreso1, pe.diagnostico_egreso2, pe.diagnostico_egreso3, p.id_consultorio, c2.nombre_consultorio, pe.fecha_egreso, pe.hora_egreso, pe.causa_egreso, n.descripcion_parto 
+			$sql2 = "SELECT n.id, pi2.fecha_ingreso, pi2.hora_ingreso, CONCAT(p.nombre_paciente,' ',p.paterno_paciente,' ',p.materno_paciente) nombre_completo, c.nombre_cama, p.sexo, n.peso_neonato, n.talla_neonato, n.pc_neonato, n.pt_neonato, n.apgar, n.edad_gestacional_neonato, p.cod_asegurado, p.nro_empleador, n.tipo_parto_neonato, pi2.diagnostico_especifico1, pi2.diagnostico_especifico2, pi2.diagnostico_especifico3, pe.diagnostico_egreso1, pe.diagnostico_egreso2, pe.diagnostico_egreso3, p.id_consultorio, c2.nombre_consultorio, pe.fecha_egreso, pe.hora_egreso, pe.causa_egreso, n.descripcion_parto 
 			FROM paciente_ingresos pi2
 			INNER JOIN pacientes p
 			ON pi2.id_paciente = p.id
@@ -113,7 +113,7 @@ class ModelNeonatos {
 	=============================================*/
 	static public function mdlMostrarNeonatos($tabla, $sql) {
 
-		$sql2 = "SELECT n.id, pi2.fecha_ingreso, pi2.hora_ingreso, CONCAT(p.nombre_paciente,' ',p.paterno_paciente,' ',p.materno_paciente) nombre_completo, c.nombre_cama, p.sexo, n.peso_neonato, n.talla_neonato, n.pc_neonato, n.pt_neonato, n.apgar_ini, n.apgar_fin, n.edad_gestacional_neonato, p.cod_asegurado, p.nro_empleador, n.tipo_parto_neonato, pi2.diagnostico_especifico1, pi2.diagnostico_especifico2, pi2.diagnostico_especifico3, pe.diagnostico_egreso1, pe.diagnostico_egreso2, pe.diagnostico_egreso3, p.id_consultorio, c2.nombre_consultorio, pe.fecha_egreso, pe.hora_egreso, pe.causa_egreso, n.descripcion_parto 
+		$sql2 = "SELECT n.id, pi2.fecha_ingreso, pi2.hora_ingreso, CONCAT(p.nombre_paciente,' ',p.paterno_paciente,' ',p.materno_paciente) nombre_completo, c.nombre_cama, p.sexo, n.peso_neonato, n.talla_neonato, n.pc_neonato, n.pt_neonato, n.apgar, n.edad_gestacional_neonato, p.cod_asegurado, p.nro_empleador, n.tipo_parto_neonato, pi2.diagnostico_especifico1, pi2.diagnostico_especifico2, pi2.diagnostico_especifico3, pe.diagnostico_egreso1, pe.diagnostico_egreso2, pe.diagnostico_egreso3, p.id_consultorio, c2.nombre_consultorio, pe.fecha_egreso, pe.hora_egreso, pe.causa_egreso, n.descripcion_parto 
 		FROM paciente_ingresos pi2
 		INNER JOIN pacientes p
 		ON pi2.id_paciente = p.id
@@ -169,7 +169,7 @@ class ModelNeonatos {
 	static public function mdlContarNeonatosFecha($tabla, $item1, $valor1, $item2, $valor2) {
 
 		// devuelve el numero de registros de la consulta
-		$sql = "SELECT n.id, pi2.fecha_ingreso, pi2.hora_ingreso, CONCAT(p.nombre_paciente,' ',p.paterno_paciente,' ',p.materno_paciente) nombre_completo, c.nombre_cama, p.sexo, n.peso_neonato, n.talla_neonato, n.pc_neonato, n.pt_neonato, n.apgar_ini, n.apgar_fin, n.edad_gestacional_neonato, p.cod_asegurado, p.nro_empleador, n.tipo_parto_neonato, pi2.diagnostico_especifico1, pi2.diagnostico_especifico2, pi2.diagnostico_especifico3, pe.diagnostico_egreso1, pe.diagnostico_egreso2, pe.diagnostico_egreso3, p.id_consultorio, c2.nombre_consultorio, pe.fecha_egreso, pe.hora_egreso, pe.causa_egreso, n.descripcion_parto 
+		$sql = "SELECT n.id, pi2.fecha_ingreso, pi2.hora_ingreso, CONCAT(p.nombre_paciente,' ',p.paterno_paciente,' ',p.materno_paciente) nombre_completo, c.nombre_cama, p.sexo, n.peso_neonato, n.talla_neonato, n.pc_neonato, n.pt_neonato, n.apgar, n.edad_gestacional_neonato, p.cod_asegurado, p.nro_empleador, n.tipo_parto_neonato, pi2.diagnostico_especifico1, pi2.diagnostico_especifico2, pi2.diagnostico_especifico3, pe.diagnostico_egreso1, pe.diagnostico_egreso2, pe.diagnostico_egreso3, p.id_consultorio, c2.nombre_consultorio, pe.fecha_egreso, pe.hora_egreso, pe.causa_egreso, n.descripcion_parto 
 			FROM paciente_ingresos pi2
 			INNER JOIN pacientes p
 			ON pi2.id_paciente = p.id
@@ -210,7 +210,7 @@ class ModelNeonatos {
 
 			// devuelve el numero de registros de la consulta
 
-			$sql2 = "SELECT n.id, pi2.fecha_ingreso, pi2.hora_ingreso, CONCAT(p.nombre_paciente,' ',p.paterno_paciente,' ',p.materno_paciente) nombre_completo, c.nombre_cama, p.sexo, n.peso_neonato, n.talla_neonato, n.pc_neonato, n.pt_neonato, n.apgar_ini, n.apgar_fin, n.edad_gestacional_neonato, p.cod_asegurado, p.nro_empleador, n.tipo_parto_neonato, pi2.diagnostico_especifico1, pi2.diagnostico_especifico2, pi2.diagnostico_especifico3, pe.diagnostico_egreso1, pe.diagnostico_egreso2, pe.diagnostico_egreso3, p.id_consultorio, c2.nombre_consultorio, pe.fecha_egreso, pe.hora_egreso, pe.causa_egreso, n.descripcion_parto 
+			$sql2 = "SELECT n.id, pi2.fecha_ingreso, pi2.hora_ingreso, CONCAT(p.nombre_paciente,' ',p.paterno_paciente,' ',p.materno_paciente) nombre_completo, c.nombre_cama, p.sexo, n.peso_neonato, n.talla_neonato, n.pc_neonato, n.pt_neonato, n.apgar, n.edad_gestacional_neonato, p.cod_asegurado, p.nro_empleador, n.tipo_parto_neonato, pi2.diagnostico_especifico1, pi2.diagnostico_especifico2, pi2.diagnostico_especifico3, pe.diagnostico_egreso1, pe.diagnostico_egreso2, pe.diagnostico_egreso3, p.id_consultorio, c2.nombre_consultorio, pe.fecha_egreso, pe.hora_egreso, pe.causa_egreso, n.descripcion_parto 
 			FROM paciente_ingresos pi2
 			INNER JOIN pacientes p
 			ON pi2.id_paciente = p.id
@@ -243,7 +243,7 @@ class ModelNeonatos {
 
 			// devuelve el numero de registros de la consulta
 
-			$sql2 = "SELECT n.id, pi2.fecha_ingreso, pi2.hora_ingreso, CONCAT(p.nombre_paciente,' ',p.paterno_paciente,' ',p.materno_paciente) nombre_completo, c.nombre_cama, p.sexo, n.peso_neonato, n.talla_neonato, n.pc_neonato, n.pt_neonato, n.apgar_ini, n.apgar_fin, n.edad_gestacional_neonato, p.cod_asegurado, p.nro_empleador, n.tipo_parto_neonato, pi2.diagnostico_especifico1, pi2.diagnostico_especifico2, pi2.diagnostico_especifico3, pe.diagnostico_egreso1, pe.diagnostico_egreso2, pe.diagnostico_egreso3, p.id_consultorio, c2.nombre_consultorio, pe.fecha_egreso, pe.hora_egreso, pe.causa_egreso, n.descripcion_parto 
+			$sql2 = "SELECT n.id, pi2.fecha_ingreso, pi2.hora_ingreso, CONCAT(p.nombre_paciente,' ',p.paterno_paciente,' ',p.materno_paciente) nombre_completo, c.nombre_cama, p.sexo, n.peso_neonato, n.talla_neonato, n.pc_neonato, n.pt_neonato, n.apgar, n.edad_gestacional_neonato, p.cod_asegurado, p.nro_empleador, n.tipo_parto_neonato, pi2.diagnostico_especifico1, pi2.diagnostico_especifico2, pi2.diagnostico_especifico3, pe.diagnostico_egreso1, pe.diagnostico_egreso2, pe.diagnostico_egreso3, p.id_consultorio, c2.nombre_consultorio, pe.fecha_egreso, pe.hora_egreso, pe.causa_egreso, n.descripcion_parto 
 			FROM paciente_ingresos pi2
 			INNER JOIN pacientes p
 			ON pi2.id_paciente = p.id
@@ -285,7 +285,7 @@ class ModelNeonatos {
 	=============================================*/
 	static public function mdlMostrarNeonatosFecha($tabla, $item1, $valor1, $item2, $valor2, $sql) {
 
-		$sql2 = "SELECT n.id, pi2.fecha_ingreso, pi2.hora_ingreso, CONCAT(p.nombre_paciente,' ',p.paterno_paciente,' ',p.materno_paciente) nombre_completo, c.nombre_cama, p.sexo, n.peso_neonato, n.talla_neonato, n.pc_neonato, n.pt_neonato, n.apgar_ini, n.apgar_fin, n.edad_gestacional_neonato, p.cod_asegurado, p.nro_empleador, n.tipo_parto_neonato, pi2.diagnostico_especifico1, pi2.diagnostico_especifico2, pi2.diagnostico_especifico3, pe.diagnostico_egreso1, pe.diagnostico_egreso2, pe.diagnostico_egreso3, p.id_consultorio, c2.nombre_consultorio, pe.fecha_egreso, pe.hora_egreso, pe.causa_egreso, n.descripcion_parto 
+		$sql2 = "SELECT n.id, pi2.fecha_ingreso, pi2.hora_ingreso, CONCAT(p.nombre_paciente,' ',p.paterno_paciente,' ',p.materno_paciente) nombre_completo, c.nombre_cama, p.sexo, n.peso_neonato, n.talla_neonato, n.pc_neonato, n.pt_neonato, n.apgar, n.edad_gestacional_neonato, p.cod_asegurado, p.nro_empleador, n.tipo_parto_neonato, pi2.diagnostico_especifico1, pi2.diagnostico_especifico2, pi2.diagnostico_especifico3, pe.diagnostico_egreso1, pe.diagnostico_egreso2, pe.diagnostico_egreso3, p.id_consultorio, c2.nombre_consultorio, pe.fecha_egreso, pe.hora_egreso, pe.causa_egreso, n.descripcion_parto 
 			FROM paciente_ingresos pi2
 			INNER JOIN pacientes p
 			ON pi2.id_paciente = p.id
@@ -331,7 +331,7 @@ class ModelNeonatos {
 	    $pdo->beginTransaction();
 
 	    // Consulta 1: Registrar nueva materniadad de paciente
-			$sql = "INSERT INTO $tabla(peso_neonato, talla_neonato, pc_neonato, pt_neonato, apgar_ini, apgar_fin, edad_gestacional_neonato, tipo_parto_neonato, descripcion_parto, id_paciente_ingreso) VALUES (:peso_neonato, :talla_neonato, :pc_neonato, :pt_neonato, :apgar_ini,:apgar_fin, :edad_gestacional_neonato, :tipo_parto_neonato, :descripcion_parto, :id_paciente_ingreso)";
+			$sql = "INSERT INTO $tabla(peso_neonato, talla_neonato, pc_neonato, pt_neonato, apgar, edad_gestacional_neonato, tipo_parto_neonato, descripcion_parto, id_paciente_ingreso) VALUES (:peso_neonato, :talla_neonato, :pc_neonato, :pt_neonato, :apgar, :edad_gestacional_neonato, :tipo_parto_neonato, :descripcion_parto, :id_paciente_ingreso)";
 
 			$stmt = $pdo->prepare($sql);
 
@@ -339,8 +339,7 @@ class ModelNeonatos {
 			$stmt->bindParam(":talla_neonato", $datos["talla_neonato"], PDO::PARAM_STR);
 			$stmt->bindParam(":pc_neonato", $datos["pc_neonato"], PDO::PARAM_STR);
 			$stmt->bindParam(":pt_neonato", $datos["pt_neonato"], PDO::PARAM_STR);
-			$stmt->bindParam(":apgar_ini", $datos["apgar_ini"], PDO::PARAM_STR);
-			$stmt->bindParam(":apgar_fin", $datos["apgar_fin"], PDO::PARAM_STR);
+			$stmt->bindParam(":apgar", $datos["apgar"], PDO::PARAM_STR);
 			$stmt->bindParam(":edad_gestacional_neonato", $datos["edad_gestacional_neonato"], PDO::PARAM_STR);
 			$stmt->bindParam(":tipo_parto_neonato", $datos["tipo_parto_neonato"], PDO::PARAM_STR);
 			$stmt->bindParam(":descripcion_parto", $datos["descripcion_parto"], PDO::PARAM_STR);
@@ -400,7 +399,7 @@ class ModelNeonatos {
 	=============================================*/
 	static public function mdlEditarNeonato($tabla, $datos) {
 
-		$sql = "UPDATE $tabla SET peso_neonato = :peso_neonato, talla_neonato = :talla_neonato, pc_neonato = :pc_neonato, pt_neonato = :pt_neonato, apgar_ini = :apgar_ini, apgar_fin =:apgar_fin, edad_gestacional_neonato = :edad_gestacional_neonato, tipo_parto_neonato = :tipo_parto_neonato, descripcion_parto = :descripcion_parto WHERE id = :id";
+		$sql = "UPDATE $tabla SET peso_neonato = :peso_neonato, talla_neonato = :talla_neonato, pc_neonato = :pc_neonato, pt_neonato = :pt_neonato, apgar = :apgar, edad_gestacional_neonato = :edad_gestacional_neonato, tipo_parto_neonato = :tipo_parto_neonato, descripcion_parto = :descripcion_parto WHERE id = :id";
 
 		$stmt = Conexion::connectPostgres()->prepare($sql);
 		
@@ -408,8 +407,7 @@ class ModelNeonatos {
 		$stmt->bindParam(":talla_neonato", $datos["talla_neonato"], PDO::PARAM_STR);
 		$stmt->bindParam(":pc_neonato", $datos["pc_neonato"], PDO::PARAM_STR);
 		$stmt->bindParam(":pt_neonato", $datos["pt_neonato"], PDO::PARAM_STR);
-		$stmt->bindParam(":apgar_ini", $datos["apgar_ini"], PDO::PARAM_STR);
-		$stmt->bindParam(":apgar_fin", $datos["apgar_fin"], PDO::PARAM_STR);
+		$stmt->bindParam(":apgar", $datos["apgar"], PDO::PARAM_STR);
 		$stmt->bindParam(":edad_gestacional_neonato", $datos["edad_gestacional_neonato"], PDO::PARAM_STR);
 		$stmt->bindParam(":tipo_parto_neonato", $datos["tipo_parto_neonato"], PDO::PARAM_STR);
 		$stmt->bindParam(":descripcion_parto", $datos["descripcion_parto"], PDO::PARAM_STR);

@@ -16,7 +16,7 @@ var tablaPacientesEgresos = $('#tblPacientesEgresos').DataTable({
 
   "serverSide": true,
 
-  "order": [[ 3, "desc" ]],
+  "order": [[ 4, "desc" ]],
 
   "language": {
 
@@ -670,7 +670,7 @@ $("#frmPacientesEgresados").on("click", "#btnBuscarPacientesEgresados", function
 
     "serverSide": true,
 
-    "order": [[ 0, "desc" ]],
+    "order": [[ 4, "desc" ]],
 
     "language": {
 

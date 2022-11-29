@@ -10,7 +10,7 @@ class ModelMaternidades {
 	static public function mdlContarMaternidades($tabla) {
 
 		// devuelve el numero de registros de la consulta
-		$sql = "SELECT m.id, pi2.fecha_ingreso, c2.nombre_consultorio, pi2.hora_ingreso, CONCAT(p.nombre_paciente,' ',p.paterno_paciente,' ',p.materno_paciente) nombre_completo, p.fecha_nacimiento, p.cod_asegurado, p.nro_empleador, p.nombre_empleador, p.estado_civil, m.procedencia, m.gestacion, m.paridad, m.cesarea, m.aborto, m.edad_gestacional_fum, m.edad_gestacional_ecografia, m.tipo_parto, m.liquido_amniotico, m.fecha_nacido, m.peso_nacido, m.hora_nacido, m.sexo_nacido, m.alumbramiento, m.perine, m.sangrado, m.estado_madre, m.nombre_esposo, s2.nombre_sala, c.nombre_cama, pe.causa_egreso 
+		$sql = "SELECT m.id, pi2.fecha_ingreso, c2.nombre_consultorio, pi2.hora_ingreso, CONCAT(p.nombre_paciente,' ',p.paterno_paciente,' ',p.materno_paciente) nombre_completo, p.fecha_nacimiento, p.cod_asegurado, p.nro_empleador, p.nombre_empleador, p.estado_civil, m.procedencia, m.paridad, m.edad_gestacional_fum, m.edad_gestacional_ecografia, m.tipo_parto, m.liquido_amniotico, m.fecha_nacido, m.peso_nacido, m.hora_nacido, m.sexo_nacido, m.alumbramiento, m.perine, m.sangrado, m.estado_madre, m.nombre_esposo, s2.nombre_sala, c.nombre_cama, pe.causa_egreso 
 				FROM paciente_ingresos pi2
 				INNER JOIN pacientes p
 				ON pi2.id_paciente = p.id
@@ -47,7 +47,7 @@ class ModelMaternidades {
 
 			// devuelve el numero de registros de la consulta
 
-			$sql2 = "SELECT m.id, pi2.fecha_ingreso, c2.nombre_consultorio, pi2.hora_ingreso, CONCAT(p.nombre_paciente,' ',p.paterno_paciente,' ',p.materno_paciente) nombre_completo, p.fecha_nacimiento, p.cod_asegurado, p.nro_empleador, p.nombre_empleador, p.estado_civil, m.procedencia, m.gestacion, m.paridad, m.cesarea, m.aborto, m.edad_gestacional_fum, m.edad_gestacional_ecografia, m.tipo_parto, m.liquido_amniotico, m.fecha_nacido, m.peso_nacido, m.hora_nacido, m.sexo_nacido, m.alumbramiento, m.perine, m.sangrado, m.estado_madre, m.nombre_esposo, s2.nombre_sala, c.nombre_cama, pe.causa_egreso 
+			$sql2 = "SELECT m.id, pi2.fecha_ingreso, c2.nombre_consultorio, pi2.hora_ingreso, CONCAT(p.nombre_paciente,' ',p.paterno_paciente,' ',p.materno_paciente) nombre_completo, p.fecha_nacimiento, p.cod_asegurado, p.nro_empleador, p.nombre_empleador, p.estado_civil, m.procedencia, m.paridad, m.edad_gestacional_fum, m.edad_gestacional_ecografia, m.tipo_parto, m.liquido_amniotico, m.fecha_nacido, m.peso_nacido, m.hora_nacido, m.sexo_nacido, m.alumbramiento, m.perine, m.sangrado, m.estado_madre, m.nombre_esposo, s2.nombre_sala, c.nombre_cama, pe.causa_egreso 
 				FROM paciente_ingresos pi2
 				INNER JOIN pacientes p
 				ON pi2.id_paciente = p.id
@@ -76,7 +76,7 @@ class ModelMaternidades {
 
 			// devuelve el numero de registros de la consulta
 
-			$sql2 = "SELECT m.id, pi2.fecha_ingreso, c2.nombre_consultorio, pi2.hora_ingreso, CONCAT(p.nombre_paciente,' ',p.paterno_paciente,' ',p.materno_paciente) nombre_completo, p.fecha_nacimiento, p.cod_asegurado, p.nro_empleador, p.nombre_empleador, p.estado_civil, m.procedencia, m.gestacion, m.paridad, m.cesarea, m.aborto, m.edad_gestacional_fum, m.edad_gestacional_ecografia, m.tipo_parto, m.liquido_amniotico, m.fecha_nacido, m.peso_nacido, m.hora_nacido, m.sexo_nacido, m.alumbramiento, m.perine, m.sangrado, m.estado_madre, m.nombre_esposo, s2.nombre_sala, c.nombre_cama, pe.causa_egreso 
+			$sql2 = "SELECT m.id, pi2.fecha_ingreso, c2.nombre_consultorio, pi2.hora_ingreso, CONCAT(p.nombre_paciente,' ',p.paterno_paciente,' ',p.materno_paciente) nombre_completo, p.fecha_nacimiento, p.cod_asegurado, p.nro_empleador, p.nombre_empleador, p.estado_civil, m.procedencia, m.paridad, m.edad_gestacional_fum, m.edad_gestacional_ecografia, m.tipo_parto, m.liquido_amniotico, m.fecha_nacido, m.peso_nacido, m.hora_nacido, m.sexo_nacido, m.alumbramiento, m.perine, m.sangrado, m.estado_madre, m.nombre_esposo, s2.nombre_sala, c.nombre_cama, pe.causa_egreso 
 				FROM paciente_ingresos pi2
 				INNER JOIN pacientes p
 				ON pi2.id_paciente = p.id
@@ -113,7 +113,7 @@ class ModelMaternidades {
 	=============================================*/
 	static public function mdlMostrarMaternidades($tabla, $sql) {
 
-		$sql = "SELECT m.id, pi2.fecha_ingreso, c2.nombre_consultorio, pi2.hora_ingreso, CONCAT(p.nombre_paciente,' ',p.paterno_paciente,' ',p.materno_paciente) nombre_completo, p.fecha_nacimiento, p.cod_asegurado, p.nro_empleador, p.nombre_empleador, p.estado_civil, m.procedencia, m.gestacion, m.paridad, m.cesarea, m.aborto, m.edad_gestacional_fum, m.edad_gestacional_ecografia, m.tipo_parto, m.liquido_amniotico, m.fecha_nacido, m.peso_nacido, m.hora_nacido, m.sexo_nacido, m.alumbramiento, m.perine, m.sangrado, m.estado_madre, m.nombre_esposo, s2.nombre_sala, c.nombre_cama, pe.causa_egreso 
+		$sql = "SELECT m.id, pi2.fecha_ingreso, c2.nombre_consultorio, pi2.hora_ingreso, CONCAT(p.nombre_paciente,' ',p.paterno_paciente,' ',p.materno_paciente) nombre_completo, p.fecha_nacimiento, p.cod_asegurado, p.nro_empleador, p.nombre_empleador, p.estado_civil, m.procedencia, m.paridad, m.edad_gestacional_fum, m.edad_gestacional_ecografia, m.tipo_parto, m.liquido_amniotico, m.fecha_nacido, m.peso_nacido, m.hora_nacido, m.sexo_nacido, m.alumbramiento, m.perine, m.sangrado, m.estado_madre, m.nombre_esposo, s2.nombre_sala, c.nombre_cama, pe.causa_egreso 
 			FROM paciente_ingresos pi2
 			INNER JOIN pacientes p
 			ON pi2.id_paciente = p.id
@@ -169,7 +169,7 @@ class ModelMaternidades {
 	static public function mdlContarMaternidadesFecha($tabla, $item1, $valor1, $item2, $valor2) {
 
 		// devuelve el numero de registros de la consulta
-		$sql = "SELECT m.id, pi2.fecha_ingreso, c2.nombre_consultorio, pi2.hora_ingreso, CONCAT(p.nombre_paciente,' ',p.paterno_paciente,' ',p.materno_paciente) nombre_completo, p.fecha_nacimiento, p.cod_asegurado, p.nro_empleador, p.nombre_empleador, p.estado_civil, m.procedencia, m.gestacion, m.paridad, m.cesarea, m.aborto, m.edad_gestacional_fum, m.edad_gestacional_ecografia, m.tipo_parto, m.liquido_amniotico, m.fecha_nacido, m.peso_nacido, m.hora_nacido, m.sexo_nacido, m.alumbramiento, m.perine, m.sangrado, m.estado_madre, m.nombre_esposo, s2.nombre_sala, c.nombre_cama, pe.causa_egreso 
+		$sql = "SELECT m.id, pi2.fecha_ingreso, c2.nombre_consultorio, pi2.hora_ingreso, CONCAT(p.nombre_paciente,' ',p.paterno_paciente,' ',p.materno_paciente) nombre_completo, p.fecha_nacimiento, p.cod_asegurado, p.nro_empleador, p.nombre_empleador, p.estado_civil, m.procedencia, m.paridad, m.edad_gestacional_fum, m.edad_gestacional_ecografia, m.tipo_parto, m.liquido_amniotico, m.fecha_nacido, m.peso_nacido, m.hora_nacido, m.sexo_nacido, m.alumbramiento, m.perine, m.sangrado, m.estado_madre, m.nombre_esposo, s2.nombre_sala, c.nombre_cama, pe.causa_egreso 
 			FROM paciente_ingresos pi2
 			INNER JOIN pacientes p
 			ON pi2.id_paciente = p.id
@@ -210,7 +210,7 @@ class ModelMaternidades {
 
 			// devuelve el numero de registros de la consulta
 
-			$sql2 = "SELECT m.id, pi2.fecha_ingreso, c2.nombre_consultorio, pi2.hora_ingreso, CONCAT(p.nombre_paciente,' ',p.paterno_paciente,' ',p.materno_paciente) nombre_completo, p.fecha_nacimiento, p.cod_asegurado, p.nro_empleador, p.nombre_empleador, p.estado_civil, m.procedencia, m.gestacion, m.paridad, m.cesarea, m.aborto, m.edad_gestacional_fum, m.edad_gestacional_ecografia, m.tipo_parto, m.liquido_amniotico, m.fecha_nacido, m.peso_nacido, m.hora_nacido, m.sexo_nacido, m.alumbramiento, m.perine, m.sangrado, m.estado_madre, m.nombre_esposo, s2.nombre_sala, c.nombre_cama, pe.causa_egreso 
+			$sql2 = "SELECT m.id, pi2.fecha_ingreso, c2.nombre_consultorio, pi2.hora_ingreso, CONCAT(p.nombre_paciente,' ',p.paterno_paciente,' ',p.materno_paciente) nombre_completo, p.fecha_nacimiento, p.cod_asegurado, p.nro_empleador, p.nombre_empleador, p.estado_civil, m.procedencia, m.paridad, m.edad_gestacional_fum, m.edad_gestacional_ecografia, m.tipo_parto, m.liquido_amniotico, m.fecha_nacido, m.peso_nacido, m.hora_nacido, m.sexo_nacido, m.alumbramiento, m.perine, m.sangrado, m.estado_madre, m.nombre_esposo, s2.nombre_sala, c.nombre_cama, pe.causa_egreso 
 			FROM paciente_ingresos pi2
 			INNER JOIN pacientes p
 			ON pi2.id_paciente = p.id
@@ -243,7 +243,7 @@ class ModelMaternidades {
 
 			// devuelve el numero de registros de la consulta
 
-			$sql2 = "SELECT m.id, pi2.fecha_ingreso, c2.nombre_consultorio, pi2.hora_ingreso, CONCAT(p.nombre_paciente,' ',p.paterno_paciente,' ',p.materno_paciente) nombre_completo, p.fecha_nacimiento, p.cod_asegurado, p.nro_empleador, p.nombre_empleador, p.estado_civil, m.procedencia, m.gestacion, m.paridad, m.cesarea, m.aborto, m.edad_gestacional_fum, m.edad_gestacional_ecografia, m.tipo_parto, m.liquido_amniotico, m.fecha_nacido, m.peso_nacido, m.hora_nacido, m.sexo_nacido, m.alumbramiento, m.perine, m.sangrado, m.estado_madre, m.nombre_esposo, s2.nombre_sala, c.nombre_cama, pe.causa_egreso 
+			$sql2 = "SELECT m.id, pi2.fecha_ingreso, c2.nombre_consultorio, pi2.hora_ingreso, CONCAT(p.nombre_paciente,' ',p.paterno_paciente,' ',p.materno_paciente) nombre_completo, p.fecha_nacimiento, p.cod_asegurado, p.nro_empleador, p.nombre_empleador, p.estado_civil, m.procedencia,  m.paridad, m.edad_gestacional_fum, m.edad_gestacional_ecografia, m.tipo_parto, m.liquido_amniotico, m.fecha_nacido, m.peso_nacido, m.hora_nacido, m.sexo_nacido, m.alumbramiento, m.perine, m.sangrado, m.estado_madre, m.nombre_esposo, s2.nombre_sala, c.nombre_cama, pe.causa_egreso 
 			FROM paciente_ingresos pi2
 			INNER JOIN pacientes p
 			ON pi2.id_paciente = p.id
@@ -285,7 +285,7 @@ class ModelMaternidades {
 	=============================================*/
 	static public function mdlMostrarMaternidadesFecha($tabla, $item1, $valor1, $item2, $valor2, $sql) {
 
-		$sql2 = "SELECT m.id, pi2.fecha_ingreso, c2.nombre_consultorio, pi2.hora_ingreso, CONCAT(p.nombre_paciente,' ',p.paterno_paciente,' ',p.materno_paciente) nombre_completo, p.fecha_nacimiento, p.cod_asegurado, p.nro_empleador, p.nombre_empleador, p.estado_civil, m.procedencia, m.gestacion, m.paridad, m.cesarea, m.aborto, m.edad_gestacional_fum, m.edad_gestacional_ecografia, m.tipo_parto, m.liquido_amniotico, m.fecha_nacido, m.peso_nacido, m.hora_nacido, m.sexo_nacido, m.alumbramiento, m.perine, m.sangrado, m.estado_madre, m.nombre_esposo, s2.nombre_sala, c.nombre_cama, pe.causa_egreso 
+		$sql2 = "SELECT m.id, pi2.fecha_ingreso, c2.nombre_consultorio, pi2.hora_ingreso, CONCAT(p.nombre_paciente,' ',p.paterno_paciente,' ',p.materno_paciente) nombre_completo, p.fecha_nacimiento, p.cod_asegurado, p.nro_empleador, p.nombre_empleador, p.estado_civil, m.procedencia, m.paridad, m.edad_gestacional_fum, m.edad_gestacional_ecografia, m.tipo_parto, m.liquido_amniotico, m.fecha_nacido, m.peso_nacido, m.hora_nacido, m.sexo_nacido, m.alumbramiento, m.perine, m.sangrado, m.estado_madre, m.nombre_esposo, s2.nombre_sala, c.nombre_cama, pe.causa_egreso 
 			FROM paciente_ingresos pi2
 			INNER JOIN pacientes p
 			ON pi2.id_paciente = p.id
@@ -331,15 +331,12 @@ class ModelMaternidades {
 	    $pdo->beginTransaction();
 
 	    // Consulta 1: Registrar nueva materniadad de paciente
-			$sql = "INSERT INTO $tabla(procedencia, gestacion, paridad, cesarea, aborto, edad_gestacional_fum, edad_gestacional_ecografia, tipo_intervencion, tipo_parto, tipo_aborto, liquido_amniotico, fecha_nacido, hora_nacido, peso_nacido, sexo_nacido, estado_nacido, alumbramiento, perine, sangrado, estado_madre, nombre_esposo, id_paciente_ingreso) VALUES (:procedencia, :gestacion, :paridad, :cesarea, :aborto,:edad_gestacional_fum, :edad_gestacional_ecografia, :tipo_intervencion, :tipo_parto, :tipo_aborto, :liquido_amniotico, :fecha_nacido, :hora_nacido, :peso_nacido, :sexo_nacido, :estado_nacido, :alumbramiento, :perine, :sangrado, :estado_madre, :nombre_esposo, :id_paciente_ingreso)";
+			$sql = "INSERT INTO $tabla(procedencia, paridad, edad_gestacional_fum, edad_gestacional_ecografia, tipo_intervencion, tipo_parto, tipo_aborto, liquido_amniotico, fecha_nacido, hora_nacido, peso_nacido, sexo_nacido, estado_nacido, alumbramiento, perine, sangrado, estado_madre, nombre_esposo, id_paciente_ingreso) VALUES (:procedencia, :paridad, :edad_gestacional_fum, :edad_gestacional_ecografia, :tipo_intervencion, :tipo_parto, :tipo_aborto, :liquido_amniotico, :fecha_nacido, :hora_nacido, :peso_nacido, :sexo_nacido, :estado_nacido, :alumbramiento, :perine, :sangrado, :estado_madre, :nombre_esposo, :id_paciente_ingreso)";
 
 			$stmt = $pdo->prepare($sql);
 
 			$stmt->bindParam(":procedencia", $datos["procedencia"], PDO::PARAM_STR);
-			$stmt->bindParam(":gestacion", $datos["gestacion"], PDO::PARAM_STR);
 			$stmt->bindParam(":paridad", $datos["paridad"], PDO::PARAM_STR);
-			$stmt->bindParam(":cesarea", $datos["cesarea"], PDO::PARAM_STR);
-			$stmt->bindParam(":aborto", $datos["aborto"], PDO::PARAM_STR);
 			$stmt->bindParam(":edad_gestacional_fum", $datos["edad_gestacional_fum"], PDO::PARAM_STR);
 			$stmt->bindParam(":edad_gestacional_ecografia", $datos["edad_gestacional_ecografia"], PDO::PARAM_STR);
 			$stmt->bindParam(":tipo_intervencion", $datos["tipo_intervencion"], PDO::PARAM_STR);
@@ -413,15 +410,12 @@ class ModelMaternidades {
 
 	static public function mdlEditarMaternidad($tabla, $datos) {
 
-		$sql = "UPDATE $tabla SET procedencia = :procedencia, gestacion = :gestacion, paridad = :paridad, cesarea = :cesarea, aborto = :aborto, edad_gestacional_fum =:edad_gestacional_fum, edad_gestacional_ecografia = :edad_gestacional_ecografia, tipo_intervencion = :tipo_intervencion, tipo_parto = :tipo_parto, tipo_aborto = :tipo_aborto, liquido_amniotico = :liquido_amniotico, fecha_nacido = :fecha_nacido, hora_nacido = :hora_nacido, peso_nacido = :peso_nacido, sexo_nacido = :sexo_nacido, estado_nacido = :estado_nacido, alumbramiento = :alumbramiento, perine = :perine, sangrado = :sangrado, estado_madre = :estado_madre, nombre_esposo = :nombre_esposo WHERE id = :id";
+		$sql = "UPDATE $tabla SET procedencia = :procedencia, paridad = :paridad, edad_gestacional_fum =:edad_gestacional_fum, edad_gestacional_ecografia = :edad_gestacional_ecografia, tipo_intervencion = :tipo_intervencion, tipo_parto = :tipo_parto, tipo_aborto = :tipo_aborto, liquido_amniotico = :liquido_amniotico, fecha_nacido = :fecha_nacido, hora_nacido = :hora_nacido, peso_nacido = :peso_nacido, sexo_nacido = :sexo_nacido, estado_nacido = :estado_nacido, alumbramiento = :alumbramiento, perine = :perine, sangrado = :sangrado, estado_madre = :estado_madre, nombre_esposo = :nombre_esposo WHERE id = :id";
 
 		$stmt = Conexion::connectPostgres()->prepare($sql);
 		
 		$stmt->bindParam(":procedencia", $datos["procedencia"], PDO::PARAM_STR);
-		$stmt->bindParam(":gestacion", $datos["gestacion"], PDO::PARAM_STR);
 		$stmt->bindParam(":paridad", $datos["paridad"], PDO::PARAM_STR);
-		$stmt->bindParam(":cesarea", $datos["cesarea"], PDO::PARAM_STR);
-		$stmt->bindParam(":aborto", $datos["aborto"], PDO::PARAM_STR);
 		$stmt->bindParam(":edad_gestacional_fum", $datos["edad_gestacional_fum"], PDO::PARAM_STR);
 		$stmt->bindParam(":edad_gestacional_ecografia", $datos["edad_gestacional_ecografia"], PDO::PARAM_STR);
 		$stmt->bindParam(":tipo_intervencion", $datos["tipo_intervencion"], PDO::PARAM_STR);

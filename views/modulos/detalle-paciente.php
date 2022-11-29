@@ -116,6 +116,7 @@ $edad = $hoy->diff($nacimiento);
             <tr>
               <th scope="col">#</th> 
               <th scope="col"></th>
+              <th scope="col"></th>
               <th scope="col">LUGAR</th>
               <th scope="col">FECHA INGRESO</th>
               <th scope="col">HORA INGRESO</th>
@@ -124,7 +125,6 @@ $edad = $hoy->diff($nacimiento);
               <th scope="col">CAMA ACTUAL</th>
               <th scope="col">DIAGNOSTICO CIE10</th>
               <th scope="col">DIAGNOSTICOS ESPECIFICOS ACTUAL</th>
-              <th scope="col">ESTADO</th>
             </tr>
           </thead>
 
@@ -1758,7 +1758,7 @@ MODAL NUEVO MATERNIDAD
 
                   <table class="table table-striped table-bordered shadow-lg" id="tblInternacion" width="100%">
 
-                    <thead class="table-dark">
+                    <thead class="text-light bg-primary">
 
                       <tr>
 
@@ -1811,17 +1811,6 @@ MODAL NUEVO MATERNIDAD
                       </select>   
                     </div>
 
-                  </div>
-
-                  <div class="row">
-
-                    <!-- ENTRADA PARA LA GESTACION --> 
-                    <div class="col-md-3 col-sm-3 col-xs-6 form-group">
-                      <label for="nuevoGestacion">GESTACIÓN</label>
-                      <label class="indicador">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>
-                      <input type="number" class="form-control" name="nuevoGestacion" id="nuevoGestacion" min=0 required>
-                    </div>
-
                     <!-- ENTRADA PARA LA PARIDAD --> 
                     <div class="col-md-3 col-sm-3 col-xs-6 form-group">
                       <label for="nuevoParidad">PARIDAD</label>
@@ -1829,19 +1818,9 @@ MODAL NUEVO MATERNIDAD
                       <input type="number" class="form-control" name="nuevoParidad" id="nuevoParidad" min=0 required>
                     </div>
 
-                    <!-- ENTRADA PARA LA CESAREA --> 
-                    <div class="col-md-3 col-sm-3 col-xs-6 form-group">
-                      <label for="nuevoCesarea">CESAREA</label>
-                      <label class="indicador">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>
-                      <input type="number" class="form-control" name="nuevoCesarea" id="nuevoCesarea" min=0 required>
-                    </div>
+                  </div>
 
-                    <!-- ENTRADA PARA EL ABORTO --> 
-                    <div class="col-md-3 col-sm-3 col-xs-6 form-group">
-                      <label for="nuevoAborto">ABORTO</label>
-                      <label class="indicador">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>
-                      <input type="number" class="form-control" name="nuevoAborto" id="nuevoAborto" min=0 required>
-                    </div>
+                  <div class="row">
 
                     <!-- ENTRADA PARA EL EDAD GESTACIONAL --> 
                     <div class="col-md-12 col-sm-12 col-xs-12 form-group">
@@ -1866,23 +1845,6 @@ MODAL NUEVO MATERNIDAD
                         <span class="input-group-text" id="Ecografia">SEMANAS</span>
                       </div>
                     </div>
-
-                    <!-- <div class="col-md-12 mb-4">
-                    
-                      <div class="form-check form-check-inline">
-                        <input class="form-check-input nuevoTipoIntervencion" type="radio" name="nuevoTipoIntervencion" id="parto" value="PARTO" checked>
-                        <label class="form-check-label" for="parto">PARTO</label>
-                      </div>
-                      <div class="form-check form-check-inline">
-                        <input class="form-check-input nuevoTipoIntervencion" type="radio" name="nuevoTipoIntervencion" id="cesarea" value="CESAREA">
-                        <label class="form-check-label" for="cesarea">CESAREA</label>
-                      </div>
-                      <div class="form-check form-check-inline">
-                        <input class="form-check-input nuevoTipoIntervencion" type="radio" name="tipoIntervencion" id="aborto" value="ABORTO" disabled>
-                        <label class="form-check-label" for="aborto">ABORTO</label>
-                      </div>
-
-                    </div> -->
 
                     <!-- ENTRADA PARA SELECCIONAR EL TIPO DE PARTO -->
                     <div class="col-md-6 col-sm-6 col-xs-12 form-group"> 
@@ -2188,17 +2150,6 @@ MODAL EDITAR MATERNIDAD
                       </select>   
                     </div>
 
-                  </div>
-
-                  <div class="row">
-
-                    <!-- ENTRADA PARA LA GESTACION --> 
-                    <div class="col-md-3 col-sm-3 col-xs-6 form-group">
-                      <label for="editarGestacion">GESTACIÓN</label>
-                      <label class="indicador">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>
-                      <input type="number" class="form-control" name="editarGestacion" id="editarGestacion" min=0 required>
-                    </div>
-
                     <!-- ENTRADA PARA LA PARIDAD --> 
                     <div class="col-md-3 col-sm-3 col-xs-6 form-group">
                       <label for="editarParidad">PARIDAD</label>
@@ -2206,19 +2157,9 @@ MODAL EDITAR MATERNIDAD
                       <input type="number" class="form-control" name="editarParidad" id="editarParidad" min=0 required>
                     </div>
 
-                    <!-- ENTRADA PARA LA CESAREA --> 
-                    <div class="col-md-3 col-sm-3 col-xs-6 form-group">
-                      <label for="editarCesarea">CESAREA</label>
-                      <label class="indicador">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>
-                      <input type="number" class="form-control" name="editarCesarea" id="editarCesarea" min=0 required>
-                    </div>
+                  </div>
 
-                    <!-- ENTRADA PARA EL ABORTO --> 
-                    <div class="col-md-3 col-sm-3 col-xs-6 form-group">
-                      <label for="editarAborto">ABORTO</label>
-                      <label class="indicador">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>
-                      <input type="number" class="form-control" name="editarAborto" id="editarAborto" min=0 required>
-                    </div>
+                  <div class="row">
 
                     <!-- ENTRADA PARA EL EDAD GESTACIONAL --> 
                     <div class="col-md-12 col-sm-12 col-xs-12 form-group">
@@ -2498,7 +2439,7 @@ MODAL NUEVO NEONATO
 
                   <table class="table table-striped table-bordered shadow-lg" id="tblInternacion" width="100%">
 
-                    <thead class="table-dark">
+                    <thead class="text-light bg-primary">
 
                       <tr>
 
@@ -2557,37 +2498,26 @@ MODAL NUEVO NEONATO
                     <!-- ENTRADA PARA VARIABLE PC --> 
                     <div class="col-md-3 col-sm-3 col-xs-6 form-group">
                       <label for="nuevoPCNeonato">PC</label>
-                      <label class="indicador">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>
-                      <input type="number" step="0.1" class="form-control" name="nuevoPCNeonato" id="nuevoPCNeonato" min="0" max="99" required>
+                      <input type="number" step="0.1" class="form-control" name="nuevoPCNeonato" id="nuevoPCNeonato" min="0.1" max="99.9">
                     </div>
 
                     <!-- ENTRADA PARA VARIABLE PT --> 
                     <div class="col-md-3 col-sm-3 col-xs-6 form-group">
                       <label for="nuevoPTNeonato">PT</label>
-                      <label class="indicador">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>
-                      <input type="number" step="1" class="form-control" name="nuevoPTNeonato" id="nuevoPTNeonato" min="0" max="99" required>
+                      <input type="number" step="0.1" class="form-control" name="nuevoPTNeonato" id="nuevoPTNeonato" min="0.1" max="99.9">
                     </div>
 
-                    <!-- ENTRADA PARA LA VARIABLE APGAR inicio --> 
+                    <!-- ENTRADA PARA LA VARIABLE APGAR --> 
                     <div class="col-md-3 col-sm-3 col-xs-6 form-group">
-                      <label for="nuevoAPGARIni">APGAR Inicio</label>
-                      <label class="indicador">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>
-                      <input type="number" step="1" class="form-control" name="nuevoAPGARIni" id="nuevoAPGARIni" min="0" required>
-                    </div>
-
-                    <!-- ENTRADA PARA LA VARIABLE APGAR fin --> 
-                    <div class="col-md-3 col-sm-3 col-xs-6 form-group">
-                      <label for="nuevoAPGARFin">APGAR Fin</label>
-                      <label class="indicador">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>
-                      <input type="number" step="1" class="form-control" name="nuevoAPGARFin" id="nuevoAPGARFin" min="0" required>
+                      <label for="nuevoAPGAR">APGAR</label>
+                      <input type="text" class="form-control" name="nuevoAPGAR" id="nuevoAPGAR">
                     </div>
 
                     <!-- ENTRADA PARA EL EDAD GESTACIONAL --> 
                     <div class="col-md-6 col-sm-6 col-xs-12 form-group">
-                      <label for="nuevoEdadGestacional">EDAD GESTACIONAL</label>
-                      <label class="indicador">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>                     
+                      <label for="nuevoEdadGestacional">EDAD GESTACIONAL</label>                     
                       <div class="input-group">
-                        <input type="number" step="0.1" class="form-control" name="nuevoEdadGestacional" id="nuevoEdadGestacional" aria-describedby="edadGestacional" min="0.1" data-error="#errNuevoEdadGestacional" required>
+                        <input type="number" step="0.1" class="form-control" name="nuevoEdadGestacional" id="nuevoEdadGestacional" aria-describedby="edadGestacional" min="0.1" data-error="#errNuevoEdadGestacional">
                         <span class="input-group-text" id="edadGestacional">SEMANAS</span>
                       </div>
                       <span id="errNuevoEdadGestacional"></span>
@@ -2596,8 +2526,7 @@ MODAL NUEVO NEONATO
                     <!-- ENTRADA PARA SELECCIONAR EL TIPO DE PARTO -->
                     <div class="col-md-6 col-sm-6 col-xs-12 form-group"> 
                       <label for="nuevoTipoPartoNeonato" class="form-label">TIPO DE PARTO</label>
-                      <label class="indicadorCesarea">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>
-                      <select name="nuevoTipoPartoNeonato" id="nuevoTipoPartoNeonato" class="form-select" role="presetation" required>
+                      <select name="nuevoTipoPartoNeonato" id="nuevoTipoPartoNeonato" class="form-select" role="presetation">
                         <option value="" disabled selected>ELEGIR...</option>
                         <option value="EUTOCICO">EUTOCICO</option>
                         <option value="DISTOCICO">DISTOCICO</option>
@@ -2734,7 +2663,7 @@ MODAL EDITAR NEONATO
 
                   <table class="table table-striped table-bordered shadow-lg" id="tblInternacion" width="100%">
 
-                    <thead class="table-dark">
+                    <thead class="text-light bg-primary">
 
                       <tr>
 
@@ -2793,37 +2722,26 @@ MODAL EDITAR NEONATO
                     <!-- ENTRADA PARA VARIABLE PC --> 
                     <div class="col-md-3 col-sm-3 col-xs-6 form-group">
                       <label for="editarPCNeonato">PC</label>
-                      <label class="indicador">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>
-                      <input type="number" step="0.01" class="form-control" name="editarPCNeonato" id="editarPCNeonato" min="0" max="99" required>
+                      <input type="number" step="0.01" class="form-control" name="editarPCNeonato" id="editarPCNeonato" min="0" max="99.9">
                     </div>
 
                     <!-- ENTRADA PARA VARIABLE PT --> 
                     <div class="col-md-3 col-sm-3 col-xs-6 form-group">
                       <label for="editarPTNeonato">PT</label>
-                      <label class="indicador">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>
-                      <input type="number" step="0.01" class="form-control" name="editarPTNeonato" id="editarPTNeonato" min="0" max="99" required>
+                      <input type="number" step="0.01" class="form-control" name="editarPTNeonato" id="editarPTNeonato" min="0" max="99">
                     </div>
 
-                    <!-- ENTRADA PARA LA VARIABLE APGAR inicio --> 
+                    <!-- ENTRADA PARA LA VARIABLE APGAR --> 
                     <div class="col-md-3 col-sm-3 col-xs-6 form-group">
-                      <label for="editarAPGARIni">APGAR Inicio</label>
-                      <label class="indicador">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>
-                      <input type="number" step="1" class="form-control" name="editarAPGARIni" id="editarAPGARIni" min="0" required>
-                    </div>
-
-                    <!-- ENTRADA PARA LA VARIABLE APGAR fin --> 
-                    <div class="col-md-3 col-sm-3 col-xs-6 form-group">
-                      <label for="editarAPGARFin">APGAR Fin</label>
-                      <label class="indicador">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>
-                      <input type="number" step="1" class="form-control" name="editarAPGARFin" id="editarAPGARFin" min="0" required>
+                      <label for="editarAPGAR">APGAR</label>
+                      <input type="text" class="form-control" name="editarAPGAR" id="editarAPGAR">
                     </div>
 
                     <!-- ENTRADA PARA EL EDAD GESTACIONAL --> 
                     <div class="col-md-6 col-sm-6 col-xs-12 form-group">
-                      <label for="editarEdadGestacional">EDAD GESTACIONAL</label>
-                      <label class="indicador">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>                     
+                      <label for="editarEdadGestacional">EDAD GESTACIONAL</label>                    
                       <div class="input-group">
-                        <input type="number" step="0.01" class="form-control" name="editarEdadGestacional" id="editarEdadGestacional" aria-describedby="edadGestacional" min="0.1" data-error="#errEditarEdadGestacional" required>
+                        <input type="number" step="0.01" class="form-control" name="editarEdadGestacional" id="editarEdadGestacional" aria-describedby="edadGestacional" min="0" data-error="#errEditarEdadGestacional" >
                         <span class="input-group-text" id="edadGestacional">SEMANAS</span>
                       </div>
                       <span id="errEditarEdadGestacional"></span>
@@ -2832,8 +2750,7 @@ MODAL EDITAR NEONATO
                     <!-- ENTRADA PARA SELECCIONAR EL TIPO DE PARTO -->
                     <div class="col-md-6 col-sm-6 col-xs-12 form-group"> 
                       <label for="editarTipoPartoNeonato" class="form-label">TIPO DE PARTO</label>
-                      <label class="indicadorCesarea">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>
-                      <select name="editarTipoPartoNeonato" id="editarTipoPartoNeonato" class="form-select" role="presetation" required>
+                      <select name="editarTipoPartoNeonato" id="editarTipoPartoNeonato" class="form-select" role="presetation">
                         <option value="" disabled selected>ELEGIR...</option>
                         <option value="EUTOCICO">EUTOCICO</option>
                         <option value="DISTOCICO">DISTOCICO</option>

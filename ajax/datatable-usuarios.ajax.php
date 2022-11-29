@@ -40,9 +40,9 @@ class TablaUsuarios {
 					/*=============================================
 					TRAEMOS LAS ACCIONES
 					=============================================*/				
-					$btnEditarUsuario = "<button class='btn btn-outline-primary btn-sm btnEditarUsuario' id='".$usuarios[$i]["id"]."' data-bs-toggle='modal' data-bs-target='#modalEditarUsuario' data-toggle='tooltip' title='Editar'><i class='fas fa-pencil-alt'></i></button>";
+					$btnEditarUsuario = "<button class='btn btn-outline-primary btn-sm btnEditarUsuario' id='".$usuarios[$i]["id"]."' data-bs-toggle='modal' data-bs-target='#modalEditarUsuario' data-toggle='tooltip' title='Editar'><i class='fas fa-pencil-alt'></i> EDITAR</button>";
 
-					$btnEliminarUsuario = "<button class='btn btn-outline-primary btn-sm btnBajarusuario' id='".$usuarios[$i]["id"]."' data-toggle='tooltip' title='Eliminar Usuario'><i class='fas fa-trash-alt'></i></button>";	
+					$btnEliminarUsuario = "<button class='btn btn-outline-primary btn-sm btnBajarusuario' id='".$usuarios[$i]["id"]."' data-toggle='tooltip' title='Eliminar Usuario'><i class='fas fa-trash-alt'></i> ELIMINAR</button>";	
 						
 					$botones = "<div class='btn-group'>".$btnEditarUsuario.$btnEliminarUsuario."</div>";
 					

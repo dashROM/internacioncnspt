@@ -32,7 +32,7 @@ class TablaMedicos {
 					/*=============================================
 					TRAEMOS LAS ACCIONES
 					=============================================*/
-					$btnEditarmedico = "<button class='btn btn-outline-primary btn-sm btnEditarMedico' idMedico='".$medico[$i]["id"]."' data-bs-toggle='modal' data-bs-target='#modalEditarMedico'><i class='fas fa-pencil-alt'></i></button>";
+					$btnEditarmedico = "<button class='btn btn-outline-primary btn-sm btnEditarMedico' idMedico='".$medico[$i]["id"]."' data-bs-toggle='modal' data-bs-target='#modalEditarMedico'><i class='fas fa-pencil-alt'></i> EDITAR</button>";
 						
 					$botones = "<div class='btn-group'>".$btnEditarmedico."</div>";
 					

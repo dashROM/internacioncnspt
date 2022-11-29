@@ -7,14 +7,10 @@ class AjaxMaternidades {
 
     public $id;
     public $procedencia;
-    public $gestacion;
 	public $paridad;
-	public $cesarea;
-	public $aborto;
 	public $diagnostico_maternidad;
 	public $edad_gestacional_fum;
 	public $edad_gestacional_ecografia;
-	// public $tipo_intervencion;
 	public $tipo_parto;
 	public $tipo_aborto;     
 	public $liquido_amniotico;
@@ -50,13 +46,9 @@ class AjaxMaternidades {
     public function ajaxNuevoMaternidad() {
 
 		$datos = array("procedencia"              	  => $this->procedencia, 
-		               "gestacion"	              	  => $this->gestacion,
 		               "paridad"	              	  => $this->paridad,
-		               "cesarea"	              	  => $this->cesarea,
-		               "aborto"	              	  	  => $this->aborto,
 		               "edad_gestacional_fum"     	  => $this->edad_gestacional_fum,
 		               "edad_gestacional_ecografia"   => $this->edad_gestacional_ecografia,
-		               // "tipo_intervencion"  	      => $this->tipo_intervencion,
                        "tipo_parto"                   => $this->tipo_parto,
                        "tipo_aborto"                  => $this->tipo_aborto,
 		               "liquido_amniotico"            => $this->liquido_amniotico,
@@ -85,13 +77,9 @@ class AjaxMaternidades {
 	public function ajaxEditarMaternidad() {
 
 		$datos = array("procedencia"              	  => $this->procedencia, 
-		               "gestacion"	              	  => $this->gestacion,
 		               "paridad"	              	  => $this->paridad,
-		               "cesarea"	              	  => $this->cesarea,
-		               "aborto"	              	  	  => $this->aborto,
 		               "edad_gestacional_fum"     	  => $this->edad_gestacional_fum,
 		               "edad_gestacional_ecografia"   => $this->edad_gestacional_ecografia,
-		               // "tipo_intervencion"  	      => $this->tipo_intervencion,
                        "tipo_parto"                   => $this->tipo_parto,
                        "tipo_aborto"                  => $this->tipo_aborto,
 		               "liquido_amniotico"            => $this->liquido_amniotico,
@@ -137,10 +125,7 @@ if (isset($_POST["nuevoMaternidad"])) {
 				 
 	$nuevoMaternidad = new AjaxMaternidades;
 	$nuevoMaternidad -> procedencia = $_POST["nuevoProcedencia"];
-	$nuevoMaternidad -> gestacion = $_POST['nuevoGestacion'];
 	$nuevoMaternidad -> paridad = $_POST['nuevoParidad'];
-	$nuevoMaternidad -> cesarea = $_POST['nuevoCesarea'];
-	$nuevoMaternidad -> aborto = $_POST['nuevoAborto'];
 	
 	if ($_POST['nuevoEdadFUM'] != "") {
 		$nuevoMaternidad -> edad_gestacional_fum = $_POST['nuevoEdadFUM'];
@@ -206,10 +191,7 @@ if (isset($_POST["editarMaternidad"])) {
 
 	$editarMaternidad = new AjaxMaternidades;
 	$editarMaternidad -> procedencia = $_POST["editarProcedencia"];
-	$editarMaternidad -> gestacion = $_POST['editarGestacion'];
 	$editarMaternidad -> paridad = $_POST['editarParidad'];
-	$editarMaternidad -> cesarea = $_POST['editarCesarea'];
-	$editarMaternidad -> aborto = $_POST['editarAborto'];
 	
 	if ($_POST['editarEdadFUM'] != "") {
 		$editarMaternidad -> edad_gestacional_fum = $_POST['editarEdadFUM'];

@@ -91,10 +91,7 @@
               <th scope="col">RAZON SOCIAL</th>
               <th scope="col">ESTADO CIVIL</th>
               <th scope="col">PROCEDENCIA</th>
-              <th scope="col">GESTACION</th>
               <th scope="col">PARIDAD</th>
-              <th scope="col">CESAREA</th>
-              <th scope="col">ABORTO</th>
               <th scope="col">EDAD GESTACIONAL</th>
               <th scope="col">TIPO DE PARTO</th>
               <th scope="col">LIQUIDO AMNIOTICO</th>

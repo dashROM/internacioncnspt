@@ -6,10 +6,10 @@ require_once "../models/cie10.model.php";
 class AjaxCie10 {
 
 	public $q;
+
 	/*=============================================
 	MOSTRAR DATOS DE DIAGNOSTICO CIE10
 	=============================================*/
-
 	public function ajaxMostrarDiagnosticoCie10()	{
 
 		$item = "q";
@@ -30,13 +30,10 @@ class AjaxCie10 {
 
 
 /*=============================================
-MOSTRAR CAMAS
+MOSTRAR DIAGNOSTICO CIE10
 =============================================*/
 				 
 $ctrMostrarDiagnostico = new AjaxCie10();
-$ctrMostrarDiagnostico -> q = $_GET["q"];
-
-// var_dump($_GET["q"]);
-
+$ctrMostrarDiagnostico -> q = $_GET['q'];
 $ctrMostrarDiagnostico -> ajaxMostrarDiagnosticoCie10();
 

@@ -11,7 +11,7 @@ class ModelCie10{
 
 		if ($item != null) {
 
-			$sql = "SELECT id, CONCAT(codigo,' - ',descripcion) diagnostico FROM $tabla WHERE (codigo ILIKE '%$valor%') OR (descripcion ILIKE '%$valor%')";
+			$sql = "SELECT id, CONCAT(codigo,' - ',descripcion) diagnostico FROM $tabla WHERE (UNACCENT(codigo) ILIKE '%$valor%') OR (UNACCENT(descripcion) ILIKE '%$valor%')";
 			
 			$stmt = Conexion::connectPostgres()->prepare($sql);
 
@@ -23,7 +23,7 @@ class ModelCie10{
 
 		} else {
 
-			$stmt = Conexion::connectPostgres()->prepare("SELECT * FROM  $tabla ORDER BY id DESC");
+			$stmt = Conexion::connectPostgres()->prepare("SELECT * FROM $tabla ORDER BY id DESC");
 
 			$stmt->execute();
 
@@ -43,7 +43,7 @@ class ModelCie10{
 
 		if ($item != null) {
 
-			$sql = "SELECT count(id) FROM $tabla WHERE (codigo LIKE '%$valor%') OR (descripcion LIKE '%$valor%')";
+			$sql = "SELECT count(id) FROM $tabla WHERE (UNACCENT(codigo) ILIKE '%$valor%') OR (UNACCENT(descripcion) ILIKE '%$valor%')";
 			
 			$stmt = Conexion::connectPostgres()->prepare($sql);
 

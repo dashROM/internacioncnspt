@@ -25,7 +25,7 @@ class TablaNeonatos {
 	    7   =>  'talla_neonato',
 	    8   =>  'pc_neonato',
 	    9   =>  'pt_neonato',
-	    10   =>  'apgar_ini',
+	    10   =>  'apgar',
 	    11   =>  'edad_gestacional_neonato',
 	    12   =>  'cod_asegurado',
 	    13   =>  'nro_empleador',
@@ -50,27 +50,19 @@ class TablaNeonatos {
 
 		if(!empty($request['search']['value'])) {
 
-		    $sql .= " AND (fecha_ingreso Like '".$request['search']['value']."%' ";
-		    $sql .= " OR hora_ingreso Like '".$request['search']['value']."%' ";
-		    $sql .= " OR nombre_completo Like '".$request['search']['value']."%' ";
-		    $sql .= " OR nombre_cama Like '".$request['search']['value']."%' )";
-		    $sql .= " OR sexo Like '".$request['search']['value']."%' )";
-		    $sql .= " OR peso_neonato Like '".$request['search']['value']."%' )";
-		    $sql .= " OR talla_neonato Like '".$request['search']['value']."%' )";
-		    $sql .= " OR pc_neonato Like '".$request['search']['value']."%' )";
-		    $sql .= " OR pt_neonato Like '".$request['search']['value']."%' )";
-		    $sql .= " OR apgar_ini Like '".$request['search']['value']."%' )";
-		    $sql .= " OR edad_gestacional_neonato Like '".$request['search']['value']."%' )";
-		    $sql .= " OR cod_asegurado Like '".$request['search']['value']."%' )";
-		    $sql .= " OR nro_empleador Like '".$request['search']['value']."%' )";
-		    $sql .= " OR tipo_parto_neonato Like '".$request['search']['value']."%' )";  		    
-		    $sql .= " OR diagnostico_especifico1 Like '".$request['search']['value']."%' )";
-		    $sql .= " OR diagnostico_egreso1 Like '".$request['search']['value']."%' )";
-		    $sql .= " OR nombre_consultorio Like '".$request['search']['value']."%' )";
-		    $sql .= " OR fecha_egreso Like '".$request['search']['value']."%' )";
-		    $sql .= " OR hora_egreso Like '".$request['search']['value']."%' )";
-		    $sql .= " OR causa_egreso Like '".$request['search']['value']."%' )";
-		    $sql .= " OR descripcion_parto Like '".$request['search']['value']."%' )";
+	    $sql .= " AND (nombre_paciente ILike '%".$request['search']['value']."%' ";
+	    $sql .= " OR paterno_paciente ILike '%".$request['search']['value']."%' ";
+	    $sql .= " OR materno_paciente ILike '%".$request['search']['value']."%' ";
+	    $sql .= " OR nombre_cama ILike '%".$request['search']['value']."%' ";
+	    $sql .= " OR sexo ILike '%".$request['search']['value']."%' ";
+	    $sql .= " OR cod_asegurado ILike '%".$request['search']['value']."%' ";
+	    $sql .= " OR nro_empleador ILike '%".$request['search']['value']."%' ";
+	    $sql .= " OR tipo_parto_neonato ILike '%".$request['search']['value']."%' ";  		    
+	    $sql .= " OR diagnostico_especifico1 ILike '%".$request['search']['value']."%' ";
+	    $sql .= " OR diagnostico_egreso1 ILike '%".$request['search']['value']."%' ";
+	    $sql .= " OR nombre_consultorio ILike '%".$request['search']['value']."%' ";
+	    $sql .= " OR causa_egreso ILike '%".$request['search']['value']."%' ";
+	    $sql .= " OR descripcion_parto ILike '%".$request['search']['value']."%' )";
 		
 		}
 
@@ -104,7 +96,7 @@ class TablaNeonatos {
 	    $subdata[] = $neonatos[$i]["talla_neonato"];
 	    $subdata[] = $neonatos[$i]["pc_neonato"];
 	    $subdata[] = $neonatos[$i]["pt_neonato"];
-	    $subdata[] = $neonatos[$i]["apgar_ini"].' - '.$neonatos[$i]["apgar_fin"];
+	    $subdata[] = $neonatos[$i]["apgar"];
 	    $subdata[] = number_format($neonatos[$i]["edad_gestacional_neonato"],2,",","");
 	    $subdata[] = $neonatos[$i]["cod_asegurado"];
 	    $subdata[] = $neonatos[$i]["nro_empleador"];
@@ -155,7 +147,7 @@ class TablaNeonatos {
 	    7   =>  'talla_neonato',
 	    8   =>  'pc_neonato',
 	    9   =>  'pt_neonato',
-	    10   =>  'apgar_ini',
+	    10   =>  'apgar',
 	    11   =>  'edad_gestacional_neonato',
 	    12   =>  'cod_asegurado',
 	    13   =>  'nro_empleador',
@@ -179,27 +171,19 @@ class TablaNeonatos {
 
 		if(!empty($request['search']['value'])) {
 
-		    $sql .= " AND (fecha_ingreso Like '".$request['search']['value']."%' ";
-		    $sql .= " OR hora_ingreso Like '".$request['search']['value']."%' ";
-		    $sql .= " OR nombre_completo Like '".$request['search']['value']."%' ";
-		    $sql .= " OR nombre_cama Like '".$request['search']['value']."%' )";
-		    $sql .= " OR sexo Like '".$request['search']['value']."%' )";
-		    $sql .= " OR peso_neonato Like '".$request['search']['value']."%' )";
-		    $sql .= " OR talla_neonato Like '".$request['search']['value']."%' )";
-		    $sql .= " OR pc_neonato Like '".$request['search']['value']."%' )";
-		    $sql .= " OR pt_neonato Like '".$request['search']['value']."%' )";
-		    $sql .= " OR apgar_ini Like '".$request['search']['value']."%' )";
-		    $sql .= " OR edad_gestacional_neonato Like '".$request['search']['value']."%' )";
-		    $sql .= " OR cod_asegurado Like '".$request['search']['value']."%' )";
-		    $sql .= " OR nro_empleador Like '".$request['search']['value']."%' )";
-		    $sql .= " OR tipo_parto_neonato Like '".$request['search']['value']."%' )";  		    
-		    $sql .= " OR diagnostico_especifico1 Like '".$request['search']['value']."%' )";
-		    $sql .= " OR diagnostico_egreso1 Like '".$request['search']['value']."%' )";
-		    $sql .= " OR nombre_consultorio Like '".$request['search']['value']."%' )";
-		    $sql .= " OR fecha_egreso Like '".$request['search']['value']."%' )";
-		    $sql .= " OR hora_egreso Like '".$request['search']['value']."%' )";
-		    $sql .= " OR causa_egreso Like '".$request['search']['value']."%' )";
-		    $sql .= " OR descripcion_parto Like '".$request['search']['value']."%' )";
+	    $sql .= " AND (nombre_paciente ILike '%".$request['search']['value']."%' ";
+	    $sql .= " OR paterno_paciente ILike '%".$request['search']['value']."%' ";
+	    $sql .= " OR materno_paciente ILike '%".$request['search']['value']."%' ";
+	    $sql .= " OR nombre_cama ILike '%".$request['search']['value']."%' ";
+	    $sql .= " OR sexo ILike '%".$request['search']['value']."%' ";
+	    $sql .= " OR cod_asegurado ILike '%".$request['search']['value']."%' ";
+	    $sql .= " OR nro_empleador ILike '%".$request['search']['value']."%' ";
+	    $sql .= " OR tipo_parto_neonato ILike '%".$request['search']['value']."%' ";  		    
+	    $sql .= " OR diagnostico_especifico1 ILike '%".$request['search']['value']."%' ";
+	    $sql .= " OR diagnostico_egreso1 ILike '%".$request['search']['value']."%' ";
+	    $sql .= " OR nombre_consultorio ILike '%".$request['search']['value']."%' ";
+	    $sql .= " OR causa_egreso ILike '%".$request['search']['value']."%' ";
+	    $sql .= " OR descripcion_parto ILike '%".$request['search']['value']."%' )";
 		
 		}
 
@@ -233,7 +217,7 @@ class TablaNeonatos {
 	    $subdata[] = $neonatos[$i]["talla_neonato"];
 	    $subdata[] = $neonatos[$i]["pc_neonato"];
 	    $subdata[] = $neonatos[$i]["pt_neonato"];
-	    $subdata[] = $neonatos[$i]["apgar_ini"].' - '.$neonatos[$i]["apgar_fin"];
+	    $subdata[] = $neonatos[$i]["apgar"];
 	    $subdata[] = number_format($neonatos[$i]["edad_gestacional_neonato"],2,",","");
 	    $subdata[] = $neonatos[$i]["cod_asegurado"];
 	    $subdata[] = $neonatos[$i]["nro_empleador"];

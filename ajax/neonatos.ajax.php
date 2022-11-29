@@ -10,8 +10,7 @@ class AjaxNeonatos {
     public $talla_neonato;
 	public $pc_neonato;
 	public $pt_neonato;
-	public $apgar_ini;
-	public $apgar_fin;
+	public $apgar;
 	public $edad_gestacional_neonato;
 	public $tipo_parto_neonato;
 	public $descripcion_parto;
@@ -40,8 +39,7 @@ class AjaxNeonatos {
 		               "talla_neonato"	              => $this->talla_neonato,
 		               "pc_neonato"	              	  => $this->pc_neonato,
 		               "pt_neonato"	              	  => $this->pt_neonato,
-		               "apgar_ini"	              	  => $this->apgar_ini,
-		               "apgar_fin"     	  		  	  => $this->apgar_fin,
+		               "apgar"		              	  => $this->apgar,
 		               "edad_gestacional_neonato"     => $this->edad_gestacional_neonato,
                        "tipo_parto_neonato"           => $this->tipo_parto_neonato,
                        "descripcion_parto"            => mb_strtoupper($this->descripcion_parto,'utf-8'),
@@ -63,8 +61,7 @@ class AjaxNeonatos {
 		               "talla_neonato"	              => $this->talla_neonato,
 		               "pc_neonato"	              	  => $this->pc_neonato,
 		               "pt_neonato"	              	  => $this->pt_neonato,
-		               "apgar_ini"	              	  => $this->apgar_ini,
-		               "apgar_fin"     	  		  	  => $this->apgar_fin,
+		               "apgar"		              	  => $this->apgar,
 		               "edad_gestacional_neonato"     => $this->edad_gestacional_neonato,
                        "tipo_parto_neonato"           => $this->tipo_parto_neonato,
                        "descripcion_parto"            => mb_strtoupper($this->descripcion_parto,'utf-8'),
@@ -99,12 +96,31 @@ if (isset($_POST["nuevoNeonato"])) {
 	$nuevoNeonato = new AjaxNeonatos;
 	$nuevoNeonato -> peso_neonato = $_POST["nuevoPesoNeonato"];
 	$nuevoNeonato -> talla_neonato = $_POST['nuevoTallaNeonato'];
-	$nuevoNeonato -> pc_neonato = $_POST['nuevoPCNeonato'];
-	$nuevoNeonato -> pt_neonato = $_POST['nuevoPTNeonato'];
-	$nuevoNeonato -> apgar_ini = $_POST['nuevoAPGARIni'];
-	$nuevoNeonato -> apgar_fin = $_POST['nuevoAPGARFin'];
-	$nuevoNeonato -> edad_gestacional_neonato = $_POST['nuevoEdadGestacional'];
-	$nuevoNeonato -> tipo_parto_neonato = $_POST['nuevoTipoPartoNeonato'];
+	// $nuevoNeonato -> pc_neonato = $_POST['nuevoPCNeonato'];
+	if ($_POST['nuevoPCNeonato'] != "") {
+		$nuevoNeonato -> pc_neonato = $_POST['nuevoPCNeonato'];
+	} else {
+		$nuevoNeonato -> pc_neonato = "0";
+	}
+	// $nuevoNeonato -> pt_neonato = $_POST['nuevoPTNeonato'];
+	if ($_POST['nuevoPTNeonato'] != "") {
+		$nuevoNeonato -> pt_neonato = $_POST['nuevoPTNeonato'];
+	} else {
+		$nuevoNeonato -> pt_neonato = "0";
+	}
+	$nuevoNeonato -> apgar = $_POST['nuevoAPGAR'];	
+	// $nuevoNeonato -> edad_gestacional_neonato = $_POST['nuevoEdadGestacional'];
+	if ($_POST['nuevoEdadGestacional'] != "") {
+		$nuevoNeonato -> edad_gestacional_neonato = $_POST['nuevoEdadGestacional'];
+	} else {
+		$nuevoNeonato -> edad_gestacional_neonato = "0";
+	}
+	// $nuevoNeonato -> tipo_parto_neonato = $_POST['nuevoTipoPartoNeonato'];
+	if (isset($_POST["nuevoTipoPartoNeonato"])) {
+		$nuevoNeonato -> tipo_parto_neonato = $_POST['nuevoTipoPartoNeonato'];
+	} else {
+		$nuevoNeonato -> tipo_parto_neonato = "";
+	}
 	$nuevoNeonato -> descripcion_parto = $_POST['nuevoDescripcionParto'];
 	$nuevoNeonato -> id_paciente_ingreso = $_POST['idPacienteIngresoN'];
 	$nuevoNeonato -> ajaxNuevoNeonato();
@@ -119,12 +135,31 @@ if (isset($_POST["editarNeonato"])) {
 	$editarNeonato = new AjaxNeonatos;
 	$editarNeonato -> peso_neonato = $_POST["editarPesoNeonato"];
 	$editarNeonato -> talla_neonato = $_POST['editarTallaNeonato'];
-	$editarNeonato -> pc_neonato = $_POST['editarPCNeonato'];
-	$editarNeonato -> pt_neonato = $_POST['editarPTNeonato'];
-	$editarNeonato -> apgar_ini = $_POST['editarAPGARIni'];
-	$editarNeonato -> apgar_fin = $_POST['editarAPGARFin'];
-	$editarNeonato -> edad_gestacional_neonato = $_POST['editarEdadGestacional'];
-	$editarNeonato -> tipo_parto_neonato = $_POST['editarTipoPartoNeonato'];
+	// $editarNeonato -> pc_neonato = $_POST['editarPCNeonato'];
+	if ($_POST['editarPCNeonato'] != "") {
+		$editarNeonato -> pc_neonato = $_POST['editarPCNeonato'];
+	} else {
+		$editarNeonato -> pc_neonato = "0";
+	}
+	// $editarNeonato -> pt_neonato = $_POST['editarPTNeonato'];
+	if ($_POST['editarPTNeonato'] != "") {
+		$editarNeonato -> pt_neonato = $_POST['editarPTNeonato'];
+	} else {
+		$editarNeonato -> pt_neonato = "0";
+	}
+	$editarNeonato -> apgar = $_POST['editarAPGAR'];
+	// $editarNeonato -> edad_gestacional_neonato = $_POST['editarEdadGestacional'];
+	if ($_POST['editarEdadGestacional'] != "") {
+		$editarNeonato -> edad_gestacional_neonato = $_POST['editarEdadGestacional'];
+	} else {
+		$editarNeonato -> edad_gestacional_neonato = "0";
+	}
+	// $editarNeonato -> tipo_parto_neonato = $_POST['editarTipoPartoNeonato'];
+	if (isset($_POST["editarTipoPartoNeonato"])) {
+		$editarNeonato -> tipo_parto_neonato = $_POST['editarTipoPartoNeonato'];
+	} else {
+		$editarNeonato -> tipo_parto_neonato = "";
+	}
 	$editarNeonato -> descripcion_parto = $_POST['editarDescripcionParto'];
 	$editarNeonato -> id_paciente_ingreso = $_POST['idPacienteIngresoEN'];
 	$editarNeonato -> id = $_POST['idNeonato'];

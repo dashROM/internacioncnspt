@@ -321,10 +321,7 @@ $("#frmNuevaMaternidad").on("click", ".btnGuardar", function() {
     						 $('#modalNuevaMaternidad').modal('toggle');
 
   							 $("#nuevoProcedencia").val("");  							 
-  							 $("#nuevoGestacion").val("");
   							 $("#nuevoParidad").val("");
-                 $("#nuevoCesarea").val("");
-                 $("#nuevoAborto").val("");
   							 $("#nuevoEdadFUM").val("");
                  $("#nuevoEdadEcografia").val("");
   							 $("#nuevoTipoParto").val("");		
@@ -513,10 +510,7 @@ $(document).on("click", ".btnEditarMaternidad", function() {
       console.log("respuesta", respuesta);
 
       $("#editarProcedencia").val(respuesta['procedencia']);
-      $("#editarGestacion").val(respuesta['gestacion']);
       $("#editarParidad").val(respuesta['paridad']);
-      $("#editarCesarea").val(respuesta['cesarea']);
-      $("#editarAborto").val(respuesta['aborto']);
       $("#editarEdadFUM").val(respuesta['edad_gestacional_fum']);
       $("#editarEdadEcografia").val(respuesta['edad_gestacional_ecografia']);
       $("#editarTipoParto").val(respuesta['tipo_parto']);
@@ -689,10 +683,7 @@ $("#frmEditarMaternidad").on("click", ".btnGuardar", function() {
                 $('#modalEditarMaternidad').modal('toggle');
 
                 $("#editarProcedencia").val(""); 
-                $("#editarGestacion").val("");
                 $("#editarParidad").val("");
-                $("#editarCesarea").val("");                
-                $("#editarAborto").val("");
                 $("#editarEdadFUM").val("");
                 $("#editarEdadEcografia").val("");
                 $("#editarTipoParto").val("");    

@@ -79,8 +79,8 @@ class TablaPacientes {
 			/*=============================================
 		  TRAEMOS LAS ACCIONES
 		  =============================================*/		
-			$btnEditarPaciente = "<button  class='btn btn-outline-primary btn-sm btnEditarPaciente' id='".$pacientes[$i]["id"]."' data-bs-toggle='modal' data-bs-target='#modalEditarPaciente' data-toggle='tooltip' title='Editar'><i class='fas fa-pencil-alt'></i></button>";
-			$btnDetallePaciente = "<button class='btn btn-outline-primary btn-sm btnDetallePaciente' id='".$pacientes[$i]["id"]."' data-toggle='modal' data-target='#modalDetallePaciente' data-toggle='tooltip' title='Detalle Paciente'><i class='fas fa-file-invoice'></i></button>";	
+			$btnEditarPaciente = "<button  class='btn btn-outline-primary btn-sm btnEditarPaciente' id='".$pacientes[$i]["id"]."' data-bs-toggle='modal' data-bs-target='#modalEditarPaciente' data-toggle='tooltip' title='Editar'><i class='fas fa-pencil-alt'></i> EDITAR</button>";
+			$btnDetallePaciente = "<button class='btn btn-outline-primary btn-sm btnDetallePaciente' id='".$pacientes[$i]["id"]."' data-toggle='modal' data-target='#modalDetallePaciente' data-toggle='tooltip' title='Detalle Paciente'><i class='fas fa-file-invoice'></i> HISTORIAL</button>";	
 					
 			$botones = "<div class='btn-group'>".$btnEditarPaciente.$btnDetallePaciente."</div>";
 

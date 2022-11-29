@@ -33,7 +33,6 @@ class TablaPacienteInternados {
 	    12   =>  'nombre_servicio',
 	    13   =>  'nombre_sala',
 	    14   =>  'nombre_cama',
-	    15   =>  'id',
 
 		);  //create column like table in database
 
@@ -87,13 +86,13 @@ class TablaPacienteInternados {
 
 			$btnReporteForm204 = "<button class='btn btn-outline-primary btn-sm btnReporteForm204' idPaciente='".$paciente_internados[$i]["id_paciente"]."' idPacienteIngreso='".$paciente_internados[$i]["id"]."' modulo='paciente-ingresos' data-toggle='tooltip' title='Reportes Paciente'><i class='fas fa-print'></i></button>";
 
-			$estado = "<button class='btn btn-danger btn-sm btnDarAltaPaciente' idPacienteIngreso='".$paciente_internados[$i]["id"]."' fecha_ingreso='".$paciente_internados[$i]["fecha_ingreso"]."' estado_paciente='0' idCama='".$paciente_internados[$i]["id_cama"]."' modulo='paciente-ingresos' data-bs-toggle='modal' data-bs-target='#modalDarAltaPaciente' data-toggle='tooltip' title='Registrar Alta Paciente'>INTERNADO</button>";
+			$estado = "<button class='btn btn-danger btn-sm btnDarAltaPaciente' idPacienteIngreso='".$paciente_internados[$i]["id"]."' fecha_ingreso='".$paciente_internados[$i]["fecha_ingreso"]."' estado_paciente='0' idCama='".$paciente_internados[$i]["id_cama"]."' modulo='paciente-ingresos' data-bs-toggle='modal' data-bs-target='#modalDarAltaPaciente' data-toggle='tooltip' title='Registrar Alta Paciente'><i class='fas fa-procedures'></i> REGISTRAR ALTA</button>";
 
 			$botones = "<div class='btn-group'>".$btnReporteForm204."</div>";	
 
 			$subdata = array();
 	    $subdata[] = $i+1;
-	    $subdata[] = $botones;
+	    $subdata[] = $estado;
 	    $subdata[] = $paciente_internados[$i]["abrev_establecimiento"];
 	    $subdata[] = date("d/m/Y", strtotime($paciente_internados[$i]["fecha_ingreso"])); 
 	    $subdata[] = $paciente_internados[$i]["hora_ingreso"]; 
@@ -107,7 +106,6 @@ class TablaPacienteInternados {
 	    $subdata[] = $paciente_internados[$i]["nombre_servicio"].' - '.$paciente_internados[$i]["nombre_especialidad"];
 	    $subdata[] = $paciente_internados[$i]["nombre_sala"];
 	    $subdata[] = $paciente_internados[$i]["nombre_cama"];
-	    $subdata[] = $estado;
 
 	    $data[] = $subdata;	
 
@@ -153,7 +151,6 @@ class TablaPacienteInternados {
 	    12   =>  'nombre_servicio',
 	    13   =>  'nombre_sala',
 	    14   =>  'nombre_cama',
-	    15   =>  'id',
 
 		);  //create column like table in database
 
@@ -207,13 +204,13 @@ class TablaPacienteInternados {
 
 			$btnReporteForm204 = "<button class='btn btn-outline-primary btn-sm btnReporteForm204' idPaciente='".$paciente_internados[$i]["id_paciente"]."' idPacienteIngreso='".$paciente_internados[$i]["id"]."' modulo='paciente-ingresos' data-toggle='tooltip' title='Reportes Paciente'><i class='fas fa-print'></i></button>";
 
-			$estado = "<button class='btn btn-danger btn-sm btnDarAltaPaciente' idPacienteIngreso='".$paciente_internados[$i]["id"]."' fecha_ingreso='".$paciente_internados[$i]["fecha_ingreso"]."' estado_paciente='0' idCama='".$paciente_internados[$i]["id_cama"]."' modulo='paciente-ingresos' data-bs-toggle='modal' data-bs-target='#modalDarAltaPaciente' data-toggle='tooltip' title='Registrar Alta Paciente'>INTERNADO</button>";
+			$estado = "<button class='btn btn-danger btn-sm btnDarAltaPaciente' idPacienteIngreso='".$paciente_internados[$i]["id"]."' fecha_ingreso='".$paciente_internados[$i]["fecha_ingreso"]."' estado_paciente='0' idCama='".$paciente_internados[$i]["id_cama"]."' modulo='paciente-ingresos' data-bs-toggle='modal' data-bs-target='#modalDarAltaPaciente' data-toggle='tooltip' title='Registrar Alta Paciente'><i class='fas fa-procedures'></i> REGISTRAR ALTA</button>";
 
 			$botones = "<div class='btn-group'>".$btnReporteForm204."</div>";	
 
 			$subdata = array();
 	    $subdata[] = $i+1;
-	    $subdata[] = $botones;
+	    $subdata[] = $estado;
 	    $subdata[] = $paciente_internados[$i]["abrev_establecimiento"];
 	    $subdata[] = date("d/m/Y", strtotime($paciente_internados[$i]["fecha_ingreso"])); 
 	    $subdata[] = $paciente_internados[$i]["hora_ingreso"]; 
@@ -227,7 +224,6 @@ class TablaPacienteInternados {
 	    $subdata[] = $paciente_internados[$i]["nombre_servicio"].' - '.$paciente_internados[$i]["nombre_especialidad"];
 	    $subdata[] = $paciente_internados[$i]["nombre_sala"];
 	    $subdata[] = $paciente_internados[$i]["nombre_cama"];
-	    $subdata[] = $estado;
 
 	    $data[] = $subdata;	
 

@@ -20,14 +20,14 @@ class TablaPacienteEgresos {
 		$col = array(
 	    0   =>  'id',
 	    1   =>  'id',
-	    2   =>  'nombre_completo',
-	    3   =>  'fecha_egreso',
-	    4   =>  'hora_egreso',
-	    5   =>  'causa_egreso',
-	    6   =>  'condicion_egreso',
-	    7   =>  'diagnostico',
-	    8   =>  'diagnostico_egreso1',
-	    9   =>  'id',
+	    2   =>  'id',
+	    3   =>  'nombre_completo',
+	    4   =>  'fecha_egreso',
+	    5   =>  'hora_egreso',
+	    6   =>  'causa_egreso',
+	    7   =>  'condicion_egreso',
+	    8   =>  'diagnostico',
+	    9   =>  'diagnostico_egreso1',
 
 		);  //create column like table in database
 
@@ -46,7 +46,7 @@ class TablaPacienteEgresos {
 	    $sql .= " OR causa_egreso ILike '%".$request['search']['value']."%' ";
 	    $sql .= " OR condicion_egreso ILike '%".$request['search']['value']."%' ";
 	    $sql .= " OR codigo ILike '%".$request['search']['value']."%' ";
-	    $sql .= " OR descripcion ILike '%".$request['search']['value']."%' )";
+	    $sql .= " OR descripcion ILike '%".$request['search']['value']."%' ";
 	    $sql .= " OR diagnostico_egreso1 ILike '%".$request['search']['value']."%' ";
 	    $sql .= " OR diagnostico_egreso2 ILike '%".$request['search']['value']."%' ";
 	    $sql .= " OR diagnostico_egreso3 ILike '%".$request['search']['value']."%' )";
@@ -67,15 +67,16 @@ class TablaPacienteEgresos {
 			/*=============================================
 			TRAEMOS LAS ACCIONES
 			=============================================*/					
-			$btnReporteForm204 = "<button class='btn btn-outline-primary btn-sm btnReporteForm204' idPaciente='".$paciente_egresos[$i]["id_paciente"]."' idPacienteIngreso='".$paciente_egresos[$i]["id_paciente_ingreso"]."' modulo='paciente-ingresos' data-toggle='tooltip' title='Reportes Paciente'><i class='fas fa-print'></i></button>";
+			$btnReporteForm204 = "<button class='btn btn-outline-primary btn-sm btnReporteForm204' idPaciente='".$paciente_egresos[$i]["id_paciente"]."' idPacienteIngreso='".$paciente_egresos[$i]["id_paciente_ingreso"]."' modulo='paciente-ingresos' data-toggle='tooltip' title='Reportes Paciente'><i class='fas fa-print'></i> FORM204</button>";
 
-			$estado = "<button class='btn btn-success btn-sm btnVerAltaPaciente' idPacienteIngreso='".$paciente_egresos[$i]["id_paciente_ingreso"]."' estado_paciente='1' data-bs-toggle='modal' modulo='paciente-egresos' data-bs-target='#modalVerAltaPaciente' data-toggle='tooltip' title='Ver Detalle Alta Paciente'>DADO DE ALTA</button>";
+			$estado = "<button class='btn btn-success btn-sm btnVerAltaPaciente' idPacienteIngreso='".$paciente_egresos[$i]["id_paciente_ingreso"]."' estado_paciente='1' data-bs-toggle='modal' modulo='paciente-egresos' data-bs-target='#modalVerAltaPaciente' data-toggle='tooltip' title='Ver Detalle Alta Paciente'><i class='fas fa-user-injured'></i> DETALLE ALTA</button>";
 
 			$botones = "<div class='btn-group'>".$btnReporteForm204."</div>";
 
 			$subdata = array();
 	    $subdata[] = $i+1;
 	    $subdata[] = $botones;
+	    $subdata[] = $estado;
 	    $subdata[] = $paciente_egresos[$i]["nombre_completo"];
 	    $subdata[] = date("d/m/Y", strtotime($paciente_egresos[$i]["fecha_egreso"])); 
 	    $subdata[] = $paciente_egresos[$i]["hora_egreso"]; 
@@ -83,7 +84,6 @@ class TablaPacienteEgresos {
 	    $subdata[] = $paciente_egresos[$i]["condicion_egreso"];
 	    $subdata[] = $paciente_egresos[$i]["diagnostico"]; 
 	    $subdata[] = $paciente_egresos[$i]["diagnostico_egreso1"].' - '.$paciente_egresos[$i]["diagnostico_egreso2"].' - '.$paciente_egresos[$i]["diagnostico_egreso3"]; 
-	    $subdata[] = $estado;
 
 	    $data[] = $subdata;	
 
@@ -116,14 +116,14 @@ class TablaPacienteEgresos {
 		$col = array(
 	    0   =>  'id',
 	    1   =>  'id',
-	    2   =>  'nombre_completo',
-	    3   =>  'fecha_egreso',
-	    4   =>  'hora_egreso',
-	    5   =>  'causa_egreso',
-	    6   =>  'condicion_egreso',
-	    7   =>  'diagnostico',
-	    8   =>  'diagnostico_egreso1',
-	    9   =>  'id',
+	    2   =>  'id',
+	    3   =>  'nombre_completo',
+	    4   =>  'fecha_egreso',
+	    5   =>  'hora_egreso',
+	    6   =>  'causa_egreso',
+	    7   =>  'condicion_egreso',
+	    8   =>  'diagnostico',
+	    9   =>  'diagnostico_egreso1',
 
 		);  //create column like table in database
 
@@ -142,7 +142,7 @@ class TablaPacienteEgresos {
 	    $sql .= " OR causa_egreso ILike '%".$request['search']['value']."%' ";
 	    $sql .= " OR condicion_egreso ILike '%".$request['search']['value']."%' ";
 	    $sql .= " OR codigo ILike '%".$request['search']['value']."%' ";
-	    $sql .= " OR descripcion ILike '%".$request['search']['value']."%' )";
+	    $sql .= " OR descripcion ILike '%".$request['search']['value']."%' ";
 	    $sql .= " OR diagnostico_egreso1 ILike '%".$request['search']['value']."%' ";
 	    $sql .= " OR diagnostico_egreso2 ILike '%".$request['search']['value']."%' ";
 	    $sql .= " OR diagnostico_egreso3 ILike '%".$request['search']['value']."%' )";
@@ -172,6 +172,7 @@ class TablaPacienteEgresos {
 			$subdata = array();
 	    $subdata[] = $i+1;
 	    $subdata[] = $botones;
+	    $subdata[] = $estado;
 	    $subdata[] = $paciente_egresos[$i]["nombre_completo"];
 	    $subdata[] = date("d/m/Y", strtotime($paciente_egresos[$i]["fecha_egreso"])); 
 	    $subdata[] = $paciente_egresos[$i]["hora_egreso"]; 
@@ -179,7 +180,6 @@ class TablaPacienteEgresos {
 	    $subdata[] = $paciente_egresos[$i]["condicion_egreso"];
 	    $subdata[] = $paciente_egresos[$i]["diagnostico"]; 
 	    $subdata[] = $paciente_egresos[$i]["diagnostico_egreso1"].' - '.$paciente_egresos[$i]["diagnostico_egreso2"].' - '.$paciente_egresos[$i]["diagnostico_egreso3"]; 
-	    $subdata[] = $estado;
 
 	    $data[] = $subdata;	
 

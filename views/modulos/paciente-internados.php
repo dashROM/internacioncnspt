@@ -97,7 +97,6 @@
                 <th scope="col">SERVICIO</th> 
                 <th scope="col">SALA</th> 
                 <th scope="col">CAMA</th> 
-                <th scope="col">ESTADO</th>
               </tr>
             </thead>
 

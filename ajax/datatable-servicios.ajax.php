@@ -34,8 +34,8 @@ class TablaServicios {
 					=============================================*/
 					// $btnEditarPaciente = "<button  class='btn btn-warning btnEditarPaciente' idPaciente='".$pacientes[$i]["idpaciente"]."' data-bs-toggle='modal' data-bs-target='#Modaleditarpaciente'><i class='fas fa-pencil-alt'></i></button>";
 					
-					$btnEditarServicio = "<button class='btn btn-outline-primary btn-sm btnEditarServicio' idServicio='".$servicios [$i]["id"]."' data-bs-toggle='modal' data-bs-target='#ModalEditarServicio' data-toggle='tooltip' title='Editar'><i class='fas fa-pencil-alt'></i></button>"; 
-					$btnDetalleServicio = "<button class='btn btn-outline-primary btn-sm btnDetalleServicio' idServicio='".$servicios[$i]["id"]."' data-toggle='modal' data-target='#modalDetalle' data-toggle='tooltip' title='Más Detalle Servicio'><i class='fas fa-eye'></i></button>";	
+					$btnEditarServicio = "<button class='btn btn-outline-primary btn-sm btnEditarServicio' idServicio='".$servicios [$i]["id"]."' data-bs-toggle='modal' data-bs-target='#ModalEditarServicio' data-toggle='tooltip' title='Editar'><i class='fas fa-pencil-alt'></i> EDITAR</button>"; 
+					$btnDetalleServicio = "<button class='btn btn-outline-primary btn-sm btnDetalleServicio' idServicio='".$servicios[$i]["id"]."' data-toggle='modal' data-target='#modalDetalle' data-toggle='tooltip' title='Más Detalle Servicio'><i class='fas fa-eye'></i> DETALLE SERVICIO</button>";	
 
 					$botones = "<div class='btn-group' id='ver'>".$btnEditarServicio.$btnDetalleServicio."</div>";
 					

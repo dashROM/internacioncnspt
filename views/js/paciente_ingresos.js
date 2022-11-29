@@ -299,6 +299,7 @@ $(document).ready(function() {
     ajax: {
       // url: "https://api.github.com/search/repositories",
       url: "../ajax/cie10.ajax.php",
+      // type: "post",
       dataType: 'json',
       delay: 250,
       data: function (params) {
