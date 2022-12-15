@@ -127,3 +127,139 @@ $(document).on("click", ".btnDetalleServicio" , function() {
 	window.location = "detalle-servicio/"+id;	
 
 });
+
+/*=============================================
+TABLA DE LIBRO SERVICIOS
+=============================================*/
+var tablaLibroServicios = $('#tblLibroServicios').DataTable({
+
+  "destroy": true,
+
+  "paging": false,
+
+  "searching": false,
+
+  "language": {
+
+    "sProcessing":     "Procesando...",
+    "sLengthMenu":     "Mostrar _MENU_ registros",
+    "sZeroRecords":    "No se encontraron resultados",
+    "sEmptyTable":     "Ningún dato disponible en esta tabla",
+    "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_",
+    "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0",
+    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+    "sInfoPostFix":    "",
+    "sSearch":         "Buscar:",
+    "sUrl":            "",
+    "sInfoThousands":  ",",
+    "sLoadingRecords": "Cargando...",
+    "oPaginate": {
+    "sFirst":    "Primero",
+    "sLast":     "Último",
+    "sNext":     "Siguiente",
+    "sPrevious": "Anterior"
+    },
+    "oAria": {
+      "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+      "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+    },
+    "buttons": {
+      "copy": "Copiar",
+      "colvis": "Visibilidad de columnas"
+    }
+    
+  },
+
+  "responsive": true,
+
+}); 
+
+/*=============================================
+FILTRAR LISTADO DE PACIENTES POR SERVICIOS Y FECHA DE EGRESO
+=============================================*/
+$("#frmLibroServicios").on("click", "#btnBuscarLibroServicios", function() {
+
+  var servicio = $("#servicio").val();
+  var nombre_servicio = $("#servicio").find('option:selected').text();
+  var fechaIni = $("#fechaIniLibroServicio").val();
+  var fechaFin = $("#fechaFinLibroServicio").val(); 
+
+  $("#nombre_servicio").text(nombre_servicio);
+
+  tablaLibroServicios.destroy();         
+
+  tablaLibroServicios = $('#tblLibroServicios').DataTable({
+
+    "ajax": {
+      url: "ajax/datatable-libro_servicios.ajax.php",
+      data: { 'servicio' : servicio, 'fechaIni' : fechaIni, 'fechaFin' : fechaFin, 'BuscarFechaLibroServicios' : 'BuscarFechaLibroServicios' },
+      type: "post"
+    },
+
+    "destroy": true,
+
+    "deferRender": true,
+
+    "retrieve" : true,
+
+    "processing" : true,
+
+    "serverSide": true,
+
+    "ordering": false,
+
+    "stateSave": true,
+
+    "paging": false,
+
+    "language": {
+
+      "sProcessing":     "Procesando...",
+      "sLengthMenu":     "Mostrar _MENU_ registros",
+      "sZeroRecords":    "No se encontraron resultados",
+      "sEmptyTable":     "Ningún dato disponible en esta tabla",
+      "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_",
+      "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0",
+      "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+      "sInfoPostFix":    "",
+      "sSearch":         "Buscar:",
+      "sUrl":            "",
+      "sInfoThousands":  ",",
+      "sLoadingRecords": "Cargando...",
+      "oPaginate": {
+        "sFirst":    "Primero",
+        "sLast":     "Último",
+        "sNext":     "Siguiente",
+        "sPrevious": "Anterior"
+      },
+      "oAria": {
+        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+      },
+      "buttons": {
+        "copy": "Copiar",
+        "colvis": "Visibilidad de columnas"
+      }
+
+    },
+
+    "responsive": true,
+
+    "lengthChange": false,
+
+    //para usar los botones
+    "dom": 'Bfrtilp',       
+    
+    "buttons":[
+      {
+        extend:    'excelHtml5',
+        title:     'Reporte '+nombre_servicio+' '+fechaIni+'_'+fechaFin,
+        text:      '<i class="fas fa-file-excel"></i> Generar EXCEL',
+        titleAttr: 'Exportar a Excel',
+        className: 'btn btn-success'
+      } 
+    ]       
+
+  });
+
+});

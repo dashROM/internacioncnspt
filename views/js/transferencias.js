@@ -432,6 +432,8 @@ GUARDANDO DATOS TRANSFERENCIA PACIENTE
 =============================================*/
 $("#frmNuevaTrasferencia").on("click", ".btnGuardar", function() {
 
+  $(".btnGuardar").prop("disabled", true);
+
   if ($("#frmNuevaTrasferencia").valid()) {
 
     var datos = new FormData($("#frmNuevaTrasferencia")[0]);
@@ -486,7 +488,9 @@ $("#frmNuevaTrasferencia").on("click", ".btnGuardar", function() {
 
               $("#nuevoIdPacienteIngreso").val(""); 
 
-              $("#idIngresoPaciente").val("");                 
+              $("#idIngresoPaciente").val("");   
+
+              $(".btnGuardar").prop("disabled", false);              
 
               // Funcion que recarga y actuaiiza la tabla
               tablaPacienteIngresos.ajax.reload( null, false );
@@ -504,6 +508,12 @@ $("#frmNuevaTrasferencia").on("click", ".btnGuardar", function() {
             allowOutsideClick: false,
             confirmButtonText: "¡Cerrar!"
 
+          }).then((result) => {
+
+            if (result.value) {
+              $(".btnGuardar").prop("disabled", false);
+            }
+
           });
           
         }
@@ -519,14 +529,20 @@ $("#frmNuevaTrasferencia").on("click", ".btnGuardar", function() {
 
   } else {
 
-   swal.fire({
+    swal.fire({
 
-     title: "¡Los campos obligatorios no puede ir vacio o llevar caracteres especiales!",
-     icon: "error",
-     allowOutsideClick: false,
-     confirmButtonText: "¡Cerrar!"
+      title: "¡Los campos obligatorios no puede ir vacio o llevar caracteres especiales!",
+      icon: "error",
+      allowOutsideClick: false,
+      confirmButtonText: "¡Cerrar!"
 
-   });
+    }).then((result) => {
+
+      if (result.value) {
+        $(".btnGuardar").prop("disabled", false);
+      }
+
+    });
 
   } 
 
@@ -867,6 +883,8 @@ GUARDANDO DATOS EDITAR TRANSFERENCIA DE PACIENTE
 =============================================*/
 $("#frmEditarTrasferencia").on("click", ".btnGuardar", function() {
 
+  $(".btnGuardar").prop("disabled", true);
+
   if ($("#frmEditarTrasferencia").valid()) {
 
     var datos = new FormData($("#frmEditarTrasferencia")[0]);
@@ -919,8 +937,11 @@ $("#frmEditarTrasferencia").on("click", ".btnGuardar", function() {
               $("#editarCamaTrans").empty();
 
               $('#modalEditarTransferencia').modal('toggle');
-              $('#modalNuevaTransferencia').modal('show');       
+              $('#modalNuevaTransferencia').modal('show'); 
 
+              $(".btnGuardar").prop("disabled", false);              
+
+              // Funcion que recarga y actuaiiza la tabla   
               tablaPacienteTransferencias.ajax.reload( null, false );
 
             }
@@ -935,6 +956,12 @@ $("#frmEditarTrasferencia").on("click", ".btnGuardar", function() {
             icon: "error",
             allowOutsideClick: false,
             confirmButtonText: "¡Cerrar!"
+
+          }).then((result) => {
+
+            if (result.value) {
+              $(".btnGuardar").prop("disabled", false);
+            }
 
           });
           
@@ -951,14 +978,20 @@ $("#frmEditarTrasferencia").on("click", ".btnGuardar", function() {
 
   } else {
 
-   swal.fire({
+    swal.fire({
 
-     title: "¡Los campos obligatorios no puede ir vacio o llevar caracteres especiales!",
-     icon: "error",
-     allowOutsideClick: false,
-     confirmButtonText: "¡Cerrar!"
+      title: "¡Los campos obligatorios no puede ir vacio o llevar caracteres especiales!",
+      icon: "error",
+      allowOutsideClick: false,
+      confirmButtonText: "¡Cerrar!"
 
-   });
+    }).then((result) => {
+
+      if (result.value) {
+        $(".btnGuardar").prop("disabled", false);
+      }
+
+    });
 
   } 
 

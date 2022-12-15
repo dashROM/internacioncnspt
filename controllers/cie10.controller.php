@@ -5,11 +5,11 @@ class ControllerCie10{
 	/*=============================================
 	DATOS DE DIAGNOSTICO BUSCADO CIE10
 	=============================================*/
-	static public function ctrMostrarDiagnosticoCie10($item, $valor) {
+	static public function ctrMostrarDiagnosticoCie10($term) {
 
 		$tabla = "cie10";
 
-		$respuesta = ModelCie10::mdlMostrarDiagnosticoCie10($tabla, $item, $valor);
+		$respuesta = ModelCie10::mdlMostrarDiagnosticoCie10($tabla, $term);
 
 		return $respuesta;
 
@@ -18,11 +18,11 @@ class ControllerCie10{
   /*=============================================
 	NUMERO DE COLUMNAS DE DIAGNOSTICO BUSCADO CIE10
 	=============================================*/
-	static public function ctrMostrarColumnasCie10($item, $valor) {
+	static public function ctrMostrarColumnasCie10($term) {
 
 		$tabla = "cie10";
 
-		$respuesta = ModelCie10::mdlMostrarColumnasCie10($tabla, $item, $valor);
+		$respuesta = ModelCie10::mdlMostrarColumnasCie10($tabla, $term);
 
 		return $respuesta;
 

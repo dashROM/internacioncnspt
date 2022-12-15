@@ -20,6 +20,10 @@ var tablaPacienteIngresos = $('#tblPacienteIngresos').DataTable({
 
   "processing" : true,
 
+  "stateSave": true,
+
+  "searching": false,
+
   "language": {
 
     "sProcessing":     "Procesando...",
@@ -64,7 +68,6 @@ VERIFICANDO QUE EL PACIENTE ESTE TODOS SUS INGRESOS CON ESTADO DE ALTA
 $(document).on("click", "#btnNuevoIngreso", function() {
 
   var id_paciente = $(this).attr("idPaciente");
-  console.log("id_paciente", id_paciente);
 
   var datos = new FormData();
   datos.append("verificarPacienteIngresos", 'verificarPacienteIngresos');
@@ -117,7 +120,6 @@ SI SE CAMBIA EL SERVICIO SE CARGAN LAS SALAS CORRESPONDIENTE AL SERVICO
 $(document).on("change", "#nuevoServicio", function() {
 
   var idServicio = $(this).val();
-  console.log("idServicio", idServicio);  
 
   if(idServicio) {
 
@@ -297,29 +299,18 @@ $(document).ready(function() {
 
     theme: "bootstrap-5",
     ajax: {
-      // url: "https://api.github.com/search/repositories",
       url: "../ajax/cie10.ajax.php",
-      // type: "post",
       dataType: 'json',
       delay: 250,
+      cache: false,
       data: function (params) {
         return {
-          q: params.term, // search term
-          page: params.page
+          term: params.term // search term
         };
       },
       processResults: function (data, params) {
-        // parse the results into the format expected by Select2
-        // since we are using custom formatting functions we do not need to
-        // alter the remote JSON data, except to indicate that infinite
-        // scrolling can be used
-        params.page = params.page || 1;
-
         return {
-          results: data.items,
-          pagination: {
-            more: (params.page * 30) < data.total_count
-          }
+          results: data.items
         };
       },
       cache: true
@@ -347,28 +338,18 @@ $(document).ready(function() {
 
     theme: "bootstrap-5",
     ajax: {
-      // url: "https://api.github.com/search/repositories",
       url: "../ajax/cie10.ajax.php",
       dataType: 'json',
       delay: 250,
+      cache: false,
       data: function (params) {
         return {
-          q: params.term, // search term
-          page: params.page
+          term: params.term // search term
         };
       },
       processResults: function (data, params) {
-        // parse the results into the format expected by Select2
-        // since we are using custom formatting functions we do not need to
-        // alter the remote JSON data, except to indicate that infinite
-        // scrolling can be used
-        params.page = params.page || 1;
-
         return {
-          results: data.items,
-          pagination: {
-            more: (params.page * 30) < data.total_count
-          }
+          results: data.items
         };
       },
       cache: true
@@ -448,6 +429,8 @@ GUARDANDO DATOS DE INGRESO DE PACIENTE
 =============================================*/
 $("#frmNuevoPacienteIngreso").on("click", ".btnGuardar", function() {
 
+  $(".btnGuardar").prop("disabled", true);
+
   if ($("#frmNuevoPacienteIngreso").valid()) {
 
     var datos = new FormData($("#frmNuevoPacienteIngreso")[0]);
@@ -513,6 +496,9 @@ $("#frmNuevoPacienteIngreso").on("click", ".btnGuardar", function() {
               $("#nuevoDiagnostico2").val("");
               $("#nuevoDiagnostico3").val("");
 
+              $(".btnGuardar").prop("disabled", false);
+              
+              // Funcion que recarga y actuaiiza la tabla
               tablaPacienteIngresos.ajax.reload( null, false );
 
             }
@@ -527,6 +513,12 @@ $("#frmNuevoPacienteIngreso").on("click", ".btnGuardar", function() {
             icon: "error",
             allowOutsideClick: false,
             confirmButtonText: "¡Cerrar!"
+
+          }).then((result) => {
+
+            if (result.value) {
+              $(".btnGuardar").prop("disabled", false);
+            }
 
           });
           
@@ -543,14 +535,20 @@ $("#frmNuevoPacienteIngreso").on("click", ".btnGuardar", function() {
 
   } else {
 
-   swal.fire({
+    swal.fire({
 
-     title: "¡Los campos obligatorios no puede ir vacio o llevar caracteres especiales!",
-     icon: "error",
-     allowOutsideClick: false,
-     confirmButtonText: "¡Cerrar!"
+      title: "¡Los campos obligatorios no puede ir vacio o llevar caracteres especiales!",
+      icon: "error",
+      allowOutsideClick: false,
+      confirmButtonText: "¡Cerrar!"
 
-   });
+    }).then((result) => {
+
+      if (result.value) {
+        $(".btnGuardar").prop("disabled", false);
+      }
+
+    });
 
   } 
 
@@ -896,6 +894,8 @@ GUARDANDO DATOS EDITAR INGRESO DE PACIENTE
 =============================================*/
 $("#frmEditarPacienteIngreso").on("click", ".btnGuardar", function() {
 
+  $(".btnGuardar").prop("disabled", true);
+
   if ($("#frmEditarPacienteIngreso").valid()) {
 
     var datos = new FormData($("#frmEditarPacienteIngreso")[0]);
@@ -911,8 +911,6 @@ $("#frmEditarPacienteIngreso").on("click", ".btnGuardar", function() {
       processData: false,
       dataType: "json",
       success: function(respuesta) {
-
-        console.log("respuesta", respuesta);
 
         if (respuesta == "ok") {
 
@@ -946,21 +944,21 @@ $("#frmEditarPacienteIngreso").on("click", ".btnGuardar", function() {
 
               $("#editarServicio").val("");
 
-              $("#editarEspecialidad").prop("disabled", true);
               $("#editarEspecialidad").empty();
               $("#editarEspecialidad").append('<option value="">ELEGIR...</option>');
 
-              $("#editarSala").prop("disabled", true);
               $("#editarSala").empty();
               $("#editarSala").append('<option value="">ELEGIR...</option>');
 
-              $("#editarCama").prop("disabled", true);
               $("#editarCama").empty();
               $("#editarCama").append('<option value="">ELEGIR...</option>');
 
               $("#editarDiagnosticoIngreso").empty();
-              $("#editarDiagnosticoIngreso").append('<option value="">BUSCAR UN DIAGNOSTICO...</option>');            
+              $("#editarDiagnosticoIngreso").append('<option value="">BUSCAR UN DIAGNOSTICO...</option>');
 
+              $(".btnGuardar").prop("disabled", false); 
+
+              // Funcion que recarga y actuaiiza la tabla 
               tablaPacienteIngresos.ajax.reload( null, false );
 
             }
@@ -975,6 +973,12 @@ $("#frmEditarPacienteIngreso").on("click", ".btnGuardar", function() {
             icon: "error",
             allowOutsideClick: false,
             confirmButtonText: "¡Cerrar!"
+
+          }).then((result) => {
+
+            if (result.value) {
+              $(".btnGuardar").prop("disabled", false);
+            }
 
           });
           
@@ -991,14 +995,20 @@ $("#frmEditarPacienteIngreso").on("click", ".btnGuardar", function() {
 
   } else {
 
-   swal.fire({
+    swal.fire({
 
-     title: "¡Los campos obligatorios no puede ir vacio o llevar caracteres especiales!",
-     icon: "error",
-     allowOutsideClick: false,
-     confirmButtonText: "¡Cerrar!"
+      title: "¡Los campos obligatorios no puede ir vacio o llevar caracteres especiales!",
+      icon: "error",
+      allowOutsideClick: false,
+      confirmButtonText: "¡Cerrar!"
 
-   });
+    }).then((result) => {
+
+      if (result.value) {
+        $(".btnGuardar").prop("disabled", false);
+      }
+
+    });
 
   } 
 

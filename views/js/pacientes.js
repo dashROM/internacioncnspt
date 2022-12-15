@@ -15,6 +15,8 @@ var tablaPacientes = $('#tblPacientes').DataTable({
 
 	"order": [[ 0, "desc" ]],
 
+	"stateSave": true,
+
 	"language": {
 
 		"sProcessing":     "Procesando...",
@@ -146,6 +148,8 @@ GUARDANDO DATOS DE NUEVO PACIENTE
 =============================================*/
 $("#frmNuevoPaciente").on("click", ".btnGuardar", function() {
 
+	$(".btnGuardar").prop("disabled", true);
+
 	if ($("#frmOpcionPaciente").valid()) {
 
 		var option = $(selectOpcionPaciente).val();
@@ -154,8 +158,6 @@ $("#frmNuevoPaciente").on("click", ".btnGuardar", function() {
 
 			if ($("#frmBuscarAfiliadoSIAIS").valid()) {		
 
-				console.log("frmBuscarAfiliadoSIAIS", "frmBuscarAfiliadoSIAIS");
-
 				if ($("#frmNuevoPaciente").valid()) {
 			 
 					var datos = new FormData($("#frmNuevoPaciente")[0]);
@@ -196,10 +198,16 @@ $("#frmNuevoPaciente").on("click", ".btnGuardar", function() {
 
 								swal.fire({
 
-									title: "¡Los campos obligatorios no puede ir vacio o llevar caracteres especiales no da!",
+									title: "¡Los campos obligatorios no puede ir vacio o llevar caracteres especiales!",
 									icon: "error",
 									allowOutsideClick: false,
 									confirmButtonText: "¡Cerrar!"
+
+								}).then((result) => {
+
+									if (result.value) {
+										$(".btnGuardar").prop("disabled", false);
+									}
 
 								});
 
@@ -223,20 +231,32 @@ $("#frmNuevoPaciente").on("click", ".btnGuardar", function() {
 			      allowOutsideClick: false,
 			      confirmButtonText: "¡Cerrar!"
 
-			    });
+			    }).then((result) => {
+
+						if (result.value) {
+							$(".btnGuardar").prop("disabled", false);
+						}
+
+					});
 			    
 			  }
 			    
 			} else {
 
-			    swal.fire({
-			        
-			      title: "¡Los campos obligatorios no puede ir vacio o llevar caracteres especiales!",
-			      icon: "error",
-			      allowOutsideClick: false,
-			      confirmButtonText: "¡Cerrar!"
+		    swal.fire({
+		        
+		      title: "¡Los campos obligatorios no puede ir vacio o llevar caracteres especiales!",
+		      icon: "error",
+		      allowOutsideClick: false,
+		      confirmButtonText: "¡Cerrar!"
 
-			    });
+		    }).then((result) => {
+
+					if (result.value) {
+						$(".btnGuardar").prop("disabled", false);
+					}
+
+				});
 			    
 			}
 
@@ -244,8 +264,6 @@ $("#frmNuevoPaciente").on("click", ".btnGuardar", function() {
 
 			if ($("#frmBuscarAfiliadoERP").valid()) {	
 
-				console.log("frmBuscarAfiliadoERP", "frmBuscarAfiliadoERP");
-
 				if ($("#frmNuevoPaciente").valid()) {
 			 
 					var datos = new FormData($("#frmNuevoPaciente")[0]);
@@ -261,8 +279,6 @@ $("#frmNuevoPaciente").on("click", ".btnGuardar", function() {
 						processData: false,
 						dataType: "json",
 						success: function(respuesta) {
-
-							console.log("respuesta", respuesta);
 
 							if (respuesta == "ok") {
 
@@ -288,10 +304,16 @@ $("#frmNuevoPaciente").on("click", ".btnGuardar", function() {
 
 								swal.fire({
 
-									title: "¡Los campos obligatorios no puede ir vacio o llevar caracteres especiales no da!",
+									title: "¡Los campos obligatorios no puede ir vacio o llevar caracteres especiales!",
 									icon: "error",
 									allowOutsideClick: false,
 									confirmButtonText: "¡Cerrar!"
+
+								}).then((result) => {
+
+									if (result.value) {
+										$(".btnGuardar").prop("disabled", false);
+									}
 
 								});
 
@@ -315,20 +337,32 @@ $("#frmNuevoPaciente").on("click", ".btnGuardar", function() {
 			      allowOutsideClick: false,
 			      confirmButtonText: "¡Cerrar!"
 
-			    });
+			    }).then((result) => {
+
+						if (result.value) {
+							$(".btnGuardar").prop("disabled", false);
+						}
+
+					});
 			    
 			  }
 
 			} else {
 
-			    swal.fire({
-			        
-			      title: "¡Los campos obligatorios no puede ir vacio o llevar caracteres especiales!",
-			      icon: "error",
-			      allowOutsideClick: false,
-			      confirmButtonText: "¡Cerrar!"
+		    swal.fire({
+		        
+		      title: "¡Los campos obligatorios no puede ir vacio o llevar caracteres especiales!",
+		      icon: "error",
+		      allowOutsideClick: false,
+		      confirmButtonText: "¡Cerrar!"
 
-			    });
+		    }).then((result) => {
+
+					if (result.value) {
+						$(".btnGuardar").prop("disabled", false);
+					}
+
+				});
 			    
 			}
 
@@ -350,7 +384,7 @@ $("#frmNuevoPaciente").on("click", ".btnGuardar", function() {
 					dataType: "json",
 					success: function(respuesta) {
 
-						console.log("respuesta", respuesta);
+						$(".btnGuardar").prop("disabled", true);
 
 						if (respuesta == "ok") {
 
@@ -376,10 +410,16 @@ $("#frmNuevoPaciente").on("click", ".btnGuardar", function() {
 
 							swal.fire({
 
-								title: "¡Los campos obligatorios no puede ir vacio o llevar caracteres especiales no da!",
+								title: "¡Los campos obligatorios no puede ir vacio o llevar caracteres especiales!",
 								icon: "error",
 								allowOutsideClick: false,
 								confirmButtonText: "¡Cerrar!"
+
+							}).then((result) => {
+
+								if (result.value) {
+									$(".btnGuardar").prop("disabled", false);
+								}
 
 							});
 
@@ -396,6 +436,8 @@ $("#frmNuevoPaciente").on("click", ".btnGuardar", function() {
 
 			} else {
 
+				$(".btnGuardar").prop("disabled", true);
+
 		    swal.fire({
 		        
 		      title: "¡Los campos obligatorios no puede ir vacio o llevar caracteres especiales!",
@@ -403,7 +445,13 @@ $("#frmNuevoPaciente").on("click", ".btnGuardar", function() {
 		      allowOutsideClick: false,
 		      confirmButtonText: "¡Cerrar!"
 
-		    });
+		    }).then((result) => {
+
+					if (result.value) {
+						$(".btnGuardar").prop("disabled", false);
+					}
+
+				});
 		    
 		  }
 
@@ -418,7 +466,13 @@ $("#frmNuevoPaciente").on("click", ".btnGuardar", function() {
       allowOutsideClick: false,
       confirmButtonText: "¡Cerrar!"
 
-    });
+    }).then((result) => {
+
+			if (result.value) {
+				$(".btnGuardar").prop("disabled", false);
+			}
+
+		});
     
   }
 
@@ -600,8 +654,9 @@ $("#frmEditarPaciente").on("click", ".btnGuardar", function() {
 							$("#editarZonaPaciente").val("");
 							$("#editarId").val("");
 
-	  					// Funcion que recarga y actuaiiza la tabla	
+							$(".btnGuardar").prop("disabled", false);  
 
+	  					// Funcion que recarga y actuaiiza la tabla	
 	  					tablaPacientes.ajax.reload( null, false );
 
 	  				}
@@ -616,6 +671,12 @@ $("#frmEditarPaciente").on("click", ".btnGuardar", function() {
 						icon: "error",
 						allowOutsideClick: false,
 						confirmButtonText: "¡Cerrar!"
+
+					}).then((result) => {
+
+						if (result.value) {
+							$(".btnGuardar").prop("disabled", false);
+						}
 
 					});
 					
@@ -639,7 +700,13 @@ $("#frmEditarPaciente").on("click", ".btnGuardar", function() {
       allowOutsideClick: false,
       confirmButtonText: "¡Cerrar!"
 
-    });
+    }).then((result) => {
+
+			if (result.value) {
+				$(".btnGuardar").prop("disabled", false);
+			}
+
+		});
     
   }
 
@@ -1328,7 +1395,6 @@ $(document).on("click", ".btnBuscarAfiliado", function() {
 		});
 
 	} else {
-
 		
 		$('#tablaAfiliadosSIAIS').remove();
 		$('#tablaAfiliadosSIAIS_wrapper').remove();

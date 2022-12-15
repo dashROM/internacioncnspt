@@ -19,7 +19,11 @@ var tablaNeonatos = $('#tblNeonatos').DataTable({
 
   "serverSide": true,
 
-  "order": [[ 1, "desc" ]],
+  "ordering": false,
+
+  "pageLength": 20,
+
+  "stateSave": true,
 
   "language": {
 
@@ -54,7 +58,7 @@ var tablaNeonatos = $('#tblNeonatos').DataTable({
 
   "responsive": true,
 
-  "lengthChange": false,
+  "lengthChange": false,    
 
 }); 
 
@@ -201,6 +205,8 @@ GUARDANDO DATOS DE NEONATO
 =============================================*/
 $("#frmNuevoNeonato").on("click", ".btnGuardar", function() {
 
+  $(".btnGuardar").prop("disabled", true);
+
   if ($("#frmNuevoNeonato").valid()) {
 
     var datos = new FormData($("#frmNuevoNeonato")[0]);
@@ -230,21 +236,23 @@ $("#frmNuevoNeonato").on("click", ".btnGuardar", function() {
 
           }).then((result) => {
               
-              if (result.value) {
+            if (result.value) {
 
-                $('#modalNuevoNeonato').modal('toggle');
+              $('#modalNuevoNeonato').modal('toggle');
 
-                $("#nuevoPesoNeonato").val("");
-                $("#nuevoTallaNeonato").val("");
-                $("#nuevoPCNeonato").val("");    
-                $("#nuevoPTNeonato").val("");
-                $("#nuevoAPGAR").val("");
-                $("#nuevoEdadGestacional").val("");
-                $("#nuevoTipoPartoNeonato").val("");
-                $("#nuevoDescripcionParto").val("");
+              $("#nuevoPesoNeonato").val("");
+              $("#nuevoTallaNeonato").val("");
+              $("#nuevoPCNeonato").val("");    
+              $("#nuevoPTNeonato").val("");
+              $("#nuevoAPGAR").val("");
+              $("#nuevoEdadGestacional").val("");
+              $("#nuevoTipoPartoNeonato").val("");
+              $("#nuevoDescripcionParto").val("");
 
-                // Funcion que recarga y actuaiiza la tabla
-                tablaPacienteIngresos.ajax.reload( null, false );
+              $(".btnGuardar").prop("disabled", false);
+
+              // Funcion que recarga y actuaiiza la tabla
+              tablaPacienteIngresos.ajax.reload( null, false );
 
             }
 
@@ -259,6 +267,12 @@ $("#frmNuevoNeonato").on("click", ".btnGuardar", function() {
             allowOutsideClick: false,
             confirmButtonText: "¡Cerrar!"
 
+          }).then((result) => {
+
+            if (result.value) {
+              $(".btnGuardar").prop("disabled", false);
+            }
+
           });
           
         }
@@ -266,9 +280,9 @@ $("#frmNuevoNeonato").on("click", ".btnGuardar", function() {
       },
       error: function(error) {
 
-            console.log("No funciona");
-            
-        }
+        console.log("No funciona");
+          
+      }
 
     });
 
@@ -280,6 +294,12 @@ $("#frmNuevoNeonato").on("click", ".btnGuardar", function() {
       icon: "error",
       allowOutsideClick: false,
       confirmButtonText: "¡Cerrar!"
+
+    }).then((result) => {
+
+      if (result.value) {
+        $(".btnGuardar").prop("disabled", false);
+      }
 
     });
     
@@ -467,6 +487,8 @@ GUARDANDO CAMBIOS DATOS DE NEONATO
 =============================================*/
 $("#frmEditarNeonato").on("click", ".btnGuardar", function() {
 
+  $(".btnGuardar").prop("disabled", true);
+
   if ($("#frmEditarNeonato").valid()) {
 
     var datos = new FormData($("#frmEditarNeonato")[0]);
@@ -510,6 +532,8 @@ $("#frmEditarNeonato").on("click", ".btnGuardar", function() {
               $("#editarDescripcionParto").val("");
               $("#idPacienteIngresoEN").val("");
 
+              $(".btnGuardar").prop("disabled", false); 
+
               // Funcion que recarga y actuaiiza la tabla
               tablaPacienteIngresos.ajax.reload( null, false );
 
@@ -525,6 +549,12 @@ $("#frmEditarNeonato").on("click", ".btnGuardar", function() {
             icon: "error",
             allowOutsideClick: false,
             confirmButtonText: "¡Cerrar!"
+
+          }).then((result) => {
+
+            if (result.value) {
+              $(".btnGuardar").prop("disabled", false);
+            }
 
           });
           
@@ -547,6 +577,12 @@ $("#frmEditarNeonato").on("click", ".btnGuardar", function() {
       icon: "error",
       allowOutsideClick: false,
       confirmButtonText: "¡Cerrar!"
+
+    }).then((result) => {
+
+      if (result.value) {
+        $(".btnGuardar").prop("disabled", false);
+      }
 
     });
     
@@ -582,7 +618,11 @@ $("#frmNeonatos").on("click", "#btnBuscarNeonatos", function() {
 
     "serverSide": true,
 
-    "order": [[ 0, "desc" ]],
+    "ordering": false,
+
+    "stateSave": true,
+
+    "paging": false,
 
     "language": {
 
@@ -618,6 +658,19 @@ $("#frmNeonatos").on("click", "#btnBuscarNeonatos", function() {
     "responsive": true,
 
     "lengthChange": false,
+
+    //para usar los botones
+    "dom": 'Bfrtilp',       
+    
+    "buttons":[
+      {
+        extend:    'excelHtml5',
+        title:     'Reporte Neonatos '+fechaIni+'_'+fechaFin,
+        text:      '<i class="fas fa-file-excel"></i> Generar EXCEL',
+        titleAttr: 'Exportar a Excel',
+        className: 'btn btn-success'
+      } 
+    ]       
 
   });
 

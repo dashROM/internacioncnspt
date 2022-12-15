@@ -241,7 +241,6 @@ MODAL NUEVA SALA
               </div>
 
               <!-- ENTRADA PARA LA DESCRIPCION DE LA SALA -->
-
               <div class="form-group">
                 <label for="nuevoDescripcionSala" class="form-label">DESCRIPCION SALA</label>  
                 <input type="text" class="form-control mayuscula" id="nuevoDescripcionSala" name="nuevoDescripcionSala">

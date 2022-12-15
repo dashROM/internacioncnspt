@@ -21,9 +21,6 @@ session_start();
 
   <!-- Bootstrap -->
   <link href="<?= BASEURL; ?>/views/plugins/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
-  <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
   
   <!-- Font Awesome Icons -->
   <link href="<?= BASEURL; ?>/views/plugins/fontawesome-free/css/all.min.css" rel="stylesheet" >
@@ -102,6 +99,7 @@ if (isset($_SESSION["iniciarSesion_internacion"]) && $_SESSION["iniciarSesion_in
           $parametros[0] == "paciente-egresos" ||
           $parametros[0] == "maternidades" ||
           $parametros[0] == "neonatos" ||
+          $parametros[0] == "libro-servicios" ||
 
           $parametros[0] == "cerrar-session")  {
 
@@ -199,9 +197,11 @@ if (isset($_SESSION["iniciarSesion_internacion"]) && $_SESSION["iniciarSesion_in
   <script src="<?= BASEURL; ?>/views/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
   <script src="<?= BASEURL; ?>/views/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
   <script src="<?= BASEURL; ?>/views/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+  <script src="<?= BASEURL; ?>/views/plugins/jszip/jszip.min.js"></script>  
   <script src="<?= BASEURL; ?>/views/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
   <script src="<?= BASEURL; ?>/views/plugins/datatables-buttons/js/buttons.print.min.js"></script>
   <script src="<?= BASEURL; ?>/views/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+  <script src="<?= BASEURL; ?>/views/plugins/datatables-scroller/js/dataTables.scroller.min.js"></script>
 
   <!-- MomentJS --> 
   <script src="<?= BASEURL; ?>/views/plugins/moment/moment.min.js"></script>

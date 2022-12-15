@@ -21,6 +21,8 @@ var tablaPacientesInternados = $('#tblPacientesInternados').DataTable({
 
   "order": [[ 3, "desc" ]],
 
+  "stateSave": true,
+
   "language": {
 
     "sProcessing":     "Procesando...",

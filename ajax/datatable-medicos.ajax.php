@@ -43,6 +43,7 @@ class TablaMedicos {
 						"'.$medico[$i]["paterno_medico"].'",
 						"'.$medico[$i]["materno_medico"].'",
 						"'.$medico[$i]["matricula_medico"].'",
+						"'.$medico[$i]["nombre_especialidad"].'",
 						"'.$medico[$i]["direccion_medico"].'",
 						"'.$medico[$i]["telefono_medico"].'"
 					],';
@@ -66,6 +67,5 @@ class TablaMedicos {
 /*=============================================
 ACTIVAR TABLA MEDICOS
 =============================================*/
-
 $activarMedico = new TablaMedicos();
 $activarMedico -> mostrarTablaMedicos();

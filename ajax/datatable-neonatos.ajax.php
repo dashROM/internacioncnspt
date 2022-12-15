@@ -14,33 +14,6 @@ class TablaNeonatos {
 
 		$request = $this->request;
 
-		$col = array(
-	    0   =>  'id',
-	    1   =>  'fecha_ingreso',
-	    2   =>  'hora_ingreso',
-	    3   =>  'nombre_completo',
-	    4   =>  'nombre_cama',
-	    5   =>  'sexo',
-	    6   =>  'peso_neonato',
-	    7   =>  'talla_neonato',
-	    8   =>  'pc_neonato',
-	    9   =>  'pt_neonato',
-	    10   =>  'apgar',
-	    11   =>  'edad_gestacional_neonato',
-	    12   =>  'cod_asegurado',
-	    13   =>  'nro_empleador',
-	    14   =>  'tipo_parto_neonato',
-	    15   =>  'diagnostico_especifico1',
-	    16   =>  'diagnostico_egreso1',
-	    17   =>  'nombre_consultorio',
-	    18   =>  'fecha_egreso',
-	    19   =>  'hora_egreso',
-	    20   =>  'causa_egreso',
-	    21   =>  'descripcion_parto',
-
-		);  //create column like table in database
-
-
 		$totalData = ControllerNeonatos::ctrContarNeonatos();
 
 		$totalFilter = $totalData;
@@ -57,57 +30,71 @@ class TablaNeonatos {
 	    $sql .= " OR sexo ILike '%".$request['search']['value']."%' ";
 	    $sql .= " OR cod_asegurado ILike '%".$request['search']['value']."%' ";
 	    $sql .= " OR nro_empleador ILike '%".$request['search']['value']."%' ";
-	    $sql .= " OR tipo_parto_neonato ILike '%".$request['search']['value']."%' ";  		    
-	    $sql .= " OR diagnostico_especifico1 ILike '%".$request['search']['value']."%' ";
-	    $sql .= " OR diagnostico_egreso1 ILike '%".$request['search']['value']."%' ";
-	    $sql .= " OR nombre_consultorio ILike '%".$request['search']['value']."%' ";
-	    $sql .= " OR causa_egreso ILike '%".$request['search']['value']."%' ";
-	    $sql .= " OR descripcion_parto ILike '%".$request['search']['value']."%' )";
+	    $sql .= " OR estado_civil ILike '%".$request['search']['value']."%' ";
+	    $sql .= " OR c2.nombre_consultorio ILike '%".$request['search']['value']."%' ";		    
+	    $sql .= " OR c3.nombre_consultorio ILike '%".$request['search']['value']."%' ";
+	    $sql .= " OR nombre_cama ILike '%".$request['search']['value']."%' ";
+	    $sql .= " OR c10_ingreso.codigo ILike '%".$request['search']['value']."%' ";
+	    $sql .= " OR c10_ingreso.descripcion ILike '%".$request['search']['value']."%' ";
+	    $sql .= " OR c10_egreso.codigo ILike '%".$request['search']['value']."%' ";
+	    $sql .= " OR c10_egreso.descripcion ILike '%".$request['search']['value']."%' ";
+	    $sql .= " OR nombre_servicio ILike '%".$request['search']['value']."%' ";
+	    $sql .= " OR causa_egreso ILike '%".$request['search']['value']."%' )";
 		
 		}
 
 		$totalFilter = ControllerNeonatos::ctrContarFiltradoNeonatos($sql);
 
-		$sql.=" ORDER BY ".$col[$request['order'][0]['column']]."   ".$request['order'][0]['dir']."  LIMIT ".
+		$sql.=" ORDER BY fecha_ingreso LIMIT ".
    	$request['length']."  OFFSET ".$request['start']."  ";
 
   	$neonatos = ControllerNeonatos::ctrMostrarNeonatos($sql);
   	
 		$data = array();
+		$nro = 0;
 
 		for ($i = 0; $i < count($neonatos); $i++) {
 
-			/*=============================================
-			TRAEMOS LAS ACCIONES
-			=============================================*/					
-			$btnEditarNeonatos = "<button class='btn btn-warning btnEditarNeonatos' idneonatos='".$neonatos[$i]["id"]."' data-bs-toggle='modal' data-bs-target='#ModaleditarNeonatos'><i class='fas fa-pencil-alt'></i></button>";
-			$btnDetalleNeonatos = "<button class='btn btn-primary btnDetalleIngreso' idneonatos='".$neonatos[$i]["id"]."' data-bs-toggle='modal' data-bs-target='#ModalnuevaAltas'><i class='fas fa-file-invoice'></i></button>";	
-		
-			$botones = "<div class='btn-group'>".$btnEditarNeonatos.$btnDetalleNeonatos."</div>";
+			// Calcular la Edad a partir de la fecha de nacimiento
+			$nacimiento = new DateTime($neonatos[$i]["fecha_nacimiento"]);
+			$hoy = new DateTime(date("Y-m-d"));
+			$edad = $hoy->diff($nacimiento);
 
+			/*=============================================
+			GUARDAMOS LOS DATOS EN UN NUEVO ARRAY
+			=============================================*/
+			$nro = $i + 1;				
 			$subdata = array();
-	    $subdata[] = $i+1;
-	    $subdata[] = date("d/m/Y", strtotime($neonatos[$i]["fecha_ingreso"])); 
-	    $subdata[] = $neonatos[$i]["hora_ingreso"]; 
-	    $subdata[] = $neonatos[$i]["nombre_completo"]; 
-	    $subdata[] = $neonatos[$i]["nombre_cama"];   
-	    $subdata[] = $neonatos[$i]["sexo"]; 
-	    $subdata[] = $neonatos[$i]["peso_neonato"];
-	    $subdata[] = $neonatos[$i]["talla_neonato"];
-	    $subdata[] = $neonatos[$i]["pc_neonato"];
-	    $subdata[] = $neonatos[$i]["pt_neonato"];
-	    $subdata[] = $neonatos[$i]["apgar"];
-	    $subdata[] = number_format($neonatos[$i]["edad_gestacional_neonato"],2,",","");
-	    $subdata[] = $neonatos[$i]["cod_asegurado"];
+	    $subdata[] = $request['start'] + $nro;
+	    $subdata[] = date("d", strtotime($neonatos[$i]["fecha_ingreso"])); 
+	    $subdata[] = date("m", strtotime($neonatos[$i]["fecha_ingreso"])); 
+	    $subdata[] = date("Y", strtotime($neonatos[$i]["fecha_ingreso"])); 
+	    $subdata[] = date("H:i", strtotime($neonatos[$i]["hora_ingreso"])); 
+	    $subdata[] = $neonatos[$i]["paterno_paciente"];
+	    $subdata[] = $neonatos[$i]["materno_paciente"];
+	    $subdata[] = $neonatos[$i]["nombre_paciente"]; 
+	    $subdata[] = $neonatos[$i]["procedencia"];
+	    $subdata[] = $edad->y;   
+	    $subdata[] = $neonatos[$i]["sexo"];
+	    $subdata[] = $neonatos[$i]["cod_beneficiario"];
+	    $subdata[] = $neonatos[$i]["estado_civil"];
+	    $subdata[] = $neonatos[$i]["zona"];
+	    $subdata[] = $neonatos[$i]["nombre_cama"]; 
+	    $subdata[] = substr($neonatos[$i]["cod_asegurado"], 0, 6);
+	    $subdata[] = substr($neonatos[$i]["cod_asegurado"], 6, 8);
 	    $subdata[] = $neonatos[$i]["nro_empleador"];
-	    $subdata[] = $neonatos[$i]["tipo_parto_neonato"];
-	    $subdata[] = $neonatos[$i]["diagnostico_especifico1"].' - '.$neonatos[$i]["diagnostico_especifico2"].' - '.$neonatos[$i]["diagnostico_especifico3"];
-	    $subdata[] = $neonatos[$i]["diagnostico_egreso1"].' - '.$neonatos[$i]["diagnostico_egreso2"].' - '.$neonatos[$i]["diagnostico_egreso3"];
-	    $subdata[] = $neonatos[$i]["nombre_consultorio"];
-	    $subdata[] = $neonatos[$i]["fecha_egreso"];
-	    $subdata[] = $neonatos[$i]["hora_egreso"];
+	    $subdata[] = $neonatos[$i]["cie10_cod_ingreso"];
+	    $subdata[] = $neonatos[$i]["cie10_diag_ingreso"];
+	    $subdata[] = $neonatos[$i]["nombre_servicio"];
+	    $subdata[] = $neonatos[$i]["cie10_cod_egreso"];
+	    $subdata[] = $neonatos[$i]["cie10_diag_egreso"];
+	    $subdata[] = date("d", strtotime($neonatos[$i]["fecha_egreso"])); 
+	    $subdata[] = date("m", strtotime($neonatos[$i]["fecha_egreso"])); 
+	    $subdata[] = date("Y", strtotime($neonatos[$i]["fecha_egreso"])); 
+	    $subdata[] = date("H:i", strtotime($neonatos[$i]["hora_egreso"])); 
 	    $subdata[] = $neonatos[$i]["causa_egreso"];
-	    $subdata[] = $neonatos[$i]["descripcion_parto"];
+	    $subdata[] = $neonatos[$i]["talla_neonato"];
+	    $subdata[] = $neonatos[$i]["peso_neonato"];
 	    $data[] = $subdata;	
 
 		}
@@ -136,32 +123,6 @@ class TablaNeonatos {
 		$item2 = "fecha_fin";
 		$valor2 = $this->fecha_fin;
 
-		$col = array(
-	    0   =>  'id',
-	    1   =>  'fecha_ingreso',
-	    2   =>  'hora_ingreso',
-	    3   =>  'nombre_completo',
-	    4   =>  'nombre_cama',
-	    5   =>  'sexo',
-	    6   =>  'peso_neonato',
-	    7   =>  'talla_neonato',
-	    8   =>  'pc_neonato',
-	    9   =>  'pt_neonato',
-	    10   =>  'apgar',
-	    11   =>  'edad_gestacional_neonato',
-	    12   =>  'cod_asegurado',
-	    13   =>  'nro_empleador',
-	    14   =>  'tipo_parto_neonato',
-	    15   =>  'diagnostico_especifico1',
-	    16   =>  'diagnostico_egreso1',
-	    17   =>  'nombre_consultorio',
-	    18   =>  'fecha_egreso',
-	    19   =>  'hora_egreso',
-	    20   =>  'causa_egreso',
-	    21   =>  'descripcion_parto',
-
-		);  //create column like table in database
-
 		$totalData = ControllerNeonatos::ctrContarNeonatosFecha($item1, $valor1, $item2, $valor2);
 
 		$totalFilter = $totalData;
@@ -178,57 +139,68 @@ class TablaNeonatos {
 	    $sql .= " OR sexo ILike '%".$request['search']['value']."%' ";
 	    $sql .= " OR cod_asegurado ILike '%".$request['search']['value']."%' ";
 	    $sql .= " OR nro_empleador ILike '%".$request['search']['value']."%' ";
-	    $sql .= " OR tipo_parto_neonato ILike '%".$request['search']['value']."%' ";  		    
-	    $sql .= " OR diagnostico_especifico1 ILike '%".$request['search']['value']."%' ";
-	    $sql .= " OR diagnostico_egreso1 ILike '%".$request['search']['value']."%' ";
-	    $sql .= " OR nombre_consultorio ILike '%".$request['search']['value']."%' ";
-	    $sql .= " OR causa_egreso ILike '%".$request['search']['value']."%' ";
-	    $sql .= " OR descripcion_parto ILike '%".$request['search']['value']."%' )";
+	    $sql .= " OR estado_civil ILike '%".$request['search']['value']."%' ";
+	    $sql .= " OR c2.nombre_consultorio ILike '%".$request['search']['value']."%' ";		    
+	    $sql .= " OR c3.nombre_consultorio ILike '%".$request['search']['value']."%' ";
+	    $sql .= " OR nombre_cama ILike '%".$request['search']['value']."%' ";
+	    $sql .= " OR c10_ingreso.codigo ILike '%".$request['search']['value']."%' ";
+	    $sql .= " OR c10_ingreso.descripcion ILike '%".$request['search']['value']."%' ";
+	    $sql .= " OR c10_egreso.codigo ILike '%".$request['search']['value']."%' ";
+	    $sql .= " OR c10_egreso.descripcion ILike '%".$request['search']['value']."%' ";
+	    $sql .= " OR nombre_servicio ILike '%".$request['search']['value']."%' ";
+	    $sql .= " OR causa_egreso ILike '%".$request['search']['value']."%' )";
 		
 		}
 
-		$totalFilter = ControllerNeonatos::ctrContarFiltradoNeonatosFecha($item1, $valor1, $item2, $valor2, $sql);
-
-		$sql.=" ORDER BY ".$col[$request['order'][0]['column']]."   ".$request['order'][0]['dir']."  LIMIT ".
-   	$request['length']."  OFFSET ".$request['start']."  ";
+		$sql.=" ORDER BY fecha_ingreso ";
 
   	$neonatos = ControllerNeonatos::ctrMostrarNeonatosFecha($item1, $valor1, $item2, $valor2, $sql);
   	
 		$data = array();
+		$nro = 0;
 
 		for ($i = 0; $i < count($neonatos); $i++) {
 
-			/*=============================================
-			TRAEMOS LAS ACCIONES
-			=============================================*/					
-			$btnEditarNeonatos = "<button class='btn btn-warning btnEditarNeonatos' idneonatos='".$neonatos[$i]["id"]."' data-bs-toggle='modal' data-bs-target='#ModaleditarNeonatos'><i class='fas fa-pencil-alt'></i></button>";
-			$btnDetalleNeonatos = "<button class='btn btn-primary btnDetalleIngreso' idneonatos='".$neonatos[$i]["id"]."' data-bs-toggle='modal' data-bs-target='#ModalnuevaAltas'><i class='fas fa-file-invoice'></i></button>";	
-		
-			$botones = "<div class='btn-group'>".$btnEditarNeonatos.$btnDetalleNeonatos."</div>";
+			// Calcular la Edad a partir de la fecha de nacimiento
+			$nacimiento = new DateTime($neonatos[$i]["fecha_nacimiento"]);
+			$hoy = new DateTime(date("Y-m-d"));
+			$edad = $hoy->diff($nacimiento);
 
+			/*=============================================
+			GUARDAMOS LOS DATOS EN UN NUEVO ARRAY
+			=============================================*/			
+			$nro = $i + 1;				
 			$subdata = array();
-	    $subdata[] = $i+1;
-	    $subdata[] = date("d/m/Y", strtotime($neonatos[$i]["fecha_ingreso"])); 
-	    $subdata[] = $neonatos[$i]["hora_ingreso"]; 
-	    $subdata[] = $neonatos[$i]["nombre_completo"]; 
-	    $subdata[] = $neonatos[$i]["nombre_cama"];   
-	    $subdata[] = $neonatos[$i]["sexo"]; 
-	    $subdata[] = $neonatos[$i]["peso_neonato"];
-	    $subdata[] = $neonatos[$i]["talla_neonato"];
-	    $subdata[] = $neonatos[$i]["pc_neonato"];
-	    $subdata[] = $neonatos[$i]["pt_neonato"];
-	    $subdata[] = $neonatos[$i]["apgar"];
-	    $subdata[] = number_format($neonatos[$i]["edad_gestacional_neonato"],2,",","");
-	    $subdata[] = $neonatos[$i]["cod_asegurado"];
+	    $subdata[] = $nro;
+	    $subdata[] = date("d", strtotime($neonatos[$i]["fecha_ingreso"])); 
+	    $subdata[] = date("m", strtotime($neonatos[$i]["fecha_ingreso"])); 
+	    $subdata[] = date("Y", strtotime($neonatos[$i]["fecha_ingreso"])); 
+	    $subdata[] = date("H:i", strtotime($neonatos[$i]["hora_ingreso"])); 
+	    $subdata[] = $neonatos[$i]["paterno_paciente"];
+	    $subdata[] = $neonatos[$i]["materno_paciente"];
+	    $subdata[] = $neonatos[$i]["nombre_paciente"]; 
+	    $subdata[] = $neonatos[$i]["procedencia"];
+	    $subdata[] = $edad->y;   
+	    $subdata[] = $neonatos[$i]["sexo"];
+	    $subdata[] = $neonatos[$i]["cod_beneficiario"];
+	    $subdata[] = $neonatos[$i]["estado_civil"];
+	    $subdata[] = $neonatos[$i]["zona"];
+	    $subdata[] = $neonatos[$i]["nombre_cama"]; 
+	    $subdata[] = substr($neonatos[$i]["cod_asegurado"], 0, 6);
+	    $subdata[] = substr($neonatos[$i]["cod_asegurado"], 6, 8);
 	    $subdata[] = $neonatos[$i]["nro_empleador"];
-	    $subdata[] = $neonatos[$i]["tipo_parto_neonato"];
-	    $subdata[] = $neonatos[$i]["diagnostico_especifico1"].' - '.$neonatos[$i]["diagnostico_especifico2"].' - '.$neonatos[$i]["diagnostico_especifico3"];
-	    $subdata[] = $neonatos[$i]["diagnostico_egreso1"].' - '.$neonatos[$i]["diagnostico_egreso2"].' - '.$neonatos[$i]["diagnostico_egreso3"];
-	    $subdata[] = $neonatos[$i]["nombre_consultorio"];
-	    $subdata[] = $neonatos[$i]["fecha_egreso"];
-	    $subdata[] = $neonatos[$i]["hora_egreso"];
+	    $subdata[] = $neonatos[$i]["cie10_cod_ingreso"];
+	    $subdata[] = $neonatos[$i]["cie10_diag_ingreso"];
+	    $subdata[] = $neonatos[$i]["nombre_servicio"];
+	    $subdata[] = $neonatos[$i]["cie10_cod_egreso"];
+	    $subdata[] = $neonatos[$i]["cie10_diag_egreso"];
+	    $subdata[] = date("d", strtotime($neonatos[$i]["fecha_egreso"])); 
+	    $subdata[] = date("m", strtotime($neonatos[$i]["fecha_egreso"])); 
+	    $subdata[] = date("Y", strtotime($neonatos[$i]["fecha_egreso"])); 
+	    $subdata[] = date("H:i", strtotime($neonatos[$i]["hora_egreso"])); 
 	    $subdata[] = $neonatos[$i]["causa_egreso"];
-	    $subdata[] = $neonatos[$i]["descripcion_parto"];
+	    $subdata[] = $neonatos[$i]["talla_neonato"];
+	    $subdata[] = $neonatos[$i]["peso_neonato"];
 	    $data[] = $subdata;	
 
 		}
@@ -258,9 +230,11 @@ if (isset($_POST["neonatos"])) {
 }
 
 if (isset($_POST["BuscarFechaNeonatos"])) {
+
 	$activarNeonatos = new TablaNeonatos();
 	$activarNeonatos -> request = $_REQUEST;
 	$activarNeonatos -> fecha_ini = $_POST["fechaIni"];
 	$activarNeonatos -> fecha_fin = $_POST["fechaFin"];
 	$activarNeonatos -> mostrarTablaNeonatosFecha();
+
 }

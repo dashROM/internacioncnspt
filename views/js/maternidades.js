@@ -19,7 +19,11 @@ var tablaMaternidades = $('#tblMaternidades').DataTable({
 
   "serverSide": true,
 
-  "order": [[ 1, "desc" ]],
+  "ordering": false,
+
+  "pageLength": 20,
+
+  "stateSave": true,
 
   "language": {
 
@@ -255,7 +259,7 @@ $(document).ready(function(){
       nuevoProcedencia : "Elija una Opción",
       nuevoTipoParto : "Elija un Tipo de Parto",
       nuevoLiquidoAmniotico : "Elija una Opción",
-      nuevoSexoNacido : "Elija una Opción",
+      // nuevoSexoNacido : "Elija una Opción",
       nuevoEstadoNacido : "Elija una Opción",
       nuevoAlumbramiento : "Elija una Opción",
       nuevoPerine : "Elija una Opción",
@@ -286,6 +290,8 @@ $(document).ready(function(){
 GUARDANDO DATOS DE MATERNIDAD
 =============================================*/
 $("#frmNuevaMaternidad").on("click", ".btnGuardar", function() {
+
+  $(".btnGuardar").prop("disabled", true);
 
   if ($("#frmNuevaMaternidad").valid()) {
 
@@ -322,8 +328,7 @@ $("#frmNuevaMaternidad").on("click", ".btnGuardar", function() {
 
   							 $("#nuevoProcedencia").val("");  							 
   							 $("#nuevoParidad").val("");
-  							 $("#nuevoEdadFUM").val("");
-                 $("#nuevoEdadEcografia").val("");
+  							 $("#nuevoEdadGestacional").val("");
   							 $("#nuevoTipoParto").val("");		
   							 $("#nuevoLiquidoAmniotico").val("");
   							 $("#nuevoFechaParto").val("");
@@ -336,6 +341,8 @@ $("#frmNuevaMaternidad").on("click", ".btnGuardar", function() {
   							 $("#nuevoEstadoMadre").val("");
   							 $("#nuevoNombreEsposo").val("");
 
+                 $(".btnGuardar").prop("disabled", false);
+
   	  					// Funcion que recarga y actuaiiza la tabla
   							tablaPacienteIngresos.ajax.reload( null, false );
 
@@ -347,21 +354,40 @@ $("#frmNuevaMaternidad").on("click", ".btnGuardar", function() {
 
   				swal.fire({
   						
-  					title: "¡Los campos obligatorios no puede ir vacio o llevar caracteres especiales no da!",
+  					title: "¡Los campos obligatorios no puede ir vacio o llevar caracteres especiales!",
   					icon: "error",
   					allowOutsideClick: false,
   					confirmButtonText: "¡Cerrar!"
 
-  				});
+  				}).then((result) => {
+
+            if (result.value) {
+              $(".btnGuardar").prop("disabled", false);
+            }
+
+          });
   				
   			}
 
   		},
   		error: function(error) {
 
-  	        console.log("No funciona");
+        swal.fire({
+              
+          title: "¡Error en al conexión a la Base de Datos!",
+          icon: "error",
+          allowOutsideClick: false,
+          confirmButtonText: "¡Cerrar!"
+
+        }).then((result) => {
+
+          if (result.value) {
+            $(".btnGuardar").prop("disabled", false);
+          }
+
+        });
   	        
-  	    }
+      }
 
   	});
 
@@ -374,7 +400,13 @@ $("#frmNuevaMaternidad").on("click", ".btnGuardar", function() {
   		allowOutsideClick: false,
   		confirmButtonText: "¡Cerrar!"
 
-  	});
+  	}).then((result) => {
+
+      if (result.value) {
+        $(".btnGuardar").prop("disabled", false);
+      }
+
+    });
   	
   } 
 
@@ -434,7 +466,20 @@ $(document).on("click", ".btnEditarMaternidad", function() {
     },
     error: function(error) {
 
-      console.log("No funciona");
+      swal.fire({
+              
+        title: "¡Error en al conexión a la Base de Datos!",
+        icon: "error",
+        allowOutsideClick: false,
+        confirmButtonText: "¡Cerrar!"
+
+      }).then((result) => {
+
+        if (result.value) {
+          $(".btnGuardar").prop("disabled", false);
+        }
+
+      });
 
     }
 
@@ -486,7 +531,20 @@ $(document).on("click", ".btnEditarMaternidad", function() {
     },
     error: function(error) {
 
-      console.log("No funciona");
+      swal.fire({
+              
+        title: "¡Error en al conexión a la Base de Datos!",
+        icon: "error",
+        allowOutsideClick: false,
+        confirmButtonText: "¡Cerrar!"
+
+      }).then((result) => {
+
+        if (result.value) {
+          $(".btnGuardar").prop("disabled", false);
+        }
+
+      });
 
     }
 
@@ -511,14 +569,17 @@ $(document).on("click", ".btnEditarMaternidad", function() {
 
       $("#editarProcedencia").val(respuesta['procedencia']);
       $("#editarParidad").val(respuesta['paridad']);
-      $("#editarEdadFUM").val(respuesta['edad_gestacional_fum']);
-      $("#editarEdadEcografia").val(respuesta['edad_gestacional_ecografia']);
+      $("#editarEdadGestacional").val(respuesta['edad_gestacional']);
       $("#editarTipoParto").val(respuesta['tipo_parto']);
       $("#editarLiquidoAmniotico").val(respuesta['liquido_amniotico']);
       $("#editarFechaParto").val(respuesta['fecha_nacido']);
       $("#editarHoraParto").val(respuesta['hora_nacido']);
-      $("#editarPesoNacido").val(respuesta['peso_nacido']);
-      $("#editarSexoNacido").val(respuesta['sexo_nacido']);
+      $("#editarPesoNacido1").val(respuesta['peso_nacido1']);
+      $("#editarSexoNacido1").val(respuesta['sexo_nacido1']);
+      $("#editarPesoNacido2").val(respuesta['peso_nacido2']);
+      $("#editarSexoNacido2").val(respuesta['sexo_nacido2']);
+      $("#editarPesoNacido3").val(respuesta['peso_nacido3']);
+      $("#editarSexoNacido3").val(respuesta['sexo_nacido3']);
       $("#editarEstadoNacido").val(respuesta['estado_nacido']);
       $("#editarAlumbramiento").val(respuesta['alumbramiento']);
       $("#editarPerine").val(respuesta['perine']);
@@ -531,8 +592,20 @@ $(document).on("click", ".btnEditarMaternidad", function() {
     },
     error: function(error) {
 
-      console.log("No funciona");
+      swal.fire({
+              
+        title: "¡Error en al conexión a la Base de Datos!",
+        icon: "error",
+        allowOutsideClick: false,
+        confirmButtonText: "¡Cerrar!"
 
+      }).then((result) => {
+
+        if (result.value) {
+          $(".btnGuardar").prop("disabled", false);
+        }
+
+      });
 
     }
 
@@ -649,6 +722,8 @@ GUARDANDO CAMBIOS DE MATERNIDAD
 =============================================*/
 $("#frmEditarMaternidad").on("click", ".btnGuardar", function() {
 
+  $(".btnGuardar").prop("disabled", true);
+
   if ($("#frmEditarMaternidad").valid()) {
 
     var datos = new FormData($("#frmEditarMaternidad")[0]);
@@ -678,28 +753,29 @@ $("#frmEditarMaternidad").on("click", ".btnGuardar", function() {
 
           }).then((result) => {
               
-              if (result.value) {
+            if (result.value) {
 
-                $('#modalEditarMaternidad').modal('toggle');
+              $('#modalEditarMaternidad').modal('toggle');
 
-                $("#editarProcedencia").val(""); 
-                $("#editarParidad").val("");
-                $("#editarEdadFUM").val("");
-                $("#editarEdadEcografia").val("");
-                $("#editarTipoParto").val("");    
-                $("#editarLiquidoAmniotico").val("");
-                $("#editarFechaParto").val("");
-                $("#editarHoraParto").val("");
-                $("#editarPesoNacimiento").val("");
-                $("#editarSexoNacimiento").val("");
-                $("#editarAlumbramiento").val("");
-                $("#editarPerine").val("");
-                $("#editarSangrado").val("");
-                $("#editarEstadoMadre").val("");
-                $("#editarNombreEsposo").val("");
+              $("#editarProcedencia").val(""); 
+              $("#editarParidad").val("");
+              $("#editarEdadGestacional").val("");
+              $("#editarTipoParto").val("");    
+              $("#editarLiquidoAmniotico").val("");
+              $("#editarFechaParto").val("");
+              $("#editarHoraParto").val("");
+              $("#editarPesoNacimiento").val("");
+              $("#editarSexoNacimiento").val("");
+              $("#editarAlumbramiento").val("");
+              $("#editarPerine").val("");
+              $("#editarSangrado").val("");
+              $("#editarEstadoMadre").val("");
+              $("#editarNombreEsposo").val("");
 
-                // Funcion que recarga y actuaiiza la tabla
-                tablaPacienteIngresos.ajax.reload( null, false );
+              $(".btnGuardar").prop("disabled", false);
+
+              // Funcion que recarga y actuaiiza la tabla
+              tablaPacienteIngresos.ajax.reload( null, false );
 
             }
 
@@ -714,6 +790,12 @@ $("#frmEditarMaternidad").on("click", ".btnGuardar", function() {
             allowOutsideClick: false,
             confirmButtonText: "¡Cerrar!"
 
+          }).then((result) => {
+
+            if (result.value) {
+              $(".btnGuardar").prop("disabled", false);
+            }
+
           });
           
         }
@@ -721,9 +803,22 @@ $("#frmEditarMaternidad").on("click", ".btnGuardar", function() {
       },
       error: function(error) {
 
-            console.log("No funciona");
+        swal.fire({
+              
+          title: "¡Error en al conexión a la Base de Datos!",
+          icon: "error",
+          allowOutsideClick: false,
+          confirmButtonText: "¡Cerrar!"
+
+        }).then((result) => {
+
+          if (result.value) {
+            $(".btnGuardar").prop("disabled", false);
+          }
+
+        });
             
-        }
+      }
 
     });
 
@@ -735,6 +830,12 @@ $("#frmEditarMaternidad").on("click", ".btnGuardar", function() {
       icon: "error",
       allowOutsideClick: false,
       confirmButtonText: "¡Cerrar!"
+
+    }).then((result) => {
+
+      if (result.value) {
+        $(".btnGuardar").prop("disabled", false);
+      }
 
     });
     
@@ -770,7 +871,11 @@ $("#frmMaternidades").on("click", "#btnBuscarMaternidades", function() {
 
     "serverSide": true,
 
-    "order": [[ 0, "desc" ]],
+    "ordering": false,
+
+    "stateSave": true,
+
+    "paging": false,
 
     "language": {
 
@@ -806,6 +911,19 @@ $("#frmMaternidades").on("click", "#btnBuscarMaternidades", function() {
     "responsive": true,
 
     "lengthChange": false,
+
+    //para usar los botones
+    "dom": 'Bfrtilp',       
+    
+    "buttons":[
+      {
+        extend:    'excelHtml5',
+        title:     'Reporte Maternidades '+fechaIni+'_'+fechaFin,
+        text:      '<i class="fas fa-file-excel"></i> Generar EXCEL',
+        titleAttr: 'Exportar a Excel',
+        className: 'btn btn-success'
+      } 
+    ]    
 
   });
 

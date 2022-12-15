@@ -10,22 +10,28 @@ class ModelNeonatos {
 	static public function mdlContarNeonatos($tabla) {
 
 		// devuelve el numero de registros de la consulta
-		$sql = "SELECT n.id, pi2.fecha_ingreso, pi2.hora_ingreso, CONCAT(p.nombre_paciente,' ',p.paterno_paciente,' ',p.materno_paciente) nombre_completo, c.nombre_cama, p.sexo, n.peso_neonato, n.talla_neonato, n.pc_neonato, n.pt_neonato, n.apgar, n.edad_gestacional_neonato, p.cod_asegurado, p.nro_empleador, n.tipo_parto_neonato, pi2.diagnostico_especifico1, pi2.diagnostico_especifico2, pi2.diagnostico_especifico3, pe.diagnostico_egreso1, pe.diagnostico_egreso2, pe.diagnostico_egreso3, p.id_consultorio, c2.nombre_consultorio, pe.fecha_egreso, pe.hora_egreso, pe.causa_egreso, n.descripcion_parto 
-			FROM paciente_ingresos pi2
-			INNER JOIN pacientes p
-			ON pi2.id_paciente = p.id
-			INNER JOIN neonatos n
-			ON pi2.id = n.id_paciente_ingreso 
-			LEFT JOIN paciente_egresos pe
-			ON pi2.id = pe.id_paciente_ingreso
-			INNER JOIN consultorios c2
-			ON p.id_consultorio = c2.id
-			INNER JOIN salas s2
-			ON pi2.id_sala = s2.id
-			INNER JOIN camas c
-			ON pi2.id_cama = c.id
-			INNER JOIN servicios s
-			ON pi2.id_servicio = s.id";
+		$sql = "SELECT n.id 
+		FROM paciente_ingresos pi2
+		INNER JOIN pacientes p
+		ON pi2.id_paciente = p.id
+		INNER JOIN neonatos n
+		ON pi2.id = n.id_paciente_ingreso 
+		LEFT JOIN paciente_egresos pe
+		ON pi2.id = pe.id_paciente_ingreso
+		INNER JOIN consultorios c2
+		ON p.id_consultorio = c2.id
+		INNER JOIN consultorios c3
+		ON pi2.id_consultorio = c3.id
+		INNER JOIN cie10 c10_ingreso
+		ON pi2.id_cie10 = c10_ingreso.id
+		INNER JOIN cie10 c10_egreso
+		ON pe.id_cie10 = c10_egreso.id
+		INNER JOIN salas s2
+		ON pi2.id_sala = s2.id
+		INNER JOIN camas c
+		ON pi2.id_cama = c.id
+		INNER JOIN servicios s
+		ON pi2.id_servicio = s.id";
 
 		$stmt = Conexion::connectPostgres()->prepare($sql);
 
@@ -47,7 +53,7 @@ class ModelNeonatos {
 
 			// devuelve el numero de registros de la consulta
 
-			$sql2 = "SELECT n.id, pi2.fecha_ingreso, pi2.hora_ingreso, CONCAT(p.nombre_paciente,' ',p.paterno_paciente,' ',p.materno_paciente) nombre_completo, c.nombre_cama, p.sexo, n.peso_neonato, n.talla_neonato, n.pc_neonato, n.pt_neonato, n.apgar, n.edad_gestacional_neonato, p.cod_asegurado, p.nro_empleador, n.tipo_parto_neonato, pi2.diagnostico_especifico1, pi2.diagnostico_especifico2, pi2.diagnostico_especifico3, pe.diagnostico_egreso1, pe.diagnostico_egreso2, pe.diagnostico_egreso3, p.id_consultorio, c2.nombre_consultorio, pe.fecha_egreso, pe.hora_egreso, pe.causa_egreso, n.descripcion_parto 
+			$sql2 = "SELECT n.id
 			FROM paciente_ingresos pi2
 			INNER JOIN pacientes p
 			ON pi2.id_paciente = p.id
@@ -57,6 +63,12 @@ class ModelNeonatos {
 			ON pi2.id = pe.id_paciente_ingreso
 			INNER JOIN consultorios c2
 			ON p.id_consultorio = c2.id
+			INNER JOIN consultorios c3
+			ON pi2.id_consultorio = c3.id
+			INNER JOIN cie10 c10_ingreso
+			ON pi2.id_cie10 = c10_ingreso.id
+			INNER JOIN cie10 c10_egreso
+			ON pe.id_cie10 = c10_egreso.id
 			INNER JOIN salas s2
 			ON pi2.id_sala = s2.id
 			INNER JOIN camas c
@@ -76,7 +88,7 @@ class ModelNeonatos {
 
 			// devuelve el numero de registros de la consulta
 
-			$sql2 = "SELECT n.id, pi2.fecha_ingreso, pi2.hora_ingreso, CONCAT(p.nombre_paciente,' ',p.paterno_paciente,' ',p.materno_paciente) nombre_completo, c.nombre_cama, p.sexo, n.peso_neonato, n.talla_neonato, n.pc_neonato, n.pt_neonato, n.apgar, n.edad_gestacional_neonato, p.cod_asegurado, p.nro_empleador, n.tipo_parto_neonato, pi2.diagnostico_especifico1, pi2.diagnostico_especifico2, pi2.diagnostico_especifico3, pe.diagnostico_egreso1, pe.diagnostico_egreso2, pe.diagnostico_egreso3, p.id_consultorio, c2.nombre_consultorio, pe.fecha_egreso, pe.hora_egreso, pe.causa_egreso, n.descripcion_parto 
+			$sql2 = "SELECT n.id
 			FROM paciente_ingresos pi2
 			INNER JOIN pacientes p
 			ON pi2.id_paciente = p.id
@@ -86,12 +98,19 @@ class ModelNeonatos {
 			ON pi2.id = pe.id_paciente_ingreso
 			INNER JOIN consultorios c2
 			ON p.id_consultorio = c2.id
+			INNER JOIN consultorios c3
+			ON pi2.id_consultorio = c3.id
+			INNER JOIN cie10 c10_ingreso
+			ON pi2.id_cie10 = c10_ingreso.id
+			INNER JOIN cie10 c10_egreso
+			ON pe.id_cie10 = c10_egreso.id
 			INNER JOIN salas s2
 			ON pi2.id_sala = s2.id
 			INNER JOIN camas c
 			ON pi2.id_cama = c.id
 			INNER JOIN servicios s
-			ON pi2.id_servicio = s.id $sql";
+			ON pi2.id_servicio = s.id 
+			$sql";
 
 			$stmt = Conexion::connectPostgres()->prepare($sql2);
 
@@ -113,7 +132,7 @@ class ModelNeonatos {
 	=============================================*/
 	static public function mdlMostrarNeonatos($tabla, $sql) {
 
-		$sql2 = "SELECT n.id, pi2.fecha_ingreso, pi2.hora_ingreso, CONCAT(p.nombre_paciente,' ',p.paterno_paciente,' ',p.materno_paciente) nombre_completo, c.nombre_cama, p.sexo, n.peso_neonato, n.talla_neonato, n.pc_neonato, n.pt_neonato, n.apgar, n.edad_gestacional_neonato, p.cod_asegurado, p.nro_empleador, n.tipo_parto_neonato, pi2.diagnostico_especifico1, pi2.diagnostico_especifico2, pi2.diagnostico_especifico3, pe.diagnostico_egreso1, pe.diagnostico_egreso2, pe.diagnostico_egreso3, p.id_consultorio, c2.nombre_consultorio, pe.fecha_egreso, pe.hora_egreso, pe.causa_egreso, n.descripcion_parto 
+		$sql2 = "SELECT n.id, pi2.fecha_ingreso, pi2.hora_ingreso, p.nombre_paciente, p.paterno_paciente, p.materno_paciente, c3.nombre_consultorio as procedencia, p.fecha_nacimiento, p.sexo, p.cod_beneficiario, p.estado_civil, c2.nombre_consultorio as zona, c.nombre_cama, p.cod_asegurado, p.nro_empleador, p.cod_asegurado, p.nro_empleador, c10_ingreso.codigo as cie10_cod_ingreso, c10_ingreso.descripcion as cie10_diag_ingreso, s.nombre_servicio, c10_egreso.codigo as cie10_cod_egreso, c10_egreso.descripcion as cie10_diag_egreso, pe.fecha_egreso, pe.hora_egreso, pe.causa_egreso, n.talla_neonato, n.peso_neonato
 		FROM paciente_ingresos pi2
 		INNER JOIN pacientes p
 		ON pi2.id_paciente = p.id
@@ -123,12 +142,19 @@ class ModelNeonatos {
 		ON pi2.id = pe.id_paciente_ingreso
 		INNER JOIN consultorios c2
 		ON p.id_consultorio = c2.id
+		INNER JOIN consultorios c3
+		ON pi2.id_consultorio = c3.id
+		INNER JOIN cie10 c10_ingreso
+		ON pi2.id_cie10 = c10_ingreso.id
+		INNER JOIN cie10 c10_egreso
+		ON pe.id_cie10 = c10_egreso.id
 		INNER JOIN salas s2
 		ON pi2.id_sala = s2.id
 		INNER JOIN camas c
 		ON pi2.id_cama = c.id
 		INNER JOIN servicios s
-		ON pi2.id_servicio = s.id $sql";
+		ON pi2.id_servicio = s.id 
+		$sql";
 
 		$stmt = Conexion::connectPostgres()->prepare($sql2);
 
@@ -169,23 +195,29 @@ class ModelNeonatos {
 	static public function mdlContarNeonatosFecha($tabla, $item1, $valor1, $item2, $valor2) {
 
 		// devuelve el numero de registros de la consulta
-		$sql = "SELECT n.id, pi2.fecha_ingreso, pi2.hora_ingreso, CONCAT(p.nombre_paciente,' ',p.paterno_paciente,' ',p.materno_paciente) nombre_completo, c.nombre_cama, p.sexo, n.peso_neonato, n.talla_neonato, n.pc_neonato, n.pt_neonato, n.apgar, n.edad_gestacional_neonato, p.cod_asegurado, p.nro_empleador, n.tipo_parto_neonato, pi2.diagnostico_especifico1, pi2.diagnostico_especifico2, pi2.diagnostico_especifico3, pe.diagnostico_egreso1, pe.diagnostico_egreso2, pe.diagnostico_egreso3, p.id_consultorio, c2.nombre_consultorio, pe.fecha_egreso, pe.hora_egreso, pe.causa_egreso, n.descripcion_parto 
-			FROM paciente_ingresos pi2
-			INNER JOIN pacientes p
-			ON pi2.id_paciente = p.id
-			INNER JOIN neonatos n
-			ON pi2.id = n.id_paciente_ingreso 
-			LEFT JOIN paciente_egresos pe
-			ON pi2.id = pe.id_paciente_ingreso
-			INNER JOIN consultorios c2
-			ON p.id_consultorio = c2.id
-			INNER JOIN salas s2
-			ON pi2.id_sala = s2.id
-			INNER JOIN camas c
-			ON pi2.id_cama = c.id
-			INNER JOIN servicios s
-			ON pi2.id_servicio = s.id
-			AND pi2.fecha_ingreso BETWEEN :$item1 AND :$item2";
+		$sql = "SELECT n.id 
+		FROM paciente_ingresos pi2
+		INNER JOIN pacientes p
+		ON pi2.id_paciente = p.id
+		INNER JOIN neonatos n
+		ON pi2.id = n.id_paciente_ingreso 
+		LEFT JOIN paciente_egresos pe
+		ON pi2.id = pe.id_paciente_ingreso
+		INNER JOIN consultorios c2
+		ON p.id_consultorio = c2.id
+		INNER JOIN consultorios c3
+		ON pi2.id_consultorio = c3.id
+		INNER JOIN cie10 c10_ingreso
+		ON pi2.id_cie10 = c10_ingreso.id
+		INNER JOIN cie10 c10_egreso
+		ON pe.id_cie10 = c10_egreso.id
+		INNER JOIN salas s2
+		ON pi2.id_sala = s2.id
+		INNER JOIN camas c
+		ON pi2.id_cama = c.id
+		INNER JOIN servicios s
+		ON pi2.id_servicio = s.id
+		AND pe.fecha_egreso BETWEEN :$item1 AND :$item2";
 
 		$stmt = Conexion::connectPostgres()->prepare($sql);
 
@@ -226,7 +258,7 @@ class ModelNeonatos {
 			ON pi2.id_cama = c.id
 			INNER JOIN servicios s
 			ON pi2.id_servicio = s.id 
-			AND pi2.fecha_ingreso BETWEEN :$item1 AND :$item2";
+			AND pe.fecha_egreso BETWEEN :$item1 AND :$item2";
 
 			$stmt = Conexion::connectPostgres()->prepare($sql2);
 
@@ -259,7 +291,7 @@ class ModelNeonatos {
 			ON pi2.id_cama = c.id
 			INNER JOIN servicios s
 			ON pi2.id_servicio = s.id 
-			AND pi2.fecha_ingreso BETWEEN :$item1 AND :$item2 
+			AND pe.fecha_egreso BETWEEN :$item1 AND :$item2 
 			$sql";
 
 			$stmt = Conexion::connectPostgres()->prepare($sql2);
@@ -285,24 +317,30 @@ class ModelNeonatos {
 	=============================================*/
 	static public function mdlMostrarNeonatosFecha($tabla, $item1, $valor1, $item2, $valor2, $sql) {
 
-		$sql2 = "SELECT n.id, pi2.fecha_ingreso, pi2.hora_ingreso, CONCAT(p.nombre_paciente,' ',p.paterno_paciente,' ',p.materno_paciente) nombre_completo, c.nombre_cama, p.sexo, n.peso_neonato, n.talla_neonato, n.pc_neonato, n.pt_neonato, n.apgar, n.edad_gestacional_neonato, p.cod_asegurado, p.nro_empleador, n.tipo_parto_neonato, pi2.diagnostico_especifico1, pi2.diagnostico_especifico2, pi2.diagnostico_especifico3, pe.diagnostico_egreso1, pe.diagnostico_egreso2, pe.diagnostico_egreso3, p.id_consultorio, c2.nombre_consultorio, pe.fecha_egreso, pe.hora_egreso, pe.causa_egreso, n.descripcion_parto 
-			FROM paciente_ingresos pi2
-			INNER JOIN pacientes p
-			ON pi2.id_paciente = p.id
-			INNER JOIN neonatos n
-			ON pi2.id = n.id_paciente_ingreso 
-			LEFT JOIN paciente_egresos pe
-			ON pi2.id = pe.id_paciente_ingreso
-			INNER JOIN consultorios c2
-			ON p.id_consultorio = c2.id
-			INNER JOIN salas s2
-			ON pi2.id_sala = s2.id
-			INNER JOIN camas c
-			ON pi2.id_cama = c.id
-			INNER JOIN servicios s
-			ON pi2.id_servicio = s.id 
-			AND pi2.fecha_ingreso BETWEEN :$item1 AND :$item2 
-			$sql";
+		$sql2 = "SELECT n.id, pi2.fecha_ingreso, pi2.hora_ingreso, p.nombre_paciente, p.paterno_paciente, p.materno_paciente, c3.nombre_consultorio as procedencia, p.fecha_nacimiento, p.sexo, p.cod_beneficiario, p.estado_civil, c2.nombre_consultorio as zona, c.nombre_cama, p.cod_asegurado, p.nro_empleador, p.cod_asegurado, p.nro_empleador, c10_ingreso.codigo as cie10_cod_ingreso, c10_ingreso.descripcion as cie10_diag_ingreso, s.nombre_servicio, c10_egreso.codigo as cie10_cod_egreso, c10_egreso.descripcion as cie10_diag_egreso, pe.fecha_egreso, pe.hora_egreso, pe.causa_egreso, n.talla_neonato, n.peso_neonato
+		FROM paciente_ingresos pi2
+		INNER JOIN pacientes p
+		ON pi2.id_paciente = p.id
+		INNER JOIN neonatos n
+		ON pi2.id = n.id_paciente_ingreso 
+		LEFT JOIN paciente_egresos pe
+		ON pi2.id = pe.id_paciente_ingreso
+		INNER JOIN consultorios c2
+		ON p.id_consultorio = c2.id
+		INNER JOIN consultorios c3
+		ON pi2.id_consultorio = c3.id
+		INNER JOIN cie10 c10_ingreso
+		ON pi2.id_cie10 = c10_ingreso.id
+		INNER JOIN cie10 c10_egreso
+		ON pe.id_cie10 = c10_egreso.id
+		INNER JOIN salas s2
+		ON pi2.id_sala = s2.id
+		INNER JOIN camas c
+		ON pi2.id_cama = c.id
+		INNER JOIN servicios s
+		ON pi2.id_servicio = s.id
+		AND pe.fecha_egreso BETWEEN :$item1 AND :$item2
+		$sql";
 		
 		$stmt = Conexion::connectPostgres()->prepare($sql2);
 

@@ -2,12 +2,12 @@
 
 	<div class="container-xl px-4">
 
-		<h1 class="mt-4">NEONATOS</h1>
+		<h1 class="mt-4">LIBROS SERVICIOS</h1>
 
 		<ol class="breadcrumb p-2 mb-4 shadow">
 
       <li class="breadcrumb-item"><a href="<?= BASEURL; ?>/inicio">Inicio</a></li>
-      <li class="breadcrumb-item active">Neonatos</li>
+      <li class="breadcrumb-item active">Libro Servicios</li>
 
     </ol>
 
@@ -20,17 +20,25 @@
 
         <div class="right_col alert alert-info" role="main">
 
-          <form id="frmNeonatos">
+          <form id="frmLibroServicios">
 
             <div class="row">
 
               <div class="form-group col-xs-10 col-sm-5 col-md-3 col-lg-3">
 
-                <label for="fechaIniNeonatos">FECHA INICIAL</label>
+                <label for="fechaIniPediatria">SERVICIO</label>
                 <label>(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>
                 <div class="input-group">
                   
-                  <input type="date" class="form-control" name="fechaIniNeonatos" id="fechaIniNeonatos">
+                  <select class="form-select" name="servicio" id="servicio" required>
+                    <option value="" disabled selected>ELEGIR...</option>
+                    <option value="1">PEDIATRIA</option>
+                    <option value="21">GINECOLOGIA</option>
+                    <option value="4">MEDICINA INTERNA</option>
+                    <option value="5">CIRUGIA</option>
+                    <option value="6">NEUMOLOGIA</option>
+                    <option value="7">UTI</option>                 
+                  </select>
 
                 </div>
 
@@ -38,11 +46,23 @@
 
               <div class="form-group col-xs-10 col-sm-5 col-md-3 col-lg-3">
 
-                <label for="fechaFinNeonatos">FECHA FINAL</label>
+                <label for="fechaIniLibroServicio">FECHA INICIAL</label>
+                <label>(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>
+                <div class="input-group">
+                  
+                  <input type="date" class="form-control" name="fechaIniLibroServicio" id="fechaIniLibroServicio" required>
+
+                </div>
+
+              </div>
+
+              <div class="form-group col-xs-10 col-sm-5 col-md-3 col-lg-3">
+
+                <label for="fechaFinLibroServicio">FECHA FINAL</label>
                 <label>(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>
                 <div class="input-group">
 
-                  <input type="date" class="form-control" name="fechaFinNeonatos" id="fechaFinNeonatos">
+                  <input type="date" class="form-control" name="fechaFinLibroServicio" id="fechaFinLibroServicio" required>
 
                 </div>
 
@@ -52,7 +72,7 @@
 
                 <label></label>
                 <div class="input-group-append mt-2">
-                  <button type="button" class="btn btn-primary px-2" id="btnBuscarNeonatos">
+                  <button type="button" class="btn btn-primary px-2" id="btnBuscarLibroServicios">
                     <i class="fas fa-search"></i> Buscar
                   </button>
                 </div>
@@ -70,13 +90,13 @@
 
       <div class="card-header">
 
-        <i class="fas fa-table me-1"></i>LISTADO PACIENTES EN NEONATOLOGIA
+        <i class="fas fa-table me-1"></i>LISTADO PACIENTES EN <span id="nombre_servicio"></span>
 
       </div>
 
       <div class="card-body">
 
-    		<table class="table table-striped table-bordered shadow-lg mt-4" id="tblNeonatos">
+    		<table class="table table-striped table-bordered shadow-lg mt-4" id="tblLibroServicios">
     			
     			<thead class="text-light bg-primary">
             <tr>
@@ -108,8 +128,6 @@
               <th scope="col">AÑO</th>
               <th scope="col">HORA</th>
               <th scope="col">TIPO ALTA</th>
-              <th scope="col">TALLA</th>
-              <th scope="col">PESO</th>
             </tr>
     			</thead>
     	   

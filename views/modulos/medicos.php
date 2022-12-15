@@ -37,6 +37,7 @@
     		      <th scope="col">PATERNO</th>
     		      <th scope="col">MATERNO</th>
               <th scope="col">MATRICULA</th>
+              <th scope="col">ESPECIALIDAD</th>
               <th scope="col">DIRECCION</th>
               <th scope="col">TELEFONO</th>
     		    </tr>
@@ -92,21 +93,50 @@ MODAL NUEVO MEDICO
 
             <div class="card-body">
 
-              <div class="row mb-3">
+              <div class="row">
 
                 <div class="col-md-6 col-sm-6 col-xs-12">
 
-                  <div class="form-inline">
+                  <!-- ENTRADA PARA PREFIJO MEDICO -->
+                  <div class="form-group"> 
 
                     <label class="form-label" for="nuevoPrefijo">PREFIJO MEDICO</label>
                     <label>(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>
-                    <select type="text" class="form-select" name="nuevoPrefijo" id="nuevoPrefijo" required>
-                      <option value="">ELEGIR...</option>
+                    <select class="form-select" name="nuevoPrefijo" id="nuevoPrefijo" required>
+                      <option value="" disabled selected>ELEGIR...</option>
                       <option value="DRA.">DRA.</option>
                       <option value="DR.">DR.</option>
                     </select>
 
                   </div>
+
+                </div>
+
+                <div class="col-md-6 col-sm-6 col-xs-12">
+
+                  <!-- ENTRADA PARA SELECCIONAR ESPECIALIDAD -->
+                  <div class="form-group">
+
+                    <label class="form-label" for="nuevoEspecialidadMedico">ESPECIALIDAD</label> 
+                    <label>(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>
+                    <select class="form-select" name="nuevoEspecialidadMedico" id="nuevoEspecialidadMedico" required>
+                      <option value="" disabled selected>ELEGIR...</option>
+                      <?php
+
+                      $item = null;
+                      $valor = null;
+
+                      $servicios =  ControllerEspecialidades::ctrMostrarEspecialidades($item, $valor);
+
+                      foreach($servicios as  $key => $value) {
+
+                        echo '<option value="'.$value["id"].'">'.$value["nombre_especialidad"].'</option>';
+
+                      }
+                      ?> 
+                    </select>
+
+                  </div> 
 
                 </div>
 
@@ -117,7 +147,6 @@ MODAL NUEVO MEDICO
                 <div class="col-md-6 col-sm-6 col-xs-12">
 
                   <!-- ENTRADA PARA EL APELLIDO PATERNO MEDICO -->
-
                   <div class="form-group">
 
                     <label class="form-label" for="nuevoPaternoMedico">A. PATERNO</label>
@@ -126,7 +155,6 @@ MODAL NUEVO MEDICO
                   </div>
 
                   <!-- ENTRADA PARA EL APELLIDO MATERNO MEDICO -->
-
                   <div class="form-group"> 
 
                     <label class="form-label" for="nuevoMaternoMedico">A. MATERNO</label>
@@ -135,7 +163,6 @@ MODAL NUEVO MEDICO
                   </div> 
           
                   <!-- ENTRADA PARA EL NOMBRE(S) MEDICO -->
-
                   <div class="form-group">
 
                     <label class="form-label" for="nuevoNombreMedico">NOMBRE</label>
@@ -148,16 +175,14 @@ MODAL NUEVO MEDICO
 
                 <div class="col-md-6 col-sm-6 col-xs-12">
 
-                  <!-- ENTRADA PARA MATRICULA MEDICO -->
-              
+                  <!-- ENTRADA PARA MATRICULA MEDICO -->              
                   <div class="form-group"> 
       			  	    <label class="form-label" for="nuevoMatricula">MATRICULA</label>
                     <label>(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>
                     <input type="text" class="form-control mayuscula" name="nuevoMatricula" id="nuevoMatricula" required>
                   </div> 
 
-                  <!-- ENTRADA PARA LA DIRECCION MEDICO -->
-                
+                  <!-- ENTRADA PARA LA DIRECCION MEDICO -->                
                   <div class="form-group"> 
       			  	    <label class="form-label" for="nuevoDireccion">DIRECCION</label>
                     <label>(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>
@@ -165,7 +190,6 @@ MODAL NUEVO MEDICO
                   </div> 
 
                   <!-- ENTRADA PARA EL TELEFONO MEDICO -->
-
                   <div class="form-group"> 
                     <label class="form-label" for="nuevoTelefono">TELEFONO / CELULAR</label>
                     <label>(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>
@@ -250,17 +274,45 @@ MODAL EDITAR MEDICO
 
                 <div class="col-md-6 col-sm-6 col-xs-12">
 
-                  <div class="form-inline">
+                  <!-- ENTRADA PARA PREFIJO MEDICO -->
+                  <div class="form-group">
 
                     <label class="form-label" for="editarPrefijo">PREFIJO MEDICO</label>
                     <label>(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>
-                    <select type="text" class="form-select" name="editarPrefijo" id="editarPrefijo" required>
-                      <option value="">ELEGIR...</option>
+                    <select class="form-select" name="editarPrefijo" id="editarPrefijo" required>
                       <option value="DRA.">DRA.</option>
                       <option value="DR.">DR.</option>
                     </select>
 
                   </div>
+
+                </div>
+
+                <div class="col-md-6 col-sm-6 col-xs-12">
+
+                  <!-- ENTRADA PARA SELECCIONAR ESPECIALIDAD -->
+                  <div class="form-group">
+
+                    <label class="form-label" for="editarEspecialidadMedico">ESPECIALIDAD</label> 
+                    <label>(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>
+                    <select class="form-select" name="editarEspecialidadMedico" id="editarEspecialidadMedico" required>
+                      <option value="" disabled selected>ELEGIR...</option>
+                      <?php
+
+                      $item = null;
+                      $valor = null;
+
+                      $servicios =  ControllerEspecialidades::ctrMostrarEspecialidades($item, $valor);
+
+                      foreach($servicios as  $key => $value) {
+
+                        echo '<option value="'.$value["id"].'">'.$value["nombre_especialidad"].'</option>';
+
+                      }
+                      ?> 
+                    </select>
+
+                  </div> 
 
                 </div>
 
@@ -271,7 +323,6 @@ MODAL EDITAR MEDICO
                 <div class="col-md-6 col-sm-6 col-xs-12">
 
                   <!-- ENTRADA PARA EL APELLIDO PATERNO MEDICO -->
-
                   <div class="form-group">
 
                     <label class="form-label" for="editarPaternoMedico">A. PATERNO</label>

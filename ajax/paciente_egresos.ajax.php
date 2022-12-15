@@ -140,8 +140,8 @@ class AjaxPacienteEgresos {
 		               "causa_egreso"        			=> $this->causa_egreso,
 		               "condicion_egreso"    			=> $this->condicion_egreso,
 		               "fallecido"					 			=> $this->fallecido,
-		               "fallecido_causa_clinica"  => $this->fallecido_causa_clinica,
-		               "fallecido_causa_autopsia" => $this->fallecido_causa_autopsia,
+		               "fallecido_causa_clinica"  => mb_strtoupper($this->fallecido_causa_clinica),
+		               "fallecido_causa_autopsia" => mb_strtoupper($this->fallecido_causa_autopsia),
 		               "contrareferencia"					=> $this->contrareferencia,
 		               "id_paciente_ingreso" 			=> $this->id_paciente_ingreso,
 		               "id_cama" 									=> $this->id_cama
@@ -323,7 +323,12 @@ if (isset($_POST["nuevoPacienteEgreso"])) {
 	$nuevoPacienteEgreso -> diagnostico_egreso2 = $_POST['nuevoDiagnosticoEgreso2'];
 	$nuevoPacienteEgreso -> diagnostico_egreso3 = $_POST['nuevoDiagnosticoEgreso3'];
 	$nuevoPacienteEgreso -> causa_egreso = $_POST['nuevoCausaEgreso'];
-	$nuevoPacienteEgreso -> condicion_egreso = $_POST['nuevoCondicionEgreso'];
+	// $nuevoPacienteEgreso -> condicion_egreso = $_POST['nuevoCondicionEgreso'];
+	if (isset($_POST['nuevoCondicionEgreso'])) {
+		$nuevoPacienteEgreso -> condicion_egreso = $_POST['nuevoCondicionEgreso'];
+	} else {
+		$nuevoPacienteEgreso -> condicion_egreso = "";
+	}
 	$nuevoPacienteEgreso -> fallecido_causa_clinica = $_POST['nuevoCausaClinica'];
 	$nuevoPacienteEgreso -> fallecido_causa_autopsia = $_POST['nuevoCausaAutopsia'];
 	

@@ -212,7 +212,7 @@ if (isset($_POST["editarPaciente"])) {
 		$editarPaciente -> sexo = "";
 	}
 
-	if (isset($_POST['editarSexoPaciente'])) {
+	if (isset($_POST['editarEstadoCivil'])) {
 		$editarPaciente -> estado_civil = $_POST['editarEstadoCivil'];
 	} else {
 		$editarPaciente -> estado_civil = "";

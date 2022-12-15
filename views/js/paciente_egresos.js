@@ -18,6 +18,8 @@ var tablaPacientesEgresos = $('#tblPacientesEgresos').DataTable({
 
   "order": [[ 4, "desc" ]],
 
+  "stateSave": true,
+
   "language": {
 
     "sProcessing":     "Procesando...",
@@ -99,28 +101,19 @@ $(document).on("click", ".btnDarAltaPaciente", function() {
 
     theme: "bootstrap-5",
     ajax: {
-
       url: dirCie10,
       dataType: 'json',
       delay: 250,
+      cache: false,
       data: function (params) {
         return {
-          q: params.term, // search term
-          page: params.page
+          term: params.term // search term
         };
       },
       processResults: function (data, params) {
-        // parse the results into the format expected by Select2
-        // since we are using custom formatting functions we do not need to
-        // alter the remote JSON data, except to indicate that infinite
-        // scrolling can be used
-        params.page = params.page || 1;
 
         return {
-          results: data.items,
-          pagination: {
-            more: (params.page * 30) < data.total_count
-          }
+          results: data.items
         };
       },
       cache: true
@@ -533,6 +526,8 @@ GUARDANDO DATOS EGRESO PACIENTE (ALTA PACIENTE)
 =============================================*/
 $("#frmDarAltaPaciente").on("click", ".btnGuardar", function() {
 
+  $(".btnGuardar").prop("disabled", true);
+
   if ($("#frmDarAltaPaciente").valid()) {
 
     var modulo = $("#modulo").val();
@@ -595,8 +590,11 @@ $("#frmDarAltaPaciente").on("click", ".btnGuardar", function() {
 
               $("#nuevoContrareferencia").prop("checked", false); 
 
-  						$("#nuevoIdPacienteIngreso").val("");					       	
+  						$("#nuevoIdPacienteIngreso").val("");
 
+              $(".btnGuardar").prop("disabled", false);              
+
+              // Funcion que recarga y actuaiiza la tabla  	       	
               if (modulo == 'detalle-paciente') {
                 tablaPacienteIngresos.ajax.reload( null, false );
               } else if (modulo == 'paciente-ingresos') {
@@ -616,6 +614,12 @@ $("#frmDarAltaPaciente").on("click", ".btnGuardar", function() {
             allowOutsideClick: false,
             confirmButtonText: "¡Cerrar!"
 
+          }).then((result) => {
+
+            if (result.value) {
+              $(".btnGuardar").prop("disabled", false);
+            }
+
           });
           
         }
@@ -631,14 +635,20 @@ $("#frmDarAltaPaciente").on("click", ".btnGuardar", function() {
 
   } else {
 
-   swal.fire({
+    swal.fire({
 
-     title: "¡Los campos obligatorios no puede ir vacio o llevar caracteres especiales!",
-     icon: "error",
-     allowOutsideClick: false,
-     confirmButtonText: "¡Cerrar!"
+      title: "¡Los campos obligatorios no puede ir vacio o llevar caracteres especiales!",
+      icon: "error",
+      allowOutsideClick: false,
+      confirmButtonText: "¡Cerrar!"
 
-   });
+    }).then((result) => {
+
+      if (result.value) {
+        $(".btnGuardar").prop("disabled", false);
+      }
+
+    });
 
   } 
 
@@ -671,6 +681,8 @@ $("#frmPacientesEgresados").on("click", "#btnBuscarPacientesEgresados", function
     "serverSide": true,
 
     "order": [[ 4, "desc" ]],
+
+    "stateSave": true,
 
     "language": {
 

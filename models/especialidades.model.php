@@ -21,6 +21,16 @@ class ModelEspecialidades {
 
 			return $stmt->fetchAll();
 
+		} else {
+
+			$sql = "SELECT * FROM $tabla";
+			
+			$stmt = Conexion::connectPostgres()->prepare($sql);
+
+			$stmt->execute();
+
+			return $stmt->fetchAll();
+
 		}
 
 		$stmt->close();

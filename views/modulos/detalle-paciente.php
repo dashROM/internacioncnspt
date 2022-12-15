@@ -222,11 +222,11 @@ MODAL NUEVO PACIENTE INGRESO
                       $item = null;
                       $valor = null;
 
-                      $servicios =  ControllerMedicos::ctrMostrarMedicos($item, $valor);
+                      $medicos =  ControllerMedicos::ctrMostrarMedicos($item, $valor);
 
-                      foreach($servicios as  $key => $value) {
+                      foreach($medicos as  $key => $value) {
 
-                        echo '<option value="'.$value["id"].'">'.$value["nombre_medico"].' '.$value["paterno_medico"].' '.$value["materno_medico"].'</option>';
+                        echo '<option value="'.$value["id"].'">'.$value["nombre_medico"].' '.$value["paterno_medico"].' '.$value["materno_medico"].' ('.$value["nombre_especialidad"].')</option>';
 
                       }
                       ?> 
@@ -524,7 +524,7 @@ MODAL EDITAR PERSONA INGRESADA
 
                       foreach($servicios as  $key => $value) {
 
-                        echo '<option value="'.$value["id"].'">'.$value["nombre_medico"].' '.$value["paterno_medico"].' '.$value["materno_medico"].'</option>';
+                        echo '<option value="'.$value["id"].'">'.$value["nombre_medico"].' '.$value["paterno_medico"].' '.$value["materno_medico"].' ('.$value["nombre_especialidad"].')</option>';
 
                       }
                       ?> 
@@ -967,12 +967,12 @@ MODAL DAR ALTA A PACIENTE
 
                     <div class="col-md-6 form-group"> 
                       <label for="nuevoCausaClinica" class="form-label">CAUSA (CLINICA)</label>
-                      <textarea class="form-control" name="nuevoCausaClinica" id="nuevoCausaClinica" readonly></textarea> 
+                      <textarea class="form-control mayuscula" name="nuevoCausaClinica" id="nuevoCausaClinica" readonly></textarea> 
                     </div>
 
                     <div class="col-md-6 form-group"> 
                       <label for="nuevoCausaAutopsia" class="form-label">CAUSA (AUTOPSIA)</label>
-                      <textarea class="form-control" name="nuevoCausaAutopsia" id="nuevoCausaAutopsia" readonly></textarea> 
+                      <textarea class="form-control mayuscula" name="nuevoCausaAutopsia" id="nuevoCausaAutopsia" readonly></textarea> 
                     </div>
 
                   </div>
@@ -1368,7 +1368,7 @@ MODAL NUEVA TRASFERENCIA DE PACIENTE
 
                         foreach($servicios as  $key => $value) {
 
-                          echo '<option value="'.$value["id"].'">'.$value["nombre_medico"].' '.$value["paterno_medico"].' '.$value["materno_medico"].'</option>';
+                          echo '<option value="'.$value["id"].'">'.$value["nombre_medico"].' '.$value["paterno_medico"].' '.$value["materno_medico"].' ('.$value["nombre_especialidad"].')</option>';
 
                         }
                         ?> 
@@ -1549,7 +1549,7 @@ MODAL EDITAR TRASFERENCIA DE PACIENTE
 
                         foreach($servicios as  $key => $value) {
 
-                          echo '<option value="'.$value["id"].'">'.$value["nombre_medico"].' '.$value["paterno_medico"].' '.$value["materno_medico"].'</option>';
+                          echo '<option value="'.$value["id"].'">'.$value["nombre_medico"].' '.$value["paterno_medico"].' '.$value["materno_medico"].' ('.$value["nombre_especialidad"].')</option>';
 
                         }
                         ?> 
@@ -1648,10 +1648,6 @@ MODAL EDITAR TRASFERENCIA DE PACIENTE
                     Guardar Cambios
 
                   </button>
-
-                  <!-- <input type="hidden" id="idServicioAnt" name="idServicioAnt">
-                  <input type="hidden" id="idEspecialidadAnt" name="idEspecialidadAnt">
-                  <input type="hidden" id="idSalaAnt" name="idSalaAnt"> -->
 
                   <input type="hidden" id="editarIDCamaAnt" name="editarIDCamaAnt">
                   <input type="hidden" id="editarIDPacienteIngresoTrans" name="editarIDPacienteIngresoTrans"> 
@@ -1814,43 +1810,26 @@ MODAL NUEVO MATERNIDAD
                     <!-- ENTRADA PARA LA PARIDAD --> 
                     <div class="col-md-3 col-sm-3 col-xs-6 form-group">
                       <label for="nuevoParidad">PARIDAD</label>
-                      <label class="indicador">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>
-                      <input type="number" class="form-control" name="nuevoParidad" id="nuevoParidad" min=0 required>
+                      <input type="number" class="form-control" name="nuevoParidad" id="nuevoParidad" min=0>
                     </div>
 
                   </div>
 
                   <div class="row">
 
-                    <!-- ENTRADA PARA EL EDAD GESTACIONAL --> 
-                    <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                      <label for="nuevoCursoEmbarazo">EDAD GESTACIONAL</label>
-                      <label class="indicador">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>
-                    </div>
-
-                    <!-- POR FUM --> 
+                    <!-- ENTRADA PARA EL EDAD GESTACIONAL -->
                     <div class="col-md-6 col-sm-6 col-xs-12 form-group">
-                      <label for="nuevoEdadFUM">FUM</label>                      
+                      <label for="nuevoEdadGestacional">EDAD GESTACIONAL</label>                      
                       <div class="input-group mb-3">
-                        <input type="number" step="0.1" class="form-control" name="nuevoEdadFUM" id="nuevoEdadFUM" aria-describedby="FUM" min="0.1">
-                        <span class="input-group-text" id="FUM">SEMANAS</span>
-                      </div>
-                    </div>
-
-                    <!-- POR ECOGRAFIA --> 
-                    <div class="col-md-6 col-sm-6 col-xs-12 form-group">
-                      <label for="nuevoEdadEcografia">ECOGRAFIA</label>
-                      <div class="input-group mb-3">
-                        <input type="number" step="0.1" class="form-control" name="nuevoEdadEcografia" id="nuevoEdadEcografia" aria-describedby="Ecografia" min="0.1">
-                        <span class="input-group-text" id="Ecografia">SEMANAS</span>
+                        <input type="number" step="0.1" class="form-control" name="nuevoEdadGestacional" id="nuevoEdadGestacional" aria-describedby="gestacion" min="0.1">
+                        <span class="input-group-text" id="gestacion">SEMANAS</span>
                       </div>
                     </div>
 
                     <!-- ENTRADA PARA SELECCIONAR EL TIPO DE PARTO -->
                     <div class="col-md-6 col-sm-6 col-xs-12 form-group"> 
                       <label for="nuevoTipoParto" class="form-label">TIPO DE PARTO</label>
-                      <label class="indicadorCesarea">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>
-                      <select name="nuevoTipoParto" id="nuevoTipoParto" class="form-select" role="presetation" required>
+                      <select name="nuevoTipoParto" id="nuevoTipoParto" class="form-select" role="presetation">
                         <option value="" disabled selected>ELEGIR...</option>
                         <option value="EUTOCICO">EUTOCICO</option>
                         <option value="DISTOCICO">DISTOCICO</option>
@@ -1861,8 +1840,7 @@ MODAL NUEVO MATERNIDAD
                     <!-- ENTRADA PARA SELECCIONAR EL LIQUIDO AMNIOTICO -->
                     <div class="col-md-6 col-sm-6 col-xs-12 form-group"> 
                       <label for="nuevoLiquidoAmniotico" class="form-label">LIQUIDO AMNIOTICO</label>
-                      <label class="indicadorCesarea">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>
-                      <select name="nuevoLiquidoAmniotico" id="nuevoLiquidoAmniotico" class="form-select" role="presetation" required>
+                      <select name="nuevoLiquidoAmniotico" id="nuevoLiquidoAmniotico" class="form-select" role="presetation">
                         <option value="" disabled selected>ELEGIR...</option>
                         <option value="CLARO">CLARO</option>
                         <option value="LECHOSO">LECHOSO</option>
@@ -1873,45 +1851,100 @@ MODAL NUEVO MATERNIDAD
 
                     <!-- ENTRADA PARA LA FECHA DE PARTO -->  
                     <div class="col-md-6 col-sm-6 col-xs-12 form-group">
-                      <label for="nuevoFechaParto">FECHA DE NACIMIENTO</label>
-                      <label class="indicador">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>   
-                      <input type="date" class="form-control" name="nuevoFechaParto" id="nuevoFechaParto" required>
+                      <label for="nuevoFechaParto">FECHA DE NACIMIENTO</label> 
+                      <input type="date" class="form-control" name="nuevoFechaParto" id="nuevoFechaParto">
                     </div>
 
                     <!-- ENTRADA PARA LA HORA DE PARTO --> 
                     <div class="col-md-6 col-sm-6 col-xs-12 form-group">
                       <label for="nuevoHoraParto">HORA DE NACIMIENTO</label>
-                      <label class="indicador">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>
-                      <input type="time" class="form-control" name="nuevoHoraParto" id="nuevoHoraParto" required>
+                      <input type="time" class="form-control" name="nuevoHoraParto" id="nuevoHoraParto">
                     </div>
 
-                    <!-- ENTRADA PARA EL PESO R.N. --> 
-                    <div class="col-md-6 col-sm-6 col-xs-12 form-group">
-                      <label for="nuevoPesoNacido">PESO R.N.</label>
-                      <label class="indicador">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>                  
-                      <div class="input-group">
-                        <input type="text" step="0.001" class="form-control" name="nuevoPesoNacido" id="nuevoPesoNacido" aria-describedby="pesoNacido" min="0.001" max="9.999" data-inputmask="'mask': '9.999'" data-error="#errNuevoPesoNacido" required>
-                        <span class="input-group-text" id="pesoNacido">Kgms.</span>
+                  </div>
+
+                  <div class="row">
+
+                    <div class="card mb-3">
+                      
+                      <div class="card-body">
+
+                        <div class="row">
+
+                          <!-- ENTRADA PARA EL PESO R.N. --> 
+                          <div class="col-md-6 col-sm-6 col-xs-12 form-group">
+                            <label for="nuevoPesoNacido1">PESO R.N. 1</label>                
+                            <div class="input-group">
+                              <input type="text" step="0.001" class="form-control" name="nuevoPesoNacido1" id="nuevoPesoNacido1" aria-describedby="pesoNacido1" min="0.001" max="9.999" data-inputmask="'mask': '9.999'" data-error="#errNuevoPesoNacido1">
+                              <span class="input-group-text" id="pesoNacido1">Kgms.</span>
+                            </div>
+                            <span id="errNuevoPesoNacido1"></span>
+                          </div>
+
+                          <!-- ENTRADA PARA SELECCIONAR EL SEXO -->
+                          <div class="col-md-6 col-sm-6 col-xs-12 form-group"> 
+                            <label for="nuevoSexoNacido1" class="form-label">SEXO R.N. 1</label>
+                            <select class="form-select" name="nuevoSexoNacido1" id="nuevoSexoNacido1">
+                              <option value="" disabled selected>ELEGIR...</option>
+                              <option value="FEMENINO">FEMENINO</option>
+                              <option value="MASCULINO">MASCULINO</option>
+                            </select>
+                          </div>
+
+                          <!-- ENTRADA PARA EL PESO R.N. --> 
+                          <div class="col-md-6 col-sm-6 col-xs-12 form-group">
+                            <label for="nuevoPesoNacido2">PESO R.N. 2</label>                
+                            <div class="input-group">
+                              <input type="text" step="0.001" class="form-control" name="nuevoPesoNacido2" id="nuevoPesoNacido2" aria-describedby="pesoNacido2" min="0.001" max="9.999" data-inputmask="'mask': '9.999'" data-error="#errNuevoPesoNacido2">
+                              <span class="input-group-text" id="pesoNacido2">Kgms.</span>
+                            </div>
+                            <span id="errNuevoPesoNacido2"></span>
+                          </div>
+
+                          <!-- ENTRADA PARA SELECCIONAR EL SEXO -->
+                          <div class="col-md-6 col-sm-6 col-xs-12 form-group"> 
+                            <label for="nuevoSexoNacido2" class="form-label">SEXO R.N. 2</label>
+                            <select class="form-select" name="nuevoSexoNacido2" id="nuevoSexoNacido2">
+                              <option value="" disabled selected>ELEGIR...</option>
+                              <option value="FEMENINO">FEMENINO</option>
+                              <option value="MASCULINO">MASCULINO</option>
+                            </select>
+                          </div>
+
+                          <!-- ENTRADA PARA EL PESO R.N. --> 
+                          <div class="col-md-6 col-sm-6 col-xs-12 form-group">
+                            <label for="nuevoPesoNacido3">PESO R.N. 3</label>                
+                            <div class="input-group">
+                              <input type="text" step="0.001" class="form-control" name="nuevoPesoNacido3" id="nuevoPesoNacido3" aria-describedby="pesoNacido3" min="0.001" max="9.999" data-inputmask="'mask': '9.999'" data-error="#errNuevoPesoNacido3">
+                              <span class="input-group-text" id="pesoNacido3">Kgms.</span>
+                            </div>
+                            <span id="errNuevoPesoNacido3"></span>
+                          </div>
+
+                          <!-- ENTRADA PARA SELECCIONAR EL SEXO -->
+                          <div class="col-md-6 col-sm-6 col-xs-12 form-group"> 
+                            <label for="nuevoSexoNacido3" class="form-label">SEXO R.N. 3</label>
+                            <select class="form-select" name="nuevoSexoNacido3" id="nuevoSexoNacido3">
+                              <option value="" disabled selected>ELEGIR...</option>
+                              <option value="FEMENINO">FEMENINO</option>
+                              <option value="MASCULINO">MASCULINO</option>
+                            </select>
+                          </div>
+
+                        </div>
+                        
                       </div>
-                      <span id="errNuevoPesoNacido"></span>
-                    </div>
 
-                    <!-- ENTRADA PARA SELECCIONAR EL SEXO -->
-                    <div class="col-md-6 col-sm-6 col-xs-12 form-group"> 
-                      <label for="nuevoSexoNacido" class="form-label">SEXO R.N.</label>
-                      <label class="indicador">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>
-                      <select class="form-select" name="nuevoSexoNacido" id="nuevoSexoNacido" required>
-                        <option value="" disabled selected>ELEGIR...</option>
-                        <option value="FEMENINO">FEMENINO</option>
-                        <option value="MASCULINO">MASCULINO</option>
-                      </select>
-                    </div>
+                    </div>                    
+
+                  </div>
+
+                  <div class="row">
 
                     <!-- ENTRADA PARA SELECCIONAR LA CONDICION DEL NACIDO -->
                     <div class="col-md-6 col-sm-6 col-xs-12 form-group"> 
                       <label for="nuevoEstadoNacido" class="form-label">ESTADO AL NACER</label>
-                      <label class="indicador">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>
-                      <select class="form-select" name="nuevoEstadoNacido" id="nuevoEstadoNacido" required>
+                      <select class="form-select" name="nuevoEstadoNacido" id="nuevoEstadoNacido">
                         <option value="" disabled selected>ELEGIR...</option>
                         <option value="VIVO">VIVO</option>
                         <option value="VIVO DEPRIMIDO">VIVO DEPRIMIDO</option>
@@ -1922,8 +1955,7 @@ MODAL NUEVO MATERNIDAD
                     <!-- ENTRADA PARA SELECCIONAR EL ALUMBRAMIENTO -->
                     <div class="col-md-6 col-sm-6 col-xs-12 form-group">
                       <label for="nuevoAlumbramiento" class="form-label">ALUMBRAMIENTO</label>
-                      <label class="indicadorCesarea">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>
-                      <select class="form-select" name="nuevoAlumbramiento" id="nuevoAlumbramiento" required>
+                      <select class="form-select" name="nuevoAlumbramiento" id="nuevoAlumbramiento">
                         <option value="" disabled selected>ELEGIR...</option>
                         <option value="COMPLETO">COMPLETO</option>
                         <option value="IMCOMPLETO">IMCOMPLETO</option>
@@ -1933,8 +1965,7 @@ MODAL NUEVO MATERNIDAD
                     <!-- ENTRADA PARA EL PERINE --> 
                     <div class="col-md-6 col-sm-6 col-xs-12 form-group">
                       <label for="nuevoPerine">PERINE</label>
-                      <label class="indicadorCesarea">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>
-                      <select class="form-select" name="nuevoPerine" id="nuevoPerine" required>
+                      <select class="form-select" name="nuevoPerine" id="nuevoPerine">
                         <option value="" disabled selected>ELEGIR...</option>
                         <option value="SANO">SANO</option>
                         <option value="SATURADO">SATURADO</option>
@@ -1946,8 +1977,7 @@ MODAL NUEVO MATERNIDAD
                     <!-- ENTRADA PARA SELECCIONAR EL SANGRADO -->
                     <div class="col-md-6 col-sm-6 col-xs-12 form-group">
                       <label for="nuevoSangrado" class="form-label">SANGRADO</label>
-                      <label class="indicadorCesarea">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>
-                      <select class="form-select" name="nuevoSangrado" id="nuevoSangrado" required>
+                      <select class="form-select" name="nuevoSangrado" id="nuevoSangrado">
                         <option value="" disabled selected>ELEGIR...</option>
                         <option value="HABITUAL">HABITUAL</option>
                         <option value="MAS DE LO HABITUAL">MAS DE LO HABITUAL</option>
@@ -1960,7 +1990,7 @@ MODAL NUEVO MATERNIDAD
                     <div class="col-md-6 col-sm-6 col-xs-12 form-group">
                       <label for="nuevoEstadoMadre" class="form-label">ESTADO DE LA MADRE</label>
                       <label class="indicador">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>
-                      <select class="form-select" name="nuevoEstadoMadre" id="nuevoEstadoMadre" required>
+                      <select class="form-select" name="nuevoEstadoMadre" id="nuevoEstadoMadre" role="presetation" required>
                         <option value="" disabled selected>ELEGIR...</option>
                         <option value="BUENO">BUENO</option>
                         <option value="REGULAR">REGULAR</option>
@@ -2097,7 +2127,7 @@ MODAL EDITAR MATERNIDAD
 
                   <table class="table table-striped table-bordered shadow-lg" id="tblInternacion" width="100%">
 
-                    <thead class="table-dark">
+                    <thead class="text-light bg-primary">
 
                       <tr>
 
@@ -2153,8 +2183,7 @@ MODAL EDITAR MATERNIDAD
                     <!-- ENTRADA PARA LA PARIDAD --> 
                     <div class="col-md-3 col-sm-3 col-xs-6 form-group">
                       <label for="editarParidad">PARIDAD</label>
-                      <label class="indicador">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>
-                      <input type="number" class="form-control" name="editarParidad" id="editarParidad" min=0 required>
+                      <input type="number" class="form-control" name="editarParidad" id="editarParidad" min=0>
                     </div>
 
                   </div>
@@ -2162,34 +2191,18 @@ MODAL EDITAR MATERNIDAD
                   <div class="row">
 
                     <!-- ENTRADA PARA EL EDAD GESTACIONAL --> 
-                    <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                      <label for="editarCursoEmbarazo">EDAD GESTACIONAL</label>
-                      <label class="indicador">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>
-                    </div>
-
-                    <!-- POR FUM --> 
                     <div class="col-md-6 col-sm-6 col-xs-12 form-group">
-                      <label for="editarEdadFUM">FUM</label>                      
+                      <label for="editarEdadGestacional">EDAD GESTACIONAL</label>                      
                       <div class="input-group mb-3">
-                        <input type="number" step="0.01" class="form-control" name="editarEdadFUM" id="editarEdadFUM" aria-describedby="FUM" min="0.00">
-                        <span class="input-group-text" id="FUM">SEMANAS</span>
-                      </div>
-                    </div>
-
-                    <!-- POR ECOGRAFIA --> 
-                    <div class="col-md-6 col-sm-6 col-xs-12 form-group">
-                      <label for="editarEdadEcografia">ECOGRAFIA</label>
-                      <div class="input-group mb-3">
-                        <input type="number" step="0.01" class="form-control" name="editarEdadEcografia" id="editarEdadEcografia" aria-describedby="Ecografia" min="0.00">
-                        <span class="input-group-text" id="Ecografia">SEMANAS</span>
+                        <input type="number" step="0.01" class="form-control" name="editarEdadGestacional" id="editarEdadGestacional" aria-describedby="gestacion" min="0.00">
+                        <span class="input-group-text" id="gestacion">SEMANAS</span>
                       </div>
                     </div>
 
                     <!-- ENTRADA PARA SELECCIONAR EL TIPO DE PARTO -->
                     <div class="col-md-6 col-sm-6 col-xs-12 form-group"> 
                       <label for="editarTipoParto" class="form-label">TIPO DE PARTO</label>
-                      <label class="indicadorCesarea">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>
-                      <select name="editarTipoParto" id="editarTipoParto" class="form-select" role="presetation" required>
+                      <select name="editarTipoParto" id="editarTipoParto" class="form-select" role="presetation">
                         <option value="" disabled selected>ELEGIR...</option>
                         <option value="EUTOCICO">EUTOCICO</option>
                         <option value="DISTOCICO">DISTOCICO</option>
@@ -2200,8 +2213,7 @@ MODAL EDITAR MATERNIDAD
                     <!-- ENTRADA PARA SELECCIONAR EL LIQUIDO AMNIOTICO -->
                     <div class="col-md-6 col-sm-6 col-xs-12 form-group"> 
                       <label for="editarLiquidoAmniotico" class="form-label">LIQUIDO AMNIOTICO</label>
-                      <label class="indicadorCesarea">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>
-                      <select name="editarLiquidoAmniotico" id="editarLiquidoAmniotico" class="form-select" role="presetation" required>
+                      <select name="editarLiquidoAmniotico" id="editarLiquidoAmniotico" class="form-select" role="presetation">
                         <option value="" disabled selected>ELEGIR...</option>
                         <option value="CLARO">CLARO</option>
                         <option value="LECHOSO">LECHOSO</option>
@@ -2214,44 +2226,96 @@ MODAL EDITAR MATERNIDAD
                     <div class="col-md-6 col-sm-6 col-xs-12 form-group">
 
                       <label for="editarFechaParto">FECHA DE NACIMIENTO</label>
-                      <label class="indicador">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>   
-                      <input type="date" class="form-control" name="editarFechaParto" id="editarFechaParto" required>
+                      <input type="date" class="form-control" name="editarFechaParto" id="editarFechaParto" >
                     </div>
 
                     <!-- ENTRADA PARA LA HORA DE PARTO --> 
                     <div class="col-md-6 col-sm-6 col-xs-12 form-group">
                       <label for="editarHoraParto">HORA DE NACIMIENTO</label>
-                      <label class="indicador">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>
-                      <input type="time" class="form-control" name="editarHoraParto" id="editarHoraParto" required>
+                      <input type="time" class="form-control" name="editarHoraParto" id="editarHoraParto" >
                     </div>
 
-                    <!-- ENTRADA PARA EL PESO R.N. --> 
-                    <div class="col-md-6 col-sm-6 col-xs-12 form-group">
-                      <label for="editarPesoNacido">PESO R.N.</label>
-                      <label class="indicador">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>                  
-                      <div class="input-group">
-                        <input type="text" step="0.001" class="form-control" name="editarPesoNacido" id="editarPesoNacido" aria-describedby="pesoNacido" min="0.001" max="9.999" data-inputmask="'mask': '9.999'" data-error="#errEditarPesoNacido" required>
-                        <span class="input-group-text" id="pesoNacido">Kgms.</span>
+                  </div>
+
+                  <div class="row">
+
+                    <div class="card mb-3">
+                      
+                      <div class="card-body">
+
+                        <div class="row">
+
+                          <!-- ENTRADA PARA EL PESO R.N. --> 
+                          <div class="col-md-6 col-sm-6 col-xs-12 form-group">
+                            <label for="editarPesoNacido1">PESO R.N.</label>
+                                             
+                            <div class="input-group">
+                              <input type="text" step="0.001" class="form-control" name="editarPesoNacido1" id="editarPesoNacido1" aria-describedby="pesoNacido1" max="9.999" data-inputmask="'mask': '9.999'" data-error="#errEditarPesoNacido1">
+                              <span class="input-group-text" id="pesoNacido1">Kgms.</span>
+                            </div>
+                            <span id="errEditarPesoNacido1"></span>
+                          </div>
+
+                          <!-- ENTRADA PARA SELECCIONAR EL SEXO -->
+                          <div class="col-md-6 col-sm-6 col-xs-12 form-group"> 
+                            <label for="editarSexoNacido1" class="form-label">SEXO R.N.</label>
+                            <select class="form-select" name="editarSexoNacido1" id="editarSexoNacido1">
+                              <option value="" disabled selected>ELEGIR...</option>
+                              <option value="FEMENINO">FEMENINO</option>
+                              <option value="MASCULINO">MASCULINO</option>
+                            </select>
+                          </div>
+
+                          <!-- ENTRADA PARA EL PESO R.N. --> 
+                          <div class="col-md-6 col-sm-6 col-xs-12 form-group">
+                            <label for="editarPesoNacido2">PESO R.N. 2</label>                
+                            <div class="input-group">
+                              <input type="text" step="0.001" class="form-control" name="editarPesoNacido2" id="editarPesoNacido2" aria-describedby="pesoNacido2" min="0.001" max="9.999" data-inputmask="'mask': '9.999'" data-error="#errEditarPesoNacido2">
+                              <span class="input-group-text" id="pesoNacido2">Kgms.</span>
+                            </div>
+                            <span id="errEditarPesoNacido2"></span>
+                          </div>
+
+                          <!-- ENTRADA PARA SELECCIONAR EL SEXO -->
+                          <div class="col-md-6 col-sm-6 col-xs-12 form-group"> 
+                            <label for="editarSexoNacido2" class="form-label">SEXO R.N. 2</label>
+                            <select class="form-select" name="editarSexoNacido2" id="editarSexoNacido2">
+                              <option value="" disabled selected>ELEGIR...</option>
+                              <option value="FEMENINO">FEMENINO</option>
+                              <option value="MASCULINO">MASCULINO</option>
+                            </select>
+                          </div>
+
+                          <!-- ENTRADA PARA EL PESO R.N. --> 
+                          <div class="col-md-6 col-sm-6 col-xs-12 form-group">
+                            <label for="editarPesoNacido3">PESO R.N. 3</label>                
+                            <div class="input-group">
+                              <input type="text" step="0.001" class="form-control" name="editarPesoNacido3" id="editarPesoNacido3" aria-describedby="pesoNacido3" min="0.001" max="9.999" data-inputmask="'mask': '9.999'" data-error="#errEditarPesoNacido3">
+                              <span class="input-group-text" id="pesoNacido3">Kgms.</span>
+                            </div>
+                            <span id="errEditarPesoNacido3"></span>
+                          </div>
+
+                          <!-- ENTRADA PARA SELECCIONAR EL SEXO -->
+                          <div class="col-md-6 col-sm-6 col-xs-12 form-group"> 
+                            <label for="editarSexoNacido3" class="form-label">SEXO R.N. 3</label>
+                            <select class="form-select" name="editarSexoNacido3" id="editarSexoNacido3">
+                              <option value="" disabled selected>ELEGIR...</option>
+                              <option value="FEMENINO">FEMENINO</option>
+                              <option value="MASCULINO">MASCULINO</option>
+                            </select>
+                          </div>
+
+                        </div>
+
                       </div>
-                      <span id="errEditarPesoNacido"></span>
-                    </div>
 
-                    <!-- ENTRADA PARA SELECCIONAR EL SEXO -->
-                    <div class="col-md-6 col-sm-6 col-xs-12 form-group"> 
-                      <label for="editarSexoNacido" class="form-label">SEXO R.N.</label>
-                      <label class="indicador">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>
-                      <select class="form-select" name="editarSexoNacido" id="editarSexoNacido" required>
-                        <option value="" disabled selected>ELEGIR...</option>
-                        <option value="FEMENINO">FEMENINO</option>
-                        <option value="MASCULINO">MASCULINO</option>
-                      </select>
                     </div>
 
                     <!-- ENTRADA PARA SELECCIONAR LA CONDICION DEL NACIDO -->
                     <div class="col-md-6 col-sm-6 col-xs-12 form-group"> 
                       <label for="editarEstadoNacido" class="form-label">ESTADO AL NACER</label>
-                      <label class="indicador">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>
-                      <select class="form-select" name="editarEstadoNacido" id="editarEstadoNacido" required>
+                      <select class="form-select" name="editarEstadoNacido" id="editarEstadoNacido">
                         <option value="" disabled selected>ELEGIR...</option>
                         <option value="VIVO">VIVO</option>
                         <option value="VIVO DEPRIMIDO">VIVO DEPRIMIDO</option>
@@ -2262,8 +2326,7 @@ MODAL EDITAR MATERNIDAD
                     <!-- ENTRADA PARA SELECCIONAR EL ALUMBRAMIENTO -->
                     <div class="col-md-6 col-sm-6 col-xs-12 form-group">
                       <label for="editarAlumbramiento" class="form-label">ALUMBRAMIENTO</label>
-                      <label class="indicadorCesarea">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>
-                      <select class="form-select" name="editarAlumbramiento" id="editarAlumbramiento" required>
+                      <select class="form-select" name="editarAlumbramiento" id="editarAlumbramiento">
                         <option value="" disabled selected>ELEGIR...</option>
                         <option value="COMPLETO">COMPLETO</option>
                         <option value="IMCOMPLETO">IMCOMPLETO</option>
@@ -2273,8 +2336,7 @@ MODAL EDITAR MATERNIDAD
                     <!-- ENTRADA PARA EL PERINE --> 
                     <div class="col-md-6 col-sm-6 col-xs-12 form-group">
                       <label for="editarPerine">PERINE</label>
-                      <label class="indicadorCesarea">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>
-                      <select class="form-select" name="editarPerine" id="editarPerine" required>
+                      <select class="form-select" name="editarPerine" id="editarPerine">
                         <option value="" disabled selected>ELEGIR...</option>
                         <option value="SANO">SANO</option>
                         <option value="SATURADO">SATURADO</option>
@@ -2286,8 +2348,7 @@ MODAL EDITAR MATERNIDAD
                     <!-- ENTRADA PARA SELECCIONAR EL SANGRADO -->
                     <div class="col-md-6 col-sm-6 col-xs-12 form-group">
                       <label for="editarSangrado" class="form-label">SANGRADO</label>
-                      <label class="indicadorCesarea">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>
-                      <select class="form-select" name="editarSangrado" id="editarSangrado" required>
+                      <select class="form-select" name="editarSangrado" id="editarSangrado">
                         <option value="" disabled selected>ELEGIR...</option>
                         <option value="HABITUAL">HABITUAL</option>
                         <option value="MAS DE LO HABITUAL">MAS DE LO HABITUAL</option>
@@ -2300,7 +2361,7 @@ MODAL EDITAR MATERNIDAD
                     <div class="col-md-6 col-sm-6 col-xs-12 form-group">
                       <label for="editarEstadoMadre" class="form-label">ESTADO DE LA MADRE</label>
                       <label class="indicador">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>
-                      <select class="form-select" name="editarEstadoMadre" id="editarEstadoMadre" required>
+                      <select class="form-select" name="editarEstadoMadre" id="editarEstadoMadre" role="presetation" required>
                         <option value="" disabled selected>ELEGIR...</option>
                         <option value="BUENO">BUENO</option>
                         <option value="REGULAR">REGULAR</option>

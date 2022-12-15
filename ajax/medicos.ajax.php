@@ -6,6 +6,7 @@ class AjaxMedicos{
 	
 	public $id;
 	public $prefijo_medico;
+	public $id_especialidad;
   public $nombre_medico;
 	public $paterno_medico;
   public $materno_medico;
@@ -30,13 +31,14 @@ class AjaxMedicos{
 	=============================================*/
   public function ajaxNuevoMedico()	{
 
-		$datos = array("prefijo_medico"    => $this->prefijo_medico,
-			             "paterno_medico"    => mb_strtoupper($this->paterno_medico,'utf-8'), 
-                   "materno_medico"    => mb_strtoupper($this->materno_medico,'utf-8'),
-                   "nombre_medico"     => mb_strtoupper($this->nombre_medico,'utf-8'),
-                   "matricula_medico"  => mb_strtoupper($this->matricula_medico,'utf-8'),
-                   "direccion_medico"  => mb_strtoupper($this->direccion_medico,'utf-8'),
-                   "telefono_medico"   => $this->telefono_medico	
+		$datos = array("prefijo_medico"    		=> $this->prefijo_medico,
+									 "id_especialidad"  		=> $this->id_especialidad, 
+			             "paterno_medico"    		=> mb_strtoupper($this->paterno_medico,'utf-8'), 
+                   "materno_medico"    		=> mb_strtoupper($this->materno_medico,'utf-8'),
+                   "nombre_medico"     		=> mb_strtoupper($this->nombre_medico,'utf-8'),
+                   "matricula_medico"  		=> mb_strtoupper($this->matricula_medico,'utf-8'),
+                   "direccion_medico"  		=> mb_strtoupper($this->direccion_medico,'utf-8'),
+                   "telefono_medico"   		=> $this->telefono_medico	
 		);	
 	
 	  $respuesta = ControllerMedicos::ctrNuevoMedico($datos);
@@ -51,14 +53,15 @@ class AjaxMedicos{
 
  	public function ajaxEditarMedico() {
 
-		$datos = array("prefijo_medico"    => $this->prefijo_medico,
-			             "paterno_medico"    => mb_strtoupper($this->paterno_medico,'utf-8'), 
-                   "materno_medico"    => mb_strtoupper($this->materno_medico,'utf-8'),
-                   "nombre_medico"     => mb_strtoupper($this->nombre_medico,'utf-8'),
-                   "matricula_medico"  => mb_strtoupper($this->matricula_medico,'utf-8'),
-                   "direccion_medico"  => mb_strtoupper($this->direccion_medico,'utf-8'),
-                   "telefono_medico"   => $this->telefono_medico,
-        					 "id"				 				 => $this->id,
+		$datos = array("prefijo_medico"    		=> $this->prefijo_medico,
+									 "id_especialidad"  		=> $this->id_especialidad,
+			             "paterno_medico"    		=> mb_strtoupper($this->paterno_medico,'utf-8'), 
+                   "materno_medico"    		=> mb_strtoupper($this->materno_medico,'utf-8'),
+                   "nombre_medico"     		=> mb_strtoupper($this->nombre_medico,'utf-8'),
+                   "matricula_medico"  		=> mb_strtoupper($this->matricula_medico,'utf-8'),
+                   "direccion_medico"  		=> mb_strtoupper($this->direccion_medico,'utf-8'),
+                   "telefono_medico"   		=> $this->telefono_medico,
+        					 "id"				 				 		=> $this->id,
 		);		
 		
 		$respuesta = ControllerMedicos::ctrEditarMedico($datos);
@@ -88,6 +91,7 @@ if (isset($_POST["nuevoMedico"])) {
 	$nuevoMedico = new AjaxMedicos();
 
 	$nuevoMedico -> prefijo_medico = $_POST["nuevoPrefijo"];
+	$nuevoMedico -> id_especialidad = $_POST["nuevoEspecialidadMedico"];
   $nuevoMedico -> paterno_medico = $_POST["nuevoPaternoMedico"];
   $nuevoMedico -> materno_medico = $_POST["nuevoMaternoMedico"];
   $nuevoMedico -> nombre_medico = $_POST["nuevoNombreMedico"];
@@ -107,6 +111,7 @@ if (isset($_POST["editarMedico"])) {
 	$editarMedico = new AjaxMedicos();
 	
 	$editarMedico -> prefijo_medico = $_POST["editarPrefijo"];
+	$editarMedico -> id_especialidad = $_POST["editarEspecialidadMedico"];
   $editarMedico -> paterno_medico = $_POST["editarPaternoMedico"];
   $editarMedico -> materno_medico = $_POST["editarMaternoMedico"];
   $editarMedico -> nombre_medico = $_POST["editarNombreMedico"];

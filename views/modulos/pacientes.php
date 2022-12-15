@@ -299,10 +299,12 @@ MODAL NUEVO PACIENTE
                     <label for="nuevoEstadoCivil" class="form-label">ESTADO CIVIL</label>
                     <select class="form-select" name="nuevoEstadoCivil" id="nuevoEstadoCivil" disabled> 
                       <option value="" disabled selected>ELEGIR...</option>
-                      <option value="SOLTERO (A)">SOLTERO (A)</option>
-                      <option value="CASADO (A)">CASADO (A)</option>
-                      <option value="DIVORCIADO (A)">DIVORCIADO (A)</option>
-                      <option value="VIUDO (A)">VIUDO (A)</option>
+                      <option value="SOLTERO(A)">SOLTERO(A)</option>
+                      <option value="CASADO(A)">CASADO(A)</option>
+                      <option value="CASADO(A)">CASADO(A)</option>
+                      <option value="CONCUBINO(A)">CONCUBINO(A)</option>
+                      <option value="DIVORCIADO(A)">DIVORCIADO(A)</option>
+                      <option value="VIUDO(A)">VIUDO(A)</option>
                     </select>
                   </div>
 
@@ -561,10 +563,11 @@ MODAL EDITAR PACIENTE
                   <label for="editarEstadoCivil" class="form-label">ESTADO CIVIL</label>
                   <label class="indicador">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>
                   <select class="form-select" name="editarEstadoCivil" id="editarEstadoCivil"> 
-                    <option value="SOLTERO (A)">SOLTERO (A)</option>
-                    <option value="CASADO (A)">CASADO (A)</option>
-                    <option value="DIVORCIADO (A)">DIVORCIADO (A)</option>
-                    <option value="VIUDO (A)">VIUDO (A)</option>
+                    <option value="SOLTERO(A)">SOLTERO(A)</option>
+                    <option value="CASADO(A)">CASADO(A)</option>
+                    <option value="CONCUBINO(A)">CONCUBINO(A)</option>
+                    <option value="DIVORCIADO(A)">DIVORCIADO(A)</option>
+                    <option value="VIUDO(A)">VIUDO(A)</option>
                   </select>
                 </div>
 

@@ -16,6 +16,8 @@ var tablaMedicos = $('#tblMedicos').DataTable({
 
 	"processing" : true,
 
+	"stateSave": true,
+
 	"language": {
 
 		"sProcessing":     "Procesando...",
@@ -54,52 +56,6 @@ var tablaMedicos = $('#tblMedicos').DataTable({
 }); 
 
 /*=============================================
-FUNCIONES CON LOS DIFERENTES PATRONES CON EXPRESIONES REGULARES PARA LA VALIDACIÓN
-=============================================*/
-
-// $.validator.addMethod("patron_letras", function (value, element) {
-
-//     var pattern = /^[a-zA-Z]+$/;
-//     return this.optional(element) || pattern.test(value);
-
-// }, "El campo debe contener letras (azAZ)");
-
-// $.validator.addMethod("patron_numeros", function (value, element) {
-
-//     var pattern = /^[0-9]+$/;
-//     return this.optional(element) || pattern.test(value);
-
-// }, "El campo debe tener un valor numérico (0-9)");
-  
-//   $.validator.addMethod("patron_numerosLetras", function (value, element) {
-
-//     var pattern = /^[a-zA-Z0-9-]+$/;
-//     return this.optional(element) || pattern.test(value);
-
-// }, "El campo debe tener un valor Alfa Numérico (a-zA-Z0-9)");
-
-// $.validator.addMethod("patron_numerosTexto", function (value, element) {
-
-//     var pattern = /^[A-Za-z0-9ñÑáéíóúÁÉÍÓÚ .-]+$/;
-//     return this.optional(element) || pattern.test(value);
-
-// }, "Caracteres Especiales No Admitidos");
-
-// $.validator.addMethod("patron_texto", function (value, element) {
-
-//     var pattern = /^[A-Za-zñÑáéíóúÁÉÍÓÚ .]+$/;
-//     return this.optional(element) || pattern.test(value);
-
-// }, "Caracteres Especiales No Admitidos");
-
-// $.validator.addMethod("patron_textoEspecial", function (value, element) {
-
-//     var pattern = /^[^"'&%${}]*$/;
-//     return this.optional(element) || pattern.test(value);
-
-// }, "Caracteres Especiales No Admitidos");
-
-/*=============================================
 CONFIGURACION DE LAS REGLAS Y MENSAJES PARA VALIDACION
 =============================================*/
 $(document).ready(function(){
@@ -107,6 +63,7 @@ $(document).ready(function(){
 
     rules: {
     	nuevoPrefijo : { required: true},
+    	nuevoEspecialidadMedico : { required: true},
       nuevoPaternoMedico : { patron_texto: true},
       nuevoMaternoMedico : { patron_texto: true},
       nuevoNombreMedico : { required: true, patron_texto: true},
@@ -117,6 +74,7 @@ $(document).ready(function(){
 
     messages: {
       nuevoPrefijo : "Elija un Prefijo de Médico",
+      nuevoEspecialidadMedico : "Elija una Especialidad",
     },
 
   });
@@ -127,6 +85,8 @@ $(document).ready(function(){
 GUARDANDO DATOS DE NUEVA MEDICO
 =============================================*/
 $("#frmNuevoMedico").on("click", ".btnGuardar", function() {
+
+	$(".btnGuardar").prop("disabled", true);
 
   if ($("#frmNuevoMedico").valid()) {
 
@@ -175,7 +135,13 @@ $("#frmNuevoMedico").on("click", ".btnGuardar", function() {
 						allowOutsideClick: false,
 						confirmButtonText: "¡Cerrar!"
 
-					});
+					}).then((result) => {
+
+            if (result.value) {
+              $(".btnGuardar").prop("disabled", false);
+            }
+
+          });
 					
 				}
 
@@ -197,7 +163,13 @@ $("#frmNuevoMedico").on("click", ".btnGuardar", function() {
 			allowOutsideClick: false,
 			confirmButtonText: "¡Cerrar!"
 
-		});
+		}).then((result) => {
+
+      if (result.value) {
+        $(".btnGuardar").prop("disabled", false);
+      }
+
+    });
 		
 	} 
 
@@ -211,6 +183,7 @@ $(document).ready(function(){
 
     rules: {
     	editarPrefijo : { required: true},
+    	editarEspecialidadMedico : { required: true},
       editarPaternoMedico : { patron_texto: true},
       editarMaternoMedico : { patron_texto: true},
       editarNombreMedico : { required: true, patron_texto: true},
@@ -221,6 +194,7 @@ $(document).ready(function(){
 
     messages: {
       editarPrefijo : "Elija un Prefijo de Médico",
+      editarEspecialidadMedico : "Elija una Especialidad",
     },
 
   });
@@ -255,6 +229,7 @@ $(document).on("click", ".btnEditarMedico", function() {
 
 			$('#editarIdMedico').val(idMedico);
 			$('#editarPrefijo').val(respuesta["prefijo_medico"]);
+			$('#editarEspecialidadMedico').val(respuesta["id_especialidad"]);
 			$('#editarPaternoMedico').val(respuesta["paterno_medico"]);
 			$('#editarMaternoMedico').val(respuesta["materno_medico"]);
 			$('#editarNombreMedico').val(respuesta["nombre_medico"]);
@@ -278,77 +253,88 @@ GUARDANDO DATOS DE EDITAR PERSONA
 =============================================*/
 $("#frmEditarMedico").on("click", ".btnGuardar", function() {
 
-    if ($("#frmEditarMedico").valid()) {
+	$(".btnGuardar").prop("disabled", true);
 
-	    var datos = new FormData($("#frmEditarMedico")[0]);
-			console.log(datos);
-			datos.append("editarMedico", 'editarMedico');
+  if ($("#frmEditarMedico").valid()) {
 
-			$.ajax({
+    var datos = new FormData($("#frmEditarMedico")[0]);
+		console.log(datos);
+		datos.append("editarMedico", 'editarMedico');
 
-				url:"ajax/medicos.ajax.php",
-				method: "POST",
-				data: datos,
-				cache: false,
-				contentType: false,
-				processData: false,
-				dataType: "json",
-				success: function(respuesta) {
-				
-					if (respuesta == "ok") {
+		$.ajax({
 
-						swal.fire({
-							
-							icon: "success",
-							title: "¡Los datos se guardaron correctamente!",
-							showConfirmButton: true,
-							allowOutsideClick: false,
-							confirmButtonText: "Cerrar"
+			url:"ajax/medicos.ajax.php",
+			method: "POST",
+			data: datos,
+			cache: false,
+			contentType: false,
+			processData: false,
+			dataType: "json",
+			success: function(respuesta) {
+			
+				if (respuesta == "ok") {
 
-						}).then((result) => {
-		  					
-		  				if (result.value) {
-
-		  					$('#modalEditarMedico').modal('toggle');
-								   
-								$("#editarPrefijo").val("");	
-								$("#editarPaternoMedico").val("");
-								$("#editarMaternoMedico").val("");		
-								$("#editarNombreMedico").val("");
-								$("#editarMatricula").val("");
-								$("#editarDireccion").val("");
-								$("#editarTelefono").val("");
-								
-		  					// Funcion que recarga y actuaiiza la tabla	
-								tablaMedicos.ajax.reload( null, false );
-
-							}
-
-						});
-
-					} else {
-
-						swal.fire({
-								
-							title: "¡Los campos obligatorios no puede ir vacio o llevar caracteres especiales no da!",
-							icon: "error",
-							allowOutsideClick: false,
-							confirmButtonText: "¡Cerrar!"
-
-						});
+					swal.fire({
 						
-					}
+						icon: "success",
+						title: "¡Los datos se guardaron correctamente!",
+						showConfirmButton: true,
+						allowOutsideClick: false,
+						confirmButtonText: "Cerrar"
 
-				},
-				error: function(error) {
+					}).then((result) => {
+	  					
+	  				if (result.value) {
 
-			    console.log("No funciona");
-			        
-			  }
+	  					$('#modalEditarMedico').modal('toggle');
+							   
+							$("#editarPrefijo").val("");
+							$("#editarEspecialidadMedico").val("");	
+							$("#editarPaternoMedico").val("");
+							$("#editarMaternoMedico").val("");		
+							$("#editarNombreMedico").val("");
+							$("#editarMatricula").val("");
+							$("#editarDireccion").val("");
+							$("#editarTelefono").val("");
 
-			});
+							$(".btnGuardar").prop("disabled", false); 
+							
+	  					// Funcion que recarga y actuaiiza la tabla	
+							tablaMedicos.ajax.reload( null, false );
 
-    } else {
+						}
+
+					});
+
+				} else {
+
+					swal.fire({
+							
+						title: "¡Los campos obligatorios no puede ir vacio o llevar caracteres especiales no da!",
+						icon: "error",
+						allowOutsideClick: false,
+						confirmButtonText: "¡Cerrar!"
+
+					}).then((result) => {
+
+            if (result.value) {
+              $(".btnGuardar").prop("disabled", false);
+            }
+
+          });
+					
+				}
+
+			},
+			error: function(error) {
+
+		    console.log("No funciona");
+		        
+		  }
+
+		});
+
+  } else {
 
 		swal.fire({
 				
@@ -357,7 +343,13 @@ $("#frmEditarMedico").on("click", ".btnGuardar", function() {
 			allowOutsideClick: false,
 			confirmButtonText: "¡Cerrar!"
 
-		});
+		}).then((result) => {
+
+      if (result.value) {
+        $(".btnGuardar").prop("disabled", false);
+      }
+
+    });
 		
 	} 
 

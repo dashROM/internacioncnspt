@@ -81,13 +81,29 @@
                     </nav>
                 </div>
 
-                <div class="collapse" id="gestion_internacion" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                <?php }
+
+                if($_SESSION["nivel_internacion"] == 1 || $_SESSION["nivel_internacion"] ==  3) { ?> 
+
+                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#libros_internacion" aria-expanded="false" aria-controls="libros_internacion">
+                    <div class="sb-nav-link-icon"><i class="fas fa-book-medical"></i></div>
+                        Libros Internación
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+
+                <div class="collapse" id="libros_internacion" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav">
+                        <a class="nav-link menu" href="<?= BASEURL; ?>/libro-servicios" id="libro-servicios">Servicios</a>
+                    </nav>
+                </div>
+
+                <div class="collapse" id="libros_internacion" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
                         <a class="nav-link menu" href="<?= BASEURL; ?>/maternidades" id="maternidades">Maternidad</a>
                     </nav>
                 </div>
 
-                 <div class="collapse" id="gestion_internacion" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                <div class="collapse" id="libros_internacion" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
                         <a class="nav-link menu" href="<?= BASEURL; ?>/neonatos" id="neonatos">Neonatos</a>
                     </nav>

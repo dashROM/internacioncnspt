@@ -7,11 +7,11 @@ class ModelCie10{
 	/*=============================================
 	MOSTRAR DATOS DE DIAGNOSTICO BUSCADO CIE10
 	=============================================*/
-	static public function mdlMostrarDiagnosticoCie10($tabla, $item, $valor) {
+	static public function mdlMostrarDiagnosticoCie10($tabla, $term) {
 
-		if ($item != null) {
+		if ($term != null) {
 
-			$sql = "SELECT id, CONCAT(codigo,' - ',descripcion) diagnostico FROM $tabla WHERE (UNACCENT(codigo) ILIKE '%$valor%') OR (UNACCENT(descripcion) ILIKE '%$valor%')";
+			$sql = "SELECT id, CONCAT(codigo,' - ',descripcion) diagnostico FROM $tabla WHERE (UNACCENT(codigo) ILIKE '%$term%') OR (UNACCENT(descripcion) ILIKE '%$term%')";
 			
 			$stmt = Conexion::connectPostgres()->prepare($sql);
 
@@ -39,11 +39,11 @@ class ModelCie10{
 	/*=============================================
 	NUMERO DE COLUMNAS DE DIAGNOSTICO BUSCADO CIE10
 	=============================================*/
-	static public function mdlMostrarColumnasCie10($tabla, $item, $valor) {
+	static public function mdlMostrarColumnasCie10($tabla, $term) {
 
-		if ($item != null) {
+		if ($term != null) {
 
-			$sql = "SELECT count(id) FROM $tabla WHERE (UNACCENT(codigo) ILIKE '%$valor%') OR (UNACCENT(descripcion) ILIKE '%$valor%')";
+			$sql = "SELECT count(id) FROM $tabla WHERE (UNACCENT(codigo) ILIKE '%$term%') OR (UNACCENT(descripcion) ILIKE '%$term%')";
 			
 			$stmt = Conexion::connectPostgres()->prepare($sql);
 
