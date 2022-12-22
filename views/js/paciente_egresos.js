@@ -454,6 +454,9 @@ $("#frmDarAltaPaciente").on("change",'#nuevoCausaEgreso', function(){
 
 	$(".indicadorAltaPaciente").remove();
 
+  $("#nuevoDestinoTransExterna").removeAttr('required');
+  $("#nuevoTransExterna").addClass('d-none');
+
 	var causaEgreso = $(this).val();
 	console.log("causaEgreso", causaEgreso);
 		
@@ -477,7 +480,20 @@ $("#frmDarAltaPaciente").on("change",'#nuevoCausaEgreso', function(){
 		$('#nuevoCondicionEgreso').prop("disabled",true);
 		$("#nuevoCondicionEgreso").removeAttr('required');
 
-	} else {
+	} else if (causaEgreso=="TRANSFERENCIA EXTERNA") {
+
+    $('#nuevoCausaClinica').prop("readonly",true);
+    $("#nuevoCausaClinica").removeAttr('required');
+    $('#nuevoCausaAutopsia').prop("readonly",true);
+    $("#nuevoCausaAutopsia").removeAttr('required');    
+    $('#nuevoCondicionEgreso').prop("disabled",false);
+    $("#nuevoCondicionEgreso").before('<label class="indicadorAltaPaciente">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>');
+    $("#nuevoCondicionEgreso").attr('required',true);
+
+    $("#nuevoDestinoTransExterna").attr('required',true);
+    $("#nuevoTransExterna").removeClass('d-none');
+
+  } else {
 
 		$('#nuevoCausaClinica').prop("readonly",true);
     $("#nuevoCausaClinica").removeAttr('required');
@@ -509,6 +525,7 @@ $(document).ready(function(){
       nuevoDiagnosticoEgreso : "Elija un Diagnostico CIE-10",
       nuevoCausaEgreso : "Elija una Opción",
       nuevoCondicionEgreso : "Elija una Opción",
+      nuevoDestinoTransExterna : "Elija una Opción",
       nuevoFechaEgreso: {
         required: "Ingrese una fecha de egreso",
         min: function (p, element) {

@@ -132,7 +132,7 @@ class ModelMaternidades {
 	=============================================*/
 	static public function mdlMostrarMaternidades($tabla, $sql) {
 
-		$sql = "SELECT m.id, pi2.fecha_ingreso, pi2.hora_ingreso, p.nombre_paciente, p.paterno_paciente, p.materno_paciente, c3.nombre_consultorio as procedencia, p.fecha_nacimiento, p.sexo, p.cod_beneficiario, p.estado_civil, c2.nombre_consultorio as zona, c.nombre_cama, p.cod_asegurado, p.nro_empleador, p.cod_asegurado, p.nro_empleador, c10_ingreso.codigo as cie10_cod_ingreso, c10_ingreso.descripcion as cie10_diag_ingreso, s.nombre_servicio, c10_egreso.codigo as cie10_cod_egreso, c10_egreso.descripcion as cie10_diag_egreso, pe.fecha_egreso, pe.hora_egreso, pe.causa_egreso, m.fecha_nacido, m.hora_nacido, m.peso_nacido1, m.sexo_nacido1, m.peso_nacido2, m.sexo_nacido2, m.peso_nacido3, m.sexo_nacido3, m.tipo_parto, m.edad_gestacional
+		$sql = "SELECT m.id, pi2.id_paciente, m.id_paciente_ingreso, pi2.fecha_ingreso, pi2.hora_ingreso, p.nombre_paciente, p.paterno_paciente, p.materno_paciente, c3.nombre_consultorio as procedencia, p.fecha_nacimiento, p.sexo, p.cod_beneficiario, p.estado_civil, c2.nombre_consultorio as zona, c.nombre_cama, p.cod_asegurado, p.nro_empleador, p.cod_asegurado, p.nro_empleador, c10_ingreso.codigo as cie10_cod_ingreso, c10_ingreso.descripcion as cie10_diag_ingreso, s.nombre_servicio, c10_egreso.codigo as cie10_cod_egreso, c10_egreso.descripcion as cie10_diag_egreso, pe.fecha_egreso, pe.hora_egreso, pe.causa_egreso, m.fecha_nacido, m.hora_nacido, m.peso_nacido1, m.sexo_nacido1, m.peso_nacido2, m.sexo_nacido2, m.peso_nacido3, m.sexo_nacido3, m.tipo_parto, m.edad_gestacional
 		FROM paciente_ingresos pi2
 		INNER JOIN pacientes p
 		ON pi2.id_paciente = p.id
@@ -329,7 +329,7 @@ class ModelMaternidades {
 	=============================================*/
 	static public function mdlMostrarMaternidadesFecha($tabla, $item1, $valor1, $item2, $valor2, $sql) {
 
-		$sql2 = "SELECT m.id, pi2.fecha_ingreso, pi2.hora_ingreso, p.nombre_paciente, p.paterno_paciente, p.materno_paciente, c3.nombre_consultorio as procedencia, p.fecha_nacimiento, p.sexo, p.cod_beneficiario, p.estado_civil, c2.nombre_consultorio as zona, c.nombre_cama, p.cod_asegurado, p.nro_empleador, p.cod_asegurado, p.nro_empleador, c10_ingreso.codigo as cie10_cod_ingreso, c10_ingreso.descripcion as cie10_diag_ingreso, s.nombre_servicio, c10_egreso.codigo as cie10_cod_egreso, c10_egreso.descripcion as cie10_diag_egreso, pe.fecha_egreso, pe.hora_egreso, pe.causa_egreso, m.fecha_nacido, m.hora_nacido, m.peso_nacido1, m.sexo_nacido1, m.peso_nacido2, m.sexo_nacido2, m.peso_nacido3, m.sexo_nacido3, m.tipo_parto, m.edad_gestacional
+		$sql2 = "SELECT m.id, pi2.id_paciente, m.id_paciente_ingreso, pi2.fecha_ingreso, pi2.hora_ingreso, p.nombre_paciente, p.paterno_paciente, p.materno_paciente, c3.nombre_consultorio as procedencia, p.fecha_nacimiento, p.sexo, p.cod_beneficiario, p.estado_civil, c2.nombre_consultorio as zona, c.nombre_cama, p.cod_asegurado, p.nro_empleador, p.cod_asegurado, p.nro_empleador, c10_ingreso.codigo as cie10_cod_ingreso, c10_ingreso.descripcion as cie10_diag_ingreso, s.nombre_servicio, c10_egreso.codigo as cie10_cod_egreso, c10_egreso.descripcion as cie10_diag_egreso, pe.fecha_egreso, pe.hora_egreso, pe.causa_egreso, m.fecha_nacido, m.hora_nacido, m.peso_nacido1, m.sexo_nacido1, m.peso_nacido2, m.sexo_nacido2, m.peso_nacido3, m.sexo_nacido3, m.tipo_parto, m.edad_gestacional
 			FROM paciente_ingresos pi2
 			INNER JOIN pacientes p
 			ON pi2.id_paciente = p.id
@@ -381,7 +381,7 @@ class ModelMaternidades {
 	    $pdo->beginTransaction();
 
 	    // Consulta 1: Registrar nueva materniadad de paciente
-			$sql = "INSERT INTO $tabla(procedencia, paridad, edad_gestacional, tipo_intervencion, tipo_parto, tipo_aborto, liquido_amniotico, fecha_nacido, hora_nacido, peso_nacido1, sexo_nacido1, peso_nacido2, sexo_nacido2, peso_nacido3, sexo_nacido3, estado_nacido, alumbramiento, perine, sangrado, estado_madre, nombre_esposo, id_paciente_ingreso) VALUES (:procedencia, :paridad, :edad_gestacional, :tipo_intervencion, :tipo_parto, :tipo_aborto, :liquido_amniotico, :fecha_nacido, :hora_nacido, :peso_nacido1, :sexo_nacido1, :peso_nacido2, :sexo_nacido2, :peso_nacido3, :sexo_nacido3, :estado_nacido, :alumbramiento, :perine, :sangrado, :estado_madre, :nombre_esposo, :id_paciente_ingreso)";
+			$sql = "INSERT INTO $tabla(procedencia, paridad, edad_gestacional, tipo_intervencion, tipo_parto, tipo_aborto, liquido_amniotico, fecha_nacido, hora_nacido, peso_nacido1, sexo_nacido1, estado_nacido1, peso_nacido2, sexo_nacido2, estado_nacido2, peso_nacido3, sexo_nacido3, estado_nacido3, alumbramiento, perine, sangrado, estado_madre, nombre_esposo, id_paciente_ingreso) VALUES (:procedencia, :paridad, :edad_gestacional, :tipo_intervencion, :tipo_parto, :tipo_aborto, :liquido_amniotico, :fecha_nacido, :hora_nacido, :peso_nacido1, :sexo_nacido1, :estado_nacido1, :peso_nacido2, :sexo_nacido2, :estado_nacido2, :peso_nacido3, :sexo_nacido3, :estado_nacido3, :alumbramiento, :perine, :sangrado, :estado_madre, :nombre_esposo, :id_paciente_ingreso)";
 
 			$stmt = $pdo->prepare($sql);
 
@@ -396,11 +396,13 @@ class ModelMaternidades {
 			$stmt->bindParam(":hora_nacido", $datos["hora_nacido"], PDO::PARAM_STR);
 			$stmt->bindParam(":peso_nacido1", $datos["peso_nacido1"], PDO::PARAM_STR);
 			$stmt->bindParam(":sexo_nacido1", $datos["sexo_nacido1"], PDO::PARAM_STR);
+			$stmt->bindParam(":estado_nacido1", $datos["estado_nacido1"], PDO::PARAM_STR);
 			$stmt->bindParam(":peso_nacido2", $datos["peso_nacido2"], PDO::PARAM_STR);
 			$stmt->bindParam(":sexo_nacido2", $datos["sexo_nacido2"], PDO::PARAM_STR);
+			$stmt->bindParam(":estado_nacido2", $datos["estado_nacido2"], PDO::PARAM_STR);
 			$stmt->bindParam(":peso_nacido3", $datos["peso_nacido3"], PDO::PARAM_STR);
 			$stmt->bindParam(":sexo_nacido3", $datos["sexo_nacido3"], PDO::PARAM_STR);
-			$stmt->bindParam(":estado_nacido", $datos["estado_nacido"], PDO::PARAM_STR);
+			$stmt->bindParam(":estado_nacido3", $datos["estado_nacido3"], PDO::PARAM_STR);
 			$stmt->bindParam(":alumbramiento", $datos["alumbramiento"], PDO::PARAM_STR);
 			$stmt->bindParam(":perine", $datos["perine"], PDO::PARAM_STR);
 			$stmt->bindParam(":sangrado", $datos["sangrado"], PDO::PARAM_STR);
@@ -463,7 +465,7 @@ class ModelMaternidades {
 
 	static public function mdlEditarMaternidad($tabla, $datos) {
 
-		$sql = "UPDATE $tabla SET procedencia = :procedencia, paridad = :paridad, edad_gestacional =:edad_gestacional, tipo_intervencion = :tipo_intervencion, tipo_parto = :tipo_parto, tipo_aborto = :tipo_aborto, liquido_amniotico = :liquido_amniotico, fecha_nacido = :fecha_nacido, hora_nacido = :hora_nacido, peso_nacido1 = :peso_nacido1, sexo_nacido1 = :sexo_nacido1, peso_nacido2 = :peso_nacido2, sexo_nacido2 = :sexo_nacido2, peso_nacido3 = :peso_nacido3, sexo_nacido3 = :sexo_nacido3, estado_nacido = :estado_nacido, alumbramiento = :alumbramiento, perine = :perine, sangrado = :sangrado, estado_madre = :estado_madre, nombre_esposo = :nombre_esposo WHERE id = :id";
+		$sql = "UPDATE $tabla SET procedencia = :procedencia, paridad = :paridad, edad_gestacional =:edad_gestacional, tipo_intervencion = :tipo_intervencion, tipo_parto = :tipo_parto, tipo_aborto = :tipo_aborto, liquido_amniotico = :liquido_amniotico, fecha_nacido = :fecha_nacido, hora_nacido = :hora_nacido, peso_nacido1 = :peso_nacido1, sexo_nacido1 = :sexo_nacido1, estado_nacido1 = :estado_nacido1, peso_nacido2 = :peso_nacido2, sexo_nacido2 = :sexo_nacido2, estado_nacido2 = :estado_nacido2, peso_nacido3 = :peso_nacido3, sexo_nacido3 = :sexo_nacido3, estado_nacido3 = :estado_nacido3, alumbramiento = :alumbramiento, perine = :perine, sangrado = :sangrado, estado_madre = :estado_madre, nombre_esposo = :nombre_esposo WHERE id = :id";
 
 		$stmt = Conexion::connectPostgres()->prepare($sql);
 		
@@ -478,11 +480,13 @@ class ModelMaternidades {
 		$stmt->bindParam(":hora_nacido", $datos["hora_nacido"], PDO::PARAM_STR);
 		$stmt->bindParam(":peso_nacido1", $datos["peso_nacido1"], PDO::PARAM_STR);
 		$stmt->bindParam(":sexo_nacido1", $datos["sexo_nacido1"], PDO::PARAM_STR);
+		$stmt->bindParam(":estado_nacido1", $datos["estado_nacido1"], PDO::PARAM_STR);
 		$stmt->bindParam(":peso_nacido2", $datos["peso_nacido2"], PDO::PARAM_STR);
 		$stmt->bindParam(":sexo_nacido2", $datos["sexo_nacido2"], PDO::PARAM_STR);
+		$stmt->bindParam(":estado_nacido2", $datos["estado_nacido2"], PDO::PARAM_STR);
 		$stmt->bindParam(":peso_nacido3", $datos["peso_nacido3"], PDO::PARAM_STR);
 		$stmt->bindParam(":sexo_nacido3", $datos["sexo_nacido3"], PDO::PARAM_STR);
-		$stmt->bindParam(":estado_nacido", $datos["estado_nacido"], PDO::PARAM_STR);
+		$stmt->bindParam(":estado_nacido3", $datos["estado_nacido3"], PDO::PARAM_STR);
 		$stmt->bindParam(":alumbramiento", $datos["alumbramiento"], PDO::PARAM_STR);
 		$stmt->bindParam(":perine", $datos["perine"], PDO::PARAM_STR);
 		$stmt->bindParam(":sangrado", $datos["sangrado"], PDO::PARAM_STR);

@@ -955,6 +955,31 @@ MODAL DAR ALTA A PACIENTE
 
                   </div>
 
+                  <div class="row d-none" id="nuevoTransExterna">
+
+                    <div class="col-md-6 form-group">
+                      <label for="nuevoDestinoTransExterna" class="form-label">DESTINO TRANSFERENCIA EXTERNA</label>
+                      <label class="indicador">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>
+                      <select class="form-select" name="nuevoDestinoTransExterna" id="nuevoDestinoTransExterna" required>
+                        <option value="" disabled selected>ELEGIR...</option>
+                        <?php
+
+                        $item = "id";
+                        $valor = 5;
+
+                        $departamentos =  ControllerDepartamentos::ctrMostrarDepartamentosTransExterna($item, $valor);
+
+                        foreach($departamentos as  $key => $value) {
+
+                          echo '<option value="'.$value["id"].'">'.$value["nombre_departamento"].'</option>';
+
+                        }
+                        ?> 
+                      </select>  
+                    </div>
+
+                  </div>
+
                 </div>
 
                 <div class="card-header">
@@ -1871,8 +1896,8 @@ MODAL NUEVO MATERNIDAD
 
                         <div class="row">
 
-                          <!-- ENTRADA PARA EL PESO R.N. --> 
-                          <div class="col-md-6 col-sm-6 col-xs-12 form-group">
+                          <!-- ENTRADA PARA EL PESO R.N. 1 --> 
+                          <div class="col-md-4 col-sm-4 col-xs-12 form-group">
                             <label for="nuevoPesoNacido1">PESO R.N. 1</label>                
                             <div class="input-group">
                               <input type="text" step="0.001" class="form-control" name="nuevoPesoNacido1" id="nuevoPesoNacido1" aria-describedby="pesoNacido1" min="0.001" max="9.999" data-inputmask="'mask': '9.999'" data-error="#errNuevoPesoNacido1">
@@ -1881,8 +1906,8 @@ MODAL NUEVO MATERNIDAD
                             <span id="errNuevoPesoNacido1"></span>
                           </div>
 
-                          <!-- ENTRADA PARA SELECCIONAR EL SEXO -->
-                          <div class="col-md-6 col-sm-6 col-xs-12 form-group"> 
+                          <!-- ENTRADA PARA SELECCIONAR EL SEXO R.N. 1 -->
+                          <div class="col-md-4 col-sm-4 col-xs-12 form-group"> 
                             <label for="nuevoSexoNacido1" class="form-label">SEXO R.N. 1</label>
                             <select class="form-select" name="nuevoSexoNacido1" id="nuevoSexoNacido1">
                               <option value="" disabled selected>ELEGIR...</option>
@@ -1891,8 +1916,19 @@ MODAL NUEVO MATERNIDAD
                             </select>
                           </div>
 
-                          <!-- ENTRADA PARA EL PESO R.N. --> 
-                          <div class="col-md-6 col-sm-6 col-xs-12 form-group">
+                          <!-- ENTRADA PARA SELECCIONAR LA CONDICION DEL R.N. 1 -->
+                          <div class="col-md-4 col-sm-4 col-xs-12 form-group"> 
+                            <label for="nuevoEstadoNacido1" class="form-label">ESTADO AL NACER R.N. 1</label>
+                            <select class="form-select" name="nuevoEstadoNacido1" id="nuevoEstadoNacido1">
+                              <option value="" disabled selected>ELEGIR...</option>
+                              <option value="VIVO">VIVO</option>
+                              <option value="VIVO DEPRIMIDO">VIVO DEPRIMIDO</option>
+                              <option value="MUERTO">MUERTO</option>
+                            </select>
+                          </div>  
+
+                          <!-- ENTRADA PARA EL PESO R.N. 2 --> 
+                          <div class="col-md-4 col-sm-4 col-xs-12 form-group">
                             <label for="nuevoPesoNacido2">PESO R.N. 2</label>                
                             <div class="input-group">
                               <input type="text" step="0.001" class="form-control" name="nuevoPesoNacido2" id="nuevoPesoNacido2" aria-describedby="pesoNacido2" min="0.001" max="9.999" data-inputmask="'mask': '9.999'" data-error="#errNuevoPesoNacido2">
@@ -1901,8 +1937,8 @@ MODAL NUEVO MATERNIDAD
                             <span id="errNuevoPesoNacido2"></span>
                           </div>
 
-                          <!-- ENTRADA PARA SELECCIONAR EL SEXO -->
-                          <div class="col-md-6 col-sm-6 col-xs-12 form-group"> 
+                          <!-- ENTRADA PARA SELECCIONAR EL SEXO R.N. 2-->
+                          <div class="col-md-4 col-sm-4 col-xs-12 form-group"> 
                             <label for="nuevoSexoNacido2" class="form-label">SEXO R.N. 2</label>
                             <select class="form-select" name="nuevoSexoNacido2" id="nuevoSexoNacido2">
                               <option value="" disabled selected>ELEGIR...</option>
@@ -1911,8 +1947,19 @@ MODAL NUEVO MATERNIDAD
                             </select>
                           </div>
 
-                          <!-- ENTRADA PARA EL PESO R.N. --> 
-                          <div class="col-md-6 col-sm-6 col-xs-12 form-group">
+                          <!-- ENTRADA PARA SELECCIONAR LA CONDICION DEL R.N. 2 -->
+                          <div class="col-md-4 col-sm-4 col-xs-12 form-group"> 
+                            <label for="nuevoEstadoNacido2" class="form-label">ESTADO AL NACER R.N. 2</label>
+                            <select class="form-select" name="nuevoEstadoNacido2" id="nuevoEstadoNacido2">
+                              <option value="" disabled selected>ELEGIR...</option>
+                              <option value="VIVO">VIVO</option>
+                              <option value="VIVO DEPRIMIDO">VIVO DEPRIMIDO</option>
+                              <option value="MUERTO">MUERTO</option>
+                            </select>
+                          </div>  
+
+                          <!-- ENTRADA PARA EL PESO R.N. 3 --> 
+                          <div class="col-md-4 col-sm-4 col-xs-12 form-group">
                             <label for="nuevoPesoNacido3">PESO R.N. 3</label>                
                             <div class="input-group">
                               <input type="text" step="0.001" class="form-control" name="nuevoPesoNacido3" id="nuevoPesoNacido3" aria-describedby="pesoNacido3" min="0.001" max="9.999" data-inputmask="'mask': '9.999'" data-error="#errNuevoPesoNacido3">
@@ -1921,8 +1968,8 @@ MODAL NUEVO MATERNIDAD
                             <span id="errNuevoPesoNacido3"></span>
                           </div>
 
-                          <!-- ENTRADA PARA SELECCIONAR EL SEXO -->
-                          <div class="col-md-6 col-sm-6 col-xs-12 form-group"> 
+                          <!-- ENTRADA PARA SELECCIONAR EL SEXO R.N. 3 -->
+                          <div class="col-md-4 col-sm-4 col-xs-12 form-group"> 
                             <label for="nuevoSexoNacido3" class="form-label">SEXO R.N. 3</label>
                             <select class="form-select" name="nuevoSexoNacido3" id="nuevoSexoNacido3">
                               <option value="" disabled selected>ELEGIR...</option>
@@ -1930,6 +1977,17 @@ MODAL NUEVO MATERNIDAD
                               <option value="MASCULINO">MASCULINO</option>
                             </select>
                           </div>
+
+                          <!-- ENTRADA PARA SELECCIONAR LA CONDICION DEL R.N. 3 -->
+                          <div class="col-md-4 col-sm-4 col-xs-12 form-group"> 
+                            <label for="nuevoEstadoNacido3" class="form-label">ESTADO AL NACER R.N. 3</label>
+                            <select class="form-select" name="nuevoEstadoNacido3" id="nuevoEstadoNacido3">
+                              <option value="" disabled selected>ELEGIR...</option>
+                              <option value="VIVO">VIVO</option>
+                              <option value="VIVO DEPRIMIDO">VIVO DEPRIMIDO</option>
+                              <option value="MUERTO">MUERTO</option>
+                            </select>
+                          </div> 
 
                         </div>
                         
@@ -1939,18 +1997,7 @@ MODAL NUEVO MATERNIDAD
 
                   </div>
 
-                  <div class="row">
-
-                    <!-- ENTRADA PARA SELECCIONAR LA CONDICION DEL NACIDO -->
-                    <div class="col-md-6 col-sm-6 col-xs-12 form-group"> 
-                      <label for="nuevoEstadoNacido" class="form-label">ESTADO AL NACER</label>
-                      <select class="form-select" name="nuevoEstadoNacido" id="nuevoEstadoNacido">
-                        <option value="" disabled selected>ELEGIR...</option>
-                        <option value="VIVO">VIVO</option>
-                        <option value="VIVO DEPRIMIDO">VIVO DEPRIMIDO</option>
-                        <option value="MUERTO">MUERTO</option>
-                      </select>
-                    </div>                
+                  <div class="row">            
 
                     <!-- ENTRADA PARA SELECCIONAR EL ALUMBRAMIENTO -->
                     <div class="col-md-6 col-sm-6 col-xs-12 form-group">
@@ -2245,9 +2292,9 @@ MODAL EDITAR MATERNIDAD
 
                         <div class="row">
 
-                          <!-- ENTRADA PARA EL PESO R.N. --> 
-                          <div class="col-md-6 col-sm-6 col-xs-12 form-group">
-                            <label for="editarPesoNacido1">PESO R.N.</label>
+                          <!-- ENTRADA PARA EL PESO R.N. 1 --> 
+                          <div class="col-md-4 col-sm-4 col-xs-12 form-group">
+                            <label for="editarPesoNacido1">PESO R.N. 1</label>
                                              
                             <div class="input-group">
                               <input type="text" step="0.001" class="form-control" name="editarPesoNacido1" id="editarPesoNacido1" aria-describedby="pesoNacido1" max="9.999" data-inputmask="'mask': '9.999'" data-error="#errEditarPesoNacido1">
@@ -2256,9 +2303,9 @@ MODAL EDITAR MATERNIDAD
                             <span id="errEditarPesoNacido1"></span>
                           </div>
 
-                          <!-- ENTRADA PARA SELECCIONAR EL SEXO -->
-                          <div class="col-md-6 col-sm-6 col-xs-12 form-group"> 
-                            <label for="editarSexoNacido1" class="form-label">SEXO R.N.</label>
+                          <!-- ENTRADA PARA SELECCIONAR EL SEXO R.N. 1 -->
+                          <div class="col-md-4 col-sm-4 col-xs-12 form-group"> 
+                            <label for="editarSexoNacido1" class="form-label">SEXO R.N. 1</label>
                             <select class="form-select" name="editarSexoNacido1" id="editarSexoNacido1">
                               <option value="" disabled selected>ELEGIR...</option>
                               <option value="FEMENINO">FEMENINO</option>
@@ -2266,8 +2313,19 @@ MODAL EDITAR MATERNIDAD
                             </select>
                           </div>
 
-                          <!-- ENTRADA PARA EL PESO R.N. --> 
-                          <div class="col-md-6 col-sm-6 col-xs-12 form-group">
+                          <!-- ENTRADA PARA SELECCIONAR LA CONDICION DEL R.N. 1 -->
+                          <div class="col-md-4 col-sm-4 col-xs-12 form-group"> 
+                            <label for="editarEstadoNacido1" class="form-label">ESTADO AL NACER R.N. 1</label>
+                            <select class="form-select" name="editarEstadoNacido1" id="editarEstadoNacido1">
+                              <option value="" disabled selected>ELEGIR...</option>
+                              <option value="VIVO">VIVO</option>
+                              <option value="VIVO DEPRIMIDO">VIVO DEPRIMIDO</option>
+                              <option value="MUERTO">MUERTO</option>
+                            </select>
+                          </div>        
+
+                          <!-- ENTRADA PARA EL PESO R.N. 2 --> 
+                          <div class="col-md-4 col-sm-4 col-xs-12 form-group">
                             <label for="editarPesoNacido2">PESO R.N. 2</label>                
                             <div class="input-group">
                               <input type="text" step="0.001" class="form-control" name="editarPesoNacido2" id="editarPesoNacido2" aria-describedby="pesoNacido2" min="0.001" max="9.999" data-inputmask="'mask': '9.999'" data-error="#errEditarPesoNacido2">
@@ -2276,8 +2334,8 @@ MODAL EDITAR MATERNIDAD
                             <span id="errEditarPesoNacido2"></span>
                           </div>
 
-                          <!-- ENTRADA PARA SELECCIONAR EL SEXO -->
-                          <div class="col-md-6 col-sm-6 col-xs-12 form-group"> 
+                          <!-- ENTRADA PARA SELECCIONAR EL SEXO R.N. 2 -->
+                          <div class="col-md-4 col-sm-4 col-xs-12 form-group"> 
                             <label for="editarSexoNacido2" class="form-label">SEXO R.N. 2</label>
                             <select class="form-select" name="editarSexoNacido2" id="editarSexoNacido2">
                               <option value="" disabled selected>ELEGIR...</option>
@@ -2286,8 +2344,19 @@ MODAL EDITAR MATERNIDAD
                             </select>
                           </div>
 
-                          <!-- ENTRADA PARA EL PESO R.N. --> 
-                          <div class="col-md-6 col-sm-6 col-xs-12 form-group">
+                          <!-- ENTRADA PARA SELECCIONAR LA CONDICION DEL R.N. 2 -->
+                          <div class="col-md-4 col-sm-4 col-xs-12 form-group"> 
+                            <label for="editarEstadoNacido2" class="form-label">ESTADO AL NACER R.N. 2</label>
+                            <select class="form-select" name="editarEstadoNacido2" id="editarEstadoNacido2">
+                              <option value="" disabled selected>ELEGIR...</option>
+                              <option value="VIVO">VIVO</option>
+                              <option value="VIVO DEPRIMIDO">VIVO DEPRIMIDO</option>
+                              <option value="MUERTO">MUERTO</option>
+                            </select>
+                          </div>  
+
+                          <!-- ENTRADA PARA EL PESO R.N. 3 --> 
+                          <div class="col-md-4 col-sm-4 col-xs-12 form-group">
                             <label for="editarPesoNacido3">PESO R.N. 3</label>                
                             <div class="input-group">
                               <input type="text" step="0.001" class="form-control" name="editarPesoNacido3" id="editarPesoNacido3" aria-describedby="pesoNacido3" min="0.001" max="9.999" data-inputmask="'mask': '9.999'" data-error="#errEditarPesoNacido3">
@@ -2296,8 +2365,8 @@ MODAL EDITAR MATERNIDAD
                             <span id="errEditarPesoNacido3"></span>
                           </div>
 
-                          <!-- ENTRADA PARA SELECCIONAR EL SEXO -->
-                          <div class="col-md-6 col-sm-6 col-xs-12 form-group"> 
+                          <!-- ENTRADA PARA SELECCIONAR EL SEXO R.N. 3 -->
+                          <div class="col-md-4 col-sm-4 col-xs-12 form-group"> 
                             <label for="editarSexoNacido3" class="form-label">SEXO R.N. 3</label>
                             <select class="form-select" name="editarSexoNacido3" id="editarSexoNacido3">
                               <option value="" disabled selected>ELEGIR...</option>
@@ -2306,22 +2375,22 @@ MODAL EDITAR MATERNIDAD
                             </select>
                           </div>
 
+                          <!-- ENTRADA PARA SELECCIONAR LA CONDICION DEL R.N. 2 -->
+                          <div class="col-md-4 col-sm-4 col-xs-12 form-group"> 
+                            <label for="editarEstadoNacido3" class="form-label">ESTADO AL NACER R.N. 3</label>
+                            <select class="form-select" name="editarEstadoNacido3" id="editarEstadoNacido3">
+                              <option value="" disabled selected>ELEGIR...</option>
+                              <option value="VIVO">VIVO</option>
+                              <option value="VIVO DEPRIMIDO">VIVO DEPRIMIDO</option>
+                              <option value="MUERTO">MUERTO</option>
+                            </select>
+                          </div>  
+
                         </div>
 
                       </div>
 
-                    </div>
-
-                    <!-- ENTRADA PARA SELECCIONAR LA CONDICION DEL NACIDO -->
-                    <div class="col-md-6 col-sm-6 col-xs-12 form-group"> 
-                      <label for="editarEstadoNacido" class="form-label">ESTADO AL NACER</label>
-                      <select class="form-select" name="editarEstadoNacido" id="editarEstadoNacido">
-                        <option value="" disabled selected>ELEGIR...</option>
-                        <option value="VIVO">VIVO</option>
-                        <option value="VIVO DEPRIMIDO">VIVO DEPRIMIDO</option>
-                        <option value="MUERTO">MUERTO</option>
-                      </select>
-                    </div>                
+                    </div>        
 
                     <!-- ENTRADA PARA SELECCIONAR EL ALUMBRAMIENTO -->
                     <div class="col-md-6 col-sm-6 col-xs-12 form-group">

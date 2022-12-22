@@ -110,6 +110,8 @@
               <th scope="col">TIPO ALTA</th>
               <th scope="col">TALLA</th>
               <th scope="col">PESO</th>
+              <th scope="col"></th>
+
             </tr>
     			</thead>
     	   
@@ -126,3 +128,32 @@
 	</div>
 	
 </main>
+
+<!--=====================================
+MODAL REPORTE PACIENTE
+======================================-->
+<div  id="ver-pdf" class="modal fade" data-backdrop="static" data-keyboard="false" role="dialog" tabindex="-1" aria-labelledby="reportePaciente" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+
+    <div class="modal-content">
+
+      <div class="modal-header bg-modal">
+        <h5 class="modal-title" id="reportePaciente">Reporte Paciente</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>                   
+
+      <div class="modal-body">
+        <div id="view_pdf_frm204" style="height:550px"> 
+
+
+        </div>  
+      </div>  
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger btnCerrar float-left" data-bs-dismiss="modal">Cerrar</button>     
+      </div>
+
+    </div>
+
+  </div>
+</div>

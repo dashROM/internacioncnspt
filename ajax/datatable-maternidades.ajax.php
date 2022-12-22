@@ -97,10 +97,9 @@ class TablaMaternidades {
 			/*=============================================
 			TRAEMOS LAS ACCIONES
 			=============================================*/					
-			$btnEditarMaternidad = "<button class='btn btn-warning btnEditarMaternidad' idMaternidad='".$maternidad[$i]["id"]."' data-bs-toggle='modal' data-bs-target='#ModaleditarMaternidad'><i class='fas fa-pencil-alt'></i></button>";
-			$btnDetalleMaternidad = "<button class='btn btn-primary btnDetalleIngreso' idMaternidad='".$maternidad[$i]["id"]."' data-bs-toggle='modal' data-bs-target='#ModalnuevaAltas'><i class='fas fa-file-invoice'></i></button>";
+			$btnReporteForm204 = "<button class='btn btn-outline-primary btn-sm btnReporteForm204' idPaciente='".$maternidad[$i]["id_paciente"]."' idPacienteIngreso='".$maternidad[$i]["id_paciente_ingreso"]."' modulo='paciente-ingresos' data-toggle='tooltip' title='Reportes Paciente'><i class='fas fa-print'></i> FORM204</button>";
 
-			$botones = "<div class='btn-group'>".$btnEditarMaternidad.$btnDetalleMaternidad."</div>";	
+			$botones = "<div class='btn-group'>".$btnReporteForm204."</div>";
 
 			$nro = $i + 1;				
 			$subdata = array();
@@ -138,6 +137,7 @@ class TablaMaternidades {
 	    $subdata[] = $maternidad[$i]["sexo_nacido1"].' - '.$maternidad[$i]["sexo_nacido2"].' - '.$maternidad[$i]["sexo_nacido3"];
 	    $subdata[] = $maternidad[$i]["tipo_parto"];
 	    $subdata[] = $maternidad[$i]["edad_gestacional"];
+	    $subdata[] = $botones;
 
 	    $data[] = $subdata;	
 
@@ -251,10 +251,9 @@ class TablaMaternidades {
 			/*=============================================
 			TRAEMOS LAS ACCIONES
 			=============================================*/					
-			$btnEditarMaternidad = "<button class='btn btn-warning btnEditarMaternidad' idMaternidad='".$maternidad[$i]["id"]."' data-bs-toggle='modal' data-bs-target='#ModaleditarMaternidad'><i class='fas fa-pencil-alt'></i></button>";
-			$btnDetalleMaternidad = "<button class='btn btn-primary btnDetalleIngreso' idMaternidad='".$maternidad[$i]["id"]."' data-bs-toggle='modal' data-bs-target='#ModalnuevaAltas'><i class='fas fa-file-invoice'></i></button>";
+			$btnReporteForm204 = "<button class='btn btn-outline-primary btn-sm btnReporteForm204' idPaciente='".$maternidad[$i]["id_paciente"]."' idPacienteIngreso='".$maternidad[$i]["id_paciente_ingreso"]."' modulo='paciente-ingresos' data-toggle='tooltip' title='Reportes Paciente'><i class='fas fa-print'></i> FORM204</button>";
 
-			$botones = "<div class='btn-group'>".$btnEditarMaternidad.$btnDetalleMaternidad."</div>";	
+			$botones = "<div class='btn-group'>".$btnReporteForm204."</div>";
 
 			$nro = $i + 1;				
 			$subdata = array();
@@ -287,11 +286,12 @@ class TablaMaternidades {
 	    $subdata[] = date("H:i", strtotime($maternidad[$i]["hora_egreso"])); 
 	    $subdata[] = $maternidad[$i]["causa_egreso"];
 	    $subdata[] = date("d/m/Y", strtotime($maternidad[$i]["fecha_nacido"]));
-	    $subdata[] = $maternidad[$i]["peso_nacido"];
-	    $subdata[] = $maternidad[$i]["hora_nacido"];
-	    $subdata[] = $maternidad[$i]["sexo_nacido"];
+	    $subdata[] = $maternidad[$i]["peso_nacido1"].' - '.$maternidad[$i]["peso_nacido2"].' - '.$maternidad[$i]["peso_nacido3"];
+	    $subdata[] = date("H:i", strtotime($maternidad[$i]["hora_nacido"]));
+	    $subdata[] = $maternidad[$i]["sexo_nacido1"].' - '.$maternidad[$i]["sexo_nacido2"].' - '.$maternidad[$i]["sexo_nacido3"];
 	    $subdata[] = $maternidad[$i]["tipo_parto"];
 	    $subdata[] = $maternidad[$i]["edad_gestacional"];
+	   	$subdata[] = $botones;
 
 	    $data[] = $subdata;
 

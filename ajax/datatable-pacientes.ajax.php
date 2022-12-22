@@ -76,6 +76,13 @@ class TablaPacientes {
 			$hoy = new DateTime(date("Y-m-d"));
 			$edad = $hoy->diff($nacimiento);
 
+			// Asignando valor y formato a fecha de nacimiento
+			if ($pacientes[$i]["fecha_nacimiento"] == null) {
+				$fecha_nacimiento = '';
+			} else {
+				$fecha_nacimiento = date("d/m/Y", strtotime($pacientes[$i]["fecha_nacimiento"]));
+			}
+
 			/*=============================================
 		  TRAEMOS LAS ACCIONES
 		  =============================================*/		
@@ -93,7 +100,7 @@ class TablaPacientes {
 	    $subdata[] = $pacientes[$i]["documento_ci"];  
 	    $subdata[] = $pacientes[$i]["cod_asegurado"]; 
 	    $subdata[] = $pacientes[$i]["cod_beneficiario"]; 
-	    $subdata[] = date("d/m/Y", strtotime($pacientes[$i]["fecha_nacimiento"])); 
+	    $subdata[] = $fecha_nacimiento;
 	    $subdata[] = $edad->y.' años '.$edad->m.' meses'; 
 	    $subdata[] = $pacientes[$i]["estado_civil"]; 
 	    $subdata[] = $pacientes[$i]["sexo"];

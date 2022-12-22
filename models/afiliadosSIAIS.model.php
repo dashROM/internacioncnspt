@@ -7,7 +7,6 @@ class ModeloAfiliadosSIAIS {
 	/*=============================================
 	MOSTRAR AFILIADOS DE LA BASE DE DATOS SIAIS
 	=============================================*/
-	
 	static public function mdlMostrarAfiliadosSIAIS($item1, $item2, $valor) {
 
 		

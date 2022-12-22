@@ -375,6 +375,7 @@ create table paciente_egresos
 	diagnostico_egreso3				text,
 	causa_egreso							varchar(100),
 	condicion_egreso					varchar(100),
+	id_departamento						integer,
 	fallecido									integer default 0,
 	fallecido_causa_clinica		text,
 	fallecido_causa_autopsia	text,
@@ -382,6 +383,7 @@ create table paciente_egresos
 	id_medico		 							integer,
 	contrareferencia					integer default 0,
 	foreign key(id_cie10) references cie10(id),
+	foreign key(id_departamento) references departamentos(id),
 	foreign key(id_paciente_ingreso) references paciente_ingresos(id),
 	foreign key(id_medico) references medicos(id)
 );
@@ -437,11 +439,11 @@ create table maternidades
 	sexo_nacido2								varchar(10),
 	peso_nacido3								numeric(10,3),
 	sexo_nacido3								varchar(10),
-	estado_nacido								varchar(20),
-	alumbramiento								varchar(20),
-	perine											varchar(20),
-	sangrado										varchar(20),
-	estado_madre								varchar(20),
+	estado_nacido								varchar(30),
+	alumbramiento								varchar(30),
+	perine											varchar(30),
+	sangrado										varchar(30),
+	estado_madre								varchar(30),
 	nombre_esposo								varchar(150),
 	id_paciente_ingreso					integer,
 	foreign key(id_paciente_ingreso) references paciente_ingresos(id)

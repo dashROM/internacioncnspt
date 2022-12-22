@@ -61,6 +61,13 @@ class TablaNeonatos {
 			$edad = $hoy->diff($nacimiento);
 
 			/*=============================================
+			TRAEMOS LAS ACCIONES
+			=============================================*/					
+			$btnReporteForm204 = "<button class='btn btn-outline-primary btn-sm btnReporteForm204' idPaciente='".$neonatos[$i]["id_paciente"]."' idPacienteIngreso='".$neonatos[$i]["id_paciente_ingreso"]."' modulo='paciente-ingresos' data-toggle='tooltip' title='Reportes Paciente'><i class='fas fa-print'></i> FORM204</button>";
+
+			$botones = "<div class='btn-group'>".$btnReporteForm204."</div>";
+
+			/*=============================================
 			GUARDAMOS LOS DATOS EN UN NUEVO ARRAY
 			=============================================*/
 			$nro = $i + 1;				
@@ -95,6 +102,8 @@ class TablaNeonatos {
 	    $subdata[] = $neonatos[$i]["causa_egreso"];
 	    $subdata[] = $neonatos[$i]["talla_neonato"];
 	    $subdata[] = $neonatos[$i]["peso_neonato"];
+	    $subdata[] = $botones;
+
 	    $data[] = $subdata;	
 
 		}
@@ -167,6 +176,13 @@ class TablaNeonatos {
 			$edad = $hoy->diff($nacimiento);
 
 			/*=============================================
+			TRAEMOS LAS ACCIONES
+			=============================================*/					
+			$btnReporteForm204 = "<button class='btn btn-outline-primary btn-sm btnReporteForm204' idPaciente='".$neonatos[$i]["id_paciente"]."' idPacienteIngreso='".$neonatos[$i]["id_paciente_ingreso"]."' modulo='paciente-ingresos' data-toggle='tooltip' title='Reportes Paciente'><i class='fas fa-print'></i> FORM204</button>";
+
+			$botones = "<div class='btn-group'>".$btnReporteForm204."</div>";
+
+			/*=============================================
 			GUARDAMOS LOS DATOS EN UN NUEVO ARRAY
 			=============================================*/			
 			$nro = $i + 1;				
@@ -201,6 +217,8 @@ class TablaNeonatos {
 	    $subdata[] = $neonatos[$i]["causa_egreso"];
 	    $subdata[] = $neonatos[$i]["talla_neonato"];
 	    $subdata[] = $neonatos[$i]["peso_neonato"];
+	    $subdata[] = $botones;
+
 	    $data[] = $subdata;	
 
 		}

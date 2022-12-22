@@ -106,6 +106,7 @@ class AjaxPacienteEgresos {
 	public $contrareferencia;
 	public $id_paciente_ingreso;
 	public $id_cama;
+	public $id_departamento;
 
 	/*=============================================
 	MOSTRAR DATOS DE PACIENTE EGRESO
@@ -120,7 +121,7 @@ class AjaxPacienteEgresos {
 			$valor = $this->id;
 		}
 
-		$respuesta= ControllerPacienteEgresos::ctrMostrarPacienteEgreso($item, $valor);
+		$respuesta = ControllerPacienteEgresos::ctrMostrarPacienteEgreso($item, $valor);
 	
 		echo json_encode($respuesta);	
 			
@@ -139,6 +140,7 @@ class AjaxPacienteEgresos {
 		               "diagnostico_egreso3"  	  => mb_strtoupper($this->diagnostico_egreso3, 'utf-8'),
 		               "causa_egreso"        			=> $this->causa_egreso,
 		               "condicion_egreso"    			=> $this->condicion_egreso,
+		               "id_departamento"    			=> $this->id_departamento,
 		               "fallecido"					 			=> $this->fallecido,
 		               "fallecido_causa_clinica"  => mb_strtoupper($this->fallecido_causa_clinica),
 		               "fallecido_causa_autopsia" => mb_strtoupper($this->fallecido_causa_autopsia),
@@ -327,8 +329,15 @@ if (isset($_POST["nuevoPacienteEgreso"])) {
 	if (isset($_POST['nuevoCondicionEgreso'])) {
 		$nuevoPacienteEgreso -> condicion_egreso = $_POST['nuevoCondicionEgreso'];
 	} else {
-		$nuevoPacienteEgreso -> condicion_egreso = "";
+		$nuevoPacienteEgreso -> condicion_egreso = null;
 	}
+
+	if (isset($_POST['nuevoDestinoTransExterna'])) {
+		$nuevoPacienteEgreso -> id_departamento = $_POST['nuevoDestinoTransExterna'];
+	} else {
+		$nuevoPacienteEgreso -> id_departamento = null;
+	}
+
 	$nuevoPacienteEgreso -> fallecido_causa_clinica = $_POST['nuevoCausaClinica'];
 	$nuevoPacienteEgreso -> fallecido_causa_autopsia = $_POST['nuevoCausaAutopsia'];
 	

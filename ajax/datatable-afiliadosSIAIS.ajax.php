@@ -13,7 +13,6 @@ class TablaAfiliadosSIAIS {
 
 	public function mostrarTablaAfiliadosSIAIS() {
  
-		
 		$item1 = "nombre_completo";
 		$item2 = "cod_asegurado";
 		$valor = $this->afiliado;

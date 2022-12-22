@@ -111,7 +111,7 @@ class ModelReportes {
 
 		if ($item != null) {
 
-			$sql = "SELECT m.fecha_nacido, m.hora_nacido, m.tipo_parto, m.tipo_aborto, m.edad_gestacional_fum, m.edad_gestacional_ecografia, m.estado_nacido, m.estado_nacido, m.sexo_nacido, m.peso_nacido
+			$sql = "SELECT m.fecha_nacido, m.hora_nacido, m.tipo_parto, m.tipo_aborto, m.edad_gestacional, m.sexo_nacido1, m.peso_nacido1, m.estado_nacido1, m.sexo_nacido2, m.peso_nacido2, m.estado_nacido2, m.sexo_nacido3, m.peso_nacido3, m.estado_nacido3
 			FROM maternidades m
 			INNER JOIN paciente_ingresos pi2
 			ON m.id_paciente_ingreso = pi2.id

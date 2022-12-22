@@ -208,18 +208,19 @@ class ModelPacienteEgresos {
 	    $pdo->beginTransaction();
 
 	    // Consulta 1: Inserta nuevo paciente egreso
-			$sql1 = "INSERT INTO $tabla(fecha_egreso, hora_egreso, id_cie10, diagnostico_egreso1, diagnostico_egreso2, diagnostico_egreso3, causa_egreso, condicion_egreso, fallecido, fallecido_causa_clinica, fallecido_causa_autopsia, contrareferencia, id_paciente_ingreso) VALUES (:fecha_egreso, :hora_egreso, :id_cie10, :diagnostico_egreso1, :diagnostico_egreso2, :diagnostico_egreso3, :causa_egreso, :condicion_egreso, :fallecido, :fallecido_causa_clinica, :fallecido_causa_autopsia, :contrareferencia, :id_paciente_ingreso)";
+			$sql1 = "INSERT INTO $tabla(fecha_egreso, hora_egreso, id_cie10, diagnostico_egreso1, diagnostico_egreso2, diagnostico_egreso3, causa_egreso, condicion_egreso, id_departamento, fallecido, fallecido_causa_clinica, fallecido_causa_autopsia, contrareferencia, id_paciente_ingreso) VALUES (:fecha_egreso, :hora_egreso, :id_cie10, :diagnostico_egreso1, :diagnostico_egreso2, :diagnostico_egreso3, :causa_egreso, :condicion_egreso, :id_departamento, :fallecido, :fallecido_causa_clinica, :fallecido_causa_autopsia, :contrareferencia, :id_paciente_ingreso)";
 
 			$stmt = $pdo->prepare($sql1);
 
 			$stmt->bindParam(":fecha_egreso", $datos["fecha_egreso"], PDO::PARAM_STR);
 			$stmt->bindParam(":hora_egreso", $datos["hora_egreso"], PDO::PARAM_STR);
 			$stmt->bindParam(":id_cie10", $datos["id_cie10"], PDO::PARAM_INT);
-			$stmt->bindParam(":causa_egreso", $datos["causa_egreso"], PDO::PARAM_STR);
 			$stmt->bindParam(":diagnostico_egreso1", $datos["diagnostico_egreso1"], PDO::PARAM_STR);
 			$stmt->bindParam(":diagnostico_egreso2", $datos["diagnostico_egreso2"], PDO::PARAM_STR);
 			$stmt->bindParam(":diagnostico_egreso3", $datos["diagnostico_egreso3"], PDO::PARAM_STR);
+			$stmt->bindParam(":causa_egreso", $datos["causa_egreso"], PDO::PARAM_STR);
 			$stmt->bindParam(":condicion_egreso", $datos["condicion_egreso"], PDO::PARAM_STR);
+			$stmt->bindParam(":id_departamento", $datos["id_departamento"], PDO::PARAM_INT);
 			$stmt->bindParam(":fallecido", $datos["fallecido"], PDO::PARAM_INT);
 			$stmt->bindParam(":fallecido_causa_clinica", $datos["fallecido_causa_clinica"], PDO::PARAM_STR);
 			$stmt->bindParam(":fallecido_causa_autopsia", $datos["fallecido_causa_autopsia"], PDO::PARAM_STR);

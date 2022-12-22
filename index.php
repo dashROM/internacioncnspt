@@ -3,6 +3,7 @@
 require_once "controllers/template.controller.php";
 require_once "controllers/usuarios.controller.php";
 require_once "controllers/pacientes.controller.php";
+require_once "controllers/departamentos.controller.php";
 require_once "controllers/establecimientos.controller.php";
 require_once "controllers/consultorios.controller.php";
 require_once "controllers/servicios.controller.php";
@@ -17,6 +18,7 @@ require_once "controllers/paciente_ingresos.controller.php";
 
 require_once "models/usuarios.model.php";
 require_once "models/pacientes.model.php";
+require_once "models/departamentos.model.php";
 require_once "models/establecimientos.model.php";
 require_once "models/consultorios.model.php";
 require_once "models/servicios.model.php";

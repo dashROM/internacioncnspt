@@ -16,12 +16,14 @@ class AjaxMaternidades {
 	public $fecha_nacido;     
 	public $hora_nacido;
 	public $peso_nacido1;     
-	public $sexo_nacido1;	
+	public $sexo_nacido1;
+	public $estado_nacido1;
 	public $peso_nacido2;     
-	public $sexo_nacido2;	
+	public $sexo_nacido2;
+	public $estado_nacido2;	
 	public $peso_nacido3;     
 	public $sexo_nacido3;	
-    public $estado_nacido;
+    public $estado_nacido3;
     public $alumbramiento;     
 	public $perine;	
     public $sangrado;
@@ -58,11 +60,13 @@ class AjaxMaternidades {
 		               "hora_nacido"                  => $this->hora_nacido,
 		               "peso_nacido1"                 => $this->peso_nacido1,
 		               "sexo_nacido1"                 => $this->sexo_nacido1,
+		               "estado_nacido1"               => $this->estado_nacido1,
 		               "peso_nacido2"                 => $this->peso_nacido2,
 		               "sexo_nacido2"                 => $this->sexo_nacido2,
+		               "estado_nacido2"               => $this->estado_nacido2,
 		               "peso_nacido3"                 => $this->peso_nacido3,
 		               "sexo_nacido3"                 => $this->sexo_nacido3,
-		               "estado_nacido"                => $this->estado_nacido,
+		               "estado_nacido3"               => $this->estado_nacido3,
 		               "alumbramiento"                => $this->alumbramiento,
 		               "perine"                       => $this->perine, 
 		               "sangrado"                     => $this->sangrado,
@@ -92,11 +96,13 @@ class AjaxMaternidades {
 		               "hora_nacido"                  => $this->hora_nacido,
 		               "peso_nacido1"                 => $this->peso_nacido1,
 		               "sexo_nacido1"                 => $this->sexo_nacido1,
+		               "estado_nacido1"               => $this->estado_nacido1,
 		               "peso_nacido2"                 => $this->peso_nacido2,
 		               "sexo_nacido2"                 => $this->sexo_nacido2,
+		               "estado_nacido2"               => $this->estado_nacido2,
 		               "peso_nacido3"                 => $this->peso_nacido3,
 		               "sexo_nacido3"                 => $this->sexo_nacido3,
-		               "estado_nacido"                => $this->estado_nacido,
+		               "estado_nacido3"               => $this->estado_nacido3,
 		               "alumbramiento"                => $this->alumbramiento,
 		               "perine"                       => $this->perine, 
 		               "sangrado"                     => $this->sangrado,
@@ -181,6 +187,12 @@ if (isset($_POST["nuevoMaternidad"])) {
 		$nuevoMaternidad -> sexo_nacido1 = null;
 	}
 
+	if (isset($_POST["nuevoEstadoNacido1"])) {
+		$nuevoMaternidad -> estado_nacido1 = $_POST['nuevoEstadoNacido1'];
+	} else {
+		$nuevoMaternidad -> estado_nacido1 = null;
+	}
+
 	if ($_POST['nuevoPesoNacido2'] != "") {
 		$nuevoMaternidad -> peso_nacido2 = $_POST['nuevoPesoNacido2'];
 	} else {
@@ -191,6 +203,12 @@ if (isset($_POST["nuevoMaternidad"])) {
 		$nuevoMaternidad -> sexo_nacido2 = $_POST['nuevoSexoNacido2'];
 	} else {
 		$nuevoMaternidad -> sexo_nacido2 = null;
+	}
+
+	if (isset($_POST["nuevoEstadoNacido2"])) {
+		$nuevoMaternidad -> estado_nacido2 = $_POST['nuevoEstadoNacido2'];
+	} else {
+		$nuevoMaternidad -> estado_nacido2 = null;
 	}
 
 	if ($_POST['nuevoPesoNacido3'] != "") {
@@ -205,10 +223,10 @@ if (isset($_POST["nuevoMaternidad"])) {
 		$nuevoMaternidad -> sexo_nacido3 = null;
 	}
 
-	if (isset($_POST["nuevoEstadoNacido"])) {
-		$nuevoMaternidad -> estado_nacido = $_POST['nuevoEstadoNacido'];
+	if (isset($_POST["nuevoEstadoNacido3"])) {
+		$nuevoMaternidad -> estado_nacido3 = $_POST['nuevoEstadoNacido3'];
 	} else {
-		$nuevoMaternidad -> estado_nacido = null;
+		$nuevoMaternidad -> estado_nacido3 = null;
 	}
 
 	if (isset($_POST["nuevoAlumbramiento"])) {
@@ -292,6 +310,12 @@ if (isset($_POST["editarMaternidad"])) {
 		$editarMaternidad -> sexo_nacido1 = null;
 	}
 
+	if (isset($_POST["editarEstadoNacido1"])) {
+		$editarMaternidad -> estado_nacido1 = $_POST['editarEstadoNacido1'];
+	} else {
+		$editarMaternidad -> estado_nacido1 = null;
+	}
+
 	if ($_POST['editarPesoNacido2'] != "") {
 		$editarMaternidad -> peso_nacido2 = $_POST['editarPesoNacido2'];
 	} else {
@@ -302,6 +326,12 @@ if (isset($_POST["editarMaternidad"])) {
 		$editarMaternidad -> sexo_nacido2 = $_POST['editarSexoNacido2'];
 	} else {
 		$editarMaternidad -> sexo_nacido2 = null;
+	}
+
+	if (isset($_POST["editarEstadoNacido2"])) {
+		$editarMaternidad -> estado_nacido2 = $_POST['editarEstadoNacido2'];
+	} else {
+		$editarMaternidad -> estado_nacido2 = null;
 	}
 
 	if ($_POST['editarPesoNacido3'] != "") {
@@ -316,10 +346,10 @@ if (isset($_POST["editarMaternidad"])) {
 		$editarMaternidad -> sexo_nacido3 = null;
 	}
 
-	if (isset($_POST["editarEstadoNacido"])) {
-		$editarMaternidad -> estado_nacido = $_POST['editarEstadoNacido'];
+	if (isset($_POST["editarEstadoNacido3"])) {
+		$editarMaternidad -> estado_nacido3 = $_POST['editarEstadoNacido3'];
 	} else {
-		$editarMaternidad -> estado_nacido = null;
+		$editarMaternidad -> estado_nacido3 = null;
 	}
 
 	if (isset($_POST["editarAlumbramiento"])) {

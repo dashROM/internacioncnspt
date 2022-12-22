@@ -56,7 +56,6 @@ class AjaxAfiliadosSIAIS {
         /*=============================================
         ELIMINANDO ESPACIOS EN BLANCO Y FORMATEANDO ALGUNOS REGISTROS
         =============================================*/       
-
         $respuesta['pac_numero_historia'] = rtrim($respuesta["pac_numero_historia"]);
 
         $respuesta['pac_codigo'] = rtrim($respuesta["pac_codigo"]);
@@ -79,7 +78,6 @@ class AjaxAfiliadosSIAIS {
 /*=============================================
 MOSTRAR DATOS AFILIADO SIAIS
 =============================================*/
-
 if (isset($_POST["mostrarAfiliado"])) {
 
 	$seleccionarAfiliado = new AjaxAfiliadosSIAIS();
@@ -91,7 +89,6 @@ if (isset($_POST["mostrarAfiliado"])) {
 /*=============================================
 MOSTRAR Y GUARDAR DATOS AFILIADO SIAIS EN FICHA 
 =============================================*/
-
 if (isset($_POST["guardarAfiliado"])) {
 
     $seleccionarAfiliado = new AjaxAfiliadosSIAIS();

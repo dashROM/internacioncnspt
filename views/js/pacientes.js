@@ -126,7 +126,7 @@ $(document).ready(function(){
   	rules: {
   		nuevoPaternoPaciente : { patron_texto: true },
   		nuevoMaternoPaciente : { patron_texto: true },
-			nuevoNombrePaciente : { patron_texto: true },
+			nuevoNombrePaciente : { patron_numerosTexto: true },
 			nuevoDomicilioPaciente : { patron_textoEspecial: true },
 			nuevoCodAsegurado : { patron_textoEspecial: true },
 			nuevoNroEmpleador : { patron_textoEspecial: true },
@@ -582,7 +582,7 @@ $(document).ready(function(){
   	rules: {
   		editarPaternoPaciente : { patron_texto: true },
   		editarMaternoPaciente : { patron_texto: true },
-			editarNombrePaciente : { patron_texto: true },
+			editarNombrePaciente : { patron_numerosTexto: true },
 			editarDomicilioPaciente : { patron_textoEspecial: true },
 			editarCodAsegurado : { patron_textoEspecial: true },
 			editarCodBeneficiario : { patron_textoEspecial: true },
@@ -601,7 +601,7 @@ $(document).ready(function(){
 });
 
 /*=============================================
-GUARDANDO DATOS DE EDITAR PERSONA
+GUARDANDO DATOS DE EDITAR PACIENTE
 =============================================*/
 $("#frmEditarPaciente").on("click", ".btnGuardar", function() {
 
@@ -667,7 +667,7 @@ $("#frmEditarPaciente").on("click", ".btnGuardar", function() {
 
 					swal.fire({
 
-						title: "¡Los campos obligatorios no puede ir vacio o llevar caracteres especiales no da!",
+						title: "¡Los campos obligatorios no puede ir vacio o llevar caracteres especiales!",
 						icon: "error",
 						allowOutsideClick: false,
 						confirmButtonText: "¡Cerrar!"
@@ -685,8 +685,20 @@ $("#frmEditarPaciente").on("click", ".btnGuardar", function() {
 			},
 			error: function(error) {
 
-				console.log("No funciona");
+				swal.fire({
 
+					title: "¡Error de conexión a la Base de Datos!",
+					icon: "error",
+					allowOutsideClick: false,
+					confirmButtonText: "¡Cerrar!"
+
+				}).then((result) => {
+
+					if (result.value) {
+						$(".btnGuardar").prop("disabled", false);
+					}
+
+				});
 			}
 
 		});
@@ -1667,3 +1679,201 @@ function CalcularEdad(edad){
 PARA HABILITAR INPUT MASK EN FORMULARIO
 =============================================*/
 $(":input").inputmask();
+
+/*=============================================
+BUSQUEDA DE AFILIADO A PARTIR DEL NOMBRE O COD ASEGURADO POR EL BOTON BUSCAR
+=============================================*/
+$(document).on("click", ".btnBuscarEmpleador", function() {
+
+	var empleador = $("#buscardorEmpleador").val();
+
+	if (empleador != "") {
+
+		var datos = new FormData();
+		datos.append("empleador", empleador);
+		datos.append("mostrarEmpleador", "mostrarEmpleador");
+
+		//Para mostrar alerta personalizada de loading
+		swal.fire({
+			text: 'Procesando...',
+			allowOutsideClick: false,
+			allowEscapeKey: false,
+			allowEnterKey: false,
+			onOpen: () => {
+				swal.showLoading()
+			}
+		});
+
+		$.ajax({
+
+			url: "ajax/datatable-empleadoresSIAIS.ajax.php",
+			method: "POST",
+			data: datos,
+			cache: false,
+			contentType: false,
+			processData: false,
+			dataType: "json",
+			success: function(respuesta) {	
+
+				//Para cerrar la alerta personalizada de loading
+				swal.close();					
+
+				// $('#tablaAfiliadosSIAIS').remove();
+				// $('#tablaAfiliadosSIAIS_wrapper').remove();
+
+				// $("#tblAfiliadosSIAIS").append(
+
+				// '<table class="table table-bordered table-hover dt-responsive" id="tablaAfiliadosSIAIS" width="100%">'+
+
+				// 	'<thead>'+
+
+				// 		'<tr>'+
+				// 			'<th>APELLIDOS Y NOMBRES</th>'+
+				// 			'<th>COD. ASEGURADO</th>'+
+				// 			'<th>COD. BENEFICIARIO</th>'+
+				// 			'<th>FECHA NACIMIENTO</th>'+
+				// 			'<th>COD. EMPLEADOR</th>'+
+				// 			'<th>NOMBRE EMPLEADOR</th>'+
+				// 		'</tr>'+
+
+				// 	'</thead>'+
+
+				// '</table>'  
+
+				// );       			
+
+				var t = $('#tablaEmpleadoresSIAIS').DataTable({
+
+					"data": respuesta,
+
+					"columns": [
+					{ data: "nombre_completo" },
+					{ data: "cod_asegurado" },
+					{ data: "cod_beneficiario" },
+					{ render: function (data, type, row) {
+						var date = new Date(row.fecha_nacimiento);
+						date.setMinutes(date.getMinutes() + date.getTimezoneOffset())
+						return (moment(date).format("DD-MM-YYYY"));
+					}},
+					{ data: "cod_empleador" },
+					{ data: "nombre_empleador" },
+					],
+
+					"deferRender": true,
+
+					"processing" : true,
+
+					"language": {
+
+						"sProcessing":     "Procesando...",
+						"sLengthMenu":     "Mostrar _MENU_ registros",
+						"sZeroRecords":    "No se encontraron resultados",
+						"sEmptyTable":     "Ningún dato disponible en esta tabla",
+						"sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_",
+						"sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0",
+						"sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+						"sInfoPostFix":    "",
+						"sSearch":         "Buscar:",
+						"searchPlaceholder": "Escribe aquí para buscar...",
+						"sUrl":            "",
+						"sInfoThousands":  ",",
+						"sLoadingRecords": "Cargando...",
+						"oPaginate": {
+							"sFirst":    "Primero",
+							"sLast":     "Último",
+							"sNext":     "Siguiente",
+							"sPrevious": "Anterior"
+						},
+						"oAria": {
+							"sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+							"sSortDescending": ": Activar para ordenar la columna de manera descendente"
+						}
+						
+					},
+
+					"lengthChange": false,
+
+					"searching": true,
+
+					"ordering": true, 
+
+					"info":     false 
+
+				});
+
+				$('#tablaEmpleadoresSIAIS tbody').on('click', 'tr', function () {
+
+					$(this).addClass("pe-auto");
+					
+					var data = t.row( this ).data();
+
+					var idEmpleador = data.idempleador;
+					console.log("idEmpleador", idEmpleador);
+
+					var datos = new FormData();
+					datos.append("guardarEmpleador", "guardarEmpleador");
+					datos.append("idEmpleador", idEmpleador);
+
+					//Para mostrar alerta personalizada de loading
+					swal.fire({
+						text: 'Procesando...',
+						allowOutsideClick: false,
+						allowEscapeKey: false,
+						allowEnterKey: false,
+						onOpen: () => {
+							swal.showLoading()
+						}
+					});
+
+					$.ajax({
+
+						url:"ajax/empleadoresSIAIS.ajax.php",
+						method: "POST",
+						data: datos,
+						cache: false,
+						contentType: false,
+						processData: false,
+						dataType:"json",
+						success:function(respuesta) {
+							console.log("respuestaEmpleador", respuesta);
+
+							//Para cerrar la alerta personalizada de loading
+							swal.close();
+
+							var id = respuesta["idempleador"];
+							var nroEmpleador = respuesta["emp_nro_empleador"];
+							var nombreEmpleador = respuesta["emp_nombre"];
+
+							$('#nuevoNroEmpleador').val(nroEmpleador);
+							$('#nuevoNombreEmpleador').val(nombreEmpleador);
+							
+							$('#modalCodAsegurado').modal('toggle');
+             	$('#modalNuevoPaciente').modal('show');
+
+						},
+						error: function(error) {
+
+							console.log('¡Error! Falla en la consulta a BD, no se modificaron.')
+
+						}
+
+					});
+				});
+
+			},
+			error: function(error){
+
+				console.log("No funciona");
+
+			}
+
+		});
+
+	} else {
+		
+		// $('#tablaAfiliadosSIAIS').remove();
+		// $('#tablaAfiliadosSIAIS_wrapper').remove();
+
+	}
+
+});

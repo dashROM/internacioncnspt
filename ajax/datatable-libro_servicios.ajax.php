@@ -66,6 +66,13 @@ class TablaLibroServicios {
 			$edad = $hoy->diff($nacimiento);
 
 			/*=============================================
+			TRAEMOS LAS ACCIONES
+			=============================================*/					
+			$btnReporteForm204 = "<button class='btn btn-outline-primary btn-sm btnReporteForm204' idPaciente='".$libroServicios[$i]["id_paciente"]."' idPacienteIngreso='".$libroServicios[$i]["id"]."' modulo='paciente-ingresos' data-toggle='tooltip' title='Reportes Paciente'><i class='fas fa-print'></i> FORM204</button>";
+
+			$botones = "<div class='btn-group'>".$btnReporteForm204."</div>";
+
+			/*=============================================
 			GUARDAMOS LOS DATOS EN UN NUEVO ARRAY
 			=============================================*/			
 			$nro = $i + 1;				
@@ -98,6 +105,8 @@ class TablaLibroServicios {
 	    $subdata[] = date("Y", strtotime($libroServicios[$i]["fecha_egreso"])); 
 	    $subdata[] = date("H:i", strtotime($libroServicios[$i]["hora_egreso"])); 
 	    $subdata[] = $libroServicios[$i]["causa_egreso"];
+	    $subdata[] = $botones;
+
 	    $data[] = $subdata;	
 
 		}
