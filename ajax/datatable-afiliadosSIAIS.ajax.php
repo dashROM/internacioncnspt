@@ -17,7 +17,7 @@ class TablaAfiliadosSIAIS {
 		$item2 = "cod_asegurado";
 		$valor = $this->afiliado;
 		
-		$respuesta = ControladorAfiliadosSIAIS::ctrMostrarAfiliadosSIAIS($item1, $item2, $valor);
+		$respuesta = ControllerAfiliadosSIAIS::ctrMostrarAfiliadosSIAIS($item1, $item2, $valor);
 
 		echo json_encode($respuesta);
 

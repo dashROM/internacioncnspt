@@ -173,7 +173,7 @@ class ModelPacienteInternados {
     /*=============================================
     LISTADO DE PACIENTES INTERNADO POR BUSQUEDA FILTRADO
     =============================================*/
-    static public function mdlMostrarPacienteInternadosFiltro($item,$valor){
+    static public function mdlMostrarPacienteInternadosFiltro($item, $valor){
 
         if ($item == "cod_asegurado") {
 
@@ -213,6 +213,34 @@ class ModelPacienteInternados {
 
             return $stmt->fetchAll();
         }
+
+        $stmt->close();
+        $stmt = null;
+
+    }
+
+    /*=============================================
+    LISTADO DE PACIENTES INTERNADO POR BUSQUEDA FILTRADO
+    =============================================*/
+    static public function mdlMostrarPacientesInternadosServicio($tabla, $item, $valor){
+
+        if ($valor == 7 || $valor == 22) {
+            $sql = "SELECT pi.fecha_ingreso, concat_ws(' ', p.nombre_paciente, p.paterno_paciente, p.materno_paciente) as nombre_completo, p.documento_ci, p.cod_asegurado, s.nombre_sala, c.nombre_cama, se.nombre_servicio, e.nombre_especialidad, concat_ws(' ', m.nombre_medico, m.paterno_medico, m.materno_medico) as nombre_completo_medico 
+            FROM pacientes p, paciente_ingresos pi, paciente_internados pi2, salas s, camas c, servicios se, especialidades e, medicos m 
+            WHERE p.id = pi2.id_paciente and pi.id = pi2.id_paciente_ingreso AND s.id = pi2.id_sala AND c.id = pi2.id_cama AND se.id = pi2.id_servicio AND e.id = pi2.id_especialidad AND m.id = pi2.id_medico AND pi2.estado_internado = 0 AND e.id = :$item";
+        } else {
+            $sql = "SELECT pi.fecha_ingreso, concat_ws(' ', p.nombre_paciente, p.paterno_paciente, p.materno_paciente) as nombre_completo, p.documento_ci, p.cod_asegurado, s.nombre_sala, c.nombre_cama, se.nombre_servicio, e.nombre_especialidad, concat_ws(' ', m.nombre_medico, m.paterno_medico, m.materno_medico) as nombre_completo_medico 
+            FROM pacientes p, paciente_ingresos pi, paciente_internados pi2, salas s, camas c, servicios se, especialidades e, medicos m 
+            WHERE p.id = pi2.id_paciente and pi.id = pi2.id_paciente_ingreso AND s.id = pi2.id_sala AND c.id = pi2.id_cama AND se.id = pi2.id_servicio AND e.id = pi2.id_especialidad AND m.id = pi2.id_medico AND pi2.estado_internado = 0 AND se.id = :$item";
+        }
+            
+        $stmt = Conexion::connectPostgres()->prepare($sql);
+
+        $stmt->bindParam(":".$item, $valor, PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        return $stmt->fetchAll();
 
         $stmt->close();
         $stmt = null;

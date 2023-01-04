@@ -152,7 +152,8 @@ if (isset($_SESSION["iniciarSesion_internacion"]) && $_SESSION["iniciarSesion_in
       $parametros = explode("/", $_GET["ruta"]);
       
       if ($parametros[0] == "login" ||
-          $parametros[0] == "buscador-internacion")  {
+          $parametros[0] == "buscador-internacion" || 
+          $parametros[0] == "marquesina-pacientes-internacion")  {
 
         include "modulos/".$parametros[0].".php";
 

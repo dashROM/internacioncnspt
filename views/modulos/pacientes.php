@@ -664,6 +664,18 @@ MODAL EDITAR PACIENTE
 
               </div>
 
+               <div class="row">
+
+                <div class="col-md-6 form-group">
+                  
+                  <button type="button" class="btn btn-round btn-primary" id="buscarEmpleador" data-bs-toggle="modal" data-bs-target="#modalEmpleadorSIAIS">
+                    <i class="fas fa-search"></i> Buscar Empleador
+                  </button>
+
+                </div>
+
+              </div>
+
               <div class="row">
 
                 <div class="col-md-6 form-group">
@@ -743,7 +755,7 @@ MODAL EDITAR PACIENTE
 </div>
 
 <!--=====================================
-MODAL SELECCIONAR ASEGURADO
+MODAL BUSCAR ASEGURADO
 ======================================-->
 <div class="modal fade" id="modalCodAsegurado" tabindex="-1" aria-labelledby="buscarAsegurado" aria-hidden="true">
 
@@ -767,42 +779,108 @@ MODAL SELECCIONAR ASEGURADO
       ======================================-->
       <div class="modal-body">
 
+        <div class="card mb-4">
+
+          <div class="card-body">
+
+            <div class="form-row">
+
+              <div class="form-group-group col-sm-12 col-md-6 col-lg-5">
+
+                <label for="buscardorAfiliado">COD. ASEGURADO (EJ: 900822OPM)</label>
+
+                <div class="input-group">
+                  <input type="text" class="form-control mr-2" id="buscardorAfiliado" name="buscardorAfiliado" placeholder="Ingrese Apellidos o Nombre(s) o Codigo Asegurado.">
+                  <div class="input-group-append">
+                    <button type="button" class="btn btn-primary px-2 btnBuscarAfiliado">
+                      <i class="fas fa-search"></i> Buscar
+                    </button>
+                  </div>
+                </div>
+
+              </div>     
+
+            </div>
+
+            <!--=====================================
+            SE MUESTRA LA TABLA GENERADA
+            ======================================-->            
+            <div id="tblAfiliadosSIAIS" class="mt-4">   
+
+
+            </div>
+
+          </div>
+
+          <div class="card-footer text-right">
+
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" href="#modalNuevoPaciente" role="button">
+
+              <i class="fas fa-times"></i>
+              Cerrar
+
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!--=====================================
+MODAL BUSCAR PATRONAL
+======================================-->
+<div class="modal fade" id="modalEmpleadorSIAIS" tabindex="-1" aria-labelledby="empleador" aria-hidden="true">
+
+  <div class="modal-dialog modal-dialog-scrollable modal-lg">
+
+    <div class="modal-content">
+
+      <!--=====================================
+      CABEZA DEL MODAL
+      ======================================-->
+      <div class="modal-header bg-modal">
+
+        <h5 class="modal-title" id="empleador">Buscar Nro. Patronal o Nombre Empleador</h5>
+        
+        <button type="button" class="btn btn-close btn-outline-danger" data-bs-toggle="modal" href="#modalEditarPaciente"></button>
+
+      </div>
+
+      <!--=====================================
+      CUERPO DEL MODAL
+      ======================================-->
+      <div class="modal-body">
+
          <div class="card mb-4">
 
             <div class="card-body">
+              
+              <table class="table table-bordered table-hover dt-responsive" id="tblEmpleadoresSIAIS" width="100%">
+                
+                <thead class="text-light bg-primary">
+                  
+                  <tr>
+                    <th>#</th>
+                    <th>NRO. PATRONAL</th>
+                    <th>RAZON SOCIAL</th>
+                  </tr>
 
-              <div class="form-row">
-
-                <div class="form-group-group col-sm-12 col-md-6 col-lg-5">
-
-                  <label for="buscardorAfiliado">COD. ASEGURADO (EJ: 900822OPM)</label>
-
-                  <div class="input-group">
-                    <input type="text" class="form-control mr-2" id="buscardorAfiliado" name="buscardorAfiliado" placeholder="Ingrese Apellidos o Nombre(s) o Codigo Asegurado.">
-                    <div class="input-group-append">
-                      <button type="button" class="btn btn-primary px-2 btnBuscarAfiliado">
-                        <i class="fas fa-search"></i> Buscar
-                      </button>
-                    </div>
-                  </div>
-
-                </div>     
-
-              </div>
-
-              <!--=====================================
-              SE MUESTRA LA TABLA GENERADA
-              ======================================-->            
-              <div id="tblAfiliadosSIAIS" class="mt-4">   
-
-
-              </div>
+                </thead>
+                
+              </table>
 
             </div>
 
             <div class="card-footer text-right">
 
-              <button type="button" class="btn btn-danger" data-bs-toggle="modal" href="#modalNuevoPaciente" role="button">
+              <button type="button" class="btn btn-danger" data-bs-toggle="modal" href="#modalEditarPaciente" role="button">
 
                 <i class="fas fa-times"></i>
                 Cerrar
@@ -810,6 +888,8 @@ MODAL SELECCIONAR ASEGURADO
               </button>
 
             </div>
+
+        </div>
 
       </div>
 

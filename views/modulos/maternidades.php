@@ -126,6 +126,12 @@
 
       </div>
 
+      <div class="card-footer text-right">
+
+        <input type="hidden" id="modulo" name="modulo" value="paciente-ingresos">
+
+      </div>
+
     </div>
 
 	</div>
@@ -142,7 +148,7 @@ MODAL REPORTE PACIENTE
 
       <div class="modal-header bg-modal">
         <h5 class="modal-title" id="reportePaciente">Reporte Paciente</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close btnCerrarReporte" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>                   
 
       <div class="modal-body">
@@ -152,9 +158,9 @@ MODAL REPORTE PACIENTE
         </div>  
       </div>  
 
-      <div class="modal-footer">
+      <!-- <div class="modal-footer">
         <button type="button" class="btn btn-danger btnCerrar float-left" data-bs-dismiss="modal">Cerrar</button>     
-      </div>
+      </div> -->
 
     </div>
 

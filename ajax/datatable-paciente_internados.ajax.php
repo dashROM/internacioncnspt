@@ -10,6 +10,8 @@ class TablaPacienteInternados {
 	public $fecha_ini;
 	public $fecha_fin;
 
+	public $id_servicio;
+
 	/*=============================================
 	MOSTRAR LA TABLA DE PACIENTES INTERNADOS
 	=============================================*/
@@ -240,6 +242,49 @@ class TablaPacienteInternados {
 	
 	}
 
+	/*=============================================
+	MOSTRAR LA TABLA DE PACIENTES INTERNADOS
+	=============================================*/
+	public function mostrarTablaPacientesInternadosServicio() {
+
+		$item = "id";;
+		$valor = $this->id;
+
+		$paciente_internados = ControllerPacienteInternados::ctrMostrarPacientesInternadosServicio($item, $valor);
+
+		if ($paciente_internados == null) {
+			
+			$datosJson = '{
+				"data": []
+			}';
+
+		} else {
+
+			$datosJson = '{
+				"data": [';
+
+				for ($i = 0; $i < count($paciente_internados); $i++) { 
+
+					$datosJson .='[				
+						"'.date("d/m/Y", strtotime($paciente_internados[$i]["fecha_ingreso"])).'",
+						"'.$paciente_internados[$i]["nombre_completo"].'",
+						"'.$paciente_internados[$i]["nombre_sala"].'",
+						"'.$paciente_internados[$i]["nombre_cama"].'"
+					],';
+				}
+
+				$datosJson = substr($datosJson, 0, -1);
+
+			$datosJson .= ']
+
+			}';
+
+		}
+		
+		echo $datosJson;
+	
+	}
+
 }
 
 
@@ -252,9 +297,19 @@ if (isset($_POST["pacientesInternados"])) {
 }
 
 if (isset($_POST["BuscarFechaInternados"])) {
+
 	$activarPacienteInternados = new TablaPacienteInternados();
 	$activarPacienteInternados -> request = $_REQUEST;
 	$activarPacienteInternados -> fecha_ini = $_POST["fechaIni"];
 	$activarPacienteInternados -> fecha_fin = $_POST["fechaFin"];
 	$activarPacienteInternados -> mostrarTablaPacientesInternadosFecha();
+
+}
+
+if (isset($_POST["pacientesInternadosServicio"])) {
+
+	$activarPacienteInternados = new TablaPacienteInternados();
+	$activarPacienteInternados -> id = $_POST["id"];		
+	$activarPacienteInternados -> mostrarTablaPacientesInternadosServicio();
+
 }

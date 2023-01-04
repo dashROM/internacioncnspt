@@ -83,12 +83,25 @@ class ControllerPacienteInternados {
 	/*=============================================
 	LISTADO DE PACIENTES INTERNADO POR BUSQUEDA FILTRADO
 	=============================================*/
-	static public function ctrMostrarPacienteInternadosFiltro($item,$valor) {
+	static public function ctrMostrarPacienteInternadosFiltro($item, $valor) {
 
-		$respuesta = ModelPacienteInternados::mdlMostrarPacienteInternadosFiltro($item,$valor);
+		$respuesta = ModelPacienteInternados::mdlMostrarPacienteInternadosFiltro($item, $valor);
 
 		return $respuesta;
 
 	}
+
+	/*=============================================
+	LISTADO DE PACIENTE INTERNADOS (FILTRADO POR SERVICIO)
+	=============================================*/
+	static public function ctrMostrarPacientesInternadosServicio($item, $valor) {
+
+		$tabla = "paciente_internados";
+
+		$respuesta = ModelPacienteInternados::mdlMostrarPacientesInternadosServicio($tabla, $item, $valor);
+
+		return $respuesta;
+		
+	} 
 
 }

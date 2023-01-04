@@ -2,7 +2,7 @@
 
 require_once "conexion.db.php";
 
-class ModeloAfiliadosSIAIS {
+class ModelAfiliadosSIAIS {
 
 	/*=============================================
 	MOSTRAR AFILIADOS DE LA BASE DE DATOS SIAIS

@@ -53,5 +53,18 @@ class ControllerReportes{
 		return $respuesta;
 
   }
+
+  /*=============================================
+	DATOS PARA REPORTE FORM 204 NEONATO
+	=============================================*/
+	static public function ctrFrmEM204Neonato($item, $valor) {
+
+		$tabla = "neonatos";
+
+		$respuesta = ModelReportes::mdlFrmEM204Neonato($tabla, $item, $valor);
+
+		return $respuesta;
+
+  }
 	
 }

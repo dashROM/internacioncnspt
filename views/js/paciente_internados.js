@@ -654,3 +654,381 @@ $("#frmBuscarNombre").on("click", "#btnBuscarNombre", function() {
   } 
 
 });
+
+/*=============================================
+CARGAR LA TABLA DINÁMICA DE PACIENTES INTERNADOS (MEDICINA INTERNA)
+=============================================*/
+var tablaMedicinaInterna = $('#tblMedicinaInterna').DataTable({
+
+  "ajax": {
+    url: "ajax/datatable-paciente_internados.ajax.php",
+    data: { 'pacientesInternadosServicio' : 'pacientesInternadosServicio', 'id' : 4},
+    type: "post"
+  },
+
+  "searching": false,
+
+  "ordering": false,
+
+  "paging": false,
+
+  "language": {
+
+    "sProcessing":     "Procesando...",
+    "sLengthMenu":     "Mostrar _MENU_ registros",
+    "sZeroRecords":    "No se encontraron resultados",
+    "sEmptyTable":     "Ningún dato disponible en esta tabla",
+    "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_",
+    "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0",
+    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+    "sInfoPostFix":    "",
+    "sSearch":         "Buscar:",
+    "sUrl":            "",
+    "sInfoThousands":  ",",
+    "sLoadingRecords": "Cargando...",
+    "oPaginate": {
+      "sFirst":    "Primero",
+      "sLast":     "Último",
+      "sNext":     "Siguiente",
+      "sPrevious": "Anterior"
+    },
+    "oAria": {
+      "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+      "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+    },
+    "buttons": {
+      "copy": "Copiar",
+      "colvis": "Visibilidad de columnas"
+    }
+
+  },
+
+  "responsive": false,
+
+  "lengthChange": false,
+
+});
+
+/*=============================================
+CARGAR LA TABLA DINÁMICA DE PACIENTES INTERNADOS (NEUMOLOGIA)
+=============================================*/
+var tablaNeumologia = $('#tblNeumologia').DataTable({
+
+  "ajax": {
+    url: "ajax/datatable-paciente_internados.ajax.php",
+    data: { 'pacientesInternadosServicio' : 'pacientesInternadosServicio', 'id' : 6},
+    type: "post"
+  },
+
+  "searching": false,
+
+  "ordering": false,
+
+  "paging": false,
+
+  "language": {
+
+    "sProcessing":     "Procesando...",
+    "sLengthMenu":     "Mostrar _MENU_ registros",
+    "sZeroRecords":    "No se encontraron resultados",
+    "sEmptyTable":     "Ningún dato disponible en esta tabla",
+    "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_",
+    "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0",
+    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+    "sInfoPostFix":    "",
+    "sSearch":         "Buscar:",
+    "sUrl":            "",
+    "sInfoThousands":  ",",
+    "sLoadingRecords": "Cargando...",
+    "oPaginate": {
+      "sFirst":    "Primero",
+      "sLast":     "Último",
+      "sNext":     "Siguiente",
+      "sPrevious": "Anterior"
+    },
+    "oAria": {
+      "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+      "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+    },
+    "buttons": {
+      "copy": "Copiar",
+      "colvis": "Visibilidad de columnas"
+    }
+
+  },
+
+  "responsive": false,
+
+  "lengthChange": false,
+
+});
+
+/*=============================================
+CARGAR LA TABLA DINÁMICA DE PACIENTES INTERNADOS (CIRUGIA)
+=============================================*/
+var tablaCirugia = $('#tblCirugia').DataTable({
+
+  "ajax": {
+    url: "ajax/datatable-paciente_internados.ajax.php",
+    data: { 'pacientesInternadosServicio' : 'pacientesInternadosServicio', 'id' : 5},
+    type: "post"
+  },
+
+  "searching": false,
+
+  "ordering": false,
+
+  "paging": false,
+
+  "language": {
+
+    "sProcessing":     "Procesando...",
+    "sLengthMenu":     "Mostrar _MENU_ registros",
+    "sZeroRecords":    "No se encontraron resultados",
+    "sEmptyTable":     "Ningún dato disponible en esta tabla",
+    "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_",
+    "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0",
+    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+    "sInfoPostFix":    "",
+    "sSearch":         "Buscar:",
+    "sUrl":            "",
+    "sInfoThousands":  ",",
+    "sLoadingRecords": "Cargando...",
+    "oPaginate": {
+      "sFirst":    "Primero",
+      "sLast":     "Último",
+      "sNext":     "Siguiente",
+      "sPrevious": "Anterior"
+    },
+    "oAria": {
+      "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+      "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+    },
+    "buttons": {
+      "copy": "Copiar",
+      "colvis": "Visibilidad de columnas"
+    }
+
+  },
+
+  "responsive": false,
+
+  "lengthChange": false,
+
+});
+
+/*=============================================
+CARGAR LA TABLA DINÁMICA DE PACIENTES INTERNADOS (UTI)
+=============================================*/
+var tablaTerapiaIntensiva = $('#tblTerapiaIntensiva').DataTable({
+
+  "ajax": {
+    url: "ajax/datatable-paciente_internados.ajax.php",
+    data: { 'pacientesInternadosServicio' : 'pacientesInternadosServicio', 'id' : 7},
+    type: "post"
+  },
+
+  "searching": false,
+
+  "ordering": false,
+
+  "paging": false,
+
+  "language": {
+
+    "sProcessing":     "Procesando...",
+    "sLengthMenu":     "Mostrar _MENU_ registros",
+    "sZeroRecords":    "No se encontraron resultados",
+    "sEmptyTable":     "Ningún dato disponible en esta tabla",
+    "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_",
+    "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0",
+    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+    "sInfoPostFix":    "",
+    "sSearch":         "Buscar:",
+    "sUrl":            "",
+    "sInfoThousands":  ",",
+    "sLoadingRecords": "Cargando...",
+    "oPaginate": {
+      "sFirst":    "Primero",
+      "sLast":     "Último",
+      "sNext":     "Siguiente",
+      "sPrevious": "Anterior"
+    },
+    "oAria": {
+      "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+      "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+    },
+    "buttons": {
+      "copy": "Copiar",
+      "colvis": "Visibilidad de columnas"
+    }
+
+  },
+
+  "responsive": false,
+
+  "lengthChange": false,
+
+});
+
+/*=============================================
+CARGAR LA TABLA DINÁMICA DE PACIENTES INTERNADOS (MATERNIDAD)
+=============================================*/
+var tablaMaternidad = $('#tblMaternidad').DataTable({
+
+  "ajax": {
+    url: "ajax/datatable-paciente_internados.ajax.php",
+    data: { 'pacientesInternadosServicio' : 'pacientesInternadosServicio', 'id' : 22},
+    type: "post"
+  },
+
+  "searching": false,
+
+  "ordering": false,
+
+  "paging": false,
+
+  "language": {
+
+    "sProcessing":     "Procesando...",
+    "sLengthMenu":     "Mostrar _MENU_ registros",
+    "sZeroRecords":    "No se encontraron resultados",
+    "sEmptyTable":     "Ningún dato disponible en esta tabla",
+    "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_",
+    "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0",
+    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+    "sInfoPostFix":    "",
+    "sSearch":         "Buscar:",
+    "sUrl":            "",
+    "sInfoThousands":  ",",
+    "sLoadingRecords": "Cargando...",
+    "oPaginate": {
+      "sFirst":    "Primero",
+      "sLast":     "Último",
+      "sNext":     "Siguiente",
+      "sPrevious": "Anterior"
+    },
+    "oAria": {
+      "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+      "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+    },
+    "buttons": {
+      "copy": "Copiar",
+      "colvis": "Visibilidad de columnas"
+    }
+
+  },
+
+  "responsive": false,
+
+  "lengthChange": false,
+
+});
+
+/*=============================================
+CARGAR LA TABLA DINÁMICA DE PACIENTES INTERNADOS (NEONATOLOGIA)
+=============================================*/
+var tablaNeonatologia = $('#tblNeonatologia').DataTable({
+
+  "ajax": {
+    url: "ajax/datatable-paciente_internados.ajax.php",
+    data: { 'pacientesInternadosServicio' : 'pacientesInternadosServicio', 'id' : 3},
+    type: "post"
+  },
+
+  "searching": false,
+
+  "ordering": false,
+
+  "paging": false,
+
+  "language": {
+
+    "sProcessing":     "Procesando...",
+    "sLengthMenu":     "Mostrar _MENU_ registros",
+    "sZeroRecords":    "No se encontraron resultados",
+    "sEmptyTable":     "Ningún dato disponible en esta tabla",
+    "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_",
+    "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0",
+    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+    "sInfoPostFix":    "",
+    "sSearch":         "Buscar:",
+    "sUrl":            "",
+    "sInfoThousands":  ",",
+    "sLoadingRecords": "Cargando...",
+    "oPaginate": {
+      "sFirst":    "Primero",
+      "sLast":     "Último",
+      "sNext":     "Siguiente",
+      "sPrevious": "Anterior"
+    },
+    "oAria": {
+      "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+      "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+    },
+    "buttons": {
+      "copy": "Copiar",
+      "colvis": "Visibilidad de columnas"
+    }
+
+  },
+
+  "responsive": false,
+
+  "lengthChange": false,
+
+});
+
+/*=============================================
+CARGAR LA TABLA DINÁMICA DE PACIENTES INTERNADOS (GINECOLOGIA)
+=============================================*/
+var tablaGinecologia = $('#tblGinecologia').DataTable({
+
+  "ajax": {
+    url: "ajax/datatable-paciente_internados.ajax.php",
+    data: { 'pacientesInternadosServicio' : 'pacientesInternadosServicio', 'id' : 7},
+    type: "post"
+  },
+
+  "searching": false,
+
+  "ordering": false,
+
+  "paging": false,
+
+  "language": {
+
+    "sProcessing":     "Procesando...",
+    "sLengthMenu":     "Mostrar _MENU_ registros",
+    "sZeroRecords":    "No se encontraron resultados",
+    "sEmptyTable":     "Ningún dato disponible en esta tabla",
+    "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_",
+    "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0",
+    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+    "sInfoPostFix":    "",
+    "sSearch":         "Buscar:",
+    "sUrl":            "",
+    "sInfoThousands":  ",",
+    "sLoadingRecords": "Cargando...",
+    "oPaginate": {
+      "sFirst":    "Primero",
+      "sLast":     "Último",
+      "sNext":     "Siguiente",
+      "sPrevious": "Anterior"
+    },
+    "oAria": {
+      "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+      "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+    },
+    "buttons": {
+      "copy": "Copiar",
+      "colvis": "Visibilidad de columnas"
+    }
+
+  },
+
+  "responsive": false,
+
+  "lengthChange": false,
+
+});

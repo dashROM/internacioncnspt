@@ -3198,9 +3198,9 @@ MODAL REPORTE PACIENTE
         </div>  
       </div>  
 
-      <div class="modal-footer">
+      <!-- <div class="modal-footer">
         <button type="button" class="btn btn-danger btnCerrar float-left" data-bs-dismiss="modal">Cerrar</button>   
-      </div>
+      </div> -->
 
     </div>
 

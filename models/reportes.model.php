@@ -11,7 +11,7 @@ class ModelReportes {
 
 		if ($item != null) {
 
-			$sql = "SELECT pi2.id, p.fecha_nacimiento, p.paterno_paciente, p.materno_paciente, p.nombre_paciente, p.cod_asegurado, p.cod_beneficiario, p.estado_civil, p.nombre_empleador, p.nro_empleador, e.nombre_establecimiento, pi2.fecha_ingreso, c2.nombre_consultorio, pi2.hora_ingreso, CONCAT(c10.codigo,' - ',c10.descripcion) diagnostico, es.nombre_especialidad
+			$sql = "SELECT pi2.id, p.fecha_nacimiento, p.paterno_paciente, p.materno_paciente, p.nombre_paciente, p.cod_asegurado, p.cod_beneficiario, p.estado_civil, p.sexo, p.nombre_empleador, p.nro_empleador, e.nombre_establecimiento, pi2.fecha_ingreso, c2.nombre_consultorio, pi2.hora_ingreso, CONCAT(c10.codigo,' - ',c10.descripcion) diagnostico, c10.codigo, es.nombre_especialidad, es.codigo_especialidad
 			FROM paciente_ingresos pi2
 			INNER JOIN pacientes p
 			ON pi2.id_paciente = p.id
@@ -115,6 +115,34 @@ class ModelReportes {
 			FROM maternidades m
 			INNER JOIN paciente_ingresos pi2
 			ON m.id_paciente_ingreso = pi2.id
+			WHERE pi2.id = :$item";
+			
+			$stmt = Conexion::connectPostgres()->prepare($sql);
+
+			$stmt->bindParam(":".$item, $valor, PDO::PARAM_INT);
+
+			$stmt->execute();
+
+			return $stmt->fetch();
+
+		}
+
+		$stmt->close();
+		$stmt = null;
+
+	}
+
+	/*=============================================
+	MOSTRAR DATOS PARA REPORTE FORM 204 MATERNIDAD
+	=============================================*/
+	static public function mdlFrmEM204Neonato($tabla, $item, $valor) {
+
+		if ($item != null) {
+
+			$sql = "SELECT n.peso_neonato, n.talla_neonato, n.edad_gestacional_neonato
+			FROM neonatos n
+			INNER JOIN paciente_ingresos pi2
+			ON n.id_paciente_ingreso = pi2.id
 			WHERE pi2.id = :$item";
 			
 			$stmt = Conexion::connectPostgres()->prepare($sql);

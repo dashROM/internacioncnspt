@@ -55,7 +55,7 @@ class AjaxPacienteIngresos {
 		$item = "id";
 		$valor = $this->id;
 
-		$ingresos= ControllerPacienteIngresos::ctrMostrarPacienteIngreso($item, $valor);
+		$ingresos = ControllerPacienteIngresos::ctrMostrarPacienteIngreso($item, $valor);
 	
 		echo json_encode($ingresos);	
 			
@@ -166,6 +166,9 @@ class AjaxPacienteIngresos {
 		// Datos Maternidad
 		$maternidad = ControllerReportes::ctrFrmEM204Maternidad($item, $valor);
 
+		// Datos Neonato
+		$neonato = ControllerReportes::ctrFrmEM204Neonato($item, $valor);
+
 		/*=============================================
 		OBTENEMOS LA EDAD A PARTIR DE LA FECHA DE NACIMIENTO
 		=============================================*/	
@@ -244,10 +247,7 @@ class AjaxPacienteIngresos {
 
     //********************************
 		// DATOS PERSONALES DEL PACIENTE
-		//********************************
-
-    // set font
-		$pdf->SetFont('times', '', 10);
+		//********************************		
 
 		// set border width
 		$pdf->SetLineWidth(0.5);
@@ -268,11 +268,11 @@ class AjaxPacienteIngresos {
     // set border width
 		$pdf->SetLineWidth(0.3);
 
-    $pdf->line(15,21,15,287);
+    $pdf->line(12,21,12,287);
 
-    $pdf->line(190,49,205,49);
+    $pdf->line(190,44,205,44);
 
-    $pdf->line(190,49,190,287);
+    $pdf->line(190,44,190,287);
 
     // set border width
 		$pdf->SetLineWidth(0.1);
@@ -282,77 +282,194 @@ class AjaxPacienteIngresos {
 
 		// MultiCell($w, $h, $txt, $border=0, $align='J', $fill=0, $ln=1, $x='', $y='', $reseth=true, $stretch=0, $ishtml=false, $autopadding=true, $maxh=0)
 
-		$pdf->MultiCell(30, 3, date("d", strtotime($paciente_ingreso['fecha_nacimiento'])), 0, 'C', 0, 0, '22', '25', true);
-		$pdf->MultiCell(30, 3, date("m", strtotime($paciente_ingreso['fecha_nacimiento'])), 0, 'C', 0, 0, '40', '25', true);
-		$pdf->MultiCell(30, 3, date("Y", strtotime($paciente_ingreso['fecha_nacimiento'])), 0, 'C', 0, 0, '60', '25', true);
-		$pdf->MultiCell(100, 3, 'FECHA..........................................................................', 0, 'L', 0, 0, '15', '27', true);
+		$pdf->SetFont('times', 'B', 10);
+		$pdf->MultiCell(30, 3, date("d", strtotime($paciente_ingreso['fecha_nacimiento'])), 0, 'C', 0, 0, '46', '25', true);
+		$pdf->MultiCell(30, 3, date("m", strtotime($paciente_ingreso['fecha_nacimiento'])), 0, 'C', 0, 0, '64', '25', true);
+		$pdf->MultiCell(30, 3, date("Y", strtotime($paciente_ingreso['fecha_nacimiento'])), 0, 'C', 0, 0, '84', '25', true);
+		$pdf->SetFont('times', '', 10);
+		
+		$pdf->MultiCell(150, 3, 'FECHA NACIMIENTO:......................................................................', 0, 'L', 0, 0, '13', '27', true);
 
-		$pdf->MultiCell(30, 3, 'DIA', 0, 'C', 0, 0, '22', '31', true);
-		$pdf->MultiCell(30, 3, 'MES', 0, 'C', 0, 0, '40', '31', true);
-		$pdf->MultiCell(30, 3, 'AÑO', 0, 'C', 0, 0, '60', '31', true);
+		$pdf->MultiCell(30, 3, 'DIA', 0, 'C', 0, 0, '46', '31', true);
+		$pdf->MultiCell(30, 3, 'MES', 0, 'C', 0, 0, '64', '31', true);
+		$pdf->MultiCell(30, 3, 'AÑO', 0, 'C', 0, 0, '84', '31', true);
 
+		
 		$pdf->MultiCell(40, 5, 'Nº de Asegurado', 0, 'L', 0, 0, '124', '25', true);
-		$pdf->MultiCell(50, 6, $paciente_ingreso['cod_asegurado'], 0, 'C', 0, 1, '154', '26', true);
-		$pdf->MultiCell(50, 6, '', 1, 'L', 0, 1, '154', '24', true);
-
 		$pdf->MultiCell(35, 5, 'Beneficiario', 0, 'L', 0, 1, '124', '33', true);
-		$pdf->MultiCell(50, 6, $paciente_ingreso['cod_beneficiario'], 0, 'C', 0, 1, '154', '34', true);
-		$pdf->MultiCell(50, 6, '', 1, 'L', 0, 1, '154', '32', true);
-		
-		$pdf->MultiCell(55, 5, $paciente_ingreso['paterno_paciente'], 0, 'C', 0, 1, '15', '48', true);
-		$pdf->MultiCell(55, 5, $paciente_ingreso['materno_paciente'], 0, 'C', 0, 1, '70', '48', true);
-		$pdf->MultiCell(60, 5, $paciente_ingreso['nombre_paciente'], 0, 'C', 0, 1, '125', '48', true);
-		$pdf->MultiCell(180, 3, '.................................................................................................................................................................................................', 0, 'L', 0, 0, '15', '50', true);
-		$pdf->MultiCell(55, 5, 'APELLIDO PATERNO', 0, 'R', 0, 1, '5', '54', true);
-		$pdf->MultiCell(55, 5, 'APELLIDO MATERNO', 0, 'R', 0, 1, '60', '54', true);
-		$pdf->MultiCell(55, 5, 'NOMBRE(S)', 0, 'R', 0, 1, '110', '54', true);
 
-		$pdf->MultiCell(25, 3, $edad->y.' años', 0, 'L', 0, 0, '50', '60', true);
-		$pdf->MultiCell(105, 5, 'Edad cumplida:...........................................', 0, 'L', 0, 0, '', '62', true);
+		$pdf->SetFont('times', 'B', 12);
+		$pdf->MultiCell(50, 6, $paciente_ingreso['cod_asegurado'], 1, 'C', 0, 1, '154', '24', true, 0, false, true, 6, 'M');
+		$pdf->MultiCell(50, 6, $paciente_ingreso['cod_beneficiario'], 1, 'C', 0, 1, '154', '32', true, 0, false, true, 6, 'M');
 		
-		$pdf->MultiCell(35, 5, $paciente_ingreso['estado_civil'], 0, 'L', 0, 0, '130', '60', true);
-		$pdf->MultiCell(105, 5, 'Estado civil:............................................', 0, 'L', 0, 0, '110', '62', true);
+		$pdf->SetFont('times', 'B', 10);
+		$pdf->MultiCell(55, 5, $paciente_ingreso['paterno_paciente'], 0, 'C', 0, 1, '13', '42', true);
+		$pdf->MultiCell(55, 5, $paciente_ingreso['materno_paciente'], 0, 'C', 0, 1, '68', '42', true);
+		$pdf->MultiCell(60, 5, $paciente_ingreso['nombre_paciente'], 0, 'C', 0, 1, '123', '42', true);
+		$pdf->SetFont('times', '', 10);
+
+		$pdf->MultiCell(180, 3, '.................................................................................................................................................................................................', 0, 'L', 0, 0, '13', '44', true);
+		$pdf->MultiCell(55, 5, 'APELLIDO PATERNO', 0, 'R', 0, 1, '5', '48', true);
+		$pdf->MultiCell(55, 5, 'APELLIDO MATERNO', 0, 'R', 0, 1, '60', '48', true);
+		$pdf->MultiCell(55, 5, 'NOMBRE(S)', 0, 'R', 0, 1, '110', '48', true);
+
+		$pdf->SetFont('times', 'B', 10);
+		$pdf->MultiCell(25, 3, $edad->y.' años', 0, 'L', 0, 0, '45', '54', true);
+		$pdf->SetFont('times', '', 10);
+
+		$pdf->MultiCell(105, 5, '1.- Edad cumplida:...............................................', 0, 'L', 0, 0, '13', '56', true);
+		
+		$pdf->SetFont('times', 'B', 10);
+		$pdf->MultiCell(35, 5, $paciente_ingreso['estado_civil'], 0, 'L', 0, 0, '130', '54', true);
+		$pdf->SetFont('times', '', 10);
+
+		$pdf->MultiCell(105, 5, 'Estado civil:...................................................................', 0, 'L', 0, 0, '110', '56', true);
+
+		$pdf->SetFont('times', 'B', 10);
+		$pdf->setCellHeightRatio(1);	
+		$pdf->MultiCell(100, 5, $paciente_ingreso['nombre_empleador'], 0, 'C', 0, 0, '88', '62', true);
+		$pdf->setCellHeightRatio(0);
+		$pdf->SetFont('times', '', 10);
+
+		$pdf->MultiCell(100, 3, '..............................................................................................................................', 0, 'L', 0, 0, '88', '68', true);		
+		$pdf->MultiCell(100, 5, '2.- Empresa donde trabaja', 0, 'C', 0, 0, '88', '71', true);
+
+		$pdf->SetFont('times', 'B', 10);
+		$pdf->MultiCell(35, 5, $paciente_ingreso['nro_empleador'], 0, 'C', 0, 0, '105', '78', true);
+		$pdf->SetFont('times', '', 10);
+
+		$pdf->MultiCell(100, 5, 'N° Patronal:...........................................................................................', 0, 'L', 0, 0, '88', '80', true);
+
+		$pdf->MultiCell(100, 5, 'Ocupacion Actual:.................................................................................', 0, 'L', 0, 0, '88', '88', true);
+
+		$pdf->SetFont('times', 'B', 10);
+		$pdf->MultiCell(95, 5, $paciente_ingreso['nombre_consultorio'], 0, 'L', 0, 0, '130', '96', true);
+		$pdf->SetFont('times', '', 10);
+
+		$pdf->MultiCell(100, 5, 'Unidad Sanitaria de origen:...................................................................', 0, 'L', 0, 0, '88', '98', true);
 
 		$pdf->setCellHeightRatio(1);
-		
-		$pdf->MultiCell(130, 5, $paciente_ingreso['nombre_empleador'], 0, 'C', 0, 0, '15', '66', true);
-
+		// $pdf->MultiCell(80, 5, $paciente_ingreso['diagnostico'], 1, 'L', 0, 0, '108', '99', true);
 		$pdf->setCellHeightRatio(0);
 
-		$pdf->MultiCell(35, 5, $paciente_ingreso['nro_empleador'], 0, 'C', 0, 0, '145', '70', true);
-
-		$pdf->MultiCell(180, 3, '.................................................................................................................................................................................................', 0, 'L', 0, 0, '15', '72', true);
-		
-		$pdf->MultiCell(55, 5, 'Empresa donde trabaja', 0, 'C', 0, 0, '45', '75', true);
-		$pdf->MultiCell(55, 5, 'N° Patronal', 0, 'C', 0, 0, '135', '75', true);
-
-		$pdf->MultiCell(185, 5, 'Ocupacion Actual:....................................................................................................................', 0, 'L', 0, 0, '', '85', true);
-
-		$pdf->MultiCell(95, 5, $paciente_ingreso['nombre_consultorio'], 0, 'L', 0, 0, '60', '93', true);
-
-		$pdf->MultiCell(185, 5, 'Unidad Sanitaria de origen:......................................................................................................', 0, 'L', 0, 0, '', '95', true);
-
-		$pdf->setCellHeightRatio(1);
-
-		$pdf->MultiCell(150, 5, $paciente_ingreso['diagnostico'], 0, 'L', 0, 0, '35', '99', true);
-
-		$pdf->setCellHeightRatio(0);
-
-		$pdf->MultiCell(185, 5, 'Diagnostico:.............................................................................................................................................................................', 0, 'L', 0, 0, '', '105', true);
+		$pdf->MultiCell(185, 5, 'Diagnostico:...........................................................................................', 0, 'L', 0, 0, '88', '106', true);
 		// $pdf->MultiCell(155, 5, $respuesta['diagnosticop'], 0, 'L', 0, 0, '35', '105', true);
-		$pdf->MultiCell(85, 5, 'A pedido Del Dr.:..........................................................', 0, 'L', 0, 0, '', '115', true);
+		$pdf->MultiCell(85, 5, 'A pedido Del Dr.:....................................................', 0, 'L', 0, 0, '88', '115', true);
 		// $pdf->MultiCell(55, 5, $respuesta['per_nombre'], 0, 'L', 0, 0, '40', '115', true);
-		$pdf->MultiCell(40, 5, 'clave:.................................', 0, 'L', 0, 0, '110', '115', true);
+		$pdf->MultiCell(40, 5, 'Clave:...................', 0, 'L', 0, 0, '160', '115', true);
 
-		// set font
-		$pdf->SetFont('times', 'B', 14);
+		// cuadrado para el contenido
+		$pdf->MultiCell(67, 55, '', 1, 'L', 0, 1, '20', '63', true);
+		
+		// set border width
+		$pdf->SetLineWidth(0.1);
+
+		// lineas horizontales
+		$pdf->line(21,75,88,75);
+		$pdf->line(40,71,88,71);
+		$pdf->line(21,84,88,84);
+		$pdf->line(21,90,88,90);
+		$pdf->line(21,96,88,96);
+		$pdf->line(21,102,88,102);
+		$pdf->line(21,108,88,108);
+		$pdf->line(21,114,88,114);
+
+		// lineas verticales
+		$pdf->line(40,64,40,119);
+		$pdf->line(52,75,52,119);
+		$pdf->line(64,75,64,119);
+		$pdf->line(76,75,76,119);
+
+		// lineas que separan primera columna en filas
+		$pdf->line(56,64,56,75);
+		$pdf->line(72,64,72,75);
+
+		// lineas que separa sexo
+		$pdf->line(31,75,31,84);
+		$pdf->line(21,79,40,79);
+
+		$pdf->MultiCell(30, 5, 'RIESGO', 0, 'L', 0, 0, '22', '68', true);
+
+		$pdf->SetFont('times', '', 8);
+		$pdf->MultiCell(17, 5, 'Enf. y Acc.', 0, 'C', 0, 0, '39', '64', true);
+		$pdf->MultiCell(17, 5, 'Común', 0, 'C', 0, 0, '39', '67', true);
+
+		$pdf->MultiCell(18, 5, 'Maternidad', 0, 'C', 0, 0, '54', '65', true);
+
+		$pdf->MultiCell(17, 5, 'Acc. Trab.', 0, 'C', 0, 0, '70', '64', true);
+		$pdf->MultiCell(17, 5, 'Enf. Prof.', 0, 'C', 0, 0, '70', '67', true);
+
+		$pdf->SetFont('times', '', 6);
+		$pdf->MultiCell(12, 3, 'HOMBRE', 0, 'C', 0, 0, '19', '75', true);
+		$pdf->MultiCell(12, 3, 'MUJER', 0, 'C', 0, 0, '28', '75', true);
+
+		$pdf->setCellHeightRatio(1);
+		$pdf->MultiCell(12, 6, 'ASEGU- RADO', 0, 'C', 0, 0, '39', '75', true);
+		$pdf->setCellHeightRatio(0);
+
+		$pdf->setCellHeightRatio(1);
+		$pdf->MultiCell(14, 6, 'ESPOSA O COMPAÑE- RA', 0, 'C', 0, 0, '50', '74', true);
+		$pdf->setCellHeightRatio(0);
+
+		$pdf->MultiCell(14, 3, 'HIJOS', 0, 'C', 0, 0, '62', '77', true);
+
+		$pdf->setCellHeightRatio(1);
+		$pdf->MultiCell(12, 6, 'OTROS FAM.', 0, 'C', 0, 0, '75', '75', true);
+		$pdf->setCellHeightRatio(0);
+
+		$pdf->MultiCell(20, 3, 'ACTIVO', 0, 'L', 0, 0, '20', '85', true);
+		$pdf->MultiCell(20, 3, 'RENTISTA', 0, 'L', 0, 0, '20', '91', true);
+		$pdf->MultiCell(20, 3, 'BENEMERITO', 0, 'L', 0, 0, '20', '97', true);
+		$pdf->setCellHeightRatio(1);
+		$pdf->MultiCell(20, 6, 'OTROS ASEGURADOS', 0, 'L', 0, 0, '20', '101', true);
+		$pdf->setCellHeightRatio(0);
+		$pdf->MultiCell(20, 3, 'PARTICULAR', 0, 'L', 0, 0, '20', '109', true);
+
+		$pdf->SetFont('times', '', 10);
+		$pdf->MultiCell(14, 3, '1', 0, 'C', 0, 0, '38', '114', true, 0, false, true, 3, 'M');
+		$pdf->MultiCell(14, 3, '2', 0, 'C', 0, 0, '50', '114', true, 0, false, true, 3, 'M');
+		$pdf->MultiCell(14, 3, '3', 0, 'C', 0, 0, '62', '114', true, 0, false, true, 3, 'M');
+		$pdf->MultiCell(14, 3, '4', 0, 'C', 0, 0, '74', '114', true, 0, false, true, 3, 'M');
+
+		$pdf->SetFont('times', '', 8);
+		$pdf->MultiCell(4, 3, '1', 1, 'C', 0, 0, '39', '70', true, 0, false, true, 3, 'M');
+		$pdf->MultiCell(4, 3, '2', 1, 'C', 0, 0, '55', '70', true, 0, false, true, 3, 'M');
+		$pdf->MultiCell(4, 3, '3', 1, 'C', 0, 0, '71', '70', true, 0, false, true, 3, 'M');
+
+		$pdf->MultiCell(4, 3, '1', 1, 'C', 0, 0, '20', '78', true, 0, false, true, 3, 'M');
+		$pdf->MultiCell(4, 3, '2', 1, 'C', 0, 0, '30', '78', true, 0, false, true, 3, 'M');
+
+		$pdf->SetFont('times', '', 10);
+		$pdf->MultiCell(6, 3, '3.-', 0, 'C', 0, 0, '12', '66', true, 0, false, true, 3, 'M');
+		$pdf->MultiCell(6, 3, '4.-', 0, 'C', 0, 0, '12', '76', true, 0, false, true, 3, 'M');
+		$pdf->MultiCell(6, 3, '5.-', 0, 'C', 0, 0, '12', '116', true, 0, false, true, 3, 'M');
+		$pdf->MultiCell(12, 3, '6.-  }', 0, 'C', 0, 0, '29', '114', true, 0, false, true, 3, 'M');
+
+		$pdf->SetFont('times', '', 16);
+		$pdf->MultiCell(6, 3, '{', 0, 'C', 0, 0, '15', '66', true, 0, false, true, 3, 'M');
+		$pdf->MultiCell(6, 3, '{', 0, 'C', 0, 0, '15', '76', true, 0, false, true, 3, 'M');
+
+		// Rotar Texto
+		$pdf->StartTransform();
+		$pdf->Rotate(-90);
+		$pdf->MultiCell(6, 3, '{', 0, 'C', 0, 0, '57', '80', true, 0, false, true, 3, 'M');
+		$pdf->StopTransform();
+
+		$pdf->SetFont('times', '', 10);
+		$pdf->MultiCell(6, 3, '1', 0, 'C', 0, 0, '12', '85', true, 0, false, true, 3, 'M');
+		$pdf->MultiCell(6, 3, '2', 0, 'C', 0, 0, '12', '91', true, 0, false, true, 3, 'M');
+		$pdf->MultiCell(6, 3, '3', 0, 'C', 0, 0, '12', '97', true, 0, false, true, 3, 'M');
+		$pdf->MultiCell(6, 3, '4', 0, 'C', 0, 0, '12', '103', true, 0, false, true, 3, 'M');
+		$pdf->MultiCell(6, 3, '5', 0, 'C', 0, 0, '12', '109', true, 0, false, true, 3, 'M');
 
 		// Rotar Texto
 		$pdf->StartTransform();
 		$pdf->Rotate(-270);
-		$pdf->MultiCell(100, 5, 'DATOS PERSONALES DEL PACIENTE', 0, 'C', 0, 0, '144', '-28', true);
-		$pdf->MultiCell(85, 5, 'DATOS DE INGRESO', 0, 'C', 0, 0, '58', '-28', true);
-		$pdf->MultiCell(50, 5, 'DATOS DE ALTA', 0, 'C', 0, 0, '0', '-28', true);
+		// set font
+		$pdf->SetFont('times', 'B', 14);
+		$pdf->MultiCell(100, 5, 'DATOS PERSONALES DEL PACIENTE', 0, 'C', 0, 0, '5', '96', true);
+		$pdf->MultiCell(85, 5, 'DATOS DE INGRESO', 0, 'C', 0, 0, '-80', '96', true);
+		$pdf->MultiCell(50, 5, 'DATOS DE ALTA', 0, 'C', 0, 0, '-145', '96', true);
 		$pdf->StopTransform();
 
 		// set font
@@ -361,40 +478,69 @@ class AjaxPacienteIngresos {
 		//********************************
 		// DATOS DE INGRESO
 		//********************************
-		$pdf->line(5,123,190,123);
+		$pdf->line(5,124,190,124);
 
-		$pdf->MultiCell(85, 5, $paciente_ingreso['nombre_establecimiento'], 0, 'L', 0, 0, '45', '125', true); 
+		$pdf->SetFont('times', 'B', 10);
+		$pdf->MultiCell(85, 5, $paciente_ingreso['nombre_establecimiento'], 0, 'L', 0, 0, '45', '127', true);
+		$pdf->SetFont('times', '', 10);
 
-		$pdf->MultiCell(185, 5, 'Hospital(Clinica):....................................................................................................................................................................', 0, 'L', 0, 0, '', '127', true);
-		$pdf->MultiCell(55, 5, 'Con fecha', 0, 'L', 0, 0, '', '135', true);
+		$pdf->MultiCell(185, 5, '7.- Hospital(Clinica):..................................................................................................................................................................', 0, 'L', 0, 0, '13', '129', true);
+		$pdf->MultiCell(55, 5, '8.- Con fecha', 0, 'L', 0, 0, '13', '137', true);
 		
 
-		$pdf->MultiCell(10, 7, '', 1, 'C', 0, 0, '35', '132', true);
-		$pdf->MultiCell(10, 7, '', 1, 'C', 0, 0, '45', '132', true);
-		$pdf->MultiCell(20, 7, '', 1, 'C', 0, 0, '55', '132', true);
-		$pdf->MultiCell(10, 7, date("d", strtotime($paciente_ingreso['fecha_ingreso'])), 0, 'C', 0, 0, '35', '133', true);
-		$pdf->MultiCell(10, 7, date("m", strtotime($paciente_ingreso['fecha_ingreso'])), 0, 'C', 0, 0, '45', '133', true);
-		$pdf->MultiCell(20, 7, date("Y", strtotime($paciente_ingreso['fecha_ingreso'])), 0, 'C', 0, 0, '55', '133', true);
-		$pdf->MultiCell(11, 5, 'DIA', 0, 'C', 0, 0, '35', '141', true);
-		$pdf->MultiCell(11, 5, 'MES', 0, 'C', 0, 0, '45', '141', true);
-		$pdf->MultiCell(21, 5, 'AÑO', 0, 'C', 0, 0, '55', '141', true); 
+		$pdf->MultiCell(10, 7, '', 1, 'C', 0, 0, '36', '134', true);
+		$pdf->MultiCell(10, 7, '', 1, 'C', 0, 0, '46', '134', true);
+		$pdf->MultiCell(20, 7, '', 1, 'C', 0, 0, '56', '134', true);
 
-		$pdf->MultiCell(65, 5, $paciente_ingreso['hora_ingreso'], 0, 'L', 0, 0, '100', '133', true);
-		$pdf->MultiCell(65, 5, 'A horas:.........................................', 0, 'L', 0, 0, '80', '135', true);
+		$pdf->SetFont('times', 'B', 10);
+		$pdf->MultiCell(10, 7, date("d", strtotime($paciente_ingreso['fecha_ingreso'])), 0, 'C', 0, 0, '36', '136', true);
+		$pdf->MultiCell(10, 7, date("m", strtotime($paciente_ingreso['fecha_ingreso'])), 0, 'C', 0, 0, '46', '136', true);
+		$pdf->MultiCell(20, 7, date("Y", strtotime($paciente_ingreso['fecha_ingreso'])), 0, 'C', 0, 0, '56', '136', true);
+		$pdf->SetFont('times', '', 10);
+
+		$pdf->MultiCell(11, 5, 'DIA', 0, 'C', 0, 0, '36', '143', true);
+		$pdf->MultiCell(11, 5, 'MES', 0, 'C', 0, 0, '46', '143', true);
+		$pdf->MultiCell(21, 5, 'AÑO', 0, 'C', 0, 0, '56', '143', true); 
+
+		$pdf->SetFont('times', 'B', 10);
+		$pdf->MultiCell(65, 5, date("H:i", strtotime($paciente_ingreso['hora_ingreso'])), 0, 'L', 0, 0, '98', '135', true);
+		$pdf->SetFont('times', '', 10);
+
+		$pdf->MultiCell(65, 5, 'A horas:.........................................', 0, 'L', 0, 0, '80', '137', true);
 		
-		$pdf->MultiCell(150, 5, $paciente_ingreso['nombre_especialidad'], 0, 'L', 0, 0, '35', '148', true);
-		$pdf->MultiCell(185, 5, 'Servico de:...............................................................................................................................................................................', 0, 'L', 0, 0, '', '150', true);
+		$pdf->SetFont('times', 'B', 10);
+		$pdf->MultiCell(150, 5, $paciente_ingreso['nombre_especialidad'], 0, 'L', 0, 0, '39', '150', true);
+		$pdf->SetFont('times', '', 10);
+
+		$pdf->MultiCell(185, 5, '9.- Servico de:.............................................................................................................................................................................', 0, 'L', 0, 0, '13', '152', true);
 
 		$pdf->setCellHeightRatio(1);
 
-		$pdf->MultiCell(137, 5, $paciente_ingreso['diagnostico'], 0, 'L', 0, 0, '50', '154', true);
+		$pdf->SetFont('times', 'B', 10);
+		$pdf->MultiCell(137, 5, $paciente_ingreso['diagnostico'], 0, 'L', 0, 0, '50', '156', true);
+		$pdf->SetFont('times', '', 10);
 
 		$pdf->setCellHeightRatio(0);
 
-		$pdf->MultiCell(185, 5, 'Diagnostico al ingreso:............................................................................................................................................................', 0, 'L', 0, 0, '', '160', true);
+		$pdf->MultiCell(185, 5, 'Diagnostico al ingreso:...............................................................................................................................................................', 0, 'L', 0, 0, '13', '162', true);
+
+		//**********************************
+		// DATOS NEONATOS (OPCIONAL)
+		//**********************************
+
+		if ($neonato != null) {
+			$pdf->SetFont('times', 'B', 10);
+			$pdf->MultiCell(80, 5, 'PESO NEONATO = '.$neonato['peso_neonato'], 0, 'L', 0, 0, '14', '169', true);
+			$pdf->MultiCell(80, 5, 'TALLA NEONATO = '.$neonato['talla_neonato'], 0, 'L', 0, 0, '14', '174', true);
+			$pdf->SetFont('times', '', 10);
+		}
+
+		//**********************************
+		// DATOS TRANSFERENCIAS
+		//**********************************
 		
-		$pdf->SetFont('times', 'B', 12);
-		$pdf->MultiCell(80, 5, 'TRANSFERENCIA INTERNAS', 0, 'c', 0, 0, '75', '170', true);
+		$pdf->SetFont('times', 'B', 13);
+		$pdf->MultiCell(80, 5, 'TRANSFERENCIAS INTERNAS:', 0, 'c', 0, 0, '69', '172', true);
 		$pdf->SetFont('times', '', 10);
 
 		$y = 0;
@@ -404,21 +550,25 @@ class AjaxPacienteIngresos {
 			if ($transferencias != null) {
 
 				if(isset($transferencias[$i]['fecha_transferencia'])) {
-					$pdf->MultiCell(75, 5, date("d/m/Y", strtotime($transferencias[$i]['fecha_transferencia'])), 0, 'L', 0, 0, '35', 178 + $y, true);
+					$pdf->SetFont('times', 'B', 10);
+					$pdf->MultiCell(75, 5, date("d/m/Y", strtotime($transferencias[$i]['fecha_transferencia'])), 0, 'L', 0, 0, '35', 180 + $y, true);
+					$pdf->SetFont('times', '', 10);
 				} else {
-					$pdf->MultiCell(75, 5, '', 0, 'L', 0, 0, '35', 178 + $y, true);
+					$pdf->MultiCell(75, 5, '', 0, 'L', 0, 0, '35', 180 + $y, true);
 				}
-				$pdf->MultiCell(125, 5, $transferencias[$i]['nombre_servicio'].' - '.$transferencias[$i]['nombre_especialidad'], 0, 'L', 0, 0, '95', 178 + $y, true);	
+				$pdf->SetFont('times', 'B', 10);
+				$pdf->MultiCell(125, 5, $transferencias[$i]['nombre_servicio'].' - '.$transferencias[$i]['nombre_especialidad'], 0, 'L', 0, 0, '95', 180 + $y, true);
+				$pdf->SetFont('times', '', 10);	
 
-				$pdf->MultiCell(75, 5, 'El Dia:..............................................', 0, 'L', 0, 0, '', 180 + $y, true);
-				$pdf->MultiCell(125, 5, 'Al servicio de:...................................................................................................', 0, 'L', 0, 0, '70', 180 + $y, true);
+				$pdf->MultiCell(75, 5, 'El Dia:......................................................', 0, 'L', 0, 0, '13', 182 + $y, true);
+				$pdf->MultiCell(125, 5, 'Al servicio de:...........................................................................................................', 0, 'L', 0, 0, '70', 182 + $y, true);
 
 				$y = $y + 10;
 
 			} else {
 
-				$pdf->MultiCell(75, 5, 'El Dia:..............................................', 0, 'L', 0, 0, '', 180 + $y, true);
-				$pdf->MultiCell(125, 5, 'Al servicio de:...................................................................................................', 0, 'L', 0, 0, '70', 180 + $y, true);
+				$pdf->MultiCell(75, 5, 'El Dia:.....................................................', 0, 'L', 0, 0, '13', 182 + $y, true);
+				$pdf->MultiCell(125, 5, 'Al servicio de:...........................................................................................................', 0, 'L', 0, 0, '70', 182 + $y, true);
 
 				$y = $y + 10;
 
@@ -436,110 +586,123 @@ class AjaxPacienteIngresos {
 		// DATOS DE ALTA
 		//**********************************
 
-		$pdf->line(5,208,190,208);
+		$pdf->line(5,210,190,210);
 
-		$pdf->MultiCell(55, 5, 'Con fecha', 0, 'L', 0, 0, '', '214', true);
+		$pdf->MultiCell(55, 5, '10.- Con fecha', 0, 'L', 0, 0, '13', '216', true);
 		// $pdf->MultiCell(55, 5, date("d", strtotime($respuesta['fecha'])).'       '.date("m", strtotime($respuesta['fecha'])).'     '.date("Y", strtotime($respuesta['fecha'])), 0, 'L', 0, 0, '48', '135', true);
 
-		$pdf->MultiCell(10, 7, '', 1, 'C', 0, 0, '35', '210', true);
-		$pdf->MultiCell(10, 7, '', 1, 'C', 0, 0, '45', '210', true);
-		$pdf->MultiCell(20, 7, '', 1, 'C', 0, 0, '55', '210', true);
+		$pdf->MultiCell(10, 7, '', 1, 'C', 0, 0, '38', '212', true);
+		$pdf->MultiCell(10, 7, '', 1, 'C', 0, 0, '48', '212', true);
+		$pdf->MultiCell(20, 7, '', 1, 'C', 0, 0, '58', '212', true);
 
 		if(isset($paciente_egreso['fecha_egreso'])) {
-			$pdf->MultiCell(10, 7, date("d", strtotime($paciente_egreso['fecha_egreso'])), 0, 'C', 0, 0, '35', '211', true);
-			$pdf->MultiCell(10, 7, date("m", strtotime($paciente_egreso['fecha_egreso'])), 0, 'C', 0, 0, '45', '211', true);
-			$pdf->MultiCell(20, 7, date("Y", strtotime($paciente_egreso['fecha_egreso'])), 0, 'C', 0, 0, '55', '211', true);
+			$pdf->SetFont('times', 'B', 10);
+			$pdf->MultiCell(10, 7, date("d", strtotime($paciente_egreso['fecha_egreso'])), 0, 'C', 0, 0, '38', '214', true);
+			$pdf->MultiCell(10, 7, date("m", strtotime($paciente_egreso['fecha_egreso'])), 0, 'C', 0, 0, '48', '214', true);
+			$pdf->MultiCell(20, 7, date("Y", strtotime($paciente_egreso['fecha_egreso'])), 0, 'C', 0, 0, '58', '214', true);
+			$pdf->SetFont('times', '', 10);
 		}
 		
-		$pdf->MultiCell(11, 5, 'DIA', 0, 'C', 0, 0, '35', '219', true);
-		$pdf->MultiCell(11, 5, 'MES', 0, 'C', 0, 0, '45', '219', true);
-		$pdf->MultiCell(21, 5, 'AÑO', 0, 'C', 0, 0, '55', '219', true); 
+		$pdf->MultiCell(11, 5, 'DIA', 0, 'C', 0, 0, '38', '221', true);
+		$pdf->MultiCell(11, 5, 'MES', 0, 'C', 0, 0, '48', '221', true);
+		$pdf->MultiCell(21, 5, 'AÑO', 0, 'C', 0, 0, '58', '221', true); 
 
-		
-		$pdf->MultiCell(55, 5, $paciente_egreso['hora_egreso'], 0, 'L', 0, 0, '95', '212', true);
-		$pdf->MultiCell(135, 5, 'A horas:......................................... El paciente ha sido dado de Alta', 0, 'L', 0, 0, '80', '214', true);
+		$pdf->SetFont('times', 'B', 10);
+		$pdf->MultiCell(55, 5, date("H:i", strtotime($paciente_egreso['hora_egreso'])), 0, 'L', 0, 0, '98', '214', true);
+		$pdf->SetFont('times', '', 10);
+		$pdf->MultiCell(135, 5, 'A horas:.................................. El paciente ha sido dado de Alta', 0, 'L', 0, 0, '84', '216', true);
 
 		$pdf->setCellHeightRatio(2);
 
-		$pdf->MultiCell(173, 5, $paciente_egreso['diagnostico_egreso'], 0, 'L', 0, 0, '15', '228', true);
-		$pdf->MultiCell(173, 5, 'Diagnostico al egreso(el de mayor importancia)......................................................................................................................................................................................................................................................................................................................', 0, 'L', 0, 0, '', '223', true);
+		$pdf->SetFont('times', 'B', 10);
+		$pdf->MultiCell(173, 5, '                                                                                         '.$paciente_egreso['diagnostico_egreso'], 0, 'L', 0, 0, '15', '223', true);
+		$pdf->SetFont('times', '', 10);
+
+		$pdf->setCellHeightRatio(2);
+
+		$pdf->MultiCell(175, 5, '11.- Diagnostico al egreso(el de mayor importancia)....................................................................................................................................................................................................................................................................................................................', 0, 'L', 0, 0, '13', '225', true);
 
 		$pdf->setCellHeightRatio(0);
 
 		// OPCIONES CAUSA EGRESO
-		$pdf->SetFont('times', 'B', 11);
-		$pdf->MultiCell(75, 3, 'CAUSA EGRESO', 0, 'L', 0, 0, '', '239', true);
+		$pdf->SetFont('times', 'B', 10);
+		$pdf->MultiCell(75, 3, '12.- CAUSA EGRESO', 0, 'L', 0, 0, '13', '243', true);
 		$pdf->SetFont('times', '', 10);
 
 		// MARCA CON UNA X DEPENDIENDO A LA CAUSA DE EGRESO
 		if ($paciente_egreso['causa_egreso'] == "ALTA MEDICA") {
-			$pdf->MultiCell(5, 3, 'X', 0, 'C', 0, 0, '43', '246', true);
+			$pdf->MultiCell(5, 3, 'X', 0, 'C', 0, 0, '43', '251', true);
 		} else if ($paciente_egreso['causa_egreso'] == "TRANSFERENCIA EXTERNA") {
-			$pdf->MultiCell(5, 3, 'X', 0, 'C', 0, 0, '86', '246', true);
+			$pdf->MultiCell(5, 3, 'X', 0, 'C', 0, 0, '86', '251', true);
 		} else if ($paciente_egreso['causa_egreso'] == "ABANDONO") {
-			$pdf->MultiCell(5, 3, 'X', 0, 'C', 0, 0, '121', '246', true);
+			$pdf->MultiCell(5, 3, 'X', 0, 'C', 0, 0, '121', '251', true);
 		} else if ($paciente_egreso['causa_egreso'] == "MUERTE INSTITUCIONAL") {
-			$pdf->MultiCell(5, 3, 'X', 0, 'C', 0, 0, '180', '246', true);
+			$pdf->MultiCell(5, 3, 'X', 0, 'C', 0, 0, '180', '251', true);
 		} else if ($paciente_egreso['causa_egreso'] == "MUERTE NO INSTITUCIONAL") {
-			$pdf->MultiCell(5, 3, 'X', 0, 'C', 0, 0, '69', '253', true);
+			$pdf->MultiCell(5, 3, 'X', 0, 'C', 0, 0, '69', '258', true);
 		} else if ($paciente_egreso['causa_egreso'] == "ALTA SOLICITADA") {
-			$pdf->MultiCell(5, 3, 'X', 0, 'C', 0, 0, '113', '253', true);
+			$pdf->MultiCell(5, 3, 'X', 0, 'C', 0, 0, '113', '258', true);
 		} else if ($paciente_egreso['causa_egreso'] == "INDICIPLINA") {
-			$pdf->MultiCell(5, 3, 'X', 0, 'C', 0, 0, '150', '253', true);
+			$pdf->MultiCell(5, 3, 'X', 0, 'C', 0, 0, '150', '258', true);
 		} else if ($paciente_egreso['causa_egreso'] == "OTROS") {
-			$pdf->MultiCell(5, 3, 'X', 0, 'C', 0, 0, '177', '253', true);
+			$pdf->MultiCell(5, 3, 'X', 0, 'C', 0, 0, '177', '258', true);
 		}
 
-		$pdf->MultiCell(55, 5, 'ALTA MEDICA', 0, 'L', 0, 0, '', '246', true);
-		$pdf->MultiCell(5, 4, '', 1, 'C', 0, 0, '43', '245', true);
-		$pdf->MultiCell(55, 5, 'TRANS. EXTERNA', 0, 'L', 0, 0, '53', '246', true);
-		$pdf->MultiCell(5, 4, '', 1, 'C', 0, 0, '86', '245', true);
-		$pdf->MultiCell(55, 5, 'ABANDONO', 0, 'L', 0, 0, '97', '246', true);
-		$pdf->MultiCell(5, 4, '', 1, 'C', 0, 0, '121', '245', true);
-		$pdf->MultiCell(55, 5, 'MUERTE INSTITUCIONAL', 0, 'L', 0, 0, '134', '246', true);
-		$pdf->MultiCell(5, 4, '', 1, 'C', 0, 0, '180', '245', true);
+		$pdf->MultiCell(55, 5, 'ALTA MEDICA', 0, 'L', 0, 0, '', '251', true);
+		$pdf->MultiCell(5, 4, '', 1, 'C', 0, 0, '43', '250', true);
+		$pdf->MultiCell(55, 5, 'TRANS. EXTERNA', 0, 'L', 0, 0, '53', '251', true);
+		$pdf->MultiCell(5, 4, '', 1, 'C', 0, 0, '86', '250', true);
+		$pdf->MultiCell(55, 5, 'ABANDONO', 0, 'L', 0, 0, '97', '251', true);
+		$pdf->MultiCell(5, 4, '', 1, 'C', 0, 0, '121', '250', true);
+		$pdf->MultiCell(55, 5, 'MUERTE INSTITUCIONAL', 0, 'L', 0, 0, '134', '251', true);
+		$pdf->MultiCell(5, 4, '', 1, 'C', 0, 0, '180', '250', true);
 
-		$pdf->MultiCell(55, 5, 'MUESTRE NO INSTITUCIONAL', 0, 'L', 0, 0, '', '253', true);
-		$pdf->MultiCell(5, 4, '', 1, 'C', 0, 0, '69', '252', true);
-		$pdf->MultiCell(55, 5, 'ALTA SOLICITADA', 0, 'L', 0, 0, '78', '253', true);
-		$pdf->MultiCell(5, 4, '', 1, 'C', 0, 0, '113', '252', true);
-		$pdf->MultiCell(55, 5, 'INDICIPLINA', 0, 'L', 0, 0, '125', '253', true);
-		$pdf->MultiCell(5, 4, '', 1, 'C', 0, 0, '150', '252', true);
-		$pdf->MultiCell(55, 5, 'OTROS', 0, 'L', 0, 0, '162', '253', true);
-		$pdf->MultiCell(5, 4, '', 1, 'C', 0, 0, '177', '252', true);
+		$pdf->MultiCell(55, 5, 'MUESTRE NO INSTITUCIONAL', 0, 'L', 0, 0, '', '258', true);
+		$pdf->MultiCell(5, 4, '', 1, 'C', 0, 0, '69', '257', true);
+		$pdf->MultiCell(55, 5, 'ALTA SOLICITADA', 0, 'L', 0, 0, '78', '258', true);
+		$pdf->MultiCell(5, 4, '', 1, 'C', 0, 0, '113', '257', true);
+		$pdf->MultiCell(55, 5, 'INDICIPLINA', 0, 'L', 0, 0, '125', '258', true);
+		$pdf->MultiCell(5, 4, '', 1, 'C', 0, 0, '150', '257', true);
+		$pdf->MultiCell(55, 5, 'OTROS', 0, 'L', 0, 0, '162', '258', true);
+		$pdf->MultiCell(5, 4, '', 1, 'C', 0, 0, '177', '257', true);
 
 		// OPCIONES CONDICION AL EGRESO
-		$pdf->SetFont('times', 'B', 11);
-		$pdf->MultiCell(55, 5, 'CONDICION AL EGRESO ', 0, 'L', 0, 0, '', '261', true);
+		$pdf->SetFont('times', 'B', 10);
+		$pdf->MultiCell(75, 5, '13.- CONDICION AL EGRESO ', 0, 'L', 0, 0, '13', '268', true);
 		$pdf->SetFont('times', '', 10);
 
 		// MARCA CON UNA X DEPENDIENDO A LA CAUSA DE EGRESO
 		if ($paciente_egreso['condicion_egreso'] == "CURADO") {
-			$pdf->MultiCell(5, 3, 'X', 0, 'C', 0, 0, '34', '268', true);
+			$pdf->MultiCell(5, 3, 'X', 0, 'C', 0, 0, '34', '276', true);
 		} else if ($paciente_egreso['condicion_egreso'] == "MEJORADO") {
-			$pdf->MultiCell(5, 3, 'X', 0, 'C', 0, 0, '70', '268', true);
+			$pdf->MultiCell(5, 3, 'X', 0, 'C', 0, 0, '70', '276', true);
 		} else if ($paciente_egreso['condicion_egreso'] == "MISMO ESTADO") {
-			$pdf->MultiCell(5, 3, 'X', 0, 'C', 0, 0, '110', '268', true);
+			$pdf->MultiCell(5, 3, 'X', 0, 'C', 0, 0, '110', '276', true);
 		} else if ($paciente_egreso['condicion_egreso'] == "INCURABLE") {
-			$pdf->MultiCell(5, 3, 'X', 0, 'C', 0, 0, '143', '268', true);
+			$pdf->MultiCell(5, 3, 'X', 0, 'C', 0, 0, '143', '276', true);
 		} else if ($paciente_egreso['condicion_egreso'] == "NO TRATADO") {
-			$pdf->MultiCell(5, 3, 'X', 0, 'C', 0, 0, '180', '268', true);
+			$pdf->MultiCell(5, 3, 'X', 0, 'C', 0, 0, '180', '276', true);
 		}
 
-		$pdf->MultiCell(55, 5, 'CURADO', 0, 'L', 0, 0, '', '268', true);
-		$pdf->MultiCell(5, 4, '', 1, 'C', 0, 0, '34', '267', true);
-		$pdf->MultiCell(55, 5, 'MEJORADO', 0, 'L', 0, 0, '47', '268', true);
-		$pdf->MultiCell(5, 4, '', 1, 'C', 0, 0, '70', '267', true);
-		$pdf->MultiCell(55, 5, 'MISMO ESTADO', 0, 'L', 0, 0, '81', '268', true);
-		$pdf->MultiCell(5, 4, '', 1, 'C', 0, 0, '110', '267', true);
-		$pdf->MultiCell(55, 5, 'INCURABLE', 0, 'L', 0, 0, '120', '268', true);
-		$pdf->MultiCell(5, 4, '', 1, 'C', 0, 0, '143', '267', true);
-		$pdf->MultiCell(55, 5, 'NO TRATADO', 0, 'L', 0, 0, '153', '268', true);
-		$pdf->MultiCell(5, 4, '', 1, 'C', 0, 0, '180', '267', true);
+		$pdf->MultiCell(55, 5, 'CURADO', 0, 'L', 0, 0, '', '276', true);
+		$pdf->MultiCell(5, 4, '', 1, 'C', 0, 0, '34', '275', true);
+		$pdf->MultiCell(55, 5, 'MEJORADO', 0, 'L', 0, 0, '47', '276', true);
+		$pdf->MultiCell(5, 4, '', 1, 'C', 0, 0, '70', '275', true);
+		$pdf->MultiCell(55, 5, 'MISMO ESTADO', 0, 'L', 0, 0, '81', '276', true);
+		$pdf->MultiCell(5, 4, '', 1, 'C', 0, 0, '110', '275', true);
+		$pdf->MultiCell(55, 5, 'INCURABLE', 0, 'L', 0, 0, '120', '276', true);
+		$pdf->MultiCell(5, 4, '', 1, 'C', 0, 0, '143', '275', true);
+		$pdf->MultiCell(55, 5, 'NO TRATADO', 0, 'L', 0, 0, '153', '276', true);
+		$pdf->MultiCell(5, 4, '', 1, 'C', 0, 0, '180', '275', true);
 
+
+		//**********************************
+		// DISEÑO CODIFICACION
+		//**********************************
+		$pdf->SetFont('times', 'B', 8);
+		$pdf->MultiCell(18, 5, 'Codificación', 0, 'C', 0, 0, '188', '46', true);
 		$pdf->SetFont('times', '', 8);
-
-		$pdf->MultiCell(25, 5, 'Codificación', 0, 'L', 0, 0, '189', '50', true);
+		$pdf->MultiCell(18, 5, '(No escribir)', 0, 'C', 0, 0, '188', '50', true);
 
 		$pdf->MultiCell(25, 5, '.....................', 0, 'L', 0, 0, '189', '53', true);
 		$pdf->SetFont('times', '', 10);
@@ -605,6 +768,46 @@ class AjaxPacienteIngresos {
 		$pdf->SetFont('times', '', 10);
 		$pdf->MultiCell(18, 5, '13', 0, 'C', 0, 0, '189', '260', true);
 
+
+		//**********************************
+		// DATOS CODIFICACION
+		//**********************************
+		$pdf->SetFont('times', 'B', 12);
+
+		// Edad
+		$pdf->MultiCell(25, 3, $edad->y, 0, 'L', 0, 0, '193', '66', true);
+
+		// Tipo Asegurado-Beneficiario
+		if ($paciente_ingreso['cod_beneficiario'] == 'ID') {
+			$pdf->MultiCell(25, 3, '1', 0, 'L', 0, 0, '193', '83', true);
+		} else {
+			$pdf->MultiCell(25, 3, '2', 0, 'L', 0, 0, '193', '83', true);
+		}
+
+		// Sexo
+		if ($paciente_ingreso['sexo'] == 'MASCULINO') {
+			$pdf->MultiCell(25, 3, '1', 0, 'L', 0, 0, '193', '117', true);
+		} else {
+			$pdf->MultiCell(25, 3, '2', 0, 'L', 0, 0, '193', '117', true);
+		}
+
+		// codigo especialidad
+		$pdf->MultiCell(25, 3, $paciente_ingreso['codigo_especialidad'], 0, 'L', 0, 0, '193', '202', true);
+
+		// dias internación
+		$fecha1 = new DateTime($paciente_ingreso['fecha_ingreso']);
+		$fecha2 = new DateTime($paciente_egreso['fecha_egreso']);
+		$diff = $fecha1->diff($fecha2);
+		$pdf->MultiCell(25, 3, $diff->days+1, 0, 'L', 0, 0, '193', '220', true);
+
+		// codigo cie-10
+		$pdf->MultiCell(25, 3, $paciente_ingreso['codigo'], 0, 'L', 0, 0, '193', '236', true);	
+
+
+		$pdf->SetFont('times', '', 10);
+
+
+
 		// add a page
 		$pdf->AddPage(); 
 		// ---------------------------------------------------------
@@ -612,7 +815,7 @@ class AjaxPacienteIngresos {
 		// set border width
 		$pdf->SetLineWidth(0.3);
 		// line left
-		$pdf->line(15,10,15,239);
+		$pdf->line(12,10,12,239);
 		// line rigth
     $pdf->line(190,10,190,239);
     // set border width
@@ -623,46 +826,48 @@ class AjaxPacienteIngresos {
 		// set cell margins
 		$pdf->setCellMargins(1, 1, 1, 1);
 
-		$pdf->SetFont('times', 'B', 11);
-		$pdf->MultiCell(55, 5, 'EN CASO DE MUERTE', 0, 'L', 0, 0, '15', '10', true);
+		$pdf->SetFont('times', 'B', 10);
+		$pdf->MultiCell(75, 5, '14.- EN CASO DE MUERTE', 0, 'L', 0, 0, '13', '10', true);
 		$pdf->SetFont('times', '', 10);
 
 		$pdf->setCellHeightRatio(2);
 
 		$pdf->MultiCell(150, 25, $paciente_egreso['fallecido_causa_clinica'], 0, 'L', 0, 0, '37', '14', true);
-		$pdf->MultiCell(173, 25, 'Causa Clínica:............................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................', 0, 'L', 0, 0, '', '15', true);
+		$pdf->MultiCell(175, 25, '1 Causa Clínica:.................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................', 0, 'L', 0, 0, '13', '15', true);
 		
 		$pdf->MultiCell(133, 5, $paciente_egreso['fallecido_causa_autopsia'], 0, 'L', 0, 0, '55', '34', true);
-		$pdf->MultiCell(173, 5, 'Causa Anatomia(Autopsia)........................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................', 0, 'L', 0, 0, '', '35', true);
+		$pdf->MultiCell(175, 5, '2 Causa Anatomia(Autopsia).............................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................', 0, 'L', 0, 0, '13', '35', true);
 	
 		$pdf->line(15,60,190,60); 
 
 		$pdf->setCellHeightRatio(0);
 
-		$pdf->MultiCell(180, 3, 'EN CASO DE QUE EL PACIENTE HAYA SIDO INTERVENIDO QUIRURJICAMENTE', 0, 'C', 0, 0, '10', '62', true);
-		$pdf->MultiCell(55, 5, 'Con fecha', 0, 'L', 0, 0, '', '72', true);
-		// $pdf->MultiCell(55, 5, date("d", strtotime($respuesta['fecha'])).'       '.date("m", strtotime($respuesta['fecha'])).'     '.date("Y", strtotime($respuesta['fecha'])), 0, 'L', 0, 0, '48', '135', true);
+		$pdf->SetFont('times', 'B', 10);
+		$pdf->MultiCell(180, 3, 'EN CASO DE QUE EL PACIENTE HAYA SIDO INTERVENIDO QUIRURGICAMENTE', 0, 'C', 0, 0, '10', '62', true);
+		$pdf->SetFont('times', '', 10);
 
-		$pdf->MultiCell(10, 7, '', 1, 'C', 0, 0, '35', '68', true);
-		$pdf->MultiCell(10, 7, '', 1, 'C', 0, 0, '45', '68', true);
-		$pdf->MultiCell(20, 7, '', 1, 'C', 0, 0, '55', '68', true);
-		$pdf->MultiCell(11, 5, 'DIA', 0, 'C', 0, 0, '35', '77', true);
-		$pdf->MultiCell(11, 5, 'MES', 0, 'C', 0, 0, '45', '77', true);
-		$pdf->MultiCell(21, 5, 'AÑO', 0, 'C', 0, 0, '55', '77', true); 
+		$pdf->MultiCell(55, 5, '15.- Con fecha:', 0, 'L', 0, 0, '13', '72', true);
 
-		$pdf->MultiCell(135, 5, 'A horas:......................................... El paciente ha sido operado', 0, 'L', 0, 0, '80', '72', true);
+		$pdf->MultiCell(10, 7, '', 1, 'C', 0, 0, '40', '68', true);
+		$pdf->MultiCell(10, 7, '', 1, 'C', 0, 0, '50', '68', true);
+		$pdf->MultiCell(20, 7, '', 1, 'C', 0, 0, '60', '68', true);
+		$pdf->MultiCell(11, 5, 'DIA', 0, 'C', 0, 0, '40', '77', true);
+		$pdf->MultiCell(11, 5, 'MES', 0, 'C', 0, 0, '50', '77', true);
+		$pdf->MultiCell(21, 5, 'AÑO', 0, 'C', 0, 0, '60', '77', true); 
 
-		$pdf->MultiCell(135, 5, 'Cirujano Dr.:......................................................................................................................', 0, 'L', 0, 0, '', '85', true);
+		$pdf->MultiCell(135, 5, 'A horas:......................................... El paciente ha sido operado', 0, 'L', 0, 0, '88', '72', true);
+
+		$pdf->MultiCell(135, 5, '17.- Cirujano Dr.:..................................................................................................................', 0, 'L', 0, 0, '13', '85', true);
 
 		$pdf->MultiCell(55, 5, 'Clave:.........................................', 0, 'C', 0, 0, '135', '85', true);
 
-		$pdf->MultiCell(185, 5, 'Tipo de anestesia:...................................................................................................................................................................', 0, 'L', 0, 0, '', '92', true);
+		$pdf->MultiCell(175, 5, '18.- Tipo de anestesia:...............................................................................................................................................................', 0, 'L', 0, 0, '13', '92', true);
 
-		$pdf->MultiCell(135, 5, 'Anasteseologo Dr.:..................................................................................................', 0, 'L', 0, 0, '', '99', true);
+		$pdf->MultiCell(135, 5, '19.- Anasteseologo Dr.:.......................................................................................................', 0, 'L', 0, 0, '13', '99', true);
 
 		$pdf->MultiCell(55, 5, 'Clave:............................................', 0, 'C', 0, 0, '135', '99', true);
 
-		$pdf->MultiCell(155, 5, 'Por el Técnico Anestesista:', 0, 'L', 0, 0, '25', '106', true);
+		$pdf->MultiCell(155, 5, '3  Por el Técnico Anestesista:', 0, 'L', 0, 0, '22', '106', true);
 
 		//********************************
 		// MATERNIDAD
@@ -671,23 +876,30 @@ class AjaxPacienteIngresos {
 
 		// if($maternidad==null){
 
-		$pdf->MultiCell(55, 5, 'Fecha de Parto', 0, 'L', 0, 0, '', '118', true);
+		$pdf->MultiCell(55, 5, '20.- Fecha de Parto:', 0, 'L', 0, 0, '13', '118', true);
 		// $pdf->MultiCell(55, 5, date("d", strtotime($respuesta['fecha'])).'       '.date("m", strtotime($respuesta['fecha'])).'     '.date("Y", strtotime($respuesta['fecha'])), 0, 'L', 0, 0, '48', '135', true);
 
-		$pdf->MultiCell(10, 7, '', 1, 'C', 0, 0, '40', '115', true);
-		$pdf->MultiCell(10, 7, '', 1, 'C', 0, 0, '50', '115', true);
-		$pdf->MultiCell(20, 7, '', 1, 'C', 0, 0, '60', '115', true);
+		$pdf->MultiCell(10, 7, '', 1, 'C', 0, 0, '45', '115', true);
+		$pdf->MultiCell(10, 7, '', 1, 'C', 0, 0, '55', '115', true);
+		$pdf->MultiCell(20, 7, '', 1, 'C', 0, 0, '65', '115', true);
 		if(isset($maternidad['fecha_nacido'])) {
-			$pdf->MultiCell(10, 7, date("d", strtotime($maternidad['fecha_nacido'])), 0, 'C', 0, 0, '40', '117', true);
-			$pdf->MultiCell(10, 7, date("m", strtotime($maternidad['fecha_nacido'])), 0, 'C', 0, 0, '50', '117', true);
-			$pdf->MultiCell(20, 7, date("Y", strtotime($maternidad['fecha_nacido'])), 0, 'C', 0, 0, '60', '117', true);
+			$pdf->SetFont('times', 'B', 10);
+			$pdf->MultiCell(10, 7, date("d", strtotime($maternidad['fecha_nacido'])), 0, 'C', 0, 0, '45', '117', true);
+			$pdf->MultiCell(10, 7, date("m", strtotime($maternidad['fecha_nacido'])), 0, 'C', 0, 0, '55', '117', true);
+			$pdf->MultiCell(20, 7, date("Y", strtotime($maternidad['fecha_nacido'])), 0, 'C', 0, 0, '65', '117', true);
+			$pdf->SetFont('times', '', 10);
 		}
-		$pdf->MultiCell(11, 5, 'DIA', 0, 'C', 0, 0, '40', '124', true);
-		$pdf->MultiCell(11, 5, 'MES', 0, 'C', 0, 0, '50', '124', true);
-		$pdf->MultiCell(21, 5, 'AÑO', 0, 'C', 0, 0, '60', '124', true);
+		$pdf->MultiCell(11, 5, 'DIA', 0, 'C', 0, 0, '45', '124', true);
+		$pdf->MultiCell(11, 5, 'MES', 0, 'C', 0, 0, '55', '124', true);
+		$pdf->MultiCell(21, 5, 'AÑO', 0, 'C', 0, 0, '65', '124', true);
 
-		$pdf->MultiCell(55, 5, $maternidad['hora_nacido'], 0, 'L', 0, 0, '100', '116', true);
-		$pdf->MultiCell(55, 5, 'A horas  .............................', 0, 'L', 0, 0, '85', '118', true);
+		if(isset($maternidad['hora_nacido'])) {
+			$pdf->SetFont('times', 'B', 10);
+			$pdf->MultiCell(55, 5, date("H:i", strtotime($maternidad['hora_nacido'])), 0, 'L', 0, 0, '105', '116', true);
+			$pdf->SetFont('times', '', 10);
+		}
+
+		$pdf->MultiCell(55, 5, 'A horas  .............................', 0, 'L', 0, 0, '90', '118', true);
 
 		// MARCA CON UNA X DEPENDIENDO AL TIPO DE PARTO
 		if ($maternidad['tipo_parto'] == "EUTOCICO") {
@@ -703,7 +915,7 @@ class AjaxPacienteIngresos {
 		// 	$pdf->MultiCell(5, 3, 'X', 0, 'C', 0, 0, '182', '135', true);
 		// }
 
-		$pdf->MultiCell(55, 5, 'Parto:', 0, 'L', 0, 0, '', '129', true);
+		$pdf->MultiCell(55, 5, '21.- Parto:', 0, 'L', 0, 0, '13', '129', true);
 		$pdf->MultiCell(55, 5, 'Eutócico', 0, 'L', 0, 0, '', '135', true);
 		$pdf->MultiCell(5, 5, '', 1, 'C', 0, 0, '35', '134', true);
 		$pdf->MultiCell(55, 5, 'Distócico', 0, 'L', 0, 0, '47', '135', true);
@@ -726,7 +938,7 @@ class AjaxPacienteIngresos {
 			$pdf->MultiCell(5, 3, 'X', 0, 'C', 0, 0, '176', '147', true);
 		} 
 
-		$pdf->MultiCell(55, 5, 'Aborto:', 0, 'L', 0, 0, '', '141', true);
+		$pdf->MultiCell(55, 5, '22.- Aborto:', 0, 'L', 0, 0, '13', '141', true);
 		$pdf->MultiCell(55, 5, 'Completo Espontaneo', 0, 'L', 0, 0, '', '147', true);
 		$pdf->MultiCell(5, 5, '', 1, 'C', 0, 0, '50', '146', true);
 		$pdf->MultiCell(95, 5, ' Incompleto Tratamiento Instrumental ', 0, 'L', 0, 0, '62', '147', true);
@@ -736,25 +948,40 @@ class AjaxPacienteIngresos {
 		$pdf->MultiCell(55, 5, 'Otros', 0, 'L', 0, 0, '164', '147', true);
 		$pdf->MultiCell(5, 5, '', 1, 'C', 0, 0, '176', '146', true);
 
-		$pdf->MultiCell(55, 5, 'ENFERMEDAD OBSTETRICIA:', 0, 'L', 0, 0, '', '155', true);
+		$pdf->SetFont('times', 'B', 10);
+		$pdf->MultiCell(75, 5, '23.- ENFERMEDAD OBSTETRICIA:', 0, 'L', 0, 0, '13', '155', true);
+		$pdf->SetFont('times', '', 10);
 
 		$pdf->setCellHeightRatio(2);
 
 		if(isset($maternidad['edad_gestacional'])) {
-			$pdf->MultiCell(60, 5, number_format($maternidad['edad_gestacional'],2,",","").' SEMANAS', 0, 'L', 0, 0, '50', '156', true);
+			$pdf->SetFont('times', 'B', 10);
+			$pdf->MultiCell(60, 5, number_format($maternidad['edad_gestacional'],2,",","").' SEMANAS', 0, 'L', 0, 0, '55', '156', true);
+			$pdf->SetFont('times', '', 10);
 		} else {
 			$pdf->MultiCell(70, 5, '', 0, 'L', 0, 0, '50', '156', true);
 		}
 
-		$pdf->MultiCell(173, 5, 'En Curso de Embarazo:............................................................................................................................................................................................................................................................................................................................................................', 0, 'L', 0, 0, '', '158', true);
-		$pdf->MultiCell(173, 5, 'Post - Partum:............................................................................................................................................................................................................................................................................................................................................................................', 0, 'L', 0, 0, '', '172', true);
+		$pdf->MultiCell(175, 5, '1   En Curso de Embarazo:.............................................................................................................................................................................................................................................................................................................................................................', 0, 'L', 0, 0, '13', '158', true);
+		$pdf->MultiCell(175, 5, '2   Post - Partum:............................................................................................................................................................................................................................................................................................................................................................................', 0, 'L', 0, 0, '13', '172', true);
 
 		$pdf->line(15,188,190,188);
 
 		if(isset($maternidad['estado_nacido1']) || isset($maternidad['estado_nacido2']) || isset($maternidad['estado_nacido3'])) {
-			$pdf->MultiCell(150, 5, 'R.N.1 = '.$maternidad['estado_nacido1'].'     R.N.2 = '.$maternidad['estado_nacido2'].'     R.N.3 = '.$maternidad['estado_nacido3'], 0, 'L', 0, 0, '40', '188', true);
+			$pdf->SetFont('times', 'B', 10);
+			$pdf->MultiCell(150, 5, 'R.N.1 = '.$maternidad['estado_nacido1'].'     R.N.2 = '.$maternidad['estado_nacido2'].'     R.N.3 = '.$maternidad['estado_nacido3'], 0, 'L', 0, 0, '50', '188', true);
+			$pdf->SetFont('times', '', 10);
 		}		
-		$pdf->MultiCell(173, 5, 'Estado al nacer:.........................................................................................................................................................................................................................................................................................................................................................................', 0, 'L', 0, 0, '', '190', true);
+		$pdf->MultiCell(175, 5, '24.- Estado al nacer:.......................................................................................................................................................................................................................................................................................................................................................................', 0, 'L', 0, 0, '13', '190', true);
+
+		$pdf->setCellHeightRatio(1);
+
+		$pdf->MultiCell(52, 2, 'NOTA:', 0, 'L', 0, 0, '3', '239', true);
+		$pdf->MultiCell(195, 2, 'En los cuadritos numerados para fines de codificación marca con una (x) lo que corresponda.', 0, 'L', 0, 0, '15', '240', true);
+		$pdf->MultiCell(195, 2, 'En las casillas Nos. 25, 26, 27, 28, 30 y 31 se debe anotar el número que corresponda a los recién nacidos.', 0, 'L', 0, 0, '15', '244', true);
+		$pdf->MultiCell(195, 2, 'Mensualmente, junto con los ejemplares del Resumen Quincenal de Censo de Pacientes a horas "0" Form. EM 204 - A, deben ser remitidos a Estadística Nacional.', 0, 'L', 0, 0, '15', '248', true);
+		$pdf->MultiCell(195, 2, 'El número de formularios remitidos deberá coincidir exactamente con el número de egresos consignados en el Form. EM 204 - A', 0, 'L', 0, 0, '15', '256', true);
+		$pdf->MultiCell(125, 2, 'Lugar y Fecha: .......................................................................................', 0, 'L', 0, 0, '75', '263', true);
 
 		$vivo_hombres = 0;
 		$vivo_mujeres = 0;
@@ -763,108 +990,107 @@ class AjaxPacienteIngresos {
 
 		if ($maternidad['sexo_nacido1'] == "MASCULINO") {
 			if ($maternidad['estado_nacido1'] == "VIVO" || $maternidad['estado_nacido1'] == "VIVO DEPRIMIDO") {
-				// $pdf->MultiCell(20, 2, 'X', 0, 'C', 0, 0, '48', '216', true);
 				$vivo_hombres = $vivo_hombres + 1;
 			} elseif ($maternidad['estado_nacido1'] == "MUERTO") {
-				// $pdf->MultiCell(20, 2, 'X', 0, 'C', 0, 0, '48', '225', true);
 				$muerto_hombres = $muerto_hombres + 1;
 			} 
 		} else {
 			if ($maternidad['estado_nacido1'] == "VIVO" || $maternidad['estado_nacido1'] == "VIVO DEPRIMIDO") {
-				// $pdf->MultiCell(20, 2, 'X', 0, 'C', 0, 0, '68', '216', true);
 				$vivo_mujeres = $vivo_mujeres + 1;
 			} elseif ($maternidad['estado_nacido1'] == "MUERTO") {
-				// $pdf->MultiCell(20, 2, 'X', 0, 'C', 0, 0, '68', '225', true);
 				$muerto_mujeres = $muerto_mujeres + 1;
 			}
 		}
 
 		if ($maternidad['sexo_nacido2'] == "MASCULINO") {
 			if ($maternidad['estado_nacido2'] == "VIVO" || $maternidad['estado_nacido2'] == "VIVO DEPRIMIDO") {
-				// $pdf->MultiCell(20, 2, 'X', 0, 'C', 0, 0, '48', '216', true);
 				$vivo_hombres = $vivo_hombres + 1;
 			} elseif ($maternidad['estado_nacido2'] == "MUERTO") {
-				// $pdf->MultiCell(20, 2, 'X', 0, 'C', 0, 0, '48', '225', true);
 				$muerto_hombres = $muerto_hombres + 1;
 			} 
 		} else {
 			if ($maternidad['estado_nacido2'] == "VIVO" || $maternidad['estado_nacido2'] == "VIVO DEPRIMIDO") {
-				// $pdf->MultiCell(20, 2, 'X', 0, 'C', 0, 0, '68', '216', true);
 				$vivo_mujeres = $vivo_mujeres + 1;
 			} elseif ($maternidad['estado_nacido2'] == "MUERTO") {
-				// $pdf->MultiCell(20, 2, 'X', 0, 'C', 0, 0, '68', '225', true);
 				$muerto_mujeres = $muerto_mujeres + 1;
 			}
 		}
 
 		if ($maternidad['sexo_nacido3'] == "MASCULINO") {
 			if ($maternidad['estado_nacido3'] == "VIVO" || $maternidad['estado_nacido3'] == "VIVO DEPRIMIDO") {
-				// $pdf->MultiCell(20, 2, 'X', 0, 'C', 0, 0, '48', '216', true);
 				$vivo_hombres = $vivo_hombres + 1;
 			} elseif ($maternidad['estado_nacido3'] == "MUERTO") {
-				// $pdf->MultiCell(20, 2, 'X', 0, 'C', 0, 0, '48', '225', true);
 				$muerto_hombres = $muerto_hombres + 1;
 			} 
 		} else {
 			if ($maternidad['estado_nacido3'] == "VIVO" || $maternidad['estado_nacido3'] == "VIVO DEPRIMIDO") {
-				// $pdf->MultiCell(20, 2, 'X', 0, 'C', 0, 0, '68', '216', true);
 				$vivo_mujeres = $vivo_mujeres + 1;
 			} elseif ($maternidad['estado_nacido3'] == "MUERTO") {
-				// $pdf->MultiCell(20, 2, 'X', 0, 'C', 0, 0, '68', '225', true);
 				$muerto_mujeres = $muerto_mujeres + 1;
 			}
 		}
 
+		$pdf->setCellHeightRatio(2);
+
 		if ($maternidad != null) {
-			$pdf->MultiCell(20, 2, $vivo_hombres, 0, 'C', 0, 0, '48', '216', true);
-			$pdf->MultiCell(20, 2, $vivo_mujeres, 0, 'C', 0, 0, '48', '225', true);
-			$pdf->MultiCell(20, 2, $muerto_hombres, 0, 'C', 0, 0, '68', '216', true);
-			$pdf->MultiCell(20, 2, $muerto_mujeres, 0, 'C', 0, 0, '68', '225', true);
+			$pdf->MultiCell(20, 2, '25.- '.$vivo_hombres, 0, 'C', 0, 0, '46', '216', true);
+			$pdf->MultiCell(20, 2, '27.- '.$muerto_hombres, 0, 'C', 0, 0, '46', '225', true);
+			$pdf->MultiCell(20, 2, '26.- '.$vivo_mujeres, 0, 'C', 0, 0, '66', '216', true);
+			$pdf->MultiCell(20, 2, '28.- '.$muerto_mujeres, 0, 'C', 0, 0, '66', '225', true);
+		} else {
+			$pdf->MultiCell(20, 2, '25.- ', 0, 'C', 0, 0, '46', '216', true);
+			$pdf->MultiCell(20, 2, '27.- ', 0, 'C', 0, 0, '46', '225', true);
+			$pdf->MultiCell(20, 2, '26.- ', 0, 'C', 0, 0, '66', '216', true);
+			$pdf->MultiCell(20, 2, '28.- ', 0, 'C', 0, 0, '66', '225', true);
 		}
 
 	
-		$pdf->MultiCell(30, 2, 'RECIEN NACIDO', 1, 'C', 0, 0, '18', '207', true);
-		$pdf->MultiCell(20, 2, 'HOMBRE', 1, 'C', 0, 0, '48', '207', true);
-		$pdf->MultiCell(20, 2, 'MUJER', 1, 'C', 0, 0, '68', '207', true);
-		$pdf->MultiCell(30, 2, 'VIVOS', 1, 'C', 0, 0, '18', '216', true);
-		$pdf->MultiCell(20, 2, '', 1, 'C', 0, 0, '48', '216', true);
-		$pdf->MultiCell(20, 2, '', 1, 'C', 0, 0, '68', '216', true);
-		$pdf->MultiCell(30, 2, 'MUERTOS', 1, 'C', 0, 0, '18', '225', true);
-		$pdf->MultiCell(20, 2, '', 1, 'C', 0, 0, '48', '225', true);
-		$pdf->MultiCell(20, 2, '', 1, 'C', 0, 0, '68', '225', true);
+		$pdf->MultiCell(30, 2, 'RECIEN NACIDO', 1, 'C', 0, 0, '16', '207', true);
+		$pdf->MultiCell(20, 2, 'HOMBRE', 1, 'C', 0, 0, '46', '207', true);
+		$pdf->MultiCell(20, 2, 'MUJER', 1, 'C', 0, 0, '66', '207', true);
+		$pdf->MultiCell(30, 2, 'VIVOS', 1, 'C', 0, 0, '16', '216', true);
+		$pdf->MultiCell(20, 2, '', 1, 'C', 0, 0, '46', '216', true);
+		$pdf->MultiCell(20, 2, '', 1, 'C', 0, 0, '66', '216', true);
+		$pdf->MultiCell(30, 2, 'MUERTOS', 1, 'C', 0, 0, '16', '225', true);
+		$pdf->MultiCell(20, 2, '', 1, 'C', 0, 0, '46', '225', true);
+		$pdf->MultiCell(20, 2, '', 1, 'C', 0, 0, '66', '225', true);
 
-		$pdf->MultiCell(52, 2, 'PESO AL NACER', 0, 'C', 0, 0, '88', '205', true);
+		$pdf->SetFont('times', 'B', 10);
+		$pdf->MultiCell(52, 2, '29.- PESO AL NACER', 0, 'C', 0, 0, '88', '205', true);
+		$pdf->SetFont('times', '', 10);
 
+		$pdf->SetFont('times', 'B', 10);
 		if(isset($maternidad['peso_nacido1'])) {
-			$pdf->MultiCell(52, 2, number_format($maternidad['peso_nacido1'],2,",",""), 0, 'C', 0, 0, '88', '211', true);
+			$pdf->MultiCell(52, 2, number_format($maternidad['peso_nacido1'],2,",",""), 0, 'C', 0, 0, '85', '211', true);
 		} else {
-			$pdf->MultiCell(52, 2, '', 0, 'C', 0, 0, '88', '211', true);
+			$pdf->MultiCell(52, 2, '', 0, 'C', 0, 0, '85', '211', true);
 		}
 		if(isset($maternidad['peso_nacido2'])) {
-			$pdf->MultiCell(52, 2, number_format($maternidad['peso_nacido2'],2,",",""), 0, 'C', 0, 0, '88', '218', true);
+			$pdf->MultiCell(52, 2, number_format($maternidad['peso_nacido2'],2,",",""), 0, 'C', 0, 0, '85', '218', true);
 		} else {
-			$pdf->MultiCell(52, 2, '', 0, 'C', 0, 0, '88', '218', true);
+			$pdf->MultiCell(52, 2, '', 0, 'C', 0, 0, '85', '218', true);
 		}
 		if(isset($maternidad['peso_nacido3'])) {
-			$pdf->MultiCell(52, 2, number_format($maternidad['peso_nacido3'],2,",",""), 0, 'C', 0, 0, '88', '225', true);
+			$pdf->MultiCell(52, 2, number_format($maternidad['peso_nacido3'],2,",",""), 0, 'C', 0, 0, '85', '225', true);
 		} else {
-			$pdf->MultiCell(52, 2, '', 0, 'C', 0, 0, '88', '211', true);
+			$pdf->MultiCell(52, 2, '', 0, 'C', 0, 0, '85', '211', true);
 		}
+		$pdf->SetFont('times', '', 10);
 
-		$pdf->MultiCell(52, 2, '...................................... Kgms.', 0, 'C', 0, 0, '88', '213', true);
-		$pdf->MultiCell(52, 2, '...................................... Kgms.', 0, 'C', 0, 0, '88', '220', true);
-		$pdf->MultiCell(52, 2, '...................................... Kgms.', 0, 'C', 0, 0, '88', '227', true);
+		$pdf->MultiCell(52, 2, '...................................... Kgms.', 0, 'C', 0, 0, '87', '213', true);
+		$pdf->MultiCell(52, 2, '...................................... Kgms.', 0, 'C', 0, 0, '87', '220', true);
+		$pdf->MultiCell(52, 2, '...................................... Kgms.', 0, 'C', 0, 0, '87', '227', true);
 	
 		$pdf->setCellHeightRatio(1);
 		$pdf->MultiCell(45, 2, 'CONDICION AL EGRESO AMBOS SEXOS', 1, 'C', 0, 0, '140', '207', true);
 
 		$pdf->setCellHeightRatio(2);
-		$pdf->MultiCell(45, 2, 'VIVOS Nº', 1, 'L', 0, 0, '140', '216', true);
-		$pdf->MultiCell(45, 2, 'MUERTOS Nº', 1, 'L', 0, 0, '140', '225', true);
+		$pdf->MultiCell(45, 2, '30.- VIVOS Nº', 1, 'L', 0, 0, '140', '216', true);
+		$pdf->MultiCell(45, 2, '31.- MUERTOS Nº', 1, 'L', 0, 0, '140', '225', true);
 
 		if ($maternidad != null) {
-			$pdf->MultiCell(35, 2, $vivo_hombres + $vivo_mujeres, 0, 'C', 0, 0, '150', '216', true);
-			$pdf->MultiCell(35, 2, $muerto_hombres + $muerto_mujeres, 0, 'C', 0, 0, '150', '225', true);
+			$pdf->MultiCell(35, 2, $vivo_hombres + $vivo_mujeres, 0, 'C', 0, 0, '157', '216', true);
+			$pdf->MultiCell(35, 2, $muerto_hombres + $muerto_mujeres, 0, 'C', 0, 0, '157', '225', true);
 		}
 
 		// set border width
@@ -883,8 +1109,14 @@ class AjaxPacienteIngresos {
 		// Rotar Texto
 		$pdf->StartTransform();
 		$pdf->Rotate(-270);
-		$pdf->MultiCell(100, 5, 'DATOS DE ALTA', 0, 'C', 0, 0, '300', '47', true);
-		$pdf->MultiCell(125, 5, 'MATERNIDAD', 0, 'C', 0, 0, '172', '47', true);
+		if ($maternidad != null) {			
+			$pdf->MultiCell(100, 5, 'DATOS DE ALTA', 0, 'C', 0, 0, '310', '38', true);
+			$pdf->MultiCell(125, 5, 'MATERNIDAD', 0, 'C', 0, 0, '180', '38', true);
+		} else {
+			$pdf->MultiCell(100, 5, 'DATOS DE ALTA', 0, 'C', 0, 0, '310', '45', true);
+			$pdf->MultiCell(125, 5, 'MATERNIDAD', 0, 'C', 0, 0, '180', '45', true);
+		}
+
 		$pdf->StopTransform();
 
 		$k = 23;
@@ -904,13 +1136,15 @@ class AjaxPacienteIngresos {
 			$k = $k + 12;
 		}
 
+
+
 		$pdf->SetFont('times', 'I', 10);
 
-		$pdf->MultiCell(90, 2, '..............................................................................................', 0, 'C', 0, 0, '10', '273', true);	
-		$pdf->MultiCell(90, 2, 'FIRMA DEL JEFE DE FICHAJE (ESTADISTICA)',0, 'C', 0, 0, '10', '277', true);
+		$pdf->MultiCell(90, 2, '..............................................................................................', 0, 'C', 0, 0, '10', '279', true);	
+		$pdf->MultiCell(90, 2, 'FIRMA DEL JEFE DE FICHAJE (ESTADISTICA)',0, 'C', 0, 0, '10', '282', true);
 
-		$pdf->MultiCell(90, 2, '..............................................................................................', 0, 'C', 0, 0, '110', '273', true);	
-		$pdf->MultiCell(90, 2, 'NOMBRE Y APELLIDO COMPLETO',0, 'C', 0, 0, '110', '277', true);	
+		$pdf->MultiCell(90, 2, '..............................................................................................', 0, 'C', 0, 0, '110', '279', true);	
+		$pdf->MultiCell(90, 2, 'NOMBRE Y APELLIDO COMPLETO',0, 'C', 0, 0, '110', '282', true);	
 
 		//============================================================+
 		// END OF FILE

@@ -9,6 +9,13 @@ var tablaPacientes = $('#tblPacientes').DataTable({
 		type: "post"
 	},
 
+	"rowCallback": function(row, data, index) {
+		if ( data[18] == "1" ) {
+			$('td', row).addClass('table-danger');
+			$('tr.child', row).addClass('table-danger');
+		}
+	},
+
 	"processing": true,
 	
 	"serverSide": true,
@@ -558,6 +565,8 @@ $(document).on("click", ".btnEditarPaciente", function() {
 				$('#editarZonaPaciente').prop("disabled",true);
 				$('#editarZonaPaciente').val("");
 				$("#editarZonaPaciente").removeAttr('required');
+
+				$('#buscarEmpleador').prop("disabled", true);
 
 			}
 
@@ -1112,6 +1121,8 @@ $("#frmEditarPaciente").on("change", "#editarParticular", function() {
 		$("#editarZonaPaciente").removeAttr('required');
 		$("#editarZonaPaciente").val('');
 
+		$("#buscarEmpleador").prop('disabled',true);
+
 		$("#nuevoEstadoAsegurado").val('INACTIVO');
 
   } else {
@@ -1135,6 +1146,8 @@ $("#frmEditarPaciente").on("change", "#editarParticular", function() {
 		$("#editarZonaPaciente").removeAttr('readonly');
 		$("#editarZonaPaciente").before('<label class="indicadorParticular">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>');
 		$("#editarZonaPaciente").attr('required',true);
+
+		$("#buscarEmpleador").prop('disabled',false);
 
   }
 
@@ -1205,6 +1218,7 @@ BUSQUEDA DE AFILIADO A PARTIR DEL NOMBRE O COD ASEGURADO POR EL BOTON BUSCAR
 $(document).on("click", ".btnBuscarAfiliado", function() {
 
 	var afiliado = $("#buscardorAfiliado").val();
+	console.log("afiliado", afiliado);
 
 	if (afiliado != "") {
 
@@ -1244,7 +1258,7 @@ $(document).on("click", ".btnBuscarAfiliado", function() {
 
 				'<table class="table table-bordered table-hover dt-responsive" id="tablaAfiliadosSIAIS" width="100%">'+
 
-					'<thead>'+
+					'<thead class="text-light bg-primary">'+
 
 						'<tr>'+
 							'<th>APELLIDOS Y NOMBRES</th>'+
@@ -1330,7 +1344,7 @@ $(document).on("click", ".btnBuscarAfiliado", function() {
 					console.log("idAfiliado", idAfiliado);
 
 					var datos = new FormData();
-					datos.append("guardarAfiliado", "guardarAfiliado");
+					datos.append("mostrarAfiliado", "mostrarAfiliado");
 					datos.append("idAfiliado", idAfiliado);
 
 					//Para mostrar alerta personalizada de loading
@@ -1462,7 +1476,7 @@ $(document).on("keypress", "#buscardorAfiliado", function(e) {
 
 					'<table class="table table-bordered table-hover dt-responsive" id="tablaAfiliadosSIAIS" width="100%">'+
 
-						'<thead>'+
+						'<thead class="text-light bg-primary">'+
 
 							'<tr>'+
 								'<th>APELLIDOS Y NOMBRES</th>'+
@@ -1543,12 +1557,13 @@ $(document).on("keypress", "#buscardorAfiliado", function(e) {
 						$(this).addClass("pe-auto");
 						
 						var data = t.row( this ).data();
+						console.log("data", data);
 
 						var idAfiliado = data.idafiliacion;
 						console.log("idAfiliado", idAfiliado);
 
 						var datos = new FormData();
-						datos.append("guardarAfiliado", "guardarAfiliado");
+						datos.append("mostrarAfiliado", "mostrarAfiliado");
 						datos.append("idAfiliado", idAfiliado);
 
 						//Para mostrar alerta personalizada de loading
@@ -1625,7 +1640,6 @@ $(document).on("keypress", "#buscardorAfiliado", function(e) {
 			});
 
 		} else {
-
 			
 			$('#tablaAfiliadosSIAIS').remove();
 			$('#tablaAfiliadosSIAIS_wrapper').remove();
@@ -1681,17 +1695,21 @@ PARA HABILITAR INPUT MASK EN FORMULARIO
 $(":input").inputmask();
 
 /*=============================================
-BUSQUEDA DE AFILIADO A PARTIR DEL NOMBRE O COD ASEGURADO POR EL BOTON BUSCAR
+FUNCION QUE TRASPASA EL NRO PATRONAL Y RAZON SOCIAL AL FORMULARIO EDITAR PACIENTE
 =============================================*/
-$(document).on("click", ".btnBuscarEmpleador", function() {
+$(document).ready(function() {
 
-	var empleador = $("#buscardorEmpleador").val();
+	$('#tblEmpleadoresSIAIS tbody').on('click', 'tr', function () {
 
-	if (empleador != "") {
+		$(this).addClass("pe-auto");
+		
+		var data = tablaEmpleadoresSIAIS.row(this).data();
+
+		var idEmpleador = data[3];
 
 		var datos = new FormData();
-		datos.append("empleador", empleador);
 		datos.append("mostrarEmpleador", "mostrarEmpleador");
+		datos.append("idEmpleador", idEmpleador);
 
 		//Para mostrar alerta personalizada de loading
 		swal.fire({
@@ -1706,174 +1724,93 @@ $(document).on("click", ".btnBuscarEmpleador", function() {
 
 		$.ajax({
 
-			url: "ajax/datatable-empleadoresSIAIS.ajax.php",
+			url:"ajax/empleadoresSIAIS.ajax.php",
 			method: "POST",
 			data: datos,
 			cache: false,
 			contentType: false,
 			processData: false,
-			dataType: "json",
-			success: function(respuesta) {	
+			dataType:"json",
+			success:function(respuesta) {
+				console.log("respuestaEmpleador", respuesta);
 
 				//Para cerrar la alerta personalizada de loading
-				swal.close();					
+				swal.close();
 
-				// $('#tablaAfiliadosSIAIS').remove();
-				// $('#tablaAfiliadosSIAIS_wrapper').remove();
+				// var id = respuesta["idempleador"];
+				var nroEmpleador = respuesta["emp_nro_empleador"];
+				var nombreEmpleador = respuesta["emp_nombre"];
 
-				// $("#tblAfiliadosSIAIS").append(
-
-				// '<table class="table table-bordered table-hover dt-responsive" id="tablaAfiliadosSIAIS" width="100%">'+
-
-				// 	'<thead>'+
-
-				// 		'<tr>'+
-				// 			'<th>APELLIDOS Y NOMBRES</th>'+
-				// 			'<th>COD. ASEGURADO</th>'+
-				// 			'<th>COD. BENEFICIARIO</th>'+
-				// 			'<th>FECHA NACIMIENTO</th>'+
-				// 			'<th>COD. EMPLEADOR</th>'+
-				// 			'<th>NOMBRE EMPLEADOR</th>'+
-				// 		'</tr>'+
-
-				// 	'</thead>'+
-
-				// '</table>'  
-
-				// );       			
-
-				var t = $('#tablaEmpleadoresSIAIS').DataTable({
-
-					"data": respuesta,
-
-					"columns": [
-					{ data: "nombre_completo" },
-					{ data: "cod_asegurado" },
-					{ data: "cod_beneficiario" },
-					{ render: function (data, type, row) {
-						var date = new Date(row.fecha_nacimiento);
-						date.setMinutes(date.getMinutes() + date.getTimezoneOffset())
-						return (moment(date).format("DD-MM-YYYY"));
-					}},
-					{ data: "cod_empleador" },
-					{ data: "nombre_empleador" },
-					],
-
-					"deferRender": true,
-
-					"processing" : true,
-
-					"language": {
-
-						"sProcessing":     "Procesando...",
-						"sLengthMenu":     "Mostrar _MENU_ registros",
-						"sZeroRecords":    "No se encontraron resultados",
-						"sEmptyTable":     "Ningún dato disponible en esta tabla",
-						"sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_",
-						"sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0",
-						"sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
-						"sInfoPostFix":    "",
-						"sSearch":         "Buscar:",
-						"searchPlaceholder": "Escribe aquí para buscar...",
-						"sUrl":            "",
-						"sInfoThousands":  ",",
-						"sLoadingRecords": "Cargando...",
-						"oPaginate": {
-							"sFirst":    "Primero",
-							"sLast":     "Último",
-							"sNext":     "Siguiente",
-							"sPrevious": "Anterior"
-						},
-						"oAria": {
-							"sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-							"sSortDescending": ": Activar para ordenar la columna de manera descendente"
-						}
-						
-					},
-
-					"lengthChange": false,
-
-					"searching": true,
-
-					"ordering": true, 
-
-					"info":     false 
-
-				});
-
-				$('#tablaEmpleadoresSIAIS tbody').on('click', 'tr', function () {
-
-					$(this).addClass("pe-auto");
-					
-					var data = t.row( this ).data();
-
-					var idEmpleador = data.idempleador;
-					console.log("idEmpleador", idEmpleador);
-
-					var datos = new FormData();
-					datos.append("guardarEmpleador", "guardarEmpleador");
-					datos.append("idEmpleador", idEmpleador);
-
-					//Para mostrar alerta personalizada de loading
-					swal.fire({
-						text: 'Procesando...',
-						allowOutsideClick: false,
-						allowEscapeKey: false,
-						allowEnterKey: false,
-						onOpen: () => {
-							swal.showLoading()
-						}
-					});
-
-					$.ajax({
-
-						url:"ajax/empleadoresSIAIS.ajax.php",
-						method: "POST",
-						data: datos,
-						cache: false,
-						contentType: false,
-						processData: false,
-						dataType:"json",
-						success:function(respuesta) {
-							console.log("respuestaEmpleador", respuesta);
-
-							//Para cerrar la alerta personalizada de loading
-							swal.close();
-
-							var id = respuesta["idempleador"];
-							var nroEmpleador = respuesta["emp_nro_empleador"];
-							var nombreEmpleador = respuesta["emp_nombre"];
-
-							$('#nuevoNroEmpleador').val(nroEmpleador);
-							$('#nuevoNombreEmpleador').val(nombreEmpleador);
-							
-							$('#modalCodAsegurado').modal('toggle');
-             	$('#modalNuevoPaciente').modal('show');
-
-						},
-						error: function(error) {
-
-							console.log('¡Error! Falla en la consulta a BD, no se modificaron.')
-
-						}
-
-					});
-				});
+				$('#editarNroEmpleador').val(nroEmpleador);
+				$('#editarNombreEmpleador').val(nombreEmpleador);
+				
+				$('#modalEmpleadorSIAIS').modal('toggle');
+	     	$('#modalEditarPaciente').modal('show');
 
 			},
-			error: function(error){
+			error: function(error) {
 
-				console.log("No funciona");
+				console.log('¡Error! Falla en la consulta a BD, no se modificaron.')
 
 			}
 
 		});
 
-	} else {
-		
-		// $('#tablaAfiliadosSIAIS').remove();
-		// $('#tablaAfiliadosSIAIS_wrapper').remove();
-
-	}
+	});
 
 });
+
+/*=============================================
+CARGAR LA TABLA DINÁMICA DE PACIENTES
+=============================================*/
+var tablaEmpleadoresSIAIS = $('#tblEmpleadoresSIAIS').DataTable({
+
+	"ajax": {
+		url: "ajax/datatable-empleadoresSIAIS.ajax.php",
+		type: "post"
+	},
+
+	// "processing": true,
+	
+	// "serverSide": true,
+
+	// "order": [[ 0, "desc" ]],
+
+	"stateSave": true,
+
+	"language": {
+
+		"sProcessing":     "Procesando...",
+		"sLengthMenu":     "Mostrar _MENU_ registros",
+		"sZeroRecords":    "No se encontraron resultados",
+		"sEmptyTable":     "Ningún dato disponible en esta tabla",
+		"sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_",
+		"sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0",
+		"sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+		"sInfoPostFix":    "",
+		"sSearch":         "Buscar:",
+		"sUrl":            "",
+		"sInfoThousands":  ",",
+		"sLoadingRecords": "Cargando...",
+		"oPaginate": {
+			"sFirst":    "Primero",
+			"sLast":     "Último",
+			"sNext":     "Siguiente",
+			"sPrevious": "Anterior"
+		},
+		"oAria": {
+			"sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+			"sSortDescending": ": Activar para ordenar la columna de manera descendente"
+		},
+		"buttons": {
+			"copy": "Copiar",
+			"colvis": "Visibilidad de columnas"
+		}
+		
+	},
+
+	"responsive": true,
+
+	"lengthChange": false,
+
+}); 

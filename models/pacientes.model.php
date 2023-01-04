@@ -10,7 +10,7 @@ class ModelPacientes {
 	static public function mdlContarPacientes($tabla) {
 
 		// devuelve el numero de registros de la consulta
-		$sql = "SELECT p.id, p.nombre_paciente, p.paterno_paciente, p.materno_paciente, p.documento_ci, p.fecha_nacimiento, p.estado_civil, p.sexo, p.cod_asegurado, p.cod_beneficiario, p.nro_empleador, p.nombre_empleador, p.estado_asegurado, c.nombre_consultorio 
+		$sql = "SELECT p.id 
 			FROM pacientes p
 			LEFT JOIN consultorios C
 			ON c.id = p.id_consultorio
@@ -36,7 +36,7 @@ class ModelPacientes {
 
 			// devuelve el numero de registros de la consulta
 
-			$sql2 = "SELECT p.id, p.nombre_paciente, p.paterno_paciente, p.materno_paciente, p.documento_ci, p.fecha_nacimiento, p.estado_civil, p.sexo, p.cod_asegurado, p.cod_beneficiario, p.nro_empleador, p.nombre_empleador, p.estado_asegurado, c.nombre_consultorio 
+			$sql2 = "SELECT p.id 
 			FROM pacientes p
 			LEFT JOIN consultorios C
 			ON c.id = p.id_consultorio
@@ -54,7 +54,7 @@ class ModelPacientes {
 
 			// devuelve el numero de registros de la consulta
 
-			$sql2 = "SELECT p.id, p.nombre_paciente, p.paterno_paciente, p.materno_paciente, p.documento_ci, p.fecha_nacimiento, p.estado_civil, p.sexo, p.cod_asegurado, p.cod_beneficiario, p.nro_empleador, p.nombre_empleador, p.estado_asegurado, c.nombre_consultorio 
+			$sql2 = "SELECT p.id
 			FROM pacientes p
 			LEFT JOIN consultorios C
 			ON c.id = p.id_consultorio
@@ -81,7 +81,7 @@ class ModelPacientes {
 	=============================================*/
 	static public function mdlMostrarTodosPacientes($tabla, $sql) {
 
-		$sql2 = "SELECT p.id, p.nombre_paciente, p.paterno_paciente, p.materno_paciente, p.documento_ci, p.fecha_nacimiento, p.estado_civil, p.sexo, p.cod_asegurado, p.cod_beneficiario, p.nro_empleador, p.nombre_empleador, p.estado_asegurado, p.domicilio, p.telefono, c.nombre_consultorio 
+		$sql2 = "SELECT p.id, p.nombre_paciente, p.paterno_paciente, p.materno_paciente, p.documento_ci, p.fecha_nacimiento, p.estado_civil, p.sexo, p.cod_asegurado, p.cod_beneficiario, p.nro_empleador, p.nombre_empleador, p.estado_asegurado, p.domicilio, p.telefono, c.nombre_consultorio, p.particular 
 		FROM pacientes p
 		LEFT JOIN consultorios C
 		ON c.id = p.id_consultorio

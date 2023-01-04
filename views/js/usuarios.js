@@ -126,7 +126,7 @@ $(document).on("click", ".btnMostrarPassword", function() {
 /*=============================================
 CONFIGURACION DE LAS REGLAS Y MENSAJES PARA VALIDACION
 =============================================*/
-$(document).ready(function(){
+$(document).ready(function() {
   $("#frmNuevoUsuario").validate({
 
     rules: {

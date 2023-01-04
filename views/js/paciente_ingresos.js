@@ -1068,14 +1068,14 @@ BOTON QUE PARA CERRAR LA VENTANA MODAL DEL REPORTE PDF Y ELIMINA EL ARCHIVO TEMP
 $("#ver-pdf").on("click", ".btnCerrarReporte", function() {
 
   var url = $(this).parent().parent().children(".modal-body").children().children().attr("src");
-  // console.log("url", url);
+  console.log("url", url);
 
   var modulo = $("#modulo").val();
-  // console.log("modulo", modulo);
+  console.log("modulo", modulo);
 
   if (modulo == 'detalle-paciente') {
     dirPacienteIngresos = "../ajax/paciente_ingresos.ajax.php";
-  } else if (modulo == 'paciente-ingresos') {
+  } else if (modulo == 'paciente-ingresos' || modulo == 'paciente-egresos') {
     dirPacienteIngresos = "ajax/paciente_ingresos.ajax.php";
     url = '../'+url;
   }

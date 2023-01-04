@@ -110,6 +110,7 @@ class TablaPacientes {
 	    $subdata[] = $pacientes[$i]["nombre_empleador"];
 	    $subdata[] = $pacientes[$i]["nombre_consultorio"];
 	    $subdata[] = $pacientes[$i]["estado_asegurado"];
+	    $subdata[] = $pacientes[$i]["particular"];
 
 	    $data[] = $subdata;	
 
