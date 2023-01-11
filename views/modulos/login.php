@@ -5,7 +5,7 @@
                 <div class="card shadow-lg border-0 rounded-lg mt-5">
 
                     <div class="card-header bg-secundary" >
-                        <h2 class="text-center my-4" style="color: #188351;">INICIAR SESSION</h2>
+                        <h2 class="titulo_marquesina text-center my-4">INICIAR SESSION</h2>
                     </div>
 
                     <div class="card-body">

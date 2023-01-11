@@ -88,7 +88,7 @@ class TablaPacienteInternados {
 
 			$btnReporteForm204 = "<button class='btn btn-outline-primary btn-sm btnReporteForm204' idPaciente='".$paciente_internados[$i]["id_paciente"]."' idPacienteIngreso='".$paciente_internados[$i]["id"]."' modulo='paciente-ingresos' data-toggle='tooltip' title='Reportes Paciente'><i class='fas fa-print'></i></button>";
 
-			$estado = "<button class='btn btn-danger btn-sm btnDarAltaPaciente' idPacienteIngreso='".$paciente_internados[$i]["id"]."' fecha_ingreso='".$paciente_internados[$i]["fecha_ingreso"]."' estado_paciente='0' idCama='".$paciente_internados[$i]["id_cama"]."' modulo='paciente-ingresos' data-bs-toggle='modal' data-bs-target='#modalDarAltaPaciente' data-toggle='tooltip' title='Registrar Alta Paciente'><i class='fas fa-procedures'></i> REGISTRAR ALTA</button>";
+			$estado = "<button class='btn btn-warning btn-sm btnDarAltaPaciente' idPacienteIngreso='".$paciente_internados[$i]["id"]."' fecha_ingreso='".$paciente_internados[$i]["fecha_ingreso"]."' estado_paciente='0' idCama='".$paciente_internados[$i]["id_cama"]."' modulo='paciente-ingresos' data-bs-toggle='modal' data-bs-target='#modalDarAltaPaciente' data-toggle='tooltip' title='Registrar Alta Paciente'><i class='fas fa-procedures'></i> REGISTRAR ALTA</button>";
 
 			$botones = "<div class='btn-group'>".$btnReporteForm204."</div>";	
 
@@ -206,7 +206,7 @@ class TablaPacienteInternados {
 
 			$btnReporteForm204 = "<button class='btn btn-outline-primary btn-sm btnReporteForm204' idPaciente='".$paciente_internados[$i]["id_paciente"]."' idPacienteIngreso='".$paciente_internados[$i]["id"]."' modulo='paciente-ingresos' data-toggle='tooltip' title='Reportes Paciente'><i class='fas fa-print'></i></button>";
 
-			$estado = "<button class='btn btn-danger btn-sm btnDarAltaPaciente' idPacienteIngreso='".$paciente_internados[$i]["id"]."' fecha_ingreso='".$paciente_internados[$i]["fecha_ingreso"]."' estado_paciente='0' idCama='".$paciente_internados[$i]["id_cama"]."' modulo='paciente-ingresos' data-bs-toggle='modal' data-bs-target='#modalDarAltaPaciente' data-toggle='tooltip' title='Registrar Alta Paciente'><i class='fas fa-procedures'></i> REGISTRAR ALTA</button>";
+			$estado = "<button class='btn btn-warning btn-sm btnDarAltaPaciente' idPacienteIngreso='".$paciente_internados[$i]["id"]."' fecha_ingreso='".$paciente_internados[$i]["fecha_ingreso"]."' estado_paciente='0' idCama='".$paciente_internados[$i]["id_cama"]."' modulo='paciente-ingresos' data-bs-toggle='modal' data-bs-target='#modalDarAltaPaciente' data-toggle='tooltip' title='Registrar Alta Paciente'><i class='fas fa-procedures'></i> REGISTRAR ALTA</button>";
 
 			$botones = "<div class='btn-group'>".$btnReporteForm204."</div>";	
 

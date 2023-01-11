@@ -19,7 +19,7 @@ class ModelLibroServicios {
 			ON pi2.id = pe.id_paciente_ingreso
 			INNER JOIN consultorios c2
 			ON p.id_consultorio = c2.id
-			INNER JOIN consultorios c3
+			LEFT JOIN consultorios c3
 			ON pi2.id_consultorio = c3.id
 			INNER JOIN cie10 c10_ingreso
 			ON pi2.id_cie10 = c10_ingreso.id
@@ -44,7 +44,7 @@ class ModelLibroServicios {
 			ON pi2.id = pe.id_paciente_ingreso
 			INNER JOIN consultorios c2
 			ON p.id_consultorio = c2.id
-			INNER JOIN consultorios c3
+			LEFT JOIN consultorios c3
 			ON pi2.id_consultorio = c3.id
 			INNER JOIN cie10 c10_ingreso
 			ON pi2.id_cie10 = c10_ingreso.id
@@ -93,7 +93,7 @@ class ModelLibroServicios {
 				ON pi2.id = pe.id_paciente_ingreso
 				INNER JOIN consultorios c2
 				ON p.id_consultorio = c2.id
-				INNER JOIN consultorios c3
+				LEFT JOIN consultorios c3
 				ON pi2.id_consultorio = c3.id
 				INNER JOIN cie10 c10_ingreso
 				ON pi2.id_cie10 = c10_ingreso.id
@@ -118,7 +118,7 @@ class ModelLibroServicios {
 				ON pi2.id = pe.id_paciente_ingreso
 				INNER JOIN consultorios c2
 				ON p.id_consultorio = c2.id
-				INNER JOIN consultorios c3
+				LEFT JOIN consultorios c3
 				ON pi2.id_consultorio = c3.id
 				INNER JOIN cie10 c10_ingreso
 				ON pi2.id_cie10 = c10_ingreso.id
@@ -148,7 +148,7 @@ class ModelLibroServicios {
 				ON pi2.id = pe.id_paciente_ingreso
 				INNER JOIN consultorios c2
 				ON p.id_consultorio = c2.id
-				INNER JOIN consultorios c3
+				LEFT JOIN consultorios c3
 				ON pi2.id_consultorio = c3.id
 				INNER JOIN cie10 c10_ingreso
 				ON pi2.id_cie10 = c10_ingreso.id
@@ -173,7 +173,7 @@ class ModelLibroServicios {
 				ON pi2.id = pe.id_paciente_ingreso
 				INNER JOIN consultorios c2
 				ON p.id_consultorio = c2.id
-				INNER JOIN consultorios c3
+				LEFT JOIN consultorios c3
 				ON pi2.id_consultorio = c3.id
 				INNER JOIN cie10 c10_ingreso
 				ON pi2.id_cie10 = c10_ingreso.id
@@ -224,7 +224,7 @@ class ModelLibroServicios {
 			ON pi2.id = pe.id_paciente_ingreso
 			INNER JOIN consultorios c2
 			ON p.id_consultorio = c2.id
-			INNER JOIN consultorios c3
+			LEFT JOIN consultorios c3
 			ON pi2.id_consultorio = c3.id
 			INNER JOIN cie10 c10_ingreso
 			ON pi2.id_cie10 = c10_ingreso.id
@@ -248,7 +248,7 @@ class ModelLibroServicios {
 			ON pi2.id_paciente = p.id
 			LEFT JOIN paciente_egresos pe
 			ON pi2.id = pe.id_paciente_ingreso
-			INNER JOIN consultorios c2
+			LEFT JOIN consultorios c2
 			ON p.id_consultorio = c2.id
 			INNER JOIN consultorios c3
 			ON pi2.id_consultorio = c3.id

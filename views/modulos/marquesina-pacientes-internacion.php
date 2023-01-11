@@ -6,7 +6,7 @@
 
           <div class="card-header bg-secundary" >
             <marquee>
-            <h2 class="my-2" style="color: #188351;">PACIENTES INTERNADOS (POTOSÍ <?= date("d")."/".date("m")."/".date("Y"); ?>)</h2>
+            <h2 class="titulo_marquesina my-2">PACIENTES INTERNADOS (POTOSÍ <?= date("d")."/".date("m")."/".date("Y"); ?>)</h2>
             </marquee>
           </div>
 
@@ -18,7 +18,7 @@
 
                 <marquee style="height:65vh;" behavior=”scroll” scrollamount="1" direction="up">
 
-                  <h4 class="my-2" style="color: #188351;">SERVICIO: MEDICINA INTERNA</h4>
+                  <h4 class="titulo_servicios_marquesina my-2">SERVICIO: MEDICINA INTERNA</h4>
 
                   <div class="mb-4">
 
@@ -39,7 +39,7 @@
 
                   </div>
 
-                  <h4 class="my-2" style="color: #188351;">SERVICIO: NEUMOLOGIA</h4>
+                  <h4 class="titulo_servicios_marquesina my-2">SERVICIO: NEUMOLOGIA</h4>
 
                   <div class="mb-4">
 
@@ -60,7 +60,7 @@
 
                   </div>
 
-                  <h4 class="my-2" style="color: #188351;">SERVICIO: UTI</h4>
+                  <h4 class="titulo_servicios_marquesina my-2">SERVICIO: UTI</h4>
 
                   <div class="mb-4">
 
@@ -89,7 +89,7 @@
 
                 <marquee style="height:65vh;" behavior=”scroll” scrollamount="1" direction="up">
 
-                  <h4 class="my-2" style="color: #188351;">SERVICIO: CIRUGIA</h4>
+                  <h4 class="titulo_servicios_marquesina my-2">SERVICIO: CIRUGIA</h4>
 
                   <div class="mb-4">
 
@@ -110,7 +110,7 @@
 
                   </div> 
 
-                  <h4 class="my-2" style="color: #188351;">SERVICIO: MATERNIDAD</h4>
+                  <h4 class="titulo_servicios_marquesina my-2">SERVICIO: MATERNIDAD</h4>
 
                   <div class="mb-4">
 
@@ -131,7 +131,7 @@
 
                   </div>              
 
-                  <h4 class="my-2" style="color: #188351;">SERVICIO: NEONATOLOGIA</h4>
+                  <h4 class="titulo_servicios_marquesina my-2">SERVICIO: NEONATOLOGIA</h4>
 
                   <div class="mb-4">
 
@@ -152,7 +152,7 @@
 
                   </div>
 
-                  <h4 class="my-2" style="color: #188351;">SERVICIO: GINECOLOGIA</h4>
+                  <h4 class="titulo_servicios_marquesina my-2">SERVICIO: GINECOLOGIA</h4>
 
                   <div class="mb-4">
 

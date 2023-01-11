@@ -269,9 +269,7 @@ class ModelPacienteIngresos {
 
 					}
 
-				}
-
-				else {
+				}	else {
 
 					// Revertir la transacción.
 					$pdo->rollBack();
@@ -279,7 +277,6 @@ class ModelPacienteIngresos {
 	    		return "error2";
 
 				}
-
 
 			} else {
 				

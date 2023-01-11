@@ -5,7 +5,7 @@
         <div class="card shadow-lg border-0 rounded-lg mt-5">
 
           <div class="card-header bg-secundary" >
-            <h2 class="my-2" style="color: #188351;">BUSCAR PACIENTES INTERNADOS</h2>
+            <h2 class="titulo_marquesina my-2">BUSCAR PACIENTES INTERNADOS</h2>
           </div>
 
           <div class="card-body">

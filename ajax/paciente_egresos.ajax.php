@@ -8,6 +8,7 @@ require_once "../library/tcpdf/tcpdf.php";
 class MYPDF extends TCPDF {
 
 	public $id_paciente_ingreso;
+	public $id_cama;
 	public $nombre_completo;
 	public $documento_ci;
 	public $cod_asegurado;
@@ -293,6 +294,22 @@ class AjaxPacienteEgresos {
 
 	}
 
+	/*=============================================
+	ELIMINAR EGRESO (ALTA) DE PACIENTE
+	=============================================*/
+	public function ajaxEliminarPacienteEgreso() {
+
+		$item1 = "id_paciente_ingreso";
+		$valor1 = $this->id_paciente_ingreso;
+		$item2 = "id";
+		$valor2 = $this->id_cama;
+
+		$respuesta = ControllerPacienteEgresos::ctrEliminarPacienteEgreso($item1, $valor1, $item2, $valor2);
+	
+		echo $respuesta;	
+			
+	}
+
 }
 
 /*=============================================
@@ -382,5 +399,17 @@ if (isset($_POST["eliminarPDF"])) {
 	$reportes = new AjaxPacienteEgresos();
 	$reportes -> file = $_POST["url"];
 	$reportes -> ajaxEliminarReportePDF();
+
+}
+
+/*=============================================
+ELIMINAR EGRESO (ALTA) DE PACIENTE
+=============================================*/
+if (isset($_POST["eliminarPacienteEgreso"])) {
+
+	$eliminarAltaPaciente = new AjaxPacienteEgresos();
+	$eliminarAltaPaciente -> id_paciente_ingreso = $_POST["idPacienteIngreso"];
+	$eliminarAltaPaciente -> id_cama = $_POST["idCama"];
+	$eliminarAltaPaciente -> ajaxEliminarPacienteEgreso();
 
 }

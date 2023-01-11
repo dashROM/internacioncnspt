@@ -1060,7 +1060,7 @@ $("#frmNuevoPaciente").on("change", "#nuevoParticular", function() {
 		$("#nuevoNombreEmpleador").removeAttr('required');
 		$("#nuevoNombreEmpleador").val('');
 
-		$("#nuevoZonaPaciente").attr('readonly',true);
+		$("#nuevoZonaPaciente").attr('disabled',true);
 		$("#nuevoZonaPaciente").removeAttr('required');
 		$("#nuevoZonaPaciente").val('');
 
@@ -1084,7 +1084,7 @@ $("#frmNuevoPaciente").on("change", "#nuevoParticular", function() {
 		$("#nuevoNombreEmpleador").before('<label class="indicadorParticular">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>');
 		$("#nuevoNombreEmpleador").attr('required',true);
 
-		$("#nuevoZonaPaciente").removeAttr('readonly');
+		$("#nuevoZonaPaciente").removeAttr('disabled');
 		$("#nuevoZonaPaciente").before('<label class="indicadorParticular">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>');
 		$("#nuevoZonaPaciente").attr('required',true);
 
@@ -1117,7 +1117,7 @@ $("#frmEditarPaciente").on("change", "#editarParticular", function() {
 		$("#editarNombreEmpleador").removeAttr('required');
 		$("#editarNombreEmpleador").val('');
 
-		$("#editarZonaPaciente").attr('readonly',true);
+		$("#editarZonaPaciente").attr('disabled',true);
 		$("#editarZonaPaciente").removeAttr('required');
 		$("#editarZonaPaciente").val('');
 
@@ -1143,7 +1143,7 @@ $("#frmEditarPaciente").on("change", "#editarParticular", function() {
 		$("#editarNombreEmpleador").before('<label class="indicadorParticular">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>');
 		$("#editarNombreEmpleador").attr('required',true);
 
-		$("#editarZonaPaciente").removeAttr('readonly');
+		$("#editarZonaPaciente").removeAttr('disabled');
 		$("#editarZonaPaciente").before('<label class="indicadorParticular">(<i class="fas fa-asterisk asterisk mr-1"></i>)</label>');
 		$("#editarZonaPaciente").attr('required',true);
 

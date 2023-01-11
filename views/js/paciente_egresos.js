@@ -778,3 +778,85 @@ $("#modalVerAltaPaciente").on("click", ".btnCerrarReporte", function() {
   });
 
 });
+
+/*=============================================
+ELIMINAR EGRESO DE PACIENTE
+=============================================*/
+$(document).on("click", "button.btnEliminarPacienteEgreso", function() {
+
+  swal.fire({
+          
+    title: "¿Está seguro de borrar el alta del paciente?",
+    text: "¡Si no lo está puede cancelar la acción!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#0b5ed7c9",
+    cancelButtonColor: "#dc3545bf",
+    cancelButtonText: "Cancelar",
+    confirmButtonText: "¡Si, borrar Alta!"
+
+  }).then((result) => {
+
+    if (result.value) {
+
+      var idPacienteIngreso = $(this).attr("idPacienteIngreso");
+      console.log("idPacienteIngreso", idPacienteIngreso);
+      var idCama = $(this).attr("idCama");
+      console.log("idCama", idCama);
+
+      var datos = new FormData();
+
+      datos.append("eliminarPacienteEgreso", 'eliminarPacienteEgreso');
+      datos.append("idPacienteIngreso", idPacienteIngreso);
+      datos.append("idCama", idCama);
+
+      $.ajax({
+
+        url:"../ajax/paciente_egresos.ajax.php",
+        method: "POST",
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: "html",
+        success: function(respuesta) {
+          console.log("respuesta", respuesta);
+
+          if (respuesta == "ok") {
+
+            tablaPacienteIngresos.ajax.reload( null, false );
+
+          } else {
+
+            swal.fire({
+
+              title: "¡Error! Falla en la consulta a BD, no se elimino el Alta de Paciente.",
+              icon: "error",
+              allowOutsideClick: false,
+              confirmButtonText: "¡Cerrar!"
+
+            });
+            
+          }
+
+        },
+        error: function(error) {
+
+          swal.fire({
+
+            title: "¡Error! Falla en la conexion a la BD, no se elimino el Alta de Paciente.",
+            icon: "error",
+            allowOutsideClick: false,
+            confirmButtonText: "¡Cerrar!"
+
+          });
+
+        }
+
+      });
+
+    }
+
+  });
+
+});

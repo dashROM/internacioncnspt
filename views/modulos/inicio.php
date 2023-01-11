@@ -2,9 +2,9 @@
 
   <div class="container-xl px-4">
 
-    <h1 class="mt-4">Bienvenido</h1>
+    <h1 class="mt-4">BIENVENIDO</h1>
 
-    <ol class="breadcrumb mb-4">
+    <ol class="breadcrumb p-2 mb-4 shadow">
       <li class="breadcrumb-item active">Inicio</li>
     </ol>
 
@@ -17,7 +17,7 @@
 
           <div class="card-body">PACIENTES INTERNADOS</div>
           <div class="card-footer d-flex align-items-center justify-content-between">
-            <a class="small text-white stretched-link" href="<?= BASEURL; ?>/paciente-ingresos">Ver Detalle</a>
+            <a class="small text-white stretched-link" href="<?= BASEURL; ?>/paciente-internados">Ver Detalle</a>
             <div class="small text-white"><i class="fas fa-angle-right"></i></div>
           </div>
 

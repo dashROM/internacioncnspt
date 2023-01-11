@@ -336,4 +336,106 @@ class ModelPacienteEgresos {
 
 	}
 
+	/*=============================================
+	ELIMINAR EGRESO PACIENTE
+	=============================================*/
+	static public function mdlEliminarPacienteEgreso($tabla, $item1, $valor1, $item2, $valor2) {
+
+		$pdo = Conexion::connectPostgres();
+
+		try {
+
+	    //Inicio de las transacciones.
+	    $pdo->beginTransaction();
+
+			$sql = "DELETE FROM $tabla WHERE id_paciente_ingreso = :$item1";
+			
+			$stmt = $pdo->prepare($sql);
+
+			$stmt->bindParam(":".$item1, $valor1, PDO::PARAM_INT);
+
+			if ($stmt->execute()) {
+				
+				// Consulta 2: Actualizacion de estado pacientes con ingreso a internacion.
+			  $sql2 = "UPDATE paciente_ingresos SET estado_paciente = 0 WHERE id = :$item1";
+
+				$stmt = $pdo->prepare($sql2);
+
+				$stmt->bindParam(":".$item1, $valor1, PDO::PARAM_INT);
+
+				if ($stmt->execute()) {
+
+					// Consulta 3: Actualizacion de estado de paciente intenado.
+			  	$sql2 = "UPDATE paciente_internados SET estado_internado = 0 WHERE id_paciente_ingreso = :$item1";
+
+				  $stmt = $pdo->prepare($sql2);
+
+					$stmt->bindParam(":".$item1, $valor1, PDO::PARAM_INT);
+
+					if ($stmt->execute()) {
+					
+						// Consulta 4: Actualizacion de estado de cama de libre a ocupado.
+				  	$sql2 = "UPDATE camas SET estado_cama = 1 WHERE id = :$item2";
+
+					  $stmt = $pdo->prepare($sql2);
+
+						$stmt->bindParam(":".$item2, $valor2, PDO::PARAM_INT);
+
+						if ($stmt->execute()) {
+
+						// Permitir la transacción.
+					    $pdo->commit();
+
+					    return "ok";
+
+					  } else {
+
+							// Revertir la transacción.
+							$pdo->rollBack();
+
+			    		return "error4";
+
+						}
+					} else {
+
+						// Revertir la transacción.
+						$pdo->rollBack();
+
+		    		return "error3";
+
+					}
+
+				} else {
+
+					// Revertir la transacción.
+					$pdo->rollBack();
+
+	    		return "error2";
+
+				}
+
+			} else {
+				
+				return "error1";
+
+			}
+			
+		} 
+		// Bloque de captura manejará cualquier excepción que se lance.
+		catch (Exception $e){
+	    // Se ha producido una excepción, lo que significa que una de nuestras consultas de base de datos hafallado
+	    // Imprimiendo mensaje de error.
+	    echo $e->getMessage();
+	    // Revertir la transacción.
+	    $pdo->rollBack();
+
+	    return "error";
+
+		}
+
+		$stmt->close();
+		$stmt = null;
+
+	}
+
 }

@@ -1,3 +1,13 @@
+@font-face {
+  font-family: 'KronaOne';
+  src: url('fonts/KronaOne-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Ramabhadra';
+  src: url('fonts/Ramabhadra-Regular.ttf');
+} 
+
 .dataTable-wrapper.no-header .dataTable-container {
 	border-top: 1px solid #d9d9d9;
 }
@@ -230,7 +240,7 @@
 	background-color: #1883518c;
 }
 
-.btn-primary {
+.btn-primary, .bg-primary {
 	background-color: #0b5ed7c9 !important;
 }
 
@@ -238,9 +248,6 @@
 	background-color: #0069d9 !important;
 }
 
-.bg-primary {
-	background-color: #0b5ed7c9 !important;
-}
 
 .btn-danger {
 	background-color: #dc3545bf !important;
@@ -250,35 +257,45 @@
 	background-color: #dc3545 !important;
 }
 
-/*neeeeoooon*/
-p{
-  text-align:center;
-  font-size:2.5em;
-  margin:20px 0 20px 0; 
+.nav-link {
+  color: #ffffff;
 }
 
-a{
+/*neeeeoooon*/
+.navbar-text {
+  text-align:center;
+  font-size:2em;
+  font-family: 'KronaOne', Helvetica;
+  margin:0 25px 0 25px; 
+}
+
+.titulo_marquesina, .titulo_servicios_marquesina {
+  color: #188351;
+  font-family: 'Ramabhadra';  
+}
+
+
+a {
   text-decoration:none; 
   -webkit-transition: all 0.5s;
   -moz-transition: all 0.5s;
   transition: all 0.5s;
 }
 
-a{
+a {
   font-size:1em;
   color:#ffffff;
-  font-family:Iceland;
+/*  font-family:Helvetica;*/
 }
-a:hover{
+
+a:hover {
   -webkit-animation: neon2 1.5s ease-in-out infinite alternate;
   -moz-animation: neon2 1.5s ease-in-out infinite alternate;
   animation: neon2 1.5s ease-in-out infinite alternate;
 }
 
-
-
-a:hover{
-color:#ffffff;  
+a:hover {
+  color:#000000;
 }
 
 /*glow for webkit*/

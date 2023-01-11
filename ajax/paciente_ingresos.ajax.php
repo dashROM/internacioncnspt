@@ -281,11 +281,12 @@ class AjaxPacienteIngresos {
 		$pdf->setCellHeightRatio(0.3);
 
 		// MultiCell($w, $h, $txt, $border=0, $align='J', $fill=0, $ln=1, $x='', $y='', $reseth=true, $stretch=0, $ishtml=false, $autopadding=true, $maxh=0)
-
 		$pdf->SetFont('times', 'B', 10);
-		$pdf->MultiCell(30, 3, date("d", strtotime($paciente_ingreso['fecha_nacimiento'])), 0, 'C', 0, 0, '46', '25', true);
-		$pdf->MultiCell(30, 3, date("m", strtotime($paciente_ingreso['fecha_nacimiento'])), 0, 'C', 0, 0, '64', '25', true);
-		$pdf->MultiCell(30, 3, date("Y", strtotime($paciente_ingreso['fecha_nacimiento'])), 0, 'C', 0, 0, '84', '25', true);
+		if (isset($paciente_ingreso['fecha_nacimiento'])) {
+			$pdf->MultiCell(30, 3, date("d", strtotime($paciente_ingreso['fecha_nacimiento'])), 0, 'C', 0, 0, '46', '25', true);
+			$pdf->MultiCell(30, 3, date("m", strtotime($paciente_ingreso['fecha_nacimiento'])), 0, 'C', 0, 0, '64', '25', true);
+			$pdf->MultiCell(30, 3, date("Y", strtotime($paciente_ingreso['fecha_nacimiento'])), 0, 'C', 0, 0, '84', '25', true);
+		}
 		$pdf->SetFont('times', '', 10);
 		
 		$pdf->MultiCell(150, 3, 'FECHA NACIMIENTO:......................................................................', 0, 'L', 0, 0, '13', '27', true);
@@ -314,7 +315,9 @@ class AjaxPacienteIngresos {
 		$pdf->MultiCell(55, 5, 'NOMBRE(S)', 0, 'R', 0, 1, '110', '48', true);
 
 		$pdf->SetFont('times', 'B', 10);
-		$pdf->MultiCell(25, 3, $edad->y.' años', 0, 'L', 0, 0, '45', '54', true);
+		if (isset($paciente_ingreso['fecha_nacimiento'])) {
+			$pdf->MultiCell(25, 3, $edad->y.' años', 0, 'L', 0, 0, '45', '54', true);
+		}
 		$pdf->SetFont('times', '', 10);
 
 		$pdf->MultiCell(105, 5, '1.- Edad cumplida:...............................................', 0, 'L', 0, 0, '13', '56', true);

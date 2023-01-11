@@ -57,7 +57,7 @@ class TablaPacienteIngresos {
 					=============================================*/
 					if($paciente_ingresos[$i]["estado_paciente"] == 0) {
 
-    				$estado = "<button class='btn btn-danger btn-sm btnDarAltaPaciente' idPacienteIngreso='".$paciente_ingresos[$i]["id"]."' fecha_ingreso='".$paciente_ingresos[$i]["fecha_ingreso"]."' estado_paciente='0' idCama='".$paciente_ingresos[$i]["id_cama"]."' modulo='detalle-paciente' data-bs-toggle='modal' data-bs-target='#modalDarAltaPaciente' data-toggle='tooltip' title='Registrar Alta Paciente'><i class='fas fa-procedures'></i> REGISTRAR ALTA</button>";
+    				$estado = "<button class='btn btn-warning btn-sm btnDarAltaPaciente' idPacienteIngreso='".$paciente_ingresos[$i]["id"]."' fecha_ingreso='".$paciente_ingresos[$i]["fecha_ingreso"]."' estado_paciente='0' idCama='".$paciente_ingresos[$i]["id_cama"]."' modulo='detalle-paciente' data-bs-toggle='modal' data-bs-target='#modalDarAltaPaciente' data-toggle='tooltip' title='Registrar Alta Paciente'><i class='fas fa-procedures'></i> REGISTRAR ALTA</button>";
 
     				if ($this->sexo == "FEMENINO") {
 
@@ -121,7 +121,7 @@ class TablaPacienteIngresos {
 
 					} else {
 
-						$estado = "<button class='btn btn-success btn-sm btnVerAltaPaciente' idPacienteIngreso='".$paciente_ingresos[$i]["id"]."' estado_paciente='1' data-bs-toggle='modal' modulo='detalle-paciente' data-bs-target='#modalVerAltaPaciente' data-toggle='tooltip' title='Ver Detalle Alta Paciente'><i class='fas fa-user-injured'></i> DETALLE ALTA</button>";
+						$estado = "<button class='btn btn-success btn-sm btnVerAltaPaciente' idPacienteIngreso='".$paciente_ingresos[$i]["id"]."' estado_paciente='1' data-bs-toggle='modal' modulo='detalle-paciente' data-bs-target='#modalVerAltaPaciente' data-toggle='tooltip' title='Ver Detalle Alta Paciente'><i class='fas fa-user-injured'></i> DETALLE ALTA</button> <button class='btn btn-danger btn-sm btnEliminarPacienteEgreso' idPacienteIngreso='".$paciente_ingresos[$i]["id"]."' estado_paciente='0' idCama='".$paciente_ingresos[$i]["id_cama"]."' modulo='detalle-paciente' data-toggle='tooltip' title='Eliminar Alta Paciente'><i class='fas fa-user-slash'></i></i> ELIMINAR ALTA</button>";
 
 							if ($paciente_ingresos[$i]["referencia"] == "0") {
 

@@ -4,7 +4,7 @@
 
 		<h1 class="mt-4">MÉDICOS</h1>
 
-		<ol class="breadcrumb mb-4">
+		<ol class="breadcrumb p-2 mb-4 shadow">
 
 	 		<li class="breadcrumb-item"><a href="<?= BASEURL; ?>/inicio">Inicio</a></li>
       <li class="breadcrumb-item active">Médicos</li>

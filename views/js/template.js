@@ -43,7 +43,7 @@ particlesJS('particles-js', {
     "shape": {
       "type": "polygon",
       "stroke": {
-        "width": 5,
+        "width": 4,
         "color": "#188351"
       },
       "polygon": {
@@ -70,14 +70,14 @@ particlesJS('particles-js', {
       "random": true,
       "anim": {
         "enable": true,
-        "speed": 1,
-        "size_min": 0.5,
-        "sync": false
+        "speed": 2,
+        "size_min": 0.3,
+        "sync": true
       }
     },
     "line_linked": {
       "enable": true,
-      "distance": 150,
+      "distance": 130,
       "color": "#188351",
       "opacity": 0.4,
       "width": 1

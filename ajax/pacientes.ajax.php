@@ -187,7 +187,12 @@ if (isset($_POST["nuevoPaciente"])) {
 	$nuevoPaciente -> nro_empleador = $_POST['nuevoNroEmpleador'];
 	$nuevoPaciente -> nombre_empleador = $_POST['nuevoNombreEmpleador'];
 	$nuevoPaciente -> estado_asegurado = $_POST['nuevoEstadoAsegurado'];
-	$nuevoPaciente -> id_consultorio = $_POST['nuevoZonaPaciente'];
+	
+	if (isset($_POST['nuevoZonaPaciente'])) {
+		$nuevoPaciente -> id_consultorio = $_POST['nuevoZonaPaciente'];
+	} else {
+		$nuevoPaciente -> id_consultorio = null;
+	}
 
 	$nuevoPaciente -> ajaxNuevoPaciente();
 
@@ -243,7 +248,7 @@ if (isset($_POST["editarPaciente"])) {
 	$editarPaciente -> nombre_empleador = $_POST['editarNombreEmpleador'];
 	$editarPaciente -> estado_asegurado = $_POST['editarEstadoAsegurado'];
 
-	if (isset($_POST['editarCodBeneficiario'])) {
+	if (isset($_POST['editarZonaPaciente'])) {
 		$editarPaciente -> id_consultorio = $_POST['editarZonaPaciente'];
 	} else {
 		$editarPaciente -> id_consultorio = null;

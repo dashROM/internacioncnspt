@@ -119,4 +119,17 @@ class ControllerPacienteEgresos {
 
 	}
 
+	/*=============================================
+	ELIMINADO DATOS DE PACIENTE EGRESO 
+	=============================================*/
+	static public function ctrEliminarPacienteEgreso($item1, $valor1, $item2, $valor2) {
+		
+		$tabla = "paciente_egresos";
+
+		$respuesta = ModelPacienteEgresos::mdlEliminarPacienteEgreso($tabla, $item1, $valor1, $item2, $valor2);
+
+		return $respuesta;
+
+	}
+
 }

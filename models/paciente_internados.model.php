@@ -227,11 +227,11 @@ class ModelPacienteInternados {
         if ($valor == 7 || $valor == 22) {
             $sql = "SELECT pi.fecha_ingreso, concat_ws(' ', p.nombre_paciente, p.paterno_paciente, p.materno_paciente) as nombre_completo, p.documento_ci, p.cod_asegurado, s.nombre_sala, c.nombre_cama, se.nombre_servicio, e.nombre_especialidad, concat_ws(' ', m.nombre_medico, m.paterno_medico, m.materno_medico) as nombre_completo_medico 
             FROM pacientes p, paciente_ingresos pi, paciente_internados pi2, salas s, camas c, servicios se, especialidades e, medicos m 
-            WHERE p.id = pi2.id_paciente and pi.id = pi2.id_paciente_ingreso AND s.id = pi2.id_sala AND c.id = pi2.id_cama AND se.id = pi2.id_servicio AND e.id = pi2.id_especialidad AND m.id = pi2.id_medico AND pi2.estado_internado = 0 AND e.id = :$item";
+            WHERE p.id = pi2.id_paciente and pi.id = pi2.id_paciente_ingreso AND s.id = pi2.id_sala AND c.id = pi2.id_cama AND se.id = pi2.id_servicio AND e.id = pi2.id_especialidad AND m.id = pi2.id_medico AND pi2.estado_internado = 0 AND e.id = :$item ORDER BY pi.fecha_ingreso";
         } else {
             $sql = "SELECT pi.fecha_ingreso, concat_ws(' ', p.nombre_paciente, p.paterno_paciente, p.materno_paciente) as nombre_completo, p.documento_ci, p.cod_asegurado, s.nombre_sala, c.nombre_cama, se.nombre_servicio, e.nombre_especialidad, concat_ws(' ', m.nombre_medico, m.paterno_medico, m.materno_medico) as nombre_completo_medico 
             FROM pacientes p, paciente_ingresos pi, paciente_internados pi2, salas s, camas c, servicios se, especialidades e, medicos m 
-            WHERE p.id = pi2.id_paciente and pi.id = pi2.id_paciente_ingreso AND s.id = pi2.id_sala AND c.id = pi2.id_cama AND se.id = pi2.id_servicio AND e.id = pi2.id_especialidad AND m.id = pi2.id_medico AND pi2.estado_internado = 0 AND se.id = :$item";
+            WHERE p.id = pi2.id_paciente and pi.id = pi2.id_paciente_ingreso AND s.id = pi2.id_sala AND c.id = pi2.id_cama AND se.id = pi2.id_servicio AND e.id = pi2.id_especialidad AND m.id = pi2.id_medico AND pi2.estado_internado = 0 AND se.id = :$item ORDER BY pi.fecha_ingreso";
         }
             
         $stmt = Conexion::connectPostgres()->prepare($sql);
